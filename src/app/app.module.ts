@@ -11,9 +11,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { firebaseConfig } from '../config';
+//import { AngularFireModule } from 'angularfire2';
+//import { AngularFireAuth } from 'angularfire2/auth';
+//import { firebaseConfig } from '../config';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { firebaseConfig } from '../config';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig.fire)
+   // AngularFireModule.initializeApp(firebaseConfig.fire)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +40,7 @@ import { firebaseConfig } from '../config';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuth
+    //AngularFireAuth
   ]
 })
 export class AppModule {}
