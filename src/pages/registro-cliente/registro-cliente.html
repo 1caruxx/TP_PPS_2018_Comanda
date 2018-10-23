@@ -1,0 +1,26 @@
+<!--
+  Generated template for the RegistroClientePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="vertical">
+    
+  <div class="cabecera">
+    <img class="logo" src="assets/imgs/icon.png" >
+    <h1 id="cab">Registro</h1>
+   
+  </div>
+  <div class="form">
+    <h2>Alta de cliente</h2>
+  
+    <input type="text"  [(ngModel)]="userActual" placeholder="nombre" name="nombre"><br>
+    
+    <input type="text" placeholder="apellido" name="pass" [(ngModel)]="passActual" name="pass" ><br>
+    <input type="number" placeholder="D.N.I" name="pass"  name="pass" ><br>
+
+    <button ion-button color="dark" (click)="Login()">FOTO</button>
+    <button ion-button color="dark" (click)="Login()">Leer DNI con QR</button>
+  </div>
+
+</div>
