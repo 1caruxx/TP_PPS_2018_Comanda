@@ -1,0 +1,62 @@
+page-splash {
+
+
+    .parent {
+        background-color: #CF4946;
+       // position: relative;
+        //top: 0;
+        //left: 0;
+      }
+      .image1 {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+      .image2 {
+        position: absolute;
+       // top: 0px;
+        //left: 0px;
+        width:1000;
+        height:600;
+    }
+    .progress-outer {
+        width: 96%;
+        margin: 10px 2%;
+        padding: 3px;
+        text-align: center;
+        background-color: #f4f4f4;
+        border: 1px solid #dcdcdc;
+        color: #fff;
+        border-radius: 20px;
+    }
+ 
+    .progress-inner {
+        min-width: 15%;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 5px;
+        border-radius: 20px;
+        //background-color: map-get($colors, primary);
+        background-color: #ff5e00;
+    }
+    .image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120px;
+        height: 120px;
+        margin:-60px 0 0 -60px;
+        -webkit-animation:spin 4s linear infinite;
+        -moz-animation:spin 4s linear infinite;
+        animation:spin 4s linear infinite;
+    }
+    @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+    @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+    @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
+
+}
+
+
+

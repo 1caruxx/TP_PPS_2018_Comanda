@@ -13,6 +13,9 @@ import { PrincipalPage } from "../pages/principal/principal";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SplashPage } from '../pages/splash/splash';
+import { AltaDeMesaPage } from '../pages/alta-de-mesa/alta-de-mesa';
+import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-de-empleado';
 
 // import { AngularFireModule } from 'angularfire2';
 // import { AngularFireAuth } from 'angularfire2/auth';
@@ -28,7 +31,11 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     HomePage,
     TabsPage,
     LoginPage,
-    PrincipalPage
+    PrincipalPage,
+    SplashPage,
+    AltaDeMesaPage,
+    EncuestaDeEmpleadoPage
+
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,10 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     HomePage,
     TabsPage,
     LoginPage,
-    PrincipalPage
+    PrincipalPage,
+    SplashPage,
+    AltaDeMesaPage,
+    EncuestaDeEmpleadoPage
   ],
   providers: [
     StatusBar,

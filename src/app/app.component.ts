@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform , ModalController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { SplashPage } from '../pages/splash/splash';
+import { AltaDeMesaPage } from '../pages/alta-de-mesa/alta-de-mesa';
+import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-de-empleado';
 
 import { LoginPage } from "../pages/login/login";
 import { PrincipalPage } from "../pages/principal/principal";
@@ -14,7 +17,7 @@ import { PrincipalPage } from "../pages/principal/principal";
 export class MyApp {
   rootPage:any = LoginPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -24,6 +27,9 @@ export class MyApp {
       if(localStorage.getItem("usuario")) {
         this.rootPage = PrincipalPage;
       }
+      let splash = modalCtrl.create(SplashPage);
+            splash.present();
+      //splashScreen.hide();
     });
   }
 }
