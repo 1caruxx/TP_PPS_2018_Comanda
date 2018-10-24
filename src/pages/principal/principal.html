@@ -11,7 +11,7 @@
     <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
 
     <ion-buttons end>
-      <button ion-button>
+      <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
       </button>
     </ion-buttons>
@@ -27,19 +27,17 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item *ngFor="let item of acciones">
-        <!-- &nbsp;&nbsp;&nbsp; -->
-        {{item.accion}}
-      </button>
-      <!-- <button ion-item>
-        Friends
-      </button>
-      <button ion-item>
-        Events
-      </button>
-      <button ion-item>
-        Close Menu
-      </button> -->
+      
+      <div>
+        <img src="https://noticiaslasheras.com.ar/images/noticias/empleado-feliz.gif" class="img-menu" />
+        <div class="nombre-menu">Fernando (Dueño)</div>
+      </div>
+
+      <hr class="hr-menu" />
+      
+      <button ion-item *ngFor="let item of acciones">{{item.accion}}</button>
+      <button ion-item (click)="Logout()">Cerrar sesión.</button>
+
     </ion-list>
   </ion-content>
 </ion-menu>
