@@ -1,0 +1,153 @@
+page-alta-platos {
+    @import url('https://fonts.googleapis.com/css?family=Rancho');
+
+  ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+    ion-content
+    {
+       // background:url("../../assets/imgs/beta/fondo2.jpg");
+        //background-repeat: repeat-x repeat-y;
+    }
+    .titulo
+    {
+        width:80%;
+        margin-left:10%;
+        font-size: 2.5em;
+        font-family: 'Rancho', cursive;
+        text-align: center;
+        border-bottom: 2px solid black;
+    }
+    .contenido, .contenido2
+    {
+        background:url("../../assets/imgs/beta/fondo2.jpg");
+        background-repeat: repeat-x repeat-y;
+        width: 100%;
+        height: 100%!important;
+        display: flex;
+        flex-direction: column;
+        height: 60%;
+        position:relative;
+    }
+    .contenido2
+    {
+        display:none;
+    }
+    .nombrePlato
+    {
+        width: 80%;
+        margin-left:10%;
+        padding: 5px;
+        border-radius: 5%;
+        font-size: 1.3em;
+        font-family: 'Rancho', cursive;
+    }
+    .tiempoDiv, .precioDiv, .botones
+    {
+        position: relative;
+    }
+    .botones
+    {
+        
+        height: 15%;
+        margin-top: 5%;
+        display: flex;
+    }
+  
+    .nombrePlato::placeholder
+    {
+        font-family: 'Rancho', cursive;
+    }
+    .descripcion
+    {
+        font-family: 'Rancho', cursive;
+        margin-top: 5%;
+        height: 20%;
+        width: 80%;
+        margin-left: 10%;
+        font-size:1.3em;
+    }
+    .tiempo, .precio
+    {
+        width: 35%;
+        padding: 5px;
+        margin-top: 5%;
+        margin-left: 10%;
+        align-self: flex-start;
+        font-family: 'Rancho', cursive;
+        font-size:1.3em;
+    }
+    .ocultar
+    {
+        display:none;
+    }
+    .mostrar
+    {
+        display:flex;
+    }
+    .tiempoLabel, .precioLabel
+    {
+        font-size: 1.3em;
+        font-family: 'Rancho', cursive;
+    }
+    .TomarFotos
+    {
+        margin-left: 5%;
+        width: 40%;
+        box-sizing: border-box;
+        height: 80%;
+     
+        font-family: 'Rancho', cursive;
+        font-size: 2em;
+    }
+    .Qr
+    {
+        width: 40%;
+        height: 80%;
+        margin-left: 10%;
+        font-family: 'Rancho', cursive;
+        font-size: 2em;
+    }
+    .precioLabel
+    {
+        margin-left:28%;
+    }
+    .precio{
+        margin-left:2%;
+    }
+    .Foto1, .Foto2, .Foto3
+    {
+        width: 50%;
+        margin-left: 25%;
+        height: 20%;
+    }
+    .Foto1 ion-icon, .Foto2 ion-icon , .Foto3 ion-icon
+    {
+        font-size: 3em;
+    }
+
+
+    @media  screen and(max-height:"500px")
+        {
+          
+           
+            
+            .contenido , .contenido2
+            {
+                height: 550px!important;
+                
+            }
+
+            
+         
+           
+        }
+
+    
+}

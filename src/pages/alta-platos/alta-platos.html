@@ -1,0 +1,85 @@
+<!--
+  Generated template for the AltaPlatosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <!-- <ion-title>{{sala}}</ion-title> -->
+    <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
+
+    <ion-buttons end>
+      <button ion-button>
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+  <ion-menu [content]="content">
+    <ion-header>
+      <ion-toolbar color="red">
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <button ion-item>
+            <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;Convencional
+        </button>
+        <button ion-item>
+          Friends
+        </button>
+        <button ion-item>
+          Events
+        </button>
+        <button ion-item >
+          Close Menu
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-nav #content swipeBackEnabled="false"></ion-nav>
+
+
+
+<ion-content no-bounce>
+
+  <div class="contenido" [ngClass]="{'ocultar':ocultar}">
+    <h1 class="titulo">Alta de platos y bebidas.</h1>
+  <input class="nombrePlato" type="text" placeholder="Nombre del plato o bebida">
+  <textarea class="descripcion" placeholder="Descripci&oacute;n..."></textarea>
+ <div class="tiempoDiv"> <input class="tiempo" type="num" placeholder="(solo numeros)"><label class="tiempoLabel">mins de elaboraci&oacute;n</label>
+  </div>  
+  <div class="tiempoDiv"> <input class="tiempo" type="num" placeholder="(solo numeros)"><label class="tiempoLabel">Cantidad de grs</label>
+  </div>  
+  <div class="precioDiv"> <label class="precioLabel">$</label><input class="precio" type="num" placeholder="(solo numeros)">
+  </div>  
+  <div class="botones">
+  <button ion-button color="dark" outline (click)="Fotos()" class="TomarFotos"> Tomar Fotos</button>
+  <button ion-button color="dark" outline class="Qr">Leer QR</button>
+</div>
+</div>
+<div class="contenido2" [ngClass]="{'mostrar':mostrar}">
+    <h1 class="titulo">Alta de platos y bebidas</h1>
+    <button ion-button color="dark"   class="Foto1">  <ion-icon ios="ios-camera" md="md-camera"></ion-icon> </button>
+    <button ion-button color="dark"   class="Foto2">   <ion-icon ios="ios-camera" md="md-camera"></ion-icon></button>
+    <button ion-button color="dark"   class="Foto3">  <ion-icon ios="ios-camera" md="md-camera"></ion-icon> </button>
+   
+    <div class="botones">
+        <button ion-button color="red"  class="TomarFotos"> Cargar</button>
+        <button ion-button color="red" (click)="Cancelar()" class="Qr">Cancelar</button>
+      
+      </div>
+  </div>
+</ion-content>
