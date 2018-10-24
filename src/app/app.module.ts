@@ -8,12 +8,17 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { LoginPage } from "../pages/login/login";
+import { PrincipalPage } from "../pages/principal/principal";
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireModule } from 'angularfire2';
+// import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
+
+import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
 
 @NgModule({
   declarations: [
@@ -21,12 +26,14 @@ import { firebaseConfig } from '../config';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    PrincipalPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig.fire)
+    // AngularFireModule.initializeApp(firebaseConfig.fire),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,13 +41,16 @@ import { firebaseConfig } from '../config';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    PrincipalPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuth
+    VerificarTipoProvider,
+    // AngularFireAuth
   ]
 })
 export class AppModule {}

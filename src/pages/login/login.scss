@@ -1,0 +1,100 @@
+@font-face {
+    src: url("../../assets/fonts/Lobster-Regular.ttf");
+    font-family: "lobster";
+}
+
+page-login {
+
+    body {
+        width: 100%;
+    }
+
+    div.vertical-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        justify-content: center;
+        background-size: cover;
+        font-family: roboto;
+    }
+
+    div.horizontal-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    img.background {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+    }
+
+    div.header {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    img {
+        width: 15vh;
+        height: auto;
+    }
+
+    h1 {
+        display: inline;
+        margin-left: 25px;
+        font-size: 80px;
+        font-weight: 100;
+        color: white;
+        font-family: "lobster";
+    }
+
+    input {
+        width: 75%;
+        border: gray solid 2px;
+        margin: 10px;
+        padding: 5px;
+        margin: 7vh 0 7vh 0;
+        font-size: 25px;
+        transition-duration: .3s;
+        transition-property: border-bottom-color font-size;
+        background-color: rgba(255, 255, 255, 0.8);
+        caret-color: color($colors, red);
+    }
+
+    input:first-of-type {
+        margin-bottom: 3vh;
+    }
+
+    input:focus {
+        transform: scale(1.2);
+        border-color: color($colors, red);;
+        background-color: rgb(255, 255, 255); 
+    }
+
+    span {
+        color: white;
+        font-size: 20px;
+        margin-bottom: 7vh;
+    }
+
+    button[ion-button] {
+        padding: 30px;
+        width: 20ch;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        font-size: 20px;
+        text-transform: none;
+    }
+
+}

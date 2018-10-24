@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <!-- <ion-title>{{sala}}</ion-title> -->
+    <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
+
+    <ion-buttons end>
+      <button ion-button>
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar color="red">
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item *ngFor="let item of acciones">
+        <!-- &nbsp;&nbsp;&nbsp; -->
+        {{item.accion}}
+      </button>
+      <!-- <button ion-item>
+        Friends
+      </button>
+      <button ion-item>
+        Events
+      </button>
+      <button ion-item>
+        Close Menu
+      </button> -->
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #content swipeBackEnabled="false"></ion-nav>
+
+<ion-content class="card-background-page" padding>
+
+  <button ion-button *ngFor="let item of acciones" (click)="Redireccionar(item.ruta)">
+    <div class="sombreado"></div>
+    <img src="../../assets/imgs/alfa/{{item.img}}" />
+    <div class="card-title">{{item.accion}}</div>
+  </button>
+
+</ion-content>
