@@ -1,0 +1,386 @@
+page-registro-cliente {
+ 
+        @import url('https://fonts.googleapis.com/css?family=Bangers');
+        @import url('https://fonts.googleapis.com/css?family=Neucha|Permanent+Marker');
+        @import url('https://fonts.googleapis.com/css?family=Grand+Hotel');
+        @import url('https://fonts.googleapis.com/css?family=Lobster');
+        @import url('https://fonts.googleapis.com/css?family=Lobster|Niramit');
+    
+    
+    /*-------------------------Animacion------------------------*/
+    @-webkit-keyframes pulse {
+        from {
+          -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+        }
+      
+        50% {
+          -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
+        }
+      
+        to {
+          -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+        }
+      }
+      
+      @keyframes pulse {
+        from {
+          -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+        }
+      
+        50% {
+          -webkit-transform: scale3d(1.05, 1.05, 1.05);
+          transform: scale3d(1.05, 1.05, 1.05);
+        }
+      
+        to {
+          -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+        }
+      }
+      
+      .pulse {
+        -webkit-animation-name: pulse;
+        animation-name: pulse;
+        animation:pulse 1.2s infinite ease-in-out;
+      }
+    
+    
+    /*---------------------------------------------------FIN DE LA ANIMACION---------------------------------------*/  
+      .mensajeError
+      {
+        
+          position:absolute;
+          top:0%;
+          z-index:50;
+            text-align: center;
+          align-items: center;
+          width:100%;
+          margin-top:10%;
+         
+          display:none;
+      }
+      .mensajeError h2
+    {
+        border-radius:8px;
+        border:1px solid red;
+        display:inline;
+        padding:5%;
+        background-color:#ff0000!important;
+       
+        color:white;
+        font-family: 'Lobster', cursive;
+    
+    }
+    .mensajeError2
+    {
+      
+        position:absolute;
+        top:0%;
+        z-index:50;
+          text-align: center;
+        align-items: center;
+        width:100%;
+        margin-top:10%;
+       
+        display:none;
+    }
+    .mensajeError2 h2
+    {
+      border-radius:8px;
+      border:1px solid rgb(0, 47, 255);
+      display:inline;
+      padding:5%;
+      background-color:#0004ff!important;
+      color:white;
+      font-family: 'Lobster', cursive;
+    
+    }
+    .mensajeError3
+    {
+      
+        position:absolute;
+        top:0%;
+        z-index:50;
+          text-align: center;
+        align-items: center;
+        width:100%;
+        margin-top:20%;
+       
+        display:none;
+    }
+    .mensajeError3 h2
+    {
+      border-radius:8px;
+      border:1px solid rgb(72, 255, 0);
+      display:inline;
+      padding:5%;
+      background-color:#2bff00!important;
+      color:white;
+      font-family: 'Lobster', cursive;
+    
+    }
+      }
+        body
+        
+        .fondo
+        {
+            width:100%;
+            height: 100%;
+            position:absolute;
+            z-index:-3;
+           
+        }
+        .vertical
+        {
+            display:flex;
+          align-items: center;
+            height: 100%;
+            padding-top:15%;
+            flex-direction: column;
+         width:100%;
+         position:relative;
+         z-index: 1;
+         background: url("../assets/imgs/beta/restaurante.jpg");
+         background-size:100% 100%;
+        
+            
+        }
+        .cabecera
+        {
+            position: relative;
+            top:-1%;
+            text-align:center;
+        
+        }
+        .cabecera h1
+        {
+            font-family: 'Lobster', cursive;
+            font-size:4em;
+          
+           text-shadow:2px 2px white;
+            margin-top:0;
+            margin-bottom:0;
+          
+            
+        }
+      .logo
+      {
+          width:100px;
+          height: 100px;
+        
+      }
+        .form
+        {
+            width:90%;
+           
+           background-color: #1dddb27d;
+            box-sizing: border-box;
+            border-radius: 8px;
+           background-image:url("../assets/imgs/fondoLogin.jpg");
+           background-size: 100% 100%;
+         
+        }
+        
+        .form h2
+        {
+            text-align: center;
+            border-bottom:1px solid rgba(0, 0, 0, 0.521);
+            font-family: 'Lobster', cursive;
+    
+            background-color:firebrick;
+            display:block;
+            font-size:1.8em;
+            line-height:2em; 
+            margin-top:0;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+        
+        
+        }
+        .form label
+        {
+            font-size:1.5em;
+            font-family: 'Neucha', cursive;
+            color:rgb(0, 0, 0);
+            
+            font-family: 'Lobster', cursive;
+    
+           letter-spacing: 1px;
+            margin-bottom:0;
+            display:inline-block;
+            font-weight: 900;
+                text-shadow: 2px 2px white;
+            border-radius: 5px;
+            margin-top:5%;
+            margin-left:5%;
+        }
+        .form input
+        {
+            width:90%;
+            margin-bottom: 20px;
+          border:none;
+            margin-left:5%;
+            background-color:transparent; 
+         
+            padding: 8px 5px;
+            padding-left:10px;
+            letter-spacing: 1PX;
+            font-size: 17px;
+            box-sizing: none!important;
+            border-bottom:1px solid black;
+            
+            border: 1px solid #999;
+            border-radius:8px;
+            font-weight: 500;
+            background-color: rgba(255, 255, 255, 0.603);
+        
+         
+        }
+        .form input[type=text]:focus
+        {
+            
+            border: 2px solid green;
+            background-color: rgba(255, 255, 255, 0.603);
+        
+            transition:.3s;
+            
+        }
+        .form input[type=password]:focus
+        {
+            
+            border: 2px solid green;
+            background-color: rgba(255, 255, 255, 0.603);
+            transition:.3s;
+        }
+        
+        
+        .form button
+        {
+            width:80%;
+            margin-left:10%;
+            font-family: 'Niramit', sans-serif;
+    
+            font-size:1em;
+            color:white;
+            font-weight: 900;
+            border-radius:8px;
+        }
+        .usuarios
+        {
+            display:flex;
+            flex-direction: row;
+            position: relative;
+            bottom:0;
+            height: 100px;
+            width:100%;
+            margin-top:8%;
+        }
+        .usuarios button
+        {
+            margin:auto;
+            font-size: 10px;
+           
+            width:15%;
+        }
+        
+        
+        @media  screen and(max-height:"1000px")
+        {
+            
+            .form {
+                height:60%;
+            }
+            
+            .form input[type=text], input[type=password] {
+                
+                margin: 8px 5%;
+            }
+        }
+        @media  screen and(max-height:"1200px")
+        {
+            
+            .form {
+                height:40%;
+            }
+            
+            .form input[type=text], input[type=password] {
+          
+                margin: 8px 5%;
+            }
+        }
+        @media  screen and(max-height:"800px")
+        {
+            .form {
+                height:60%;
+            }
+            
+           
+            
+            .form input[type=text], input[type=password] {
+              
+                margin: 8px 5%;
+            }
+        }
+        
+        
+        
+        
+        
+        @media  screen and(max-height:"600px")
+        {
+            .usuarios
+            {
+                display:flex!important;
+            }
+        
+            .form {
+                height:60%;
+            }
+            
+            .form input[type=text], input[type=password], button {
+               
+                margin: 1px 5%;
+            }
+            .form label
+            {
+                margin:1px 5%;
+            }
+        }
+        @media  screen and(max-height:"500px")
+        {
+            .usuarios
+            {
+                display:none !important;
+            }
+            .form {
+                height:100%;
+                position:relative;
+                top:-5%;
+            }
+            .cabecera
+            {
+                top:-5%;
+            }
+            .form input[type=text], input[type=password], button {
+                padding:1% 5%;
+                margin: 1px 5%;
+                padding-top: 2.5%;
+               
+            }
+            .form label
+            {
+                font-size:1.4em;
+                margin:1px 5%;
+            }
+            .fondo img
+            {
+                height: 500px!important;
+            }
+        
+    
+    
+}

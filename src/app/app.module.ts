@@ -7,6 +7,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente'
 
 import { LoginPage } from "../pages/login/login";
 import { PrincipalPage } from "../pages/principal/principal";
@@ -34,8 +35,9 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     PrincipalPage,
     SplashPage,
     AltaDeMesaPage,
-    EncuestaDeEmpleadoPage
+    EncuestaDeEmpleadoPage,
 
+    RegistroClientePage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     PrincipalPage,
     SplashPage,
     AltaDeMesaPage,
-    EncuestaDeEmpleadoPage
+    EncuestaDeEmpleadoPage,
+    RegistroClientePage
   ],
   providers: [
     StatusBar,
