@@ -1,0 +1,208 @@
+<!--
+  Generated template for the AltaDeMesaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--<ion-header>
+
+  <ion-navbar>
+    <ion-title>altaDeMesa</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+</ion-content>-->
+
+
+
+
+
+
+
+<!--<ion-header>
+
+  <ion-navbar>
+    <ion-title>altaDeMesa</ion-title>
+  </ion-navbar>
+
+</ion-header>-->
+
+
+<!--<ion-content padding>
+
+    <ion-label>Tipo</ion-label>
+    <ion-select value=Regular>
+      <ion-option value="Vip">Vip</ion-option>
+      <ion-option value="Discapacitados">Discapacitados</ion-option>
+      <ion-option value="Regular">Regular</ion-option>
+    </ion-select>
+
+</ion-content>-->
+
+<!--<ion-content >
+    <ion-row >
+   
+      <ion-col>
+        
+        <img src="assets/imgs/gamma/mesas.jpg"/>
+      </ion-col>
+    
+    </ion-row>
+    <div >
+      <form >
+        <ion-row>
+          <ion-col>
+            <ion-list inset>
+              
+              <ion-item>
+                <ion-input type="text" placeholder="Numero de mesa" name="email" ></ion-input>
+              </ion-item>
+              
+              <ion-item>
+                <ion-input type="password" placeholder="Cantidad de comensales" name="password"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-input type="password" placeholder="Tipo" name="password"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="file" [id]="pic"></ion-input>
+                  </ion-item>
+              
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col class="signup-col">
+
+
+            <button ion-button class="submit-btn"  >Dar de alta la mesa</button>
+
+            <button ion-button class="submit-btn"  >Lector de codigo qr de la mesa</button>
+            
+          </ion-col>
+        </ion-row>
+        
+      </form>
+      <ion-row>
+        <ion-col class="signup-col">
+          
+          
+          
+        </ion-col>
+      </ion-row>
+      
+    </div>
+  </ion-content>-->
+
+  <ion-header>
+      <ion-navbar color="red">
+    
+        <ion-buttons>
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    
+        <!-- <ion-title>{{sala}}</ion-title> -->
+        <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
+    
+        <ion-buttons end>
+          <button ion-button>
+            <ion-icon name="power"></ion-icon>
+          </button>
+        </ion-buttons>
+    
+      </ion-navbar>
+    </ion-header>
+    
+      <ion-menu [content]="content">
+        <ion-header>
+          <ion-toolbar color="red">
+            <ion-title>Menú</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+            <button ion-item>
+                <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;Convencional
+            </button>
+            <button ion-item>
+              Friends
+            </button>
+            <button ion-item>
+              Events
+            </button>
+            <button ion-item>
+              Close Menu
+            </button>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+    
+      <ion-nav #content swipeBackEnabled="false"></ion-nav>
+
+      <ion-content >
+          <ion-row >
+         
+            <ion-col>
+              
+              <img src="assets/imgs/gamma/mesas.jpg"/>
+            </ion-col>
+          
+          </ion-row>
+          <div >
+            <form >
+              <ion-row>
+                <ion-col>
+                  <ion-list inset>
+                    
+                    <ion-item>
+                      <ion-input type="text" placeholder="Numero de mesa" name="email" ></ion-input>
+                    </ion-item>
+                    
+                    <ion-item>
+                      <ion-input type="password" placeholder="Cantidad de comensales" name="password"></ion-input>
+                    </ion-item>
+      
+                    <ion-item>
+                        <ion-input type="password" placeholder="Tipo" name="password"></ion-input>
+                      </ion-item>
+      
+                      <ion-item>
+                          <ion-input type="file" [id]="pic"></ion-input>
+                        </ion-item>
+                    
+                  </ion-list>
+                </ion-col>
+              </ion-row>
+              
+              <ion-row>
+                <ion-col class="signup-col">
+      
+      
+                  <button ion-button class="submit-btn" color="red" >Dar de alta la mesa</button>
+      
+                  <button ion-button class="submit-btn" color="red" >Lector de codigo qr de la mesa</button>
+                  
+                </ion-col>
+              </ion-row>
+              
+            </form>
+            <ion-row>
+              <ion-col class="signup-col">
+                
+                
+                
+              </ion-col>
+            </ion-row>
+            
+          </div>
+        </ion-content>
+
