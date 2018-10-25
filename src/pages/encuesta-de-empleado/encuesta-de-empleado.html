@@ -13,53 +13,76 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding  class="cds">
+
+    
+
+  <ion-list class="list">
+
+    
 
     <ion-list-header>
         Como se siente en el restaurante?
       </ion-list-header>
     
+      <ion-label class="lb" >Cuan limpio es el lugar?</ion-label>
       <ion-item>
-        <ion-label>Cuan limpio es el lugar?</ion-label>
-        <ion-range value="1"></ion-range>
+        
+        <ion-range value="1">
+            <ion-icon range-left  name="sad"></ion-icon>
+            <ion-icon range-right name="happy"></ion-icon>
+
+        </ion-range>
       </ion-item>
 
-      <ion-item>
-          <ion-label>Que cambiaria del lugar</ion-label>
-          <ion-input value="2"></ion-input>
+      <ion-label class="lb" >Que cambiaria del lugar</ion-label>
+      <ion-item >
+         
+          <ion-input></ion-input>
         </ion-item>
 
+      </ion-list>
+
+      <ion-label class="lb" >lo tratan bien sus jefes?</ion-label>
+     
+      <ion-item>
+          <ion-label>Si</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+      
         <ion-item>
-            <ion-label>lo tratan bien sus jefes?</ion-label>
-            <ion-radio value="3">si</ion-radio>
-            <ion-radio value="5">no</ion-radio>
-          </ion-item>
+          <ion-label>No</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
 
           
-          <ion-item>
-            <ion-label>le pagan bien?</ion-label>
-            <ion-select [(ngModel)]="gender">
-              <ion-option value="f">Female</ion-option>
-              <ion-option value="m">Male</ion-option>
-            </ion-select>
-          </ion-item>
 
-          <ion-label>Dejaria de trabajar aca?</ion-label>
+          <ion-label class="lb">le pagan bien?</ion-label>
+          <ion-item>
+              <ion-label>Elija su opcion</ion-label>
+              <ion-select>
+                <ion-option value="1">Si</ion-option>
+                <ion-option value="2">No</ion-option>
+                
+              </ion-select>
+            </ion-item>
+
+          <ion-label class="lb">Dejaria de trabajar aca?</ion-label>
 
           <ion-item>
-            
+              <ion-label >Si</ion-label>
             <ion-checkbox value="Si" >Si</ion-checkbox>
             
           </ion-item>
 
           <ion-item>
-            
+              <ion-label >No</ion-label>
             <ion-checkbox value="no" >No</ion-checkbox>
             
           </ion-item>
     
 
-          <button ion-button class="submit-btn" color="red"  >Enviar la encuesta</button>
+          <button  ion-button class="submit-btn" color="red"  >Enviar la encuesta</button>
      
 
 
