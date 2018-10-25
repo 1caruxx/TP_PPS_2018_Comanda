@@ -13,6 +13,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SplashPage } from '../pages/splash/splash';
 import { AltaDeMesaPage } from '../pages/alta-de-mesa/alta-de-mesa';
 import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-de-empleado';
+import { QrDeLaMesaPage } from '../pages/qr-de-la-mesa/qr-de-la-mesa';
+import { TomarPedidoPage } from '../pages/tomar-pedido/tomar-pedido';
+import { HttpModule } from '@angular/http';
 
 //import { AngularFireModule } from 'angularfire2';
 //import { AngularFireAuth } from 'angularfire2/auth';
@@ -27,12 +30,15 @@ import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-d
     TabsPage,
     SplashPage,
     AltaDeMesaPage,
-    EncuestaDeEmpleadoPage
+    EncuestaDeEmpleadoPage,
+    QrDeLaMesaPage,
+    TomarPedidoPage
 
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule
    // AngularFireModule.initializeApp(firebaseConfig.fire)
   ],
   bootstrap: [IonicApp],
@@ -44,7 +50,9 @@ import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-d
     TabsPage,
     SplashPage,
     AltaDeMesaPage,
-    EncuestaDeEmpleadoPage
+    EncuestaDeEmpleadoPage,
+    QrDeLaMesaPage,
+    TomarPedidoPage
   ],
   providers: [
     StatusBar,

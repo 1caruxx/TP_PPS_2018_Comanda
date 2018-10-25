@@ -7,12 +7,14 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { SplashPage } from '../pages/splash/splash';
 import { AltaDeMesaPage } from '../pages/alta-de-mesa/alta-de-mesa';
 import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-de-empleado';
+import { QrDeLaMesaPage } from '../pages/qr-de-la-mesa/qr-de-la-mesa';
+import { TomarPedidoPage } from '../pages/tomar-pedido/tomar-pedido';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = EncuestaDeEmpleadoPage;
+  rootPage:any = TomarPedidoPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController) {
     platform.ready().then(() => {
