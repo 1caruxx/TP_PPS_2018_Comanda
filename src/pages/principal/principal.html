@@ -7,9 +7,6 @@
       </button>
     </ion-buttons>
 
-    <!-- <ion-title>{{sala}}</ion-title> -->
-    <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
-
     <ion-buttons end>
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
@@ -27,15 +24,17 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      
+
       <div>
         <img src="https://noticiaslasheras.com.ar/images/noticias/empleado-feliz.gif" class="img-menu" />
-        <div class="nombre-menu">Fernando (Dueño)</div>
+        <div class="nombre-menu">{{usuario.nombre}} ({{usuario.tipo}})</div>
       </div>
 
       <hr class="hr-menu" />
-      
-      <button ion-item *ngFor="let item of acciones">{{item.accion}}</button>
+
+      <button ion-item *ngFor="let item of acciones" (click)="Redireccionar(item.ruta)">{{item.accion}}</button>
+      <button ion-item (click)="IrAPerfil()">Ver mi perfil.</button>
+      <button ion-item>Desactivar sonidos.</button>
       <button ion-item (click)="Logout()">Cerrar sesión.</button>
 
     </ion-list>

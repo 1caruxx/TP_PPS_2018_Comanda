@@ -1,0 +1,118 @@
+@font-face {
+    src: url("../../assets/fonts/Cinzel-Regular.ttf");
+    font-family: cinzel;
+}
+
+page-perfil {
+
+    .scroll-content {
+        background-image: url('../../assets/imgs/alfa/perfil.jpg');
+        background-size: cover; 
+        background-position: center;
+    }
+
+    ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+
+    body {
+        width: 100%;
+    }
+
+    div.vertical-container {
+        display: flex;
+        background-size: cover;
+        font-family: roboto;
+
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.3);
+        padding-top: 20px;
+    }
+
+    div.header {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    h1 {
+        font-size: 80px;
+        font-weight: 100;
+        color: white;
+        font-family: lobster;
+        margin-bottom: 25px;
+    }
+
+    h2 {
+        width: 100%;
+        padding: 10px 0 10px 0;
+        font-family: cinzel;
+        text-align: center;
+        background-color: rgba(207, 73, 70, 1);
+        color: white;
+        margin-bottom: 25px;
+    }
+
+    .editar {
+        position: absolute;
+        padding: 20px 7px 20px 7px;
+        top: 5%;
+        left: 5%;
+        z-index: 10;
+        color: white;
+        font-size: 30px;
+        margin: 0;
+        border-radius: 100%;
+    }
+
+    img {
+        width: 200px;
+        height: auto;
+        margin-bottom: 25px;
+    }
+
+    .datos {
+        width: 100%;
+        background-color: rgba(0, 0, 0, .6);
+        color: white;
+        padding-left: 10px;
+        font-size: 20px;
+
+        .titulo {
+            font-family: cinzel;
+            font-size: 40px;
+            border-bottom: solid white 1px;
+            margin-bottom: 20px;
+        }
+
+        span {
+            display: block;
+            margin-bottom: 10px;
+
+            span {
+                display: initial;
+                font-family: cinzel;
+            }
+
+           button {
+               color: white;
+               margin: 0;
+               padding: 0 0 5px 0;
+               font-size: 20px;
+               position: absolute;
+               right: 0;
+               margin-right: 10px;
+           }
+        }
+    }
+}

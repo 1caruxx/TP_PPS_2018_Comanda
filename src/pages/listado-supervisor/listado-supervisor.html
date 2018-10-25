@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <h2 class="titulo">Empleados</h2>
+
+  <ion-list>
+
+    <ion-item *ngFor="let item of empleados">
+      <ion-thumbnail item-start>
+        <img src={{item.img}}>
+      </ion-thumbnail>
+
+      <h1>{{item.apellido}}, {{item.nombre}}</h1>
+      <p>Empleado • {{item.tipo}}</p>
+      <p>CUIL • {{item.CUIL}}</p>
+
+      <button ion-button clear item-end (click)="MostrarEncuesta()">
+        <ion-icon name="clipboard"></ion-icon>
+      </button>
+    </ion-item>
+
+  </ion-list>
+
+  <h2 class="titulo">Clientes</h2>
+
+  <ion-list>
+
+    <ion-item *ngFor="let item of empleados">
+      <ion-thumbnail item-start>
+        <img src={{item.img}}>
+      </ion-thumbnail>
+
+      <h1>{{item.apellido}}, {{item.nombre}}</h1>
+      <p>Empleado • {{item.tipo}}</p>
+      <p>CUIL • {{item.CUIL}}</p>
+
+      <button ion-button clear item-end (click)="MostrarEncuesta()">
+        <ion-icon name="clipboard"></ion-icon>
+      </button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

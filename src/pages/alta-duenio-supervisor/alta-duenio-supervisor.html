@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar color="red">
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+
+      <div>
+        <img src="https://noticiaslasheras.com.ar/images/noticias/empleado-feliz.gif" class="img-menu" />
+        <div class="nombre-menu">Fernando (Dueño)</div>
+      </div>
+
+      <hr class="hr-menu" />
+
+      <button ion-item *ngFor="let item of acciones">{{item.accion}}</button>
+      <button ion-item (click)="Logout()">Cerrar sesión.</button>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #content swipeBackEnabled="false"></ion-nav>
+
+<ion-content>
+
+  <div class="vertical-container">
+
+    <img src="../../assets/imgs/alfa/logo.png">
+
+    <h1>Registro</h1>
+
+    <h2>Alta de dueño / supervisor</h2>
+
+    <input type="text" placeholder="Nombre" />
+    <input type="text" placeholder="Apellido" />
+
+    <div class="header" style="width: 75%;margin: 20px 0 20px 0;">
+      <input type="text" placeholder="DNI" style="margin: 0 15px 0 0; width: 50%" />
+      <input type="text" placeholder="CUIL" style="margin: 0;width: 50%" />
+    </div>
+
+    <input type="password" placeholder="Contraseña" />
+
+    <select>
+      <option value="dueño">Dueño</option>
+      <option value="supervisor">Supervisor</option>
+    </select>
+
+    <div class="header" style="width: 75%;margin: 20px 0 20px 0;">
+      <button ion-button outline color="light" class="alta" style="margin: 0 30px 0 0;width: 50%" (click)="Loguear()">Sacar
+        foto</button>
+      <button ion-button outline color="light" class="alta" style="margin: 0;width: 50%" (click)="Loguear()">QR</button>
+
+    </div>
+
+    <button ion-button outline color="light" class="alta" (click)="Loguear()">Registrar</button>
+  </div>
+
+</ion-content>

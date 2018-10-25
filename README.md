@@ -23,7 +23,7 @@ Branch del proyecto: [lareu_alfa](https://github.com/1caruxx/TP_PPS_2018_Comanda
 * [ ] N- Hacer reservas agendadas.
 * [ ] Q- Hacer reservas agendadas.
 
-**Fecha de inicio:**<br />
+**Fecha de inicio:** 21/10/2018<br />
 **Fecha de fin:**
 
 ---

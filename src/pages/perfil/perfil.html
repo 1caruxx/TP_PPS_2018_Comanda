@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="vertical-container">
+
+    <h2>Tu perfil</h2>
+
+    <div style="position: relative;">
+      <button ion-button color="red" class="editar">
+        <ion-icon name="create"></ion-icon>
+      </button>
+      <img src="https://noticiaslasheras.com.ar/images/noticias/empleado-feliz.gif">
+    </div>
+
+    <div class="datos">
+
+      <span class="titulo">Datos:</span>
+      <span><span>Nombre:</span> Rosalinda</span>
+      <span><span>Apellido:</span> Petra </span>
+      <span><span>Tipo:</span> cliente </span>
+      <span><span>DNI:</span> 123456789 </span>
+      <span><span>CUIL:</span> ..... </span>
+      <span><span>Clave:</span> {{claveOculta}}  &nbsp;<button ion-button clear (mousedown)="MostrarClave()" (mouseup)="VolverAOcultar()"><ion-icon name="eye"></ion-icon></button></span>
+
+      <!-- <ng-container *ngFor="let item of datos">
+
+        <ng-container *ngIf="item.clave != 'img'">
+          <span><span>{{item.clave}}:</span> {{item.valor}}</span>
+        </ng-container>
+
+      </ng-container> -->
+
+    </div>
+
+  </div>
+
+</ion-content>

@@ -27,7 +27,7 @@ export class LoginPage {
   Loguear() {
 
     let datos = {
-      tipo: "dueño",
+      tipo: "supervisor",
       nombre: "fer",
       img: "fasdfdsaf"
     };

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { LoginPage } from "../../pages/login/login";
+import { AltaDuenioSupervisorPage } from "../../pages/alta-duenio-supervisor/alta-duenio-supervisor";
+import { AltaEmpleadoPage } from "../../pages/alta-empleado/alta-empleado";
+import { ListadoSupervisorPage } from "../../pages/listado-supervisor/listado-supervisor";
 
 /*
   Generated class for the VerificarTipoProvider provider.
@@ -25,16 +27,16 @@ export class VerificarTipoProvider {
 
       case "dueño":
         acciones = [
-          { accion: "Nuevo dueño o supervisor.", img: "nuevo-duenio-supervisor.jpg", ruta: LoginPage },
-          { accion: "Nuevo empleado.", img: "nuevo-empleado.jpg", ruta: "./" }
+          { accion: "Nuevo dueño o supervisor.", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
+          { accion: "Nuevo empleado.", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage }
         ];
         break;
 
       case "supervisor":
         acciones = [
-          { accion: "Nuevo dueño o supervisor.", img: "nuevo-duenio-supervisor.jpg", ruta: "./" },
-          { accion: "Nuevo empleado.", img: "nuevo-empleado.jpg", ruta: "./" },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" }
+          { accion: "Nuevo dueño o supervisor.", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
+          { accion: "Nuevo empleado.", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
+          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: ListadoSupervisorPage }
         ];
         break;
 

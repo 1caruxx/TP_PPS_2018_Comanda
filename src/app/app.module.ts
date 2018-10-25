@@ -10,6 +10,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { LoginPage } from "../pages/login/login";
 import { PrincipalPage } from "../pages/principal/principal";
+import { AltaDuenioSupervisorPage } from "../pages/alta-duenio-supervisor/alta-duenio-supervisor";
+import { PerfilPage } from "../pages/perfil/perfil";
+import { AltaEmpleadoPage } from "../pages/alta-empleado/alta-empleado";
+import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
+import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,7 +33,12 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     HomePage,
     TabsPage,
     LoginPage,
-    PrincipalPage
+    PrincipalPage,
+    AltaDuenioSupervisorPage,
+    PerfilPage,
+    AltaEmpleadoPage,
+    EncuestaSupervisorPage,
+    ListadoSupervisorPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +53,12 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     HomePage,
     TabsPage,
     LoginPage,
-    PrincipalPage
+    PrincipalPage,
+    AltaDuenioSupervisorPage,
+    PerfilPage,
+    AltaEmpleadoPage,
+    EncuestaSupervisorPage,
+    ListadoSupervisorPage
   ],
   providers: [
     StatusBar,

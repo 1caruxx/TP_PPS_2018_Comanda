@@ -31,7 +31,12 @@ page-principal {
     }
 
     .hr-menu {
-        background-color: red;
+        background-color: color($colors, red);
+    }
+
+    ion-icon {
+        color: color($colors, red);
+        font-size: 0px;
     }
 
     .card-background-page {
