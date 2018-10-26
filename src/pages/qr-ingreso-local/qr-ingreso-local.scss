@@ -46,7 +46,9 @@ page-qr-ingreso-local {
     {
         width: 50%;
         margin-left: 25%;
-        padding: 10%;
+        padding: 20%;
+        font-size: 2em;
+        color: black;
         font-family: 'Sorts Mill Goudy', serif;
     }
 
@@ -57,9 +59,6 @@ page-qr-ingreso-local {
             font-size: 3em;
         }
         
-        .form input[type=text], input[type=password] {
-      
-            margin: 8px 5%;
-        }
+        
     }
 }
