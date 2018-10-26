@@ -18,6 +18,7 @@ import { TomarPedidoPage } from '../pages/tomar-pedido/tomar-pedido';
 import { HttpModule } from '@angular/http';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { ChartsModule } from 'ng2-charts';
+import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 
 //import { AngularFireModule } from 'angularfire2';
 //import { AngularFireAuth } from 'angularfire2/auth';
@@ -34,7 +35,8 @@ import { ChartsModule } from 'ng2-charts';
     AltaDeMesaPage,
     EncuestaDeEmpleadoPage,
     QrDeLaMesaPage,
-    TomarPedidoPage
+    TomarPedidoPage,
+    MapaDeRutaPage
 
   ],
   imports: [
@@ -55,7 +57,8 @@ import { ChartsModule } from 'ng2-charts';
     AltaDeMesaPage,
     EncuestaDeEmpleadoPage,
     QrDeLaMesaPage,
-    TomarPedidoPage
+    TomarPedidoPage,
+    MapaDeRutaPage
   ],
   providers: [
     StatusBar,

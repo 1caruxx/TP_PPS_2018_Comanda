@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!--<ion-header>
 
   <ion-navbar>
     <ion-title>mapaDeRuta</ion-title>
@@ -15,4 +15,85 @@
 
 <ion-content padding>
 
+</ion-content>-->
+
+<ion-header>
+  <ion-navbar color="red">
+    <ion-title>
+      Mapa de ruta hasta el domicilio de entrega
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+
+
+
+
+<ion-content padding class="home">
+
+    <ion-row class="logo-row">
+        <!-- <ion-col></ion-col> -->
+        <ion-col>
+            <img src="assets/imgs/gamma/mapaderuta.jpg"/>
+          
+        </ion-col>
+        <!-- <ion-col></ion-col> -->
+      </ion-row>
+
+      
+      <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>
+      <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>
+      
+  
+
+   <ion-list>
+     <ion-item *ngFor="let chat of ListadoDeChats">
+
+   
+     <div class="chat-message" text-right >
+       <div class="right-bubble">
+         <span class="msg-name">Yo</span>
+         <span class="msg-date">asdasd</span>
+         <p text-wrap>fdsfs</p>
+       </div>
+     </div>
+
+     <div class="chat-message" text-left >
+       <div class="left-bubble">
+         <span class="msg-name">Cliente:Juan Perez</span>
+         <span class="msg-date">sdfs</span>
+         <p text-wrap>asdasd</p>
+       </div>
+     </div>
+
+   
+   </ion-item>
+ </ion-list>
+   
 </ion-content>
+
+
+
+
+
+<ion-footer no-shadow >
+  <ion-toolbar position="bottom" color="light">
+    <form (ngSubmit)="enviarMensaje()" #registerForm="ngForm">
+      <ion-row>
+            <ion-input type="text" placeholder="Nuevo Mensaje" name="mensaje" class="input" [(ngModel)]="mensaje" required></ion-input>
+            <ion-buttons end>
+                <button ion-button class="submit-btn" icon-only type="submit" [disabled]="!registerForm.form.valid">
+                    <ion-icon name="arrow-round-forward"></ion-icon>
+                </button>
+            </ion-buttons>
+      </ion-row>
+    </form>
+  </ion-toolbar>
+</ion-footer>

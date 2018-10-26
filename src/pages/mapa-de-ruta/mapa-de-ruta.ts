@@ -15,6 +15,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MapaDeRutaPage {
 
+  ListadoDeChats=["asd","probando","gg"];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

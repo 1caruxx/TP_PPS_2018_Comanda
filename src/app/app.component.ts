@@ -9,12 +9,13 @@ import { AltaDeMesaPage } from '../pages/alta-de-mesa/alta-de-mesa';
 import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-de-empleado';
 import { QrDeLaMesaPage } from '../pages/qr-de-la-mesa/qr-de-la-mesa';
 import { TomarPedidoPage } from '../pages/tomar-pedido/tomar-pedido';
+import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TomarPedidoPage;
+  rootPage:any = MapaDeRutaPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController) {
     platform.ready().then(() => {
