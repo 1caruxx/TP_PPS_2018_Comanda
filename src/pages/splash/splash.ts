@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 /**
  * Generated class for the SplashPage page.
@@ -17,7 +18,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 })
 export class SplashPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController, public splashScreen: SplashScreen) {
+  
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController, public splashScreen: SplashScreen,private nativeAudio: NativeAudio) 
+  {
+    this.nativeAudio.preloadSimple('z', 'assets/imgs/gamma/aud.mp3').catch(() => { }); 
+
   }
 
   ionViewDidEnter() {
@@ -25,6 +31,7 @@ export class SplashPage {
     this.splashScreen.hide();
  
     setTimeout(() => {
+      this.nativeAudio.play('z').catch(() => { });
       this.viewCtrl.dismiss();
     }, 4000);
  

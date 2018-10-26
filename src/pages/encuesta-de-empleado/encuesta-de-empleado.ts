@@ -15,11 +15,45 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EncuestaDeEmpleadoPage {
 
+  encuestita=true;
+  probabilidad=false;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EncuestaDeEmpleadoPage');
+  }
+
+  Volver()
+  {
+    //this.navCtrl.setRoot(SuperControlPanelPage);
+  }
+
+  
+  public pieChartType:string = 'pie';
+ 
+  // Pie
+  public pieChartLabels:string[] = ['Bueno', 'Malo'];
+  public pieChartData:number[] = [300, 500];
+ 
+  public randomizeType():void {
+    
+    this.pieChartType = this.pieChartType === 'doughnut' ? 'pie' : 'doughnut';
+  }
+ 
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
+ 
+  public chartHovered(e:any):void {
+    console.log(e);
+  }
+
+  enviarEncuesta()
+  {
+    this.encuestita=false;
+    this.probabilidad=true;
   }
 
 }

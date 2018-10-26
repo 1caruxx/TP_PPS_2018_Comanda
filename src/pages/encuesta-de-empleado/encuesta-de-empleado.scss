@@ -7,9 +7,11 @@ page-encuesta-de-empleado {
         border-radius: 20px ;
         background-color: red !important;
         margin-top: 3px !important;
-        max-width: 20% !important;
+        max-width: 80% !important;
         margin-left: auto;
         margin-right: auto;
+
+        
        
         
         
@@ -21,6 +23,8 @@ page-encuesta-de-empleado {
         //background:cover;
         
         //background-color: #f0f0f0 !important;
+
+        
     }
 
     .lb{
@@ -38,6 +42,9 @@ page-encuesta-de-empleado {
         background-color: #ffd000 !important;
         margin-bottom: 5px;
     }*/
+
+    canvas{ height:60% !important; }
+    div { height: 95%; }
 
     
     

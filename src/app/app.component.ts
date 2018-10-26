@@ -14,7 +14,7 @@ import { TomarPedidoPage } from '../pages/tomar-pedido/tomar-pedido';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TomarPedidoPage;
+  rootPage:any = EncuestaDeEmpleadoPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController) {
     platform.ready().then(() => {

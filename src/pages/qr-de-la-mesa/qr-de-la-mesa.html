@@ -18,16 +18,18 @@
 </ion-content>-->
 
 <ion-header>
+  <ion-navbar color="red">
+    <ion-title>
+      qrDeLaMesa
+    </ion-title>
 
-  <ion-navbar color ="red">
-    <ion-title>Qr de la mesa</ion-title>
     <ion-buttons end>
-        <button ion-button (click)="back()">
-          <ion-icon name="arrow-back"></ion-icon>
-        </button>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
     </ion-buttons>
-  </ion-navbar>
 
+  </ion-navbar>
 </ion-header>
 
     <ion-content padding class="home">
@@ -38,7 +40,15 @@
           
         </div>
         <div class="center button">
-          <button ion-button class="submit-btn" >Qr de la mesa</button>
+          <button ion-button class="submit-btn" >Relacionar cliente con mesa</button>
+        </div>
+
+        <div class="center button">
+          <button ion-button class="submit-btn" >Ver estado de pedido</button>
+        </div>
+
+        <div class="center button">
+          <button ion-button class="submit-btn" >Acceder a encuesta de satisfaccion</button>
         </div>
         
       </ion-content>

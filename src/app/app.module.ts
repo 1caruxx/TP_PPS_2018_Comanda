@@ -16,6 +16,8 @@ import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-d
 import { QrDeLaMesaPage } from '../pages/qr-de-la-mesa/qr-de-la-mesa';
 import { TomarPedidoPage } from '../pages/tomar-pedido/tomar-pedido';
 import { HttpModule } from '@angular/http';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { ChartsModule } from 'ng2-charts';
 
 //import { AngularFireModule } from 'angularfire2';
 //import { AngularFireAuth } from 'angularfire2/auth';
@@ -38,7 +40,8 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    ChartsModule
    // AngularFireModule.initializeApp(firebaseConfig.fire)
   ],
   bootstrap: [IonicApp],
@@ -57,6 +60,7 @@ import { HttpModule } from '@angular/http';
   providers: [
     StatusBar,
     SplashScreen,
+    NativeAudio,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     //AngularFireAuth
   ]

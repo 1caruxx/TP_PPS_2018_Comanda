@@ -13,20 +13,24 @@
 </ion-header>-->
 
 <ion-header>
+  <ion-navbar color="red">
+    <ion-title>
+      Encuesta de empleados
+    </ion-title>
 
-  <ion-navbar color ="red">
-    <ion-title>Encuesta de empleado</ion-title>
     <ion-buttons end>
-        <button ion-button (click)="back()">
-          <ion-icon name="arrow-back"></ion-icon>
-        </button>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
     </ion-buttons>
-  </ion-navbar>
 
+  </ion-navbar>
 </ion-header>
 
 
-<ion-content padding  class="cds">
+
+
+<ion-content padding  class="cds" *ngIf="encuestita">
 
     
 
@@ -95,9 +99,57 @@
           </ion-item>
     
 
-          <button  ion-button class="submit-btn" color="red"  >Enviar la encuesta</button>
+          <button  ion-button class="submit-btn" color="red" (click)="enviarEncuesta()" >Enviar la encuesta</button>
+
+          
      
 
 
+
+</ion-content>
+
+
+<ion-content padding *ngIf="probabilidad">
+  <!-- style="display: block; width: 100%;height: 90%;" -->
+  
+  <div class="col-xs-2 col-sm-2 col-md-2">
+    <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+  </div>
+
+  <div class="col-xs-2 col-sm-2 col-md-2">
+    <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+  </div>
+
+  <div class="col-xs-2 col-sm-2 col-md-2">
+    <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+  </div>
+
+  <div class="col-xs-2 col-sm-2 col-md-2">
+    <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-8 text-center" style="margin-top: 10px;height: 50%">
+    <button (click)="randomizeType()" style="display: inline-block">Toggle</button>
+  </div>
+ 
 
 </ion-content>
