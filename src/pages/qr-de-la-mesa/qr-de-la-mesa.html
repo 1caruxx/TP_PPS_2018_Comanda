@@ -18,51 +18,17 @@
 </ion-content>-->
 
 <ion-header>
-    <ion-navbar color="red">
-  
-      <ion-buttons>
-        <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
+
+  <ion-navbar color ="red">
+    <ion-title>Qr de la mesa</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
         </button>
-      </ion-buttons>
-  
-      <!-- <ion-title>{{sala}}</ion-title> -->
-      <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
-  
-      <ion-buttons end>
-        <button ion-button>
-          <ion-icon name="power"></ion-icon>
-        </button>
-      </ion-buttons>
-  
-    </ion-navbar>
-  </ion-header>
-  
-    <ion-menu [content]="content">
-      <ion-header>
-        <ion-toolbar color="red">
-          <ion-title>Menú</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <button ion-item>
-              <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;Convencional
-          </button>
-          <button ion-item>
-            Friends
-          </button>
-          <button ion-item>
-            Events
-          </button>
-          <button ion-item>
-            Close Menu
-          </button>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-  
-    <ion-nav #content swipeBackEnabled="false"></ion-nav>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
 
     <ion-content padding class="home">
         <div class="center">
