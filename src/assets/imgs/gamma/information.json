@@ -1,94 +1,91 @@
 {
     "items": [
         {
-            "name": "Action",
+            "name": "Lista de pedidos terminados",
             "children": [
                 {
-                    "name": "Special Academy Pizza",
-                    "information": "Pastrami pork belly ball tip andouille corned beef jerky shankle landjaeger. Chicken chuck porchetta picanha, ham brisket tenderloin venison meatloaf landjaeger jowl.",
-                    "price": "$25"
+                    "name": "papas fritas con milanesa",
+                    "information": "plato pedido por juan perez de la mesa 5,con el empleado lucas",
+                    "price": "$25",
+                    "estado":"terminado"
                 },
                 {
-                    "name": "Pizza Ionic",
-                    "information": "Pork chop meatloaf rump, meatball shoulder turducken alcatra doner sausage capicola pork strip steak turkey cupim leberkas.",
-                    "price": "$19.99"
+                    "name": "arroz con leche",
+                    "information": "pedido por marcelo de la mesa 7,por el empleado martin",
+                    "price": "$19.99",
+                    "estado":"terminado"
+                    
+                },
+                {
+                    "name": "Vino malbec",
+                    "information": "pedido por luna de la mesa 1,por el empleado lucas",
+                    "price": "$19.99",
+                    "estado":"terminado"
+                },
+                {
+                    "name": "Mousse de Chocolate",
+                    "information": "pedido por julieta de la mesa 4,por la empleada luna",
+                    "price": "$19.99",
+                    "estado":"terminado"
                 }
+
             ]
         },
         {
-            "name": "Pizza",
+            "name": "Lista de pedidos pendientes",
             "children": [
                 {
-                    "name": "Traditional",
+                    "name": "Cocina",
                     "children": [
                         {
-                            "name": "Pizza Salami",
-                            "information": "Pork chop jowl capicola porchetta, kielbasa prosciutto boudin bacon pork pig.",
-                            "price": "$10"
+                            "name": "Papas fritas con milanesa",
+                            "information": "Plato pedido por juan perez de la mesa 5,con el empleado lucas.",
+                            "price": "$10",
+                            "estado":"pendiente"
                         },
                         {
-                            "name": "Pizza Prosciutto",
-                            "information": "Pork chop pastrami landjaeger chuck brisket",
-                            "price": "$12"
+                            "name": "arroz con leche",
+                            "information": "pedido por marcelo de la mesa 7,por el empleado martin",
+                            "price": "$12",
+                            "estado":"pendiente"
                         }
                     ]
                 },
                 {
-                    "name": "Gourmet",
+                    "name": "Bebidas",
                     "children": [
                         {
-                            "name": "Pizza Bombay",
-                            "information": "Pastrami ham hock ball tip, tongue ribeye chuck ham beef bresaola leberkas.",
-                            "price": "$13"
-                        },
-                        {
-                            "name": "Pizza Crazy Dog",
-                            "information": "Andouille spare ribs meatloaf swine ground round pork loin, brisket chuck bacon tongue.",
-                            "price": "$14"
-                        },
-                        {
-                            "name": "Pizza Italia",
-                            "information": "Ribeye ham t-bone, tail ground round biltong picanha sausage rump corned beef.",
-                            "price": "$11"
-                        },
-                        {
-                            "name": "Pizza Tuna",
-                            "information": "Pork chop pastrami landjaeger chuck brisket",
-                            "price": "$14"
+                            "name": "Vino malbec",
+                            "information": "pedido por luna de la mesa 1,por el empleado lucas",
+                            "price": "$13",
+                            "estado":"pendiente"
                         }
                     ]
                 },
                 {
-                    "name": "Bestseller",
+                    "name": "Postres",
                     "children": [
                         {
-                            "name": "Pizza Academy",
-                            "information": "Frankfurter tail capicola cupim shankle salami, beef ribs beef boudin porchetta ball tip leberkas turkey tenderloin.",
-                            "price": "$25"
-                        },
-                        {
-                            "name": "Pizza Ionic",
-                            "information": "Shank chuck tail, kevin shankle ham hock pork loin pork hamburger beef ribs.",
-                            "price": "$19.99"
+                            "name": "Mousse de Chocolate",
+                            "information": "pedido por julieta de la mesa 4,por la empleada luna",
+                            "price": "$13",
+                            "estado":"pendiente"
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "name": "Drinks",
-            "children": [
-                {
-                    "name": "Special Academy Pizza",
-                    "information": " Landjaeger fatback shank frankfurter, tongue shoulder ham strip steak pancetta pork short loin corned beef short ribs biltong cow",
-                    "price": "$25"
                 },
                 {
-                    "name": "Pizza Ionic",
-                    "information": "Pork chop pastrami landjaeger chuck brisket",
-                    "price": "$19.99"
+                    "name": "Cervezeria",
+                    "children": [
+                        {
+                            "name": "Cerveza artesanal",
+                            "information": "pedido por jorge de la mesa 9,por el empleado fabricio",
+                            "price": "$25",
+                            "estado":"pendiente"
+                        }
+                    ]
                 }
             ]
         }
+        
     ]
 }

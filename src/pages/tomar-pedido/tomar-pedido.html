@@ -112,7 +112,7 @@
                 <ion-item *ngIf="!child.children" ion-item detail-none class="child-item" text-wrap>
                   <h2>{{ child.name }}</h2>
                   <p text-lowercase>{{ child.information }}</p>
-                  <button ion-button outline item-end (click)="buyItem(child)">{{ child.price }}</button>
+                  <button ion-button outline item-end (click)="buyItem(child)">{{ child.estado }}</button>
                 </ion-item>
        
                 <ion-list *ngIf="child.children && child.open">
@@ -121,7 +121,8 @@
                     <h2>{{ item.name }}</h2>
                     <p text-lowercase>{{ item.information }}</p>
                     <!-- Direct Add Button -->
-                    <button ion-button outline item-end (click)="buyItem(item)">{{ item.price }}</button>
+                    <button ion-button outline item-end (click)="buyItem(child)">Cambiar tiempo estimado</button>
+                    <button ion-button outline item-end (click)="buyItem(item)">Terminar pedido</button>
                   </ion-item>
                 </ion-list>
        
