@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente';
 import { AltaPlatosPage } from '../pages/alta-platos/alta-platos';
+import { QrIngresoLocalPage } from '../pages/qr-ingreso-local/qr-ingreso-local';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,7 +27,8 @@ import { firebaseConfig } from '../config';
     HomePage,
     TabsPage,
     RegistroClientePage,
-    AltaPlatosPage
+    AltaPlatosPage,
+    QrIngresoLocalPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { firebaseConfig } from '../config';
     HomePage,
     TabsPage,
     RegistroClientePage,
-    AltaPlatosPage
+    AltaPlatosPage,
+    QrIngresoLocalPage
   ],
   providers: [
     StatusBar,

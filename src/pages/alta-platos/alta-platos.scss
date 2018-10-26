@@ -47,6 +47,12 @@ page-alta-platos {
         border-radius: 5%;
         font-size: 1.3em;
         font-family: 'Rancho', cursive;
+        background-color: transparent;
+        border:1px solid black;
+    }
+    .nombrePlato::placeholder,.descripcion::placeholder,.tiempo::placeholder, .precio::placeholder
+    {
+        color:black;
     }
     .tiempoDiv, .precioDiv, .botones
     {
@@ -72,6 +78,8 @@ page-alta-platos {
         width: 80%;
         margin-left: 10%;
         font-size:1.3em;
+        background-color: transparent;
+        border:1px solid black;
     }
     .tiempo, .precio
     {
@@ -82,6 +90,8 @@ page-alta-platos {
         align-self: flex-start;
         font-family: 'Rancho', cursive;
         font-size:1.3em;
+        background-color: transparent;
+        border:1px solid black;
     }
     .ocultar
     {
