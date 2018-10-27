@@ -1,0 +1,128 @@
+<!--
+  Generated template for the EncuestaClientePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="pregunta1"  [ngClass]="{'noMostrar':ocultar}">
+  <div class="laPregunta1">
+      <h2>¿Se siente c&oacute;modo en el restaurant?</h2>
+     
+      <ion-item>
+          <ion-label>Si</ion-label>
+          <ion-radio value="1"></ion-radio>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>No</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+        <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+    </div>
+</div>
+<div class="pregunta2"  [ngClass]="{'noMostrar':ocultar2}">
+    <div class="laPregunta2">
+        <h2>¿Como calificar&iacute;a la atenci&oacute;n?</h2>
+       
+        <ion-item>
+            <ion-label>Elija su opci&oacute;n</ion-label>
+            <ion-select  okText="Ok" cancelText="Cancelar">
+                <ion-option value="1">Buena</ion-option>
+                <ion-option value="2">Mala</ion-option>
+                <ion-option value="3">Regular</ion-option>
+                <ion-option value="4">Muy buena</ion-option>
+              </ion-select>
+          </ion-item>
+          <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+      </div>
+  </div>
+  <div class="pregunta3"  [ngClass]="{'noMostrar':ocultar3}">
+      <div class="laPregunta3">
+          <h2>¿Se sintio a gusto la ultima vez que nos visit&oacute;?</h2>
+         
+          <ion-item>
+              <ion-label >Si</ion-label>
+            <ion-checkbox value="Si" >Si</ion-checkbox>
+            
+          </ion-item>
+
+          <ion-item>
+              <ion-label >No</ion-label>
+            <ion-checkbox value="no" >No</ion-checkbox>
+            
+          </ion-item>
+            <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+        </div>
+    </div>
+    <div class="pregunta4"  [ngClass]="{'noMostrar':ocultar4}">
+        <div class="laPregunta4">
+            <h2>¿Que tan buenos son nuestros platos?</h2>
+           
+            <ion-item>
+        
+                <ion-range value="1">
+                    <ion-icon range-left  name="sad"></ion-icon>
+                    <ion-icon range-right name="happy"></ion-icon>
+        
+                </ion-range>
+              </ion-item>
+              <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+          </div>
+      </div>
+      <div class="pregunta5"  [ngClass]="{'noMostrar':ocultar5}">
+          <div class="laPregunta5">
+              <h2>¿Qu&eacute;  piensa qu&eacute; es lo mejor del restaurante?</h2>
+             
+              <ion-item>
+          
+                  <ion-input placeholder="Escribalo aqui"></ion-input>
+                </ion-item>
+                <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+            </div>
+        </div>
+        <div class="pregunta6"  [ngClass]="{'noMostrar':ocultar6}">
+            <div class="laPregunta6">
+                <h2>Tome algunas fotos(m&aacute;ximo 3) relacionadas a sus respuestas</h2>
+               
+              
+            
+                    <button ion-button color="dark"   class="Foto">  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button>
+                 
+                  <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+              </div>
+          </div>
+<ion-header>
+    <ion-navbar color="red">
+  
+      
+      
+  
+      
+  
+      <!-- <ion-title>{{sala}}</ion-title> -->
+      <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
+  
+      <ion-buttons end>
+        <button ion-button>
+          <ion-icon name="power"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content >
+    <div class="contenido">
+        <h1 class="tituloPag">¿Qu&eacute; piensa de nosotros?</h1>
+        <p class="info">Ayudenos a brindarle una mejor atenci&oacute;n cada vez, con la siguiente encuesta:</p>
+        <button ion-button color="light" (click)="pregunta1()" outline>Pregunta I</button>
+         <button ion-button color="light" (click)="pregunta2()"  outline>Pregunta II</button>
+         <button ion-button color="light" (click)="pregunta3()" outline>Pregunta III</button>
+         <button ion-button color="light"  (click)="pregunta4()" outline>Pregunta IV</button>
+         <button ion-button color="light" (click)="pregunta5()" outline>Pregunta V</button>
+         <button ion-button color="light" (click)="pregunta6()" outline>Fotos(Opcional)</button>
+         <button class="enviar" ion-button color="red">Enviar encuesta</button>
+      </div>
+    
+</ion-content>

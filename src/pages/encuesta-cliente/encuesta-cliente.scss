@@ -1,0 +1,130 @@
+page-encuesta-cliente {
+    ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+
+    .scroll-content
+    {
+        overflow-x: hidden!important;
+    }
+    ion-content
+    {
+        overflow: hidden!important;
+    }
+    .contenido
+    {
+       
+        width: 100%;
+        height: 100%!important;
+        display: flex;
+        flex-direction: column;
+        background: url("../assets/imgs/beta/fondoQr.jpg");
+        background-size:100% 100%;
+        position:relative;
+    }
+    .tituloPag
+    {
+        font-family: 'Lobster', cursive;
+        text-align: center;
+        color:white;
+      
+    }
+    .info   
+    {
+        font-family: 'Sorts Mill Goudy', serif;
+        text-align: center;
+        color: white;
+        width: 100%;
+margin-top:0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        font-size: 1.7em;
+    }
+    .contenido button
+    {
+        width: 60%;
+        margin-left: 20%;
+        box-sizing: border-box;
+        font-family: 'Sorts Mill Goudy', serif;
+        margin-top: 0;
+        margin-bottom: 2%;
+        color:white;
+        padding: 5%!important;
+    }
+    .yaRespondido
+    {
+        background: white;
+        color:black;
+    }
+    .pregunta1, .pregunta2, .pregunta3, .pregunta4, .pregunta5, .pregunta6
+    {
+        position: absolute;
+        z-index: 1000;
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content: center;
+        align-items:center; 
+        background: #0000009e;
+    }
+    .laPregunta1, .laPregunta2, .laPregunta3, .laPregunta4, .laPregunta5, .laPregunta6
+    {
+        width: 100%;
+        padding-bottom:5%;
+        background-color: white;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: .5s;
+    }
+    .noMostrar
+    {
+        display: none;
+        transition: .5s;
+    }
+    .laPregunta1 h2, .laPregunta2 h2, .laPregunta3 h2 , .laPregunta4 h2, .laPregunta5 h2 , .laPregunta6 h2  {
+        font-family: 'Lobster', cursive;
+     text-align: center;
+    }
+    .Foto
+    {
+        width: 50%;
+        padding: 10%;
+    }
+    .camaraIcon
+    {
+        font-size: 3em;
+    }
+    .enviar
+    {
+        width: 80%;
+        margin-left: 10%;
+        box-sizing: border-box;
+        font-family: 'Sorts Mill Goudy', serif;
+       
+        
+        color:white;
+        padding: 5%!important;
+
+    }
+    .aceptar
+    {
+        width: 80%;
+      
+        box-sizing: border-box;
+        font-family: 'Sorts Mill Goudy', serif;
+       
+        
+        color:white;
+        padding: 5%!important;
+
+    }
+
+}

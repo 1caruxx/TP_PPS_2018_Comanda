@@ -1,0 +1,64 @@
+page-qr-ingreso-local {
+
+   
+    @import url('https://fonts.googleapis.com/css?family=Kalam|Lobster|Sorts+Mill+Goudy');
+
+    ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+
+    .contenido
+    {
+       
+        width: 100%;
+        height: 100%!important;
+        display: flex;
+        flex-direction: column;
+        background: url("../assets/imgs/beta/fondoQr.jpg");
+        background-size:100% 100%;
+        position:relative;
+    }
+    .tituloPag
+    {
+        font-family: 'Lobster', cursive;
+        text-align: center;
+        color:white;
+        font-size:5em;
+    }
+    .info   
+    {
+        font-family: 'Sorts Mill Goudy', serif;
+        font-size: 2em;
+        text-align: center;
+        color:white;
+        width: 80%;
+        margin-left: 10%;
+        margin-top:10%;
+        box-sizing: border-box;
+    }
+    .btnQr1
+    {
+        width: 50%;
+        margin-left: 25%;
+        padding: 20%;
+        font-size: 2em;
+        color: black;
+        font-family: 'Sorts Mill Goudy', serif;
+    }
+
+    @media  screen and(max-width:"340px")
+    {
+        
+        .tituloPag {
+            font-size: 3em;
+        }
+        
+        
+    }
+}

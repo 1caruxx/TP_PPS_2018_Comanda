@@ -7,6 +7,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+<<<<<<< HEAD
 import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente'
 
 import { LoginPage } from "../pages/login/login";
@@ -18,6 +19,13 @@ import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-su
 import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../pages/reserva/reserva";
 
+=======
+import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente';
+import { AltaPlatosPage } from '../pages/alta-platos/alta-platos';
+import { QrIngresoLocalPage } from '../pages/qr-ingreso-local/qr-ingreso-local';
+import {  EncuestaClientePage } from '../pages/encuesta-cliente/encuesta-cliente';
+import { PedirPlatosPage } from '../pages/pedir-platos/pedir-platos';
+>>>>>>> vega_beta
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SplashPage } from '../pages/splash/splash';
@@ -38,6 +46,7 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     ContactPage,
     HomePage,
     TabsPage,
+<<<<<<< HEAD
     LoginPage,
     PrincipalPage,
     SplashPage,
@@ -51,6 +60,13 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
     ReservaPage
+=======
+    RegistroClientePage,
+    AltaPlatosPage,
+    QrIngresoLocalPage,
+    EncuestaClientePage,
+    PedirPlatosPage
+>>>>>>> vega_beta
   ],
   imports: [
     BrowserModule,
@@ -65,6 +81,7 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     ContactPage,
     HomePage,
     TabsPage,
+<<<<<<< HEAD
     LoginPage,
     PrincipalPage,
     SplashPage,
@@ -77,6 +94,13 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
     ReservaPage
+=======
+    RegistroClientePage,
+    AltaPlatosPage,
+    QrIngresoLocalPage,
+    EncuestaClientePage,
+    PedirPlatosPage
+>>>>>>> vega_beta
   ],
   providers: [
     StatusBar,

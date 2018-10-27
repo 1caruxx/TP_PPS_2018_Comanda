@@ -5,6 +5,7 @@ page-registro-cliente {
         @import url('https://fonts.googleapis.com/css?family=Grand+Hotel');
         @import url('https://fonts.googleapis.com/css?family=Lobster');
         @import url('https://fonts.googleapis.com/css?family=Lobster|Niramit');
+        @import url('https://fonts.googleapis.com/css?family=Anton');
     
     
     /*-------------------------Animacion------------------------*/
@@ -75,6 +76,9 @@ page-registro-cliente {
         font-family: 'Lobster', cursive;
     
     }
+    .ion-page .show-page {
+        overflow: scroll!important;
+     }
     .mensajeError2
     {
       
@@ -139,7 +143,7 @@ page-registro-cliente {
             display:flex;
           align-items: center;
             height: 100%;
-            padding-top:15%;
+            padding-top:5%;
             flex-direction: column;
          width:100%;
          position:relative;
@@ -147,7 +151,7 @@ page-registro-cliente {
          background: url("../assets/imgs/beta/restaurante.jpg");
          background-size:100% 100%;
         
-            
+            overflow: scroll;
         }
         .cabecera
         {
@@ -180,7 +184,7 @@ page-registro-cliente {
            background-color: #1dddb27d;
             box-sizing: border-box;
             border-radius: 8px;
-           background-image:url("../assets/imgs/fondoLogin.jpg");
+          
            background-size: 100% 100%;
          
         }
@@ -287,7 +291,15 @@ page-registro-cliente {
             width:15%;
         }
         
-        
+        #btnRegistrar
+        {
+            width: 50%;
+            margin-left: 25%;
+            height: 15%;
+            font-family: 'Anton', sans-serif;
+            font-size: 1.7em;
+            color:black;
+        }
         @media  screen and(max-height:"1000px")
         {
             
@@ -304,7 +316,7 @@ page-registro-cliente {
         {
             
             .form {
-                height:40%;
+                height:55%;
             }
             
             .form input[type=text], input[type=password] {
@@ -315,7 +327,7 @@ page-registro-cliente {
         @media  screen and(max-height:"800px")
         {
             .form {
-                height:60%;
+                height:70%;
             }
             
            
@@ -327,7 +339,21 @@ page-registro-cliente {
         }
         
         
-        
+        @media  screen and(max-height:"550px")
+        {
+          
+           
+            
+            .vertical
+            {
+                height: 580px;
+                padding-top:10%;
+            }
+
+            
+         
+           
+        }
         
         
         @media  screen and(max-height:"600px")
@@ -338,7 +364,7 @@ page-registro-cliente {
             }
         
             .form {
-                height:60%;
+                height:65%;
             }
             
             .form input[type=text], input[type=password], button {
@@ -349,7 +375,14 @@ page-registro-cliente {
             {
                 margin:1px 5%;
             }
+            
+            
+
+            
+         
+           
         }
+
         @media  screen and(max-height:"500px")
         {
             .usuarios
