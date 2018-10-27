@@ -58,8 +58,13 @@ page-principal {
             text-align: center;
             padding: 0;
         }
+
         button[ion-button]:nth-of-type(2n + 2) {
             margin: 16px 0 16px 0;
+        }
+
+        button[ion-button]:last-child {
+            margin-bottom: 16px;
         }
 
         .card-title {

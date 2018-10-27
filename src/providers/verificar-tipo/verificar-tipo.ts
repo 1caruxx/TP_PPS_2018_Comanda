@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { AltaDuenioSupervisorPage } from "../../pages/alta-duenio-supervisor/alta-duenio-supervisor";
 import { AltaEmpleadoPage } from "../../pages/alta-empleado/alta-empleado";
 import { ListadoSupervisorPage } from "../../pages/listado-supervisor/listado-supervisor";
+import { ReservaPage } from "../../pages/reserva/reserva";
 
 /*
   Generated class for the VerificarTipoProvider provider.
@@ -84,7 +85,7 @@ export class VerificarTipoProvider {
           { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: "./" },
           { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" },
           { accion: "Dar propina.", img: "propina.jpg", ruta: "./" },
-          { accion: "Reservar.", img: "pedido.jpg", ruta: "./" }
+          { accion: "Reservar.", img: "reserva.jpg", ruta: ReservaPage }
         ];
         break;
 

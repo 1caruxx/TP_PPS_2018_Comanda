@@ -15,6 +15,7 @@ import { PerfilPage } from "../pages/perfil/perfil";
 import { AltaEmpleadoPage } from "../pages/alta-empleado/alta-empleado";
 import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
 import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
+import { ReservaPage } from "../pages/reserva/reserva";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,6 +23,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // import { AngularFireModule } from 'angularfire2';
 // import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
+import { ChartsModule } from 'ng2-charts';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
 
@@ -38,12 +40,14 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     PerfilPage,
     AltaEmpleadoPage,
     EncuestaSupervisorPage,
-    ListadoSupervisorPage
+    ListadoSupervisorPage,
+    ReservaPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     // AngularFireModule.initializeApp(firebaseConfig.fire),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -58,7 +62,8 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     PerfilPage,
     AltaEmpleadoPage,
     EncuestaSupervisorPage,
-    ListadoSupervisorPage
+    ListadoSupervisorPage,
+    ReservaPage
   ],
   providers: [
     StatusBar,

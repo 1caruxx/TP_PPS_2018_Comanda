@@ -58,7 +58,7 @@ page-login {
         font-family: lobster;
     }
 
-    input {
+    input, select {
         width: 75%;
         border: gray solid 2px;
         margin: 10px;
@@ -69,6 +69,10 @@ page-login {
         transition-property: border-bottom-color font-size;
         background-color: rgba(255, 255, 255, 0.8);
         caret-color: color($colors, red);
+    }
+
+    select {
+        margin: 0 0 10px 0;
     }
 
     input:first-of-type {

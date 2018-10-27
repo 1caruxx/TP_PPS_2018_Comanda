@@ -1,17 +1,7 @@
-@font-face {
-    src: url("../../assets/fonts/Lobster-Regular.ttf");
-    font-family: lobster;
-}
-
-@font-face {
-    src: url("../../assets/fonts/Cinzel-Regular.ttf");
-    font-family: cinzel;
-}
-
-page-alta-duenio-supervisor {
+page-reserva {
 
     .scroll-content {
-        background-image: url('../../assets/imgs/alfa/manos-estrechandose.jpg');
+        background-image: url('../../assets/imgs/alfa/reserva-background.jpg');
         background-size: cover; 
         background-position: center; 
     }
@@ -26,49 +16,27 @@ page-alta-duenio-supervisor {
 
     ion-navbar ion-icon { font-size: 50px !important; }
 
-    ion-menu {
-        .scroll-content { background-color: white; }
-    }
-
-    .img-menu {
-        width: 100%;
-        height: auto;
-    }
-
-    .nombre-menu {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        display: flex;
-        justify-content: center;
-        font-size: 20px;
-    }
-
-    .hr-menu {
-        background-color: red;
-    }
-
     body {
         width: 100%;
+    }
+
+    div.horizontal-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     div.vertical-container {
         display: flex;
         background-size: cover;
         font-family: roboto;
-
         width: 100%;
         flex-direction: column;
         align-items: center;
         background-color: rgba(0, 0, 0, 0.3);
         padding-top: 20px;
-    }
-
-    div.header {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-        align-items: center;
-        margin-top: 20px;
     }
 
     img {
@@ -84,16 +52,21 @@ page-alta-duenio-supervisor {
         margin-bottom: 25px;
     }
 
-    h2 {
-        width: 100%;
-        padding: 10px 0 10px 0;
-        font-family: cinzel;
-        text-align: center;
-        background-color: rgba(207, 73, 70, 1);
-        color: white;
+    div.inputs {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        width: 75%;
+        margin: 15px 0 15px 0;
+
+        span {
+            font-size: 30px;
+            margin: 0 5px 0 5px;
+        }
     }
 
-    input, select {
+    input {
         width: 75%;
         border: gray solid 2px;
         padding: 10px;
@@ -105,12 +78,7 @@ page-alta-duenio-supervisor {
         caret-color: color($colors, red);
     }
 
-    input:first-of-type {
-        margin-bottom: 3vh;
-    }
-
     input:focus {
-        transform: scale(1.2);
         border-color: color($colors, red);;
         background-color: rgb(255, 255, 255); 
     }

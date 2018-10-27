@@ -1,12 +1,6 @@
 <ion-header>
   <ion-navbar color="red">
 
-    <ion-buttons>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-
     <ion-buttons end>
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
@@ -15,31 +9,6 @@
 
   </ion-navbar>
 </ion-header>
-
-<ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar color="red">
-      <ion-title>Menú</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-
-      <div>
-        <img src="https://noticiaslasheras.com.ar/images/noticias/empleado-feliz.gif" class="img-menu" />
-        <div class="nombre-menu">Fernando (Dueño)</div>
-      </div>
-
-      <hr class="hr-menu" />
-
-      <button ion-item *ngFor="let item of acciones">{{item.accion}}</button>
-      <button ion-item (click)="Logout()">Cerrar sesión.</button>
-
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<ion-nav #content swipeBackEnabled="false"></ion-nav>
 
 <ion-content>
 

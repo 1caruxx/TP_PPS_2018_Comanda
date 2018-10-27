@@ -2,8 +2,8 @@
   <ion-navbar color="red">
 
     <ion-buttons>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
+      <button ion-button (click)="VolverAtras()">
+        <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -17,5 +17,125 @@
 </ion-header>
 
 <ion-content>
+
+  <h1>Califique la conducta.</h1>
+
+  <div class="encuesta">
+    <div id="divCanvas" class="canvas">
+        <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+    </div>
+    
+    <ion-range [(ngModel)]="singleValue" color="red" pin="true" min="1" max="5" snaps="true" style="width: 50%;position: relative;left: -50px;"></ion-range>
+
+  </div>
+
+  <h1>¿Tuvo algún inconveniente con esta persona en horas de servicio?</h1>
+
+  <div class="encuesta">
+
+    <div id="divCanvas" class="canvas">
+
+      <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+
+    <ion-list radio-group >
+      <ion-item>
+        <ion-label>Si</ion-label>
+        <ion-radio color="red" value="friends" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No</ion-label>
+        <ion-radio color="red" value="family"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+  <h1>Seleccione el/los aspectos a tener en cuenta.</h1>
+
+  <div class="encuesta">
+
+    <div id="divCanvas" class="canvas">
+      <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+      </div>
+
+      <ion-list style="left: -75px;">
+
+        <ion-item>
+          <ion-label>Mala conducta</ion-label>
+          <ion-checkbox color="red" [(ngModel)]="pepperoni"></ion-checkbox>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Mala presentacíon</ion-label>
+          <ion-checkbox color="red" [(ngModel)]="sausage"></ion-checkbox>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>Poca formalidad</ion-label>
+          <ion-checkbox color="red" [(ngModel)]="mushrooms"></ion-checkbox>
+        </ion-item>
+        
+      </ion-list>
+
+  </div>
+
+  <h1>Aca va otra pregunta.</h1>
+
+  <div class="encuesta">
+
+    <div id="divCanvas" class="canvas">
+        <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+      </div>
+
+      <ion-range [(ngModel)]="singleValue" color="danger" pin="true" style="width: 50%;position: relative;left: -50px;"></ion-range>
+
+  </div>
+
+  <h1>Aca va otra pregunta.</h1>  
+
+  <div class="encuesta">
+
+    <div id="divCanvas" class="canvas">
+        <canvas baseChart
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+      </div>
+
+      <select [(ngModel)]="tipo"> 
+        <option value="dueño">dueño</option>
+        <option value="supervisor">supervisor</option>
+        <option value="mozo">Mozo</option>
+        <option value="cocinero">Cocinero</option>
+        <option value="bartender">Bartender</option>
+        <option value="metre">Metre</option>
+      </select>
+
+  </div>
+
+  <button ion-button color="red" class="enviar">Enviar encuesta</button>
 
 </ion-content>

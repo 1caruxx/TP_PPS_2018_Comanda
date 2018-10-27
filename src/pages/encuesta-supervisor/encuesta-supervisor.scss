@@ -9,10 +9,7 @@ page-encuesta-supervisor {
         // background-image: url('../../assets/imgs/alfa/encuesta-supervisor.jpg');
         background-size: cover; 
         background-position: center;
-    }
-
-    ion-menu {
-        .scroll-content { background-image: none; }
+        background-color: #FCE5C6;
     }
 
     ion-navbar {
@@ -25,4 +22,50 @@ page-encuesta-supervisor {
 
     ion-navbar ion-icon { font-size: 50px !important; }
 
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 10px 20px 10px 20px;
+        background-color: color($colors, red);
+        color: white;
+        font-family: cinzel;
+        margin-bottom: 0;
+    }
+
+    .encuesta {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 50px 0 50px 0;
+
+        .canvas {
+            width: 200px;
+            height: auto;
+            display: inline-block;
+            position: relative;
+            left: -30px;
+        }
+
+        ion-list {
+            position: relative;
+            top: 10px;
+
+            ion-item {
+                background-color: transparent !important;
+
+                border-color: red;
+            }
+        }
+    }
+
+    .enviar {
+        display: block;
+        margin: auto;
+        text-transform: none;
+        margin-bottom: 20px;
+    }
+
 }
+
