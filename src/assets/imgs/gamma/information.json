@@ -1,0 +1,91 @@
+{
+    "items": [
+        {
+            "name": "Lista de pedidos terminados",
+            "children": [
+                {
+                    "name": "papas fritas con milanesa",
+                    "information": "plato pedido por juan perez de la mesa 5,con el empleado lucas",
+                    "price": "$25",
+                    "estado":"terminado"
+                },
+                {
+                    "name": "arroz con leche",
+                    "information": "pedido por marcelo de la mesa 7,por el empleado martin",
+                    "price": "$19.99",
+                    "estado":"terminado"
+                    
+                },
+                {
+                    "name": "Vino malbec",
+                    "information": "pedido por luna de la mesa 1,por el empleado lucas",
+                    "price": "$19.99",
+                    "estado":"terminado"
+                },
+                {
+                    "name": "Mousse de Chocolate",
+                    "information": "pedido por julieta de la mesa 4,por la empleada luna",
+                    "price": "$19.99",
+                    "estado":"terminado"
+                }
+
+            ]
+        },
+        {
+            "name": "Lista de pedidos pendientes",
+            "children": [
+                {
+                    "name": "Cocina",
+                    "children": [
+                        {
+                            "name": "Papas fritas con milanesa",
+                            "information": "Plato pedido por juan perez de la mesa 5,con el empleado lucas.",
+                            "price": "$10",
+                            "estado":"pendiente"
+                        },
+                        {
+                            "name": "arroz con leche",
+                            "information": "pedido por marcelo de la mesa 7,por el empleado martin",
+                            "price": "$12",
+                            "estado":"pendiente"
+                        }
+                    ]
+                },
+                {
+                    "name": "Bebidas",
+                    "children": [
+                        {
+                            "name": "Vino malbec",
+                            "information": "pedido por luna de la mesa 1,por el empleado lucas",
+                            "price": "$13",
+                            "estado":"pendiente"
+                        }
+                    ]
+                },
+                {
+                    "name": "Postres",
+                    "children": [
+                        {
+                            "name": "Mousse de Chocolate",
+                            "information": "pedido por julieta de la mesa 4,por la empleada luna",
+                            "price": "$13",
+                            "estado":"pendiente"
+                        }
+                    ]
+                },
+                {
+                    "name": "Cervezeria",
+                    "children": [
+                        {
+                            "name": "Cerveza artesanal",
+                            "information": "pedido por jorge de la mesa 9,por el empleado fabricio",
+                            "price": "$25",
+                            "estado":"pendiente"
+                        }
+                    ]
+                }
+            ]
+        }
+        
+    ]
+}

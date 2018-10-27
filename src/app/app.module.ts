@@ -27,6 +27,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SplashPage } from '../pages/splash/splash';
 import { AltaDeMesaPage } from '../pages/alta-de-mesa/alta-de-mesa';
 import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-de-empleado';
+import { QrDeLaMesaPage } from '../pages/qr-de-la-mesa/qr-de-la-mesa';
+import { TomarPedidoPage } from '../pages/tomar-pedido/tomar-pedido';
+import { HttpModule } from '@angular/http';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { ChartsModule } from 'ng2-charts';
+import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 
 // import { AngularFireModule } from 'angularfire2';
 // import { AngularFireAuth } from 'angularfire2/auth';
@@ -47,6 +53,9 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     SplashPage,
     AltaDeMesaPage,
     EncuestaDeEmpleadoPage,
+    QrDeLaMesaPage,
+    TomarPedidoPage,
+    MapaDeRutaPage,
 
     RegistroClientePage,
     AltaDuenioSupervisorPage,
@@ -65,7 +74,8 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     BrowserModule,
     IonicModule.forRoot(MyApp),
     // AngularFireModule.initializeApp(firebaseConfig.fire),
-    ChartsModule
+    ChartsModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -79,6 +89,7 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     SplashPage,
     AltaDeMesaPage,
     EncuestaDeEmpleadoPage,
+<<<<<<< HEAD
     RegistroClientePage,
     AltaDuenioSupervisorPage,
     PerfilPage,
@@ -91,10 +102,16 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     QrIngresoLocalPage,
     EncuestaClientePage,
     PedirPlatosPage
+=======
+    QrDeLaMesaPage,
+    TomarPedidoPage,
+    MapaDeRutaPage
+>>>>>>> quinteros_gamma
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    NativeAudio,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VerificarTipoProvider,
     // AngularFireAuth

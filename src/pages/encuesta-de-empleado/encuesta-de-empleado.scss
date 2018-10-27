@@ -1,3 +1,96 @@
 page-encuesta-de-empleado {
 
+    
+    ion-item {
+        //background: transparent!important;
+        text-align: center !important;
+        border-radius: 20px ;
+        background-color: "red";
+        margin-top: 3px !important;
+        max-width: 80% !important;
+        margin-left: auto;
+        margin-right: auto;
+        
+
+        
+       
+        
+        
+    }
+
+    .cds{
+        background-color: #ffffff !important;
+        //background: url("../../assets/imgs/gamma/encuesta.jpg");
+        //background:cover;
+        
+        //background-color: #f0f0f0 !important;
+
+        
+    }
+
+    .lb{
+        color: white !important;
+        font-size: 100%;
+        margin-bottom: 0px !important;
+        margin-top: 2px !important;
+        padding-top: 5px !important;
+        text-align: center;
+        //border-radius: 20px !important;
+    }
+
+    /*.list{
+        border-radius: 20px ;
+        margin-top: 5px !important;
+        background-color: #ffd000 !important;
+        margin-bottom: 5px;
+    }*/
+
+    canvas{ height:60% !important; }
+    div { height: 95%; }
+
+    .item-block {
+        margin:0 auto;
+        
+
+        
+    }
+
+    .ion-button
+    {
+        //align-items: center;
+    }
+
+    .button-md {
+
+
+        width: 50%;
+        margin-left: 30%;
+        margin-right: 30%
+    }
+
+    .scroll-content {
+        background-image: url('../../assets/imgs/gamma/encuesta.jpg');
+        background-size: cover; 
+        background-position: center; 
+    }
+
+
+    ion-grid {
+        //height: 100%;
+        border-collapse: collapse;
+        //border: 2px solid black;
+    
+        
+      }
+        ion-row {
+          //height: 33.33%;
+          //height: 90%;
+          height: 33%;
+        }
+    
+    
+    
+
+    
+
 }
