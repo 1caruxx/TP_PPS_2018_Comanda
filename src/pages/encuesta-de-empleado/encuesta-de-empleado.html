@@ -31,18 +31,30 @@
 
 
 <ion-content padding  class="cds" *ngIf="encuestita">
+  
 
     
 
-  <ion-list class="list">
+ <!-- <ion-list class="list">-->
 
     
 
     <ion-list-header>
         Como se siente en el restaurante?
       </ion-list-header>
-    
-      <ion-label class="lb" >Cuan limpio es el lugar?</ion-label>
+
+      <ion-grid>
+
+          <ion-row>
+              <ion-col col-12>
+                  <ion-label class="lb" >Cuan limpio es el lugar?</ion-label>
+                </ion-col>
+              </ion-row>
+
+        
+          <ion-row>
+              <ion-col col-12>
+      
       <ion-item>
         
         <ion-range value="1">
@@ -51,30 +63,68 @@
 
         </ion-range>
       </ion-item>
+          </ion-col>
+      </ion-row>
 
-      <ion-label class="lb" >Que cambiaria del lugar</ion-label>
+      <ion-row>
+          <ion-col col-12>
+              <ion-label class="lb" >Que cambiaria del lugar</ion-label>
+            </ion-col>
+          </ion-row>
+
+
+      <ion-row>
+          <ion-col col-12>
+
+      
       <ion-item >
          
           <ion-input></ion-input>
         </ion-item>
 
-      </ion-list>
+      </ion-col>
+    </ion-row>
 
-      <ion-label class="lb" >lo tratan bien sus jefes?</ion-label>
+      <!--</ion-list>-->
+
+      <ion-row>
+          <ion-col col-12>
+              <ion-label class="lb" >lo tratan bien sus jefes?</ion-label>
+            </ion-col>
+          </ion-row>
+
+      <ion-row>
+          <ion-col col-6>
+
+      
      
       <ion-item>
           <ion-label>Si</ion-label>
           <ion-radio value="1"></ion-radio>
         </ion-item>
+
+      </ion-col>
+
+        <ion-col col-6>
       
         <ion-item>
           <ion-label>No</ion-label>
           <ion-radio value="2"></ion-radio>
         </ion-item>
 
-          
+      </ion-col>
+    </ion-row>
 
-          <ion-label class="lb">le pagan bien?</ion-label>
+    <ion-row>
+        <ion-col col-12>
+            <ion-label class="lb">le pagan bien?</ion-label>
+          </ion-col>
+        </ion-row>
+          
+    <ion-row>
+        <ion-col col-12>
+
+         
           <ion-item>
               <ion-label>Elija su opcion</ion-label>
               <ion-select>
@@ -84,7 +134,19 @@
               </ion-select>
             </ion-item>
 
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-12>
+               
           <ion-label class="lb">Dejaria de trabajar aca?</ion-label>
+              </ion-col>
+            </ion-row>
+
+        <ion-row>
+            <ion-col col-6>
+
 
           <ion-item>
               <ion-label >Si</ion-label>
@@ -92,19 +154,42 @@
             
           </ion-item>
 
+        </ion-col>
+
+          <ion-col col-6>
+
           <ion-item>
               <ion-label >No</ion-label>
             <ion-checkbox value="no" >No</ion-checkbox>
+
             
           </ion-item>
     
 
-          <button  ion-button  color="red" (click)="enviarEncuesta()" >Enviar la encuesta</button>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col col-12>
+    
 
           
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col col-12>
+    
+
+          <button  ion-button  color="red" (click)="enviarEncuesta()" >Enviar la encuesta</button>
+
+        </ion-col>
+      </ion-row>
      
-
-
+        </ion-grid>
+        
 
 </ion-content>
 
