@@ -1,0 +1,96 @@
+page-reserva {
+
+    .scroll-content {
+        background-image: url('../../assets/imgs/alfa/reserva-background.jpg');
+        background-size: cover; 
+        background-position: center; 
+    }
+
+    ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+
+    body {
+        width: 100%;
+    }
+
+    div.horizontal-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    div.vertical-container {
+        display: flex;
+        background-size: cover;
+        font-family: roboto;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.3);
+        padding-top: 20px;
+    }
+
+    img {
+        width: 140px;
+        height: auto;
+    }
+
+    h1 {
+        font-size: 80px;
+        font-weight: 100;
+        color: white;
+        font-family: lobster;
+        margin-bottom: 25px;
+    }
+
+    div.inputs {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        width: 75%;
+        margin: 15px 0 15px 0;
+
+        span {
+            font-size: 30px;
+            margin: 0 5px 0 5px;
+        }
+    }
+
+    input {
+        width: 75%;
+        border: gray solid 2px;
+        padding: 10px;
+        margin: 20px 0 20px 0;
+        font-size: 25px;
+        transition-duration: .3s;
+        transition-property: border-bottom-color font-size;
+        background-color: rgba(255, 255, 255, 0.8);
+        caret-color: color($colors, red);
+    }
+
+    input:focus {
+        border-color: color($colors, red);;
+        background-color: rgb(255, 255, 255); 
+    }
+
+    .alta {
+        padding: 30px;
+        width: 20ch;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        font-size: 20px;
+        text-transform: none;
+    }
+
+}

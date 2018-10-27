@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="horizontal-container">
+
+    <div class="vertical-container">
+
+      <img src="../../assets/imgs/alfa/logo.png">
+
+      <h1>Reservar</h1>
+
+      <div class="inputs">
+        <input type="number" placeholder="Dia" [value]="dia" min="dia" max="31" style="width: 33%" />
+        <span>/</span>
+        <input type="number" placeholder="Mes" [(ngModel)]="mesSeleccionado" [min]="mesMinimo" max="12" style="width: 33%" />
+        <span>/</span>
+        <input type="number" placeholder="Año" [min]="anio" max="2019" (input)="test()" [(ngModel)]="anioSeleccionado" style="width: 33%" />
+      </div>
+
+      <div class="inputs">
+        <input type="number" placeholder="Hora" style="width: 33%" />
+        <span>:</span>
+        <input type="number" placeholder="Minutos" style="width: 33%" />
+      </div>
+
+      <button ion-button outline color="light" class="alta" (click)="Loguear()">Reservar</button>
+    </div>
+
+  </div>
+
+</ion-content>

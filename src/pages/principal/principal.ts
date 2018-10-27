@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { VerificarTipoProvider } from "../../providers/verificar-tipo/verificar-tipo";
 
+import { LoginPage } from "../login/login";
+import { PerfilPage } from "../perfil/perfil";
+
 /**
  * Generated class for the PrincipalPage page.
  *
@@ -17,10 +20,13 @@ import { VerificarTipoProvider } from "../../providers/verificar-tipo/verificar-
 })
 export class PrincipalPage {
 
-  public acciones = this.verificarTipo.RetornarAcciones();
+  public acciones: Array<any> = [];
+  public usuario: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private verificarTipo: VerificarTipoProvider) {
 
+    this.acciones = this.verificarTipo.RetornarAcciones();
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
   }
 
   ionViewDidLoad() {
@@ -28,7 +34,18 @@ export class PrincipalPage {
   }
 
   Redireccionar(ruta) {
+
     this.navCtrl.push(ruta);
+  }
+
+  IrAPerfil() {
+    this.navCtrl.push(PerfilPage);
+  }
+
+  Logout() {
+
+    localStorage.clear();
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }

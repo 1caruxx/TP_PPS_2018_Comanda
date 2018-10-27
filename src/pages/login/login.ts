@@ -17,6 +17,8 @@ import { PrincipalPage } from "../principal/principal";
 })
 export class LoginPage {
 
+  public tipo = "dueño";
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -27,7 +29,7 @@ export class LoginPage {
   Loguear() {
 
     let datos = {
-      tipo: "dueño",
+      tipo: this.tipo,
       nombre: "fer",
       img: "fasdfdsaf"
     };
