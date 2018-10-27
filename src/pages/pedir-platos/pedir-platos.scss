@@ -1,0 +1,121 @@
+page-pedir-platos {
+    @import url('https://fonts.googleapis.com/css?family=Boogaloo');
+    ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+ 
+    .scroll-content
+    {
+        overflow-x: hidden!important;
+        overflow-y: hidden!important;
+    }
+    .contenido
+    {
+       
+        width: 100%;
+        height: 100%!important;
+        display: flex;
+        flex-direction: column;
+        background: url("../assets/imgs/beta/fondoPedido.jpg");
+        background-size:100% 100%;
+        position:relative;
+    }
+    .tituloPag
+    {
+        font-family: 'Lobster', cursive;
+        text-align: center;
+        color:white;
+        font-size:3em;
+        background:orangered;
+        margin-bottom:20%;
+    }
+    .tituloPlatos
+    {
+        font-family: 'Lobster', cursive;
+        text-align: center;
+        color:white;
+   
+     
+        margin-bottom:10%;
+    }
+    .btnBebidas, .btnPlatos
+    {
+        width:70%;
+        margin-left:15%;
+
+    }
+    .btnPlatos
+    {
+        margin-bottom:5%;
+    }
+    .inpDireccion
+    {
+        margin-top: 15%;
+        width: 70%;
+        margin-left: 15%;
+        background: #f7f5f2b8;;
+        border: 3px solid white;
+        padding: 5%;
+        border-radius: 4% 4% 4% 4%;
+        font-size: 1.5em;
+        font-family: 'Boogaloo', cursive;
+    }
+    .inpDireccion::placeholder
+    {
+       
+        font-size: 1.5em;
+        font-family: 'Boogaloo', cursive;
+        text-align: center;
+       }  
+       
+       .btnPedir
+       {
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 15%;
+      
+        font-size: 1.7em;
+        height: 15%;
+        font-family: 'Boogaloo', cursive;
+       }
+       .platos
+       {
+           position: absolute;
+           z-index:1000;
+         
+           width: 100%;
+           height: 70%;
+           top: 25%;
+           background: orangered;
+           overflow:scroll;
+           
+        display: none;           
+       }
+   
+       .plato{
+          position: relative;
+           width:100%;
+    
+           box-sizing: border-box;
+           position: relative;
+   
+           height: 25%;
+           -webkit-box-sizing: border-box;
+           box-sizing: border-box;
+           border-top: 1px solid white;
+           border-bottom: 1px solid white;
+       }
+       .plato img{
+        width: 20%;
+        position: absolute;
+        left: 2%;
+        top: 15%;
+        height: 70%;
+       }
+}

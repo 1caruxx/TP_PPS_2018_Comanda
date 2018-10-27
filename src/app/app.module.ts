@@ -11,7 +11,7 @@ import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente'
 import { AltaPlatosPage } from '../pages/alta-platos/alta-platos';
 import { QrIngresoLocalPage } from '../pages/qr-ingreso-local/qr-ingreso-local';
 import {  EncuestaClientePage } from '../pages/encuesta-cliente/encuesta-cliente';
-
+import { PedirPlatosPage } from '../pages/pedir-platos/pedir-platos';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -30,7 +30,8 @@ import { firebaseConfig } from '../config';
     RegistroClientePage,
     AltaPlatosPage,
     QrIngresoLocalPage,
-    EncuestaClientePage
+    EncuestaClientePage,
+    PedirPlatosPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +48,8 @@ import { firebaseConfig } from '../config';
     RegistroClientePage,
     AltaPlatosPage,
     QrIngresoLocalPage,
-    EncuestaClientePage
+    EncuestaClientePage,
+    PedirPlatosPage
   ],
   providers: [
     StatusBar,

@@ -10,11 +10,7 @@ page-alta-platos {
     }
 
     ion-navbar ion-icon { font-size: 50px !important; }
-    ion-content
-    {
-       // background:url("../../assets/imgs/beta/fondo2.jpg");
-        //background-repeat: repeat-x repeat-y;
-    }
+  
     .titulo
     {
         width:80%;
@@ -45,14 +41,15 @@ page-alta-platos {
         margin-left:10%;
         padding: 5px;
         border-radius: 5%;
-        font-size: 1.3em;
+        font-size: 2em;
         font-family: 'Rancho', cursive;
-        background-color: transparent;
-        border:1px solid black;
+        background-color: #0000007d;
+        border: 1px solid black;
+        color: white;
     }
     .nombrePlato::placeholder,.descripcion::placeholder,.tiempo::placeholder, .precio::placeholder
     {
-        color:black;
+        color:white;
     }
     .tiempoDiv, .precioDiv, .botones
     {
@@ -77,9 +74,10 @@ page-alta-platos {
         height: 20%;
         width: 80%;
         margin-left: 10%;
-        font-size:1.3em;
-        background-color: transparent;
-        border:1px solid black;
+        font-size:2em;
+        background-color: #0000007d;
+        border: 1px solid black;
+        color: white;
     }
     .tiempo, .precio
     {
@@ -89,9 +87,10 @@ page-alta-platos {
         margin-left: 10%;
         align-self: flex-start;
         font-family: 'Rancho', cursive;
-        font-size:1.3em;
-        background-color: transparent;
-        border:1px solid black;
+        font-size:2em;
+        background-color: #0000007d;
+        border: 1px solid black;
+        color: white;
     }
     .ocultar
     {
@@ -103,7 +102,7 @@ page-alta-platos {
     }
     .tiempoLabel, .precioLabel
     {
-        font-size: 1.3em;
+        font-size: 2em;
         font-family: 'Rancho', cursive;
     }
     .TomarFotos
@@ -115,6 +114,18 @@ page-alta-platos {
      
         font-family: 'Rancho', cursive;
         font-size: 2em;
+      
+    }
+    .TomarFotos1
+    {
+        margin-left: 5%;
+        width: 40%;
+        box-sizing: border-box;
+        height: 80%;
+     
+        font-family: 'Rancho', cursive;
+        font-size: 2em;
+        border:5px solid black;
     }
     .Qr
     {
@@ -123,7 +134,19 @@ page-alta-platos {
         margin-left: 10%;
         font-family: 'Rancho', cursive;
         font-size: 2em;
+           
+
     }
+    .Qr1
+    {
+        width: 40%;
+        height: 80%;
+        margin-left: 10%;
+        font-family: 'Rancho', cursive;
+        font-size: 2em;
+        border:5px solid black;
+
+    }   
     .precioLabel
     {
         margin-left:28%;
