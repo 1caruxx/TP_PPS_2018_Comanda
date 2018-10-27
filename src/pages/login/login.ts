@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { PrincipalPage } from "../principal/principal";
+import { RegistroClientePage } from "../registro-cliente/registro-cliente";
 
 /**
  * Generated class for the LoginPage page.
@@ -36,6 +37,10 @@ export class LoginPage {
     console.log("hola mundo")
     localStorage.setItem("usuario", JSON.stringify(datos));
     this.navCtrl.setRoot(PrincipalPage);
+  }
+
+  Redireccionar() {
+    this.navCtrl.push(RegistroClientePage);
   }
 
 }

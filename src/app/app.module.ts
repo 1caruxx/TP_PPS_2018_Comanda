@@ -37,7 +37,6 @@ import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 // import { AngularFireModule } from 'angularfire2';
 // import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
-import { ChartsModule } from 'ng2-charts';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
 
@@ -89,7 +88,6 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     SplashPage,
     AltaDeMesaPage,
     EncuestaDeEmpleadoPage,
-<<<<<<< HEAD
     RegistroClientePage,
     AltaDuenioSupervisorPage,
     PerfilPage,
@@ -101,12 +99,10 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     AltaPlatosPage,
     QrIngresoLocalPage,
     EncuestaClientePage,
-    PedirPlatosPage
-=======
+    PedirPlatosPage,
     QrDeLaMesaPage,
     TomarPedidoPage,
     MapaDeRutaPage
->>>>>>> quinteros_gamma
   ],
   providers: [
     StatusBar,
