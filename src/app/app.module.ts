@@ -19,13 +19,14 @@ import { ReservaPage } from "../pages/reserva/reserva";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-// import { AngularFireModule } from 'angularfire2';
-// import { AngularFireAuth } from 'angularfire2/auth';
-import { firebaseConfig } from '../config';
-import { ChartsModule } from 'ng2-charts';
+import { Camera } from '@ionic-native/camera';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { firebaseConfig } from '../config';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    // AngularFireModule.initializeApp(firebaseConfig.fire),
+    AngularFireModule.initializeApp(firebaseConfig.fire),
     ChartsModule
   ],
   bootstrap: [IonicApp],
@@ -70,7 +71,8 @@ import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tip
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VerificarTipoProvider,
-    // AngularFireAuth
+    AngularFireAuth,
+    Camera
   ]
 })
 export class AppModule {}

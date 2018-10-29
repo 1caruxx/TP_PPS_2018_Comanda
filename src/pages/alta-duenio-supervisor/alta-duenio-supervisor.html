@@ -18,31 +18,33 @@
 
     <h1>Registro</h1>
 
-    <h2>Alta de dueño / supervisor</h2>
+    <h2>Agregar un dueño o supervisor</h2>
 
-    <input type="text" placeholder="Nombre" />
-    <input type="text" placeholder="Apellido" />
+    <input type="text" placeholder="Correo electrónico" [(ngModel)]="correo" />
+    <input type="text" placeholder="Nombre" [(ngModel)]="nombre" />
+    <input type="text" placeholder="Apellido" [(ngModel)]="apellido" />
 
     <div class="header" style="width: 75%;margin: 20px 0 20px 0;">
-      <input type="text" placeholder="DNI" style="margin: 0 15px 0 0; width: 50%" />
-      <input type="text" placeholder="CUIL" style="margin: 0;width: 50%" />
+      <input type="text" placeholder="DNI" style="margin: 0 15px 0 0; width: 50%" [(ngModel)]="dni" />
+      <input type="text" placeholder="CUIL" style="margin: 0;width: 50%" [(ngModel)]="cuil" />
     </div>
 
-    <input type="password" placeholder="Contraseña" />
+    <input type="password" placeholder="Contraseña" [(ngModel)]="clave" />
 
-    <select>
+    <select [(ngModel)]="tipo">
       <option value="dueño">Dueño</option>
       <option value="supervisor">Supervisor</option>
     </select>
 
+    <img [src]="foto" alt="">
+
     <div class="header" style="width: 75%;margin: 20px 0 20px 0;">
-      <button ion-button outline color="light" class="alta" style="margin: 0 30px 0 0;width: 50%" (click)="Loguear()">Sacar
+      <button ion-button outline color="light" class="alta" style="margin: 0 30px 0 0;width: 50%" (click)="SacarFoto()">Sacar
         foto</button>
       <button ion-button outline color="light" class="alta" style="margin: 0;width: 50%" (click)="Loguear()">QR</button>
-
     </div>
 
-    <button ion-button outline color="light" class="alta" (click)="Loguear()">Registrar</button>
+    <button ion-button outline color="light" class="alta" (click)="Registrar()">Registrar</button>
   </div>
 
 </ion-content>
