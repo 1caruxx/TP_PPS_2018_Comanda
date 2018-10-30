@@ -1,30 +1,42 @@
-<img class="background" src="../../assets/imgs/alfa/background.jpg"/>
-<div class="vertical-container" >
-  
+<img class="background" src="../../assets/imgs/alfa/background.jpg" />
+
+<div class="usuarios">
+
+  <button [class]="botonUsuarios" (click)="DesplegarUsuarios()">
+    <ion-icon name="person"></ion-icon>
+  </button>
+
+  <div [class]="agrandar">
+
+    <button (click)="SetearUsuario('fernando@gmail.com', '111111')">Dueño</button>
+    <button (click)="SetearUsuario('supervisor@gmail.com', '222222')">Supervisor</button>
+    <button (click)="SetearUsuario('mozo@gmail.com', '333333')">Mozo</button>
+    <button (click)="SetearUsuario('cocinero@gmail.com', '444444')">Cocinero</button>
+    <button (click)="SetearUsuario('bartender@gmail.com', '555555')">Bartender</button>
+    <button (click)="SetearUsuario('metre@gmail.com', '666666')">Metre</button>
+    <button (click)="SetearUsuario('cliente@gmail.com', '777777')">Cliente</button>
+    <button (click)="SetearUsuario('anonimo@gmail.com', '888888')">Anonimo</button>
+  </div>
+
+</div>
+
+<div class="vertical-container" (click)="NoDesplegarUsuarios()">
+
   <div class="horizontal-container">
     <div class="header">
-      <img src="../../assets/imgs/alfa/logo.png">
+      <img src="../../assets/imgs/alfa/logo.png" [class]="animation" />
       <h1>Inicio</h1>
     </div>
 
-    <input type="text" placeholder="DNI" />
-    <input type="password" placeholder="Contraseña"/>
-
-    <select [(ngModel)]="tipo"> 
-      <option value="dueño">Dueño</option>
-      <option value="supervisor">Supervisor</option>
-      <option value="mozo">Mozo</option>
-      <option value="cocinero">Cocinero</option>
-      <option value="bartender">Bartender</option>
-      <option value="metre">Metre</option>
-      <option value="cliente-registrado">Cliente</option>
-    </select>
+    <input type="text" placeholder="Correo electrónico" [(ngModel)]="correo" />
+    <input type="password" placeholder="Contraseña" [(ngModel)]="clave" />
 
     <span>
       ¿No tienes una cuenta?
       <a href="">Registrate</a>
     </span>
 
-    <button ion-button outline color="light" (click)="Loguear()">Ingresar</button>
+    <button ion-button outline color="light" (click)="Login()" [disabled]="estadoBoton">{{textoDelBoton}}</button>
+
   </div>
 </div>

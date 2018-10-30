@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [class]="estado">
   <ion-navbar color="red">
 
     <ion-buttons end>
@@ -10,9 +10,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content [ngClass]="{'ocultar-fondo': estado == 'ocultar'}">
 
-  <div class="vertical-container">
+  <div [class]="estado">
 
     <img src="../../assets/imgs/alfa/logo.png">
 
@@ -20,31 +20,38 @@
 
     <h2>Agregar un empleado</h2>
 
-    <input type="text" placeholder="Nombre" />
-    <input type="text" placeholder="Apellido" />
+    <input type="text" placeholder="Correo electrónico" [(ngModel)]="correo" />
+    <input type="text" placeholder="Nombre" [(ngModel)]="nombre" />
+    <input type="text" placeholder="Apellido" [(ngModel)]="apellido" />
 
     <div class="header" style="width: 75%;margin: 20px 0 20px 0;">
-      <input type="text" placeholder="DNI" style="margin: 0 15px 0 0; width: 50%" />
-      <input type="text" placeholder="CUIL" style="margin: 0;width: 50%" />
+      <input type="text" placeholder="DNI" style="margin: 0 15px 0 0; width: 50%" [(ngModel)]="dni" />
+      <input type="text" placeholder="CUIL" style="margin: 0;width: 50%" [(ngModel)]="cuil" />
     </div>
 
-    <input type="password" placeholder="Contraseña" />
+    <input type="password" placeholder="Contraseña" [(ngModel)]="clave" />
 
-    <select>
+    <select [(ngModel)]="tipo">
       <option value="mozo">Mozo</option>
       <option value="cocinero">Cocinero</option>
       <option value="bartender">Bartender</option>
       <option value="metre">Metre</option>
     </select>
 
+    <img [src]="foto" alt="">
+
     <div class="header" style="width: 75%;margin: 20px 0 20px 0;">
-      <button ion-button outline color="light" class="alta" style="margin: 0 30px 0 0;width: 50%" (click)="Loguear()">Sacar
+      <button ion-button outline color="light" class="alta" style="margin: 0 30px 0 0;width: 50%" (click)="SacarFoto()">Sacar
         foto</button>
-      <button ion-button outline color="light" class="alta" style="margin: 0;width: 50%" (click)="Loguear()">QR</button>
+      <button ion-button outline color="light" class="alta" style="margin: 0;width: 50%" (click)="InicializarLectorQR()">QR</button>
 
     </div>
 
-    <button ion-button outline color="light" class="alta" (click)="Loguear()">Registrar</button>
+    <button ion-button outline color="light" class="alta" (click)="Registrar()">Registrar</button>
   </div>
+
+  <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
+    <ion-icon name="close"></ion-icon>
+  </button>
 
 </ion-content>

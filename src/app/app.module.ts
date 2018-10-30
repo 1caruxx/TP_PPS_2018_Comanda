@@ -20,6 +20,7 @@ import { ReservaPage } from "../pages/reserva/reserva";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Camera } from '@ionic-native/camera';
+import { QRScanner } from '@ionic-native/qr-scanner';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
 
@@ -72,7 +73,8 @@ import { ChartsModule } from 'ng2-charts';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VerificarTipoProvider,
     AngularFireAuth,
-    Camera
+    Camera,
+    QRScanner
   ]
 })
 export class AppModule {}

@@ -14,7 +14,10 @@ page-principal {
     ion-navbar ion-icon { font-size: 50px !important; }
 
     ion-menu {
-        .scroll-content { background-color: white; }
+        .scroll-content { background-color: #FCE5C6; }
+        button {
+            background-color: transparent !important;
+        }
     }
 
     .img-menu {
