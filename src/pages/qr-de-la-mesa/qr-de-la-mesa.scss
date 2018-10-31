@@ -1,6 +1,6 @@
 page-qr-de-la-mesa {
 
-    .center {
+    /*.center {
         //padding: 0px 20px 0px 20px;
         margin-top: 10%;
         -webkit-align-content: stretch;
@@ -63,13 +63,50 @@ page-qr-de-la-mesa {
           border: 1px solid #0030ff;
           border-bottom: 0px !important;
           box-shadow: none !important;
-      }
+      }*/
 
-      /*.scroll-content {
-        background-image: url('../../assets/imgs/gamma/qr.jpg');
+
+
+      .scroll-content {
+        //background-image: url('../../assets/imgs/gamma/qr.jpg');
         background-size: cover; 
         background-position: center; 
-    }*/
+    }
+
+    ion-navbar {
+      padding: 20px 10px !important;
+
+      ion-icon {
+          color: white;
+      }
+  }
+
+  ion-navbar ion-icon { font-size: 50px !important; }
+
+  ion-item {
+    background-color: rgba(0, 0, 0, .6) !important;
+    color: white !important;
+
+    p {
+        color: rgba(255, 255, 255, .9) !important;
+    }
+
+    ion-icon {
+        color: white;
+        font-size: 30px;
+    }
+}
+
+.titulo {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    font-family: cinzel;
+    text-align: center;
+    background-color: rgba(207, 73, 70, 1);
+    color: white;
+}
+
+
 
 
 

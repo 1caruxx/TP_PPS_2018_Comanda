@@ -226,6 +226,9 @@
             
           </div>
 
+         <!-- <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
+            <ion-icon name="close"></ion-icon>
+          </button>-->
           
 
         </ion-content>
@@ -248,6 +251,17 @@
             <ion-content class="content" scroll="true" overflow-scroll="true">
               <button class="button" ion-button (click)="Leer()">qrscanner</button>
             </ion-content>-->
+
+            <ion-footer *ngIf="cerrarqr">
+              <ion-toolbar>
+                <ion-title>Footer</ion-title>
+                <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
+                  <ion-icon name="close"></ion-icon>
+                </button>
+              </ion-toolbar>
+            </ion-footer>
+
+
 
         
 

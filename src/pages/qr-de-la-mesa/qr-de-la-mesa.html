@@ -52,3 +52,37 @@
         </div>-->
         
       </ion-content>
+
+      <ion-content *ngIf="probandingg">
+
+      <h2 class="titulo">Lista de personas en espera</h2>
+
+      <ion-list>
+
+        <ion-item *ngFor="let item of user_data">
+          <ion-thumbnail item-start>
+            <!--<img src={{item.img}}>-->
+          </ion-thumbnail>
+    
+          <h1>{{item.apellido}}, {{item.clave}}</h1>
+          <p>Empleado • {{item.tipo}}</p>
+          <p>CUIL • {{item.cuil}}</p>
+    
+          <button ion-button clear item-end (click)="MostrarQr()">
+            <ion-icon name="expand"></ion-icon>
+          </button>
+        </ion-item>
+    
+      </ion-list>
+
+    </ion-content>
+
+
+      <ion-footer *ngIf="cerrarqr">
+        <ion-toolbar>
+          <ion-title>Footer</ion-title>
+          <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-toolbar>
+      </ion-footer>

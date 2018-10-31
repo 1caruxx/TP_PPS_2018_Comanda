@@ -28,6 +28,7 @@ export class AltaDeMesaPage {
   public foto: string = "";
   public nombreFoto: string;
   public probandingg;
+  public cerrarqr=false;
 
   public scanSub;
   public estado = "vertical-container";
@@ -153,7 +154,9 @@ export class AltaDeMesaPage {
             }
           })
           .catch((e: any) => console.log('Error is', e));
+
 */
+this.cerrarqr=true;
 this.probandingg=false;
 
 this.qrScanner.prepare()
@@ -165,7 +168,8 @@ this.qrScanner.prepare()
 
       //this.vibration.vibrate(300);
       alert(text);
-      this.OcultarLectorQR();
+      //this.OcultarLectorQR();
+      
       
       
       // let datos = JSON.parse(text);
@@ -206,14 +210,17 @@ this.qrScanner.prepare()
 
       (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
       (window.document.querySelector('.close') as HTMLElement).classList.remove('mostrar');
-      (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "#FDE8C9";
+      //(window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "#FDE8C9";
       this.estado = "vertical-container";
       this.probandingg=true;
+      this.cerrarqr=false;
     });
 
     this.scanSub.unsubscribe();
   }
 
+
+  
 
 
 
