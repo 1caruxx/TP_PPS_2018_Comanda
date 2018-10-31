@@ -1,5 +1,16 @@
 page-encuesta-de-empleado {
 
+    ion-navbar {
+        padding: 20px 10px !important;
+        
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+
     
     ion-item {
         //background: transparent!important;
@@ -30,7 +41,7 @@ page-encuesta-de-empleado {
 
     .lb{
         color: white !important;
-        font-size: 100%;
+        font-size: 200%;
         margin-bottom: 0px !important;
         margin-top: 2px !important;
         padding-top: 5px !important;
@@ -69,7 +80,8 @@ page-encuesta-de-empleado {
     }
 
     .scroll-content {
-        background-image: url('../../assets/imgs/gamma/encuesta.jpg');
+        //background-image: url('../../assets/imgs/gamma/encuesta.jpg');
+        background-color: #000000 !important;
         background-size: cover; 
         background-position: center; 
     }
