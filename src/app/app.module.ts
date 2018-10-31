@@ -20,9 +20,12 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { ChartsModule } from 'ng2-charts';
 import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 
-//import { AngularFireModule } from 'angularfire2';
-//import { AngularFireAuth } from 'angularfire2/auth';
-//import { firebaseConfig } from '../config';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { firebaseConfig } from '../config';
+
+import { Camera } from '@ionic-native/camera';
+import { QRScanner } from '@ionic-native/qr-scanner';
 
 @NgModule({
   declarations: [
@@ -43,8 +46,8 @@ import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    ChartsModule
-   // AngularFireModule.initializeApp(firebaseConfig.fire)
+    ChartsModule,
+    AngularFireModule.initializeApp(firebaseConfig.fire)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -65,7 +68,9 @@ import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
     SplashScreen,
     NativeAudio,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    //AngularFireAuth
+    AngularFireAuth,
+    Camera,
+    QRScanner
   ]
 })
 export class AppModule {}

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map'
+import firebase from "firebase";
+import "firebase/firestore";
+import { AngularFireAuth } from "angularfire2/auth";
 
 /**
  * Generated class for the TomarPedidoPage page.
@@ -17,8 +20,12 @@ import 'rxjs/add/operator/map'
 })
 export class TomarPedidoPage {
   information: any[];
+  user_data= [];
+  public firebase = firebase;
+  public db = firebase.firestore();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http) 
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
   {
 
     let localData = http.get('assets/imgs/gamma/information.json').map(res => res.json().items);
@@ -26,7 +33,7 @@ export class TomarPedidoPage {
       this.information = data;
     })
 
-
+    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
   }
 
   toggleSection(i) {
@@ -42,5 +49,33 @@ export class TomarPedidoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TomarPedidoPage');
   }
+
+  probando()
+  {
+    let pedidosRef = this.firebase.database().ref("mesas");
+
+    pedidosRef.once("value", (snap) => {
+
+      //let data = snap.val();
+     // let esValido = true;
+     let result = snap.val();
+    for(let k in result){ //"k" provides key Id of each object
+      this.user_data.push({
+       id : k,
+       carga : result[k].cantidadComensales,
+       numeroMesa : result[k].numeroMesa,
+     });
+    }
+
+
+
+      
+    });
+      
+      
+
+    
+  }
+ 
 
 }
