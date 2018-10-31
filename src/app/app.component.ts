@@ -17,9 +17,8 @@ export class MyApp {
 
       
    
-     
- rootPage:any = TabsPage;
-// rootPage:any =   PedirPlatosPage;
+
+rootPage:any =   AltaPlatosPage  ;
  
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

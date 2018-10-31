@@ -8,9 +8,15 @@ page-alta-platos {
             color: white;
         }
     }
+  
 
     ion-navbar ion-icon { font-size: 50px !important; }
   
+    ion-content
+    {
+        background-image:url("../assets/imgs/beta/fondo2.jpg");
+        background-repeat: repeat-x repeat-y;
+    }
     .titulo
     {
         width:80%;
@@ -22,13 +28,21 @@ page-alta-platos {
     }
     .contenido, .contenido2
     {
-        background:url("../../assets/imgs/beta/fondo2.jpg");
-        background-repeat: repeat-x repeat-y;
+       
+ 
         width: 100%;
-        height: 100%!important;
+    
         display: flex;
         flex-direction: column;
-        height: 60%;
+        height: auto;
+        position:relative;
+    }
+    .elContenido
+    {
+    
+        height: 80%;
+        width: 100%;
+        height: 500px;
         position:relative;
     }
     .contenido2
@@ -43,17 +57,25 @@ page-alta-platos {
         border-radius: 5%;
         font-size: 2em;
         font-family: 'Rancho', cursive;
-        background-color: #0000007d;
+        background-color: transparent;
         border: 1px solid black;
-        color: white;
+     color:black;
     }
     .nombrePlato::placeholder,.descripcion::placeholder,.tiempo::placeholder, .precio::placeholder
     {
-        color:white;
+        color:black!important;
     }
     .tiempoDiv, .precioDiv, .botones
     {
         position: relative;
+    }
+    .radio-md .radio-inner
+    {
+        width: 25px;
+        height: 25px;
+        background-color: #f53d3d;
+        top:0;
+        left:0;
     }
     .botones
     {
@@ -66,6 +88,7 @@ page-alta-platos {
     .nombrePlato::placeholder
     {
         font-family: 'Rancho', cursive;
+        color:black;
     }
     .descripcion
     {
@@ -75,22 +98,22 @@ page-alta-platos {
         width: 80%;
         margin-left: 10%;
         font-size:2em;
-        background-color: #0000007d;
+        background-color: transparent;
         border: 1px solid black;
-        color: white;
+        color: black;
     }
     .tiempo, .precio
     {
-        width: 35%;
+        width: 25%;
         padding: 5px;
         margin-top: 5%;
         margin-left: 10%;
         align-self: flex-start;
         font-family: 'Rancho', cursive;
         font-size:2em;
-        background-color: #0000007d;
+        background-color: transparent;
         border: 1px solid black;
-        color: white;
+        color: black;
     }
     .ocultar
     {
@@ -102,8 +125,11 @@ page-alta-platos {
     }
     .tiempoLabel, .precioLabel
     {
-        font-size: 2em;
         font-family: 'Rancho', cursive;
+        position: absolute;
+        top: 42%;
+        left: 40%;
+        font-size: 2em;
     }
     .TomarFotos
     {
@@ -124,7 +150,7 @@ page-alta-platos {
         height: 80%;
      
         font-family: 'Rancho', cursive;
-        font-size: 2em;
+        font-size: 1.6em;
         border:5px solid black;
     }
     .Qr
@@ -133,32 +159,107 @@ page-alta-platos {
         height: 80%;
         margin-left: 10%;
         font-family: 'Rancho', cursive;
-        font-size: 2em;
+        font-size: 1.6em;
            
 
     }
+    
+    .opciones
+    {
+        display: flex;
+    width: 60%;
+    margin-left: 20%;
+    justify-content: space-between;
+    margin-bottom: 7%;
+    }
+    .opcion1, .opcion2
+    {
+        font-family: 'Rancho', cursive;
+        font-size: 1.7em;
+    }
+    .tituloCheck
+    {
+        font-family: 'Rancho', cursive;
+        text-align: center;
+        font-size:2em;
+
+    }
+
     .Qr1
     {
         width: 40%;
         height: 80%;
-        margin-left: 10%;
+  
         font-family: 'Rancho', cursive;
-        font-size: 2em;
+        font-size: 1.6em;
         border:5px solid black;
-
+        position: absolute;
+        top: 20%;
+        right: 3%;
     }   
     .precioLabel
     {
-        margin-left:28%;
+        position: absolute;
+        left: 4%;
+        font-size: 2em;
     }
     .precio{
-        margin-left:2%;
+        margin-left: 10%;
     }
     .Foto1, .Foto2, .Foto3
     {
         width: 50%;
         margin-left: 25%;
         height: 20%;
+        visibility: hidden;
+    }
+    .laFoto1
+    {
+        position:absolute;
+        z-index:1000;
+        width: 50%;
+        height: 20%;
+        left: 25%;
+        top:15%;
+        display:none;
+    }
+
+    .laFoto2
+    {
+        position:absolute;
+        z-index:1000;
+        width: 50%;
+        height: 20%;
+        left: 25%;
+        top:37%;
+        display:none;
+    }
+    .radio-icon
+    {
+        width:30px!important;
+        height: 30px!important;
+        border-color:black!important;
+    }
+    .laFoto3
+    {
+        position:absolute;
+        z-index:1000;
+        position: absolute;
+        z-index: 1000;
+        top: 58%;
+        width: 50%;
+        height: 21%;
+        left: 25%;
+        display:none;
+
+    }
+    .mostrarLaFoto
+    {
+        display: block;
+    }
+    .mostrarBoton
+    {
+        visibility: visible;
     }
     .Foto1 ion-icon, .Foto2 ion-icon , .Foto3 ion-icon
     {
@@ -166,21 +267,6 @@ page-alta-platos {
     }
 
 
-    @media  screen and(max-height:"500px")
-        {
-          
-           
-            
-            .contenido , .contenido2
-            {
-                height: 550px!important;
-                
-            }
-
-            
-         
-           
-        }
-
+  
     
 }

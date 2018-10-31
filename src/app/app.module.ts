@@ -14,10 +14,11 @@ import {  EncuestaClientePage } from '../pages/encuesta-cliente/encuesta-cliente
 import { PedirPlatosPage } from '../pages/pedir-platos/pedir-platos';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { Camera } from '@ionic-native/camera';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
+
 
 
 @NgModule({
@@ -54,8 +55,10 @@ import { firebaseConfig } from '../config';
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth
+
   ]
 })
 export class AppModule {}
