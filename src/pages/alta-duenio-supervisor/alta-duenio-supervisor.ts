@@ -33,6 +33,13 @@ export class AltaDuenioSupervisorPage {
   public scanSub;
   public estado = "vertical-container";
 
+  public estadoBoton: boolean = false;
+  public ocultarAlert: boolean = true;
+  public alertTitulo;
+  public alertMensaje;
+  public alertMensajeBoton;
+  public alertHandler;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -42,6 +49,7 @@ export class AltaDuenioSupervisorPage {
     private qrScanner: QRScanner) {
 
     this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+
   }
 
   ionViewDidLoad() {
@@ -54,17 +62,17 @@ export class AltaDuenioSupervisorPage {
 
   Registrar() {
 
-    if(!this.correo || !this.clave || !this.nombre || !this.apellido || !this.dni || !this.cuil) {
+    if (!this.correo || !this.clave || !this.nombre || !this.apellido || !this.dni || !this.cuil) {
       this.presentToast("Todos los campos deben ser completados.");
       return;
     }
 
-    if(!this.ValidarNumero(this.dni)) {
+    if (!this.ValidarNumero(this.dni)) {
       this.presentToast("El DNI ingresado no es válido.");
       return;
     }
 
-    if(!this.ValidarNumero(this.cuil)) {
+    if (!this.ValidarNumero(this.cuil)) {
       this.presentToast("El CUIL ingresado no es válido.");
       return;
     }
@@ -74,6 +82,7 @@ export class AltaDuenioSupervisorPage {
       return;
     }
 
+    this.estadoBoton = true;
     let usuariosRef = this.firebase.database().ref("usuarios");
 
     usuariosRef.once("value", (snap) => {
@@ -87,6 +96,7 @@ export class AltaDuenioSupervisorPage {
 
           this.presentToast("El DNI ingresado ya corresponde a otro usuario registrado.");
           esValido = false;
+          this.estadoBoton = false;
           break;
         }
       }
@@ -113,6 +123,9 @@ export class AltaDuenioSupervisorPage {
                   tipo: this.tipo,
                   clave: this.clave,
                   img: url
+                }).then(() => {
+                  this.MostrarAlert("¡Éxito!", "Se registró correctamente el empleado.", "Aceptar", this.LimpiarCampos);
+                  this.estadoBoton = false;
                 });
               });
             });
@@ -126,18 +139,22 @@ export class AltaDuenioSupervisorPage {
             switch (error.code) {
               case "auth/invalid-email":
                 mensaje = "El correo ingresado no es válido.";
+                this.estadoBoton = false;
                 break;
 
               case "auth/email-already-in-use":
                 mensaje = "Este usuario ya fue registrado previamente.";
+                this.estadoBoton = false;
                 break;
 
               case "auth/weak-password":
                 mensaje = "La contraseña debe tener 6 o más caracteres.";
+                this.estadoBoton = false;
                 break;
 
               default:
                 mensaje = "Ups... Tenemos problemas técnicos.";
+                this.estadoBoton = false;
                 break;
             }
 
@@ -240,6 +257,27 @@ export class AltaDuenioSupervisorPage {
     }
 
     return true;
+  }
+
+  MostrarAlert(titulo: string, mensaje: string, mensajeBoton: string, handler) {
+    this.ocultarAlert = false;
+    this.alertTitulo = titulo;
+    this.alertMensaje = mensaje;
+    this.alertMensajeBoton = mensajeBoton;
+    this.alertHandler = handler;
+  }
+
+  LimpiarCampos() {
+
+    this.ocultarAlert = true;
+    this.correo = undefined;
+    this.clave = undefined;
+    this.nombre = undefined;
+    this.apellido = undefined;
+    this.dni = undefined;
+    this.cuil = undefined;
+    this.tipo = "dueño";
+    this.foto = "";
   }
 
   presentToast(mensaje: string) {

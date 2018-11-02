@@ -23,6 +23,16 @@ Branch del proyecto: [lareu_alfa](https://github.com/1caruxx/TP_PPS_2018_Comanda
 * [ ] N- Hacer reservas agendadas.
 * [ ] Q- Hacer reservas agendadas.
 
+---
+
+* [x] Vista y funcionalidad de la pagina de inicio de sesion.
+* [x] Vista y funcionalidad de la pagina principal.
+* [x] Vista de la pagina del perfil del usuario.
+* [x] Vista y funcionalidad (falta leer QR) de la pagina para registrar dueños y supervisores.
+* [x] Vista y funcionalidad (falta leer QR) de la pagina para registrar empleados.
+* [x] Vista de la pagina de encuesta del supervisor.
+* [x] Vista de la pagina para realizar reservas.
+
 **Fecha de inicio:** 21/10/2018<br />
 **Fecha de fin:**
 

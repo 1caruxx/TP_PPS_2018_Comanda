@@ -10,6 +10,19 @@
   </ion-navbar>
 </ion-header>
 
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+  <div class="alert-message animation-target">
+    <h1>{{alertTitulo}}</h1>
+    <p>{{alertMensaje}}</p>
+    <div class="botones">
+
+      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+    </div>
+  </div>
+
+</div>
+
 <ion-content [ngClass]="{'ocultar-fondo': estado == 'ocultar'}">
 
   <div [class]="estado">
@@ -47,11 +60,13 @@
 
     </div>
 
-    <button ion-button outline color="light" class="alta" (click)="Registrar()">Registrar</button>
+    <button ion-button outline color="light" [disabled]="estadoBoton" class="alta" (click)="Registrar()">Registrar</button>
   </div>
 
   <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
     <ion-icon name="close"></ion-icon>
   </button>
+
+  <app-spinner [ngClass]="{'ocultar':!estadoBoton}"></app-spinner>
 
 </ion-content>

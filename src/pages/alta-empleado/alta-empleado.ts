@@ -33,6 +33,13 @@ export class AltaEmpleadoPage {
   public scanSub;
   public estado = "vertical-container";
 
+  public estadoBoton: boolean = false;
+  public ocultarAlert: boolean = true;
+  public alertTitulo;
+  public alertMensaje;
+  public alertMensajeBoton;
+  public alertHandler;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -69,6 +76,7 @@ export class AltaEmpleadoPage {
       return;
     }
 
+    this.estadoBoton = true;
     let usuariosRef = this.firebase.database().ref("usuarios");
 
     usuariosRef.once("value", (snap) => {
@@ -82,6 +90,7 @@ export class AltaEmpleadoPage {
 
           this.presentToast("El DNI ingresado ya corresponde a otro usuario registrado.");
           esValido = false;
+          this.estadoBoton = false;
           break;
         }
       }
@@ -108,6 +117,10 @@ export class AltaEmpleadoPage {
                 tipo: this.tipo,
                 clave: this.clave,
                 img: url
+              }).then(() => {
+
+                this.MostrarAlert("¡Éxito!", "Se registró correctamente el empleado.", "Aceptar", this.LimpiarCampos);
+                this.estadoBoton = false;
               });
             } else {
 
@@ -126,6 +139,10 @@ export class AltaEmpleadoPage {
                     tipo: this.tipo,
                     clave: this.clave,
                     img: url
+                  }).then(() => {
+
+                    this.MostrarAlert("¡Éxito!", "Se registró correctamente el empleado.", "Aceptar", this.LimpiarCampos);
+                    this.estadoBoton = false;
                   });
                 });
               });
@@ -140,18 +157,22 @@ export class AltaEmpleadoPage {
             switch (error.code) {
               case "auth/invalid-email":
                 mensaje = "El correo ingresado no es válido.";
+                this.estadoBoton = false;
                 break;
 
               case "auth/email-already-in-use":
                 mensaje = "Este usuario ya fue registrado previamente.";
+                this.estadoBoton = false;
                 break;
 
               case "auth/weak-password":
                 mensaje = "La contraseña debe tener 6 o más caracteres.";
+                this.estadoBoton = false;
                 break;
 
               default:
                 mensaje = "Ups... Tenemos problemas técnicos.";
+                this.estadoBoton = false;
                 break;
             }
 
@@ -254,6 +275,27 @@ export class AltaEmpleadoPage {
     }
 
     return true;
+  }
+
+  MostrarAlert(titulo: string, mensaje: string, mensajeBoton: string, handler) {
+    this.ocultarAlert = false;
+    this.alertTitulo = titulo;
+    this.alertMensaje = mensaje;
+    this.alertMensajeBoton = mensajeBoton;
+    this.alertHandler = handler;
+  }
+
+  LimpiarCampos() {
+
+    this.ocultarAlert = true;
+    this.correo = undefined;
+    this.clave = undefined;
+    this.nombre = undefined;
+    this.apellido = undefined;
+    this.dni = undefined;
+    this.cuil = undefined;
+    this.tipo = "mozo";
+    this.foto = "";
   }
 
   presentToast(mensaje: string) {

@@ -61,12 +61,13 @@ page-login {
     img {
         width: 15vh;
         height: 15vh;
+
     }
 
     h1 {
         display: inline;
-        margin-left: 25px;
         font-size: 80px;
+        margin-right: 25px;
         font-weight: 100;
         color: white;
         font-family: lobster;
@@ -144,7 +145,6 @@ page-login {
             overflow: hidden;
 
             button {
-
                 display: block;
                 width: 100%;
                 height: 40px;

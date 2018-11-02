@@ -29,6 +29,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 import { ChartsModule } from 'ng2-charts';
 
+import { ComponentsModule } from "../components/components.module";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -49,7 +51,8 @@ import { ChartsModule } from 'ng2-charts';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig.fire),
-    ChartsModule
+    ChartsModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

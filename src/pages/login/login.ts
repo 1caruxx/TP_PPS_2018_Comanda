@@ -95,18 +95,36 @@ export class LoginPage {
         usuariosRef.once("value", (snap) => {
 
           let data = snap.val();
-
+          console.clear();
+          //console.log(data);
           for (let item in data) {
+
+            // if (data[item].correo == this.correo.toLowerCase()) {
+
+            //   localStorage.setItem("usuario", JSON.stringify(data[item]));
+            //   break;
+            // }
 
             if (data[item].correo == this.correo.toLowerCase()) {
 
-              localStorage.setItem("usuario", JSON.stringify(data[item]));
-              break;
+              if (!data[item].logueado) {
+
+                localStorage.setItem("usuario", JSON.stringify(data[item]));
+
+                usuariosRef.child(item).update({
+                  logueado: true
+                }).then(() => {} /*this.navCtrl.setRoot(PrincipalPage)*/);
+                break;
+              } else {
+                this.presentToast("Este usuario ya tiene una sesión activa actualmente.");
+              }
             }
           }
 
           this.animation = "";
-          this.navCtrl.setRoot(PrincipalPage);
+          this.estadoBoton = false;
+          this.textoDelBoton = "Ingresar";
+          //this.navCtrl.setRoot(PrincipalPage);
         });
       })
       .catch(err => {
