@@ -27,6 +27,7 @@ export class QrDeLaMesaPage {
   public scanSub;
   public cerrarqr=false;
   public probandingg=true;
+  public clientovich;
 
 
   
@@ -113,7 +114,7 @@ export class QrDeLaMesaPage {
   }
 
 
-  MostrarQr()
+  MostrarQr(correo)
   {
 
           this.cerrarqr=true;
@@ -127,7 +128,50 @@ export class QrDeLaMesaPage {
               this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
 
                 
-                alert(text);
+               // alert(text);
+
+                //if(text=="1")
+                //{
+                  alert("bienvenido,se relaciono al cliente con la mesa " + text)
+
+                  var ref = this.firebase.database().ref("usuarios");
+             
+                  ref.on('value', function (snap) {
+                      var data = snap.val();
+                      for(var key in data){
+                          if (correo == data[key].correo) {
+                              data[key].mesa = text;
+                             // this.clientovich = data[key].correo;
+                              ref.child(key).update(data[key]);
+
+                             
+      
+ 
+                          };                  
+                      }
+                  });
+
+                  var refDos = this.firebase.database().ref("mesas");
+             
+                  refDos.on('value', function (snap) {
+                      var data2 = snap.val();
+                      for(var key2 in data2){
+                          if (text == data2[key2].numeroMesa) {
+                              data2[key2].cliente = correo;
+                              refDos.child(key2).update(data2[key2]);
+                             
+                          };                  
+                      }
+                  });
+
+              
+
+
+              //  }
+
+
+
+
              
 
                // this.estado = "vertical-container";
@@ -168,5 +212,24 @@ export class QrDeLaMesaPage {
     this.scanSub.unsubscribe();
   }
 
+  Modificar(correo)
+  {
+    alert("bienvenido,se relaciono al cliente con la mesa uno")
+
+    var ref = this.firebase.database().ref("usuarios");
+    
+    ref.on('value', function (snap) {
+        var data = snap.val();
+        for(var key in data){
+            if (correo == data[key].correo) {
+                data[key].mesa = 1;
+                ref.child(key).update(data[key]);/*SOLUTION*/
+               
+            };                  
+        }
+    });
+
+    
+  }
 
 }

@@ -68,8 +68,28 @@
           <p>Empleado • {{item.tipo}}</p>
           <p>CUIL • {{item.cuil}}</p>
     
-          <button ion-button clear item-end (click)="MostrarQr()">
+          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
             <ion-icon name="expand"></ion-icon>
+          </button>
+        </ion-item>
+    
+      </ion-list>
+
+      <h2 class="titulo">Lista de personas Atendidas</h2>
+
+      <ion-list>
+
+        <ion-item *ngFor="let item of user_data">
+          <ion-thumbnail item-start>
+            <!--<img src={{item.img}}>-->
+          </ion-thumbnail>
+    
+          <h1>{{item.apellido}}, {{item.clave}}</h1>
+          <p>Empleado • {{item.tipo}}</p>
+          <p>CUIL • {{item.cuil}}</p>
+    
+          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+            <ion-icon name="restaurant"></ion-icon>
           </button>
         </ion-item>
     

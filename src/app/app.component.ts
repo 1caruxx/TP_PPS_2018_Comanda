@@ -22,7 +22,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      let splash = modalCtrl.create(SplashPage);
+      let splash = modalCtrl.create(QrDeLaMesaPage);
             splash.present();
       //splashScreen.hide();
     });

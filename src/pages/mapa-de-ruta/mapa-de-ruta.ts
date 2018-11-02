@@ -39,7 +39,7 @@ export class MapaDeRutaPage {
     //console.log('ionViewDidLoad MapaDeRutaPage');
 
     	// Presenting popup
-  	this.alert.create({
+/*  	this.alert.create({
   		title:'Username',
   		inputs:[{
   			name:'username',
@@ -56,7 +56,7 @@ export class MapaDeRutaPage {
     
      this.ref = firebase.database().ref('mensajes/' + this.nombre);
 
-  	//reading data from firebase
+  	
   	this.ref.on('value',data => {
   		let tmp = [];
   		data.forEach( data => {
@@ -71,7 +71,7 @@ export class MapaDeRutaPage {
 
 
 
-
+		*/
   }
 
 
