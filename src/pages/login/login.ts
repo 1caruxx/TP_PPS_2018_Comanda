@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { PrincipalPage } from "../principal/principal";
+import { AltaEmpleadoPage } from "../alta-empleado/alta-empleado";
+import { ListadoSupervisorPage } from "../listado-supervisor/listado-supervisor";
 
 import { AngularFireAuth } from "angularfire2/auth";
 import firebase from "firebase";
@@ -95,36 +97,58 @@ export class LoginPage {
         usuariosRef.once("value", (snap) => {
 
           let data = snap.val();
-          console.clear();
-          //console.log(data);
+          let tipo;
+
           for (let item in data) {
-
-            // if (data[item].correo == this.correo.toLowerCase()) {
-
-            //   localStorage.setItem("usuario", JSON.stringify(data[item]));
-            //   break;
-            // }
 
             if (data[item].correo == this.correo.toLowerCase()) {
 
-              if (!data[item].logueado) {
-
-                localStorage.setItem("usuario", JSON.stringify(data[item]));
-
-                usuariosRef.child(item).update({
-                  logueado: true
-                }).then(() => {} /*this.navCtrl.setRoot(PrincipalPage)*/);
-                break;
-              } else {
-                this.presentToast("Este usuario ya tiene una sesión activa actualmente.");
-              }
+              localStorage.setItem("usuario", JSON.stringify(data[item]));
+              tipo = data[item].tipo;
+              break;
             }
           }
+
+          //   if (data[item].correo == this.correo.toLowerCase()) {
+
+          //     if (!data[item].logueado) {
+
+          //       localStorage.setItem("usuario", JSON.stringify(data[item]));
+
+          //       usuariosRef.child(item).update({
+          //         logueado: true
+          //       }).then(() => { this.navCtrl.setRoot(PrincipalPage); } /**/);
+          //       break;
+          //     } else {
+          //       this.presentToast("Este usuario ya tiene una sesión activa actualmente.");
+          //     }
+          //   }
+          // }
 
           this.animation = "";
           this.estadoBoton = false;
           this.textoDelBoton = "Ingresar";
-          //this.navCtrl.setRoot(PrincipalPage);
+
+          switch(tipo) {
+
+            case "mozo":
+            case "cocinero":
+            case "bartender":
+            case "metre":
+            case "cajero":
+              this.navCtrl.setRoot(PrincipalPage);
+              break;
+
+            case "cliente":
+            case "anonimo":
+              this.navCtrl.setRoot(PrincipalPage);
+              break;
+
+            default:
+              this.navCtrl.setRoot(PrincipalPage);
+              break;
+          }
+
         });
       })
       .catch(err => {

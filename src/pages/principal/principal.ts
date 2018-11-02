@@ -6,12 +6,8 @@ import { VerificarTipoProvider } from "../../providers/verificar-tipo/verificar-
 import { LoginPage } from "../login/login";
 import { PerfilPage } from "../perfil/perfil";
 
-/**
- * Generated class for the PrincipalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import firebase from "firebase";
+import "firebase/firestore";
 
 @IonicPage()
 @Component({
@@ -22,6 +18,7 @@ export class PrincipalPage {
 
   public acciones: Array<any> = [];
   public usuario: any;
+  public firebase = firebase;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private verificarTipo: VerificarTipoProvider) {
 
@@ -44,8 +41,37 @@ export class PrincipalPage {
 
   Logout() {
 
-    localStorage.clear();
-    this.navCtrl.setRoot(LoginPage);
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+      let tipo;
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "cajero") {
+
+              this.navCtrl.setRoot(LoginPage);
+            } else {
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 }

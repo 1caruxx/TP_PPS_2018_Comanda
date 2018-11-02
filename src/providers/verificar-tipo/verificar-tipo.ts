@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { AltaDuenioSupervisorPage } from "../../pages/alta-duenio-supervisor/alta-duenio-supervisor";
@@ -6,12 +5,6 @@ import { AltaEmpleadoPage } from "../../pages/alta-empleado/alta-empleado";
 import { ListadoSupervisorPage } from "../../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../../pages/reserva/reserva";
 
-/*
-  Generated class for the VerificarTipoProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class VerificarTipoProvider {
 
@@ -29,7 +22,8 @@ export class VerificarTipoProvider {
       case "dueño":
         acciones = [
           { accion: "Agregar un dueño o supervisor", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
-          { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage }
+          { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
+          { accion: "Nueva mesa.", img: "ocupar-mesa.jpg", ruta: "./" }
         ];
         break;
 
@@ -79,7 +73,7 @@ export class VerificarTipoProvider {
         ];
         break;
 
-        case "cliente-registrado":
+        case "cliente":
         acciones = [
           { accion: "Ingresar al local", img: "entrada.jpg", ruta: "./" },
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
@@ -89,7 +83,7 @@ export class VerificarTipoProvider {
         ];
         break;
 
-        case "cliente-anonimo":
+        case "anonimo":
         acciones = [
           { accion: "Ingresar al local.", img: "entrada.jpg", ruta: "./" },
           { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: "./" },
