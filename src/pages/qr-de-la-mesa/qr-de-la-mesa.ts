@@ -68,7 +68,7 @@ export class QrDeLaMesaPage {
               .catch((e: any) => this.presentToast(e));
 
 */
-    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
 
   /*  let pedidosRef = this.firebase.database().ref("usuarios");

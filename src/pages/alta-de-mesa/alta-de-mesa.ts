@@ -37,7 +37,7 @@ export class AltaDeMesaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera,
     private qrScanner: QRScanner)
    {
-    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
     this.probandingg=true;
 
 

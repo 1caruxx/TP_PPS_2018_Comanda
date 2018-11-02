@@ -28,7 +28,7 @@ export class MapaDeRutaPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public alert: AlertController,private authInstance: AngularFireAuth) 
   {
-    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+   // this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
    
 
 
