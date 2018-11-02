@@ -29,6 +29,10 @@ export class QrDeLaMesaPage {
   public probandingg=true;
   public clientovich;
 
+  public usuarios: Array<any>;
+  public espera: Array<any>;
+  public atendidos: Array<any>;
+
 
   
 
@@ -67,7 +71,7 @@ export class QrDeLaMesaPage {
     this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
 
-    let pedidosRef = this.firebase.database().ref("usuarios");
+  /*  let pedidosRef = this.firebase.database().ref("usuarios");
 
     pedidosRef.once("value", (snap) => {
 
@@ -90,6 +94,38 @@ export class QrDeLaMesaPage {
 
 
       
+    });*/  
+    this.usuarios = [];
+    this.espera = [];
+    this.atendidos = [];
+
+
+    let genteRef = this.firebase.database().ref("usuarios");
+
+    genteRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        this.usuarios.push(data[item]);
+      }
+
+      console.log(this.usuarios);
+    }).then(() => {
+      this.espera = this.usuarios.filter(item => {
+
+        return item.mesa == null;
+      });
+
+      this.atendidos = this.usuarios.filter(item => {
+
+        return item.mesa != null;
+      });
+
+
+      
+
     });
 
 

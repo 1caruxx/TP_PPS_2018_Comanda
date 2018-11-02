@@ -59,9 +59,10 @@
 
       <ion-list>
 
-        <ion-item *ngFor="let item of user_data">
+        <ion-item *ngFor="let item of espera">
           <ion-thumbnail item-start>
             <!--<img src={{item.img}}>-->
+            <ion-icon name="person"></ion-icon>
           </ion-thumbnail>
     
           <h1>{{item.apellido}}, {{item.clave}}</h1>
@@ -79,16 +80,17 @@
 
       <ion-list>
 
-        <ion-item *ngFor="let item of user_data">
+        <ion-item *ngFor="let item of atendidos">
           <ion-thumbnail item-start>
             <!--<img src={{item.img}}>-->
+            <ion-icon name="people"></ion-icon>
           </ion-thumbnail>
     
           <h1>{{item.apellido}}, {{item.clave}}</h1>
           <p>Empleado • {{item.tipo}}</p>
           <p>CUIL • {{item.cuil}}</p>
     
-          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+          <button ion-button clear item-end (click)="MostrarPedidos(item.correo)">
             <ion-icon name="restaurant"></ion-icon>
           </button>
         </ion-item>

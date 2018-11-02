@@ -34,6 +34,36 @@ export class TomarPedidoPage {
     })
 
     this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+
+    let pedidosRef = this.firebase.database().ref("mesas");
+
+    pedidosRef.once("value", (snap) => {
+
+      //let data = snap.val();
+     // let esValido = true;
+     let result = snap.val();
+    for(let k in result){ //"k" provides key Id of each object
+      this.user_data.push({
+       id : k,
+       carga : result[k].cantidadComensales,
+       numeroMesa : result[k].numeroMesa,
+       name : "adasdasd"
+     });
+    }
+
+
+
+      
+    });
+      
+
+
+
+
+
+
+
+
   }
 
   toggleSection(i) {
@@ -64,6 +94,7 @@ export class TomarPedidoPage {
        id : k,
        carga : result[k].cantidadComensales,
        numeroMesa : result[k].numeroMesa,
+       name : "adasdasd"
      });
     }
 
