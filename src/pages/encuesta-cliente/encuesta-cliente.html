@@ -5,17 +5,17 @@
   Ionic pages and navigation.
 -->
 <div class="pregunta1"  [ngClass]="{'noMostrar':ocultar}">
-  <div class="laPregunta1">
+  <div class="laPregunta1" radio-group [(ngModel)]="resp1">
       <h2>¿Se siente c&oacute;modo en el restaurant?</h2>
      
       <ion-item>
           <ion-label>Si</ion-label>
-          <ion-radio value="1"></ion-radio>
+          <ion-radio value="Si"></ion-radio>
         </ion-item>
       
         <ion-item>
           <ion-label>No</ion-label>
-          <ion-radio value="2"></ion-radio>
+          <ion-radio value="No"></ion-radio>
         </ion-item>
         <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
     </div>
@@ -26,11 +26,12 @@
        
         <ion-item>
             <ion-label>Elija su opci&oacute;n</ion-label>
-            <ion-select  okText="Ok" cancelText="Cancelar">
-                <ion-option value="1">Buena</ion-option>
-                <ion-option value="2">Mala</ion-option>
-                <ion-option value="3">Regular</ion-option>
-                <ion-option value="4">Muy buena</ion-option>
+            <ion-select  okText="Ok" [(ngModel)]="resp2" cancelText="Cancelar">
+                <ion-option  value=" muy mala">Muy mala</ion-option>
+                <ion-option value="mala">Mala</ion-option>
+                <ion-option value="regular">Regular</ion-option>
+                <ion-option value="Buena">Buena</ion-option>
+                <ion-option value="Muy buena">Muy Buena</ion-option>
               </ion-select>
           </ion-item>
           <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
@@ -38,19 +39,29 @@
   </div>
   <div class="pregunta3"  [ngClass]="{'noMostrar':ocultar3}">
       <div class="laPregunta3">
-          <h2>¿Se sintio a gusto la ultima vez que nos visit&oacute;?</h2>
+          <h2>¿Cu&aacute;les considera nuestros puntos fuertes?</h2>
          
           <ion-item>
-              <ion-label >Si</ion-label>
-            <ion-checkbox value="Si" >Si</ion-checkbox>
+              <ion-label >La comodidad del sal&oacute;n</ion-label>
+            <ion-checkbox [(ngModel)]="resp3comodidad" >Si</ion-checkbox>
             
           </ion-item>
 
           <ion-item>
-              <ion-label >No</ion-label>
-            <ion-checkbox value="no" >No</ion-checkbox>
+              <ion-label >Nuestros platos</ion-label>
+            <ion-checkbox  [(ngModel)]="resp3platos" >No</ion-checkbox>
             
           </ion-item>
+          <ion-item>
+                <ion-label >Nuestros precios</ion-label>
+              <ion-checkbox  [(ngModel)]="resp3precios" >No</ion-checkbox>
+              
+            </ion-item>
+            <ion-item>
+                    <ion-label >Nuestra atenci&oacute;n</ion-label>
+                  <ion-checkbox  [(ngModel)]="resp3atencion" >No</ion-checkbox>
+                  
+                </ion-item>
             <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
         </div>
     </div>
@@ -60,7 +71,7 @@
            
             <ion-item>
         
-                <ion-range value="1">
+                <ion-range [(ngModel)]="resp4" min="1" max="10" pin="true" >
                     <ion-icon range-left  name="sad"></ion-icon>
                     <ion-icon range-right name="happy"></ion-icon>
         
@@ -75,9 +86,9 @@
              
               <ion-item>
           
-                  <ion-input placeholder="Escribalo aqui"></ion-input>
+                  <ion-input placeholder="Escribalo aqui" [(ngModel)]="resp5"></ion-input>
                 </ion-item>
-                <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+                <button class="aceptar" (click)="Aceptar()"  ion-button color="red">Aceptar</button>
             </div>
         </div>
         <div class="pregunta6"  [ngClass]="{'noMostrar':ocultar6}">
@@ -86,9 +97,13 @@
                
               
             
-                    <button ion-button color="dark"   class="Foto">  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button>
-                 
-                  <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+                    <button ion-button color="dark"   (click)="Foto1()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton1}" >  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button> 
+                    <img class="laFoto1" [src]="foto1" [ngClass]="{'mostrarLaFoto':mostrarfoto1}" >
+                    <button ion-button color="dark"   (click)="Foto2()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton2}">  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button>
+                    <img class="laFoto2" [src]="foto2" [ngClass]="{'mostrarLaFoto':mostrarfoto2}" >
+                    <button ion-button color="dark"  (click)="Foto3()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton3}">  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button>
+                    <img class="laFoto3" [src]="foto3" [ngClass]="{'mostrarLaFoto':mostrarfoto3}" >
+                    <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
               </div>
           </div>
 <ion-header>
@@ -103,7 +118,7 @@
       <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
   
       <ion-buttons end>
-        <button ion-button>
+        <button ion-button (click)="irA()">
           <ion-icon name="power"></ion-icon>
         </button>
       </ion-buttons>
@@ -122,7 +137,7 @@
          <button ion-button color="light"  (click)="pregunta4()" outline>Pregunta IV</button>
          <button ion-button color="light" (click)="pregunta5()" outline>Pregunta V</button>
          <button ion-button color="light" (click)="pregunta6()" outline>Fotos(Opcional)</button>
-         <button class="enviar" ion-button color="red">Enviar encuesta</button>
+         <button class="enviar" (click)= "SubirEncuesta()" ion-button color="red">Enviar encuesta</button>
       </div>
     
 </ion-content>

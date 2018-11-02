@@ -15,7 +15,7 @@ page-pedir-platos {
     .slide
     {
         position:absolute;
-       z-index:2000;
+       z-index:4000;
         display:none;
         width: 100%;
         height: 100%;
@@ -47,7 +47,43 @@ page-pedir-platos {
         {
             border:none;
         }
-     
+        .imgTransparente
+        {
+            position:absolute;
+            z-index:3000;
+           display:none;
+            position: absolute;
+            z-index: 3000;
+            width: 100%;
+            opacity: .2;
+          
+        
+            height: 124px;
+          
+            top: 0px;
+        }
+     .alert
+     {
+         position:absolute;
+         z-index:1000;
+         width: 80%;
+         left:10%;
+         border-radius:5%;
+         background: red;
+    text-align: center;
+    top:50%;
+    display:none;
+    animation:fadeInDown 2s 1 ease-in-out;  
+     }
+     .mostrarAlert
+     {
+         display:block;
+     }
+     .alert h1
+     {
+        font-family: 'Lobster', cursive;
+        color:white;
+     }
    
       .foto
       {
@@ -70,6 +106,7 @@ page-pedir-platos {
         background: url("../assets/imgs/beta/fondoPedido.jpg");
         background-size:100% 100%;
         position:relative;
+      
     }
     .tituloPag
     {
@@ -163,7 +200,7 @@ page-pedir-platos {
        {
         width: 50%;
         margin-left: 25%;
-        margin-top: 15%;
+        margin-top: 25%;
       
         font-size: 1.7em;
         height: 15%;
@@ -237,7 +274,7 @@ page-pedir-platos {
   
 
     height: 124px;
-    background: #050505ad;
+    background-color:rgba(236, 15, 15, 0.61);
     top: -17px;
 }
 .mostrarElegido
@@ -309,6 +346,10 @@ page-pedir-platos {
        }
        @media  screen and(max-height:"550px")
        {
+           .aceptarBtn, .cancelarBtn
+           {
+               display:none;
+           }
            
            .elPlato {
               height:65%;
@@ -317,7 +358,44 @@ page-pedir-platos {
            {
                height: 600px!important;
            }
+         .platos
+         {
+             height: 95%;
+         }
            
        }
-
+/*-----------------------------Animacion----------------------------------*/
+@-webkit-keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+  }
+ 
     }

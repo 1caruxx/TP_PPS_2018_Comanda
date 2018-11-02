@@ -35,6 +35,7 @@ export class AltaPlatosPage {
   mostrarfoto3:boolean;
 nombre="";
 descripcion="";
+
 tiempo="";
 cantidad="";
 precio="";
@@ -61,7 +62,7 @@ ocultarTiempo:boolean;
     this.ocultarTiempo=false;
 
     //BORRAR ESTA LINEA ANTES DE HACER EL PUSH.
-  this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+  //this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
   }
 
   ionViewDidLoad() {
@@ -72,7 +73,7 @@ ocultarTiempo:boolean;
   }
   pedido()
   {
-    this.navCtrl.push(PedirPlatosPage);
+  
 
 
   }

@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from "firebase";
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 
 
@@ -19,12 +21,14 @@ import firebase from "firebase";
 export class PedirPlatosPage {
   @ViewChild('cant') cant:any;
 
-
+  mensaje:string;
+  mostrarAlert:boolean=false;
   ocultarPlatos:boolean;
   cantidad:number;
   titulo:string;
   platos:any[]=[];
   bebidas:any[]=[];
+  valor:number;
   foto1;
   foto2;
   foto3;
@@ -44,9 +48,10 @@ contador;
     this.TraerPlatos();
     this.contador=0;
     this.ocultarTitulo=false;
+    this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
 this.foto="";
-  
 
+    
   }
   onChangeTime(value)
   {
@@ -125,6 +130,9 @@ this.foto="";
   }
   Platos()
   {
+
+    this.valor=null;
+    console.log(this.valor);
     this.ocultarPlatos =false;
     this.ocultarTitulo=true;
     this.titulo ="Nuestros platos";
@@ -132,7 +140,8 @@ this.foto="";
   }
   Bebidas()
   {
-  
+    this.ocultarPlatos =true;
+    this.valor=undefined;
     this.ocultarBebidas =false;
     this.titulo ="Nuestras bebidas" ;
 
@@ -188,10 +197,11 @@ var data =snap.val();
     for(let i=0;i<this.pedido.length;i++)
     {
       (window.document.querySelector('#'+this.pedido[i].nombre) as HTMLElement).classList.remove("mostrarElegido");
+
     }
     this.pedido.splice(0, this.pedido.length);
     console.log(this.pedido);
-    
+    this.valor=undefined;
     this.Cerrar();
    
  
@@ -205,5 +215,10 @@ var data =snap.val();
     {
       mensaje2.push(this.pedido[i]);
     }
+    this.mostrarAlert=true;
+    setTimeout(()=>{
+
+      this.mostrarAlert=false;
+    }, 4000);
   }
 }
