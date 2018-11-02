@@ -37,7 +37,8 @@ export class EncuestaDeEmpleadoPage {
 
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad() 
+  {
     console.log('ionViewDidLoad EncuestaDeEmpleadoPage');
   }
 

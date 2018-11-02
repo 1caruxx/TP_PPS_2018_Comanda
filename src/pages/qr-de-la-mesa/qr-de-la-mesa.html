@@ -53,7 +53,12 @@
         
       </ion-content>
 
-      <ion-content *ngIf="probandingg">
+      <ion-content  *ngIf="probandingg">
+
+         
+
+
+
 
       <h2 class="titulo">Lista de personas en espera</h2>
 
@@ -65,9 +70,13 @@
             <ion-icon name="person"></ion-icon>
           </ion-thumbnail>
     
-          <h1>{{item.apellido}}, {{item.clave}}</h1>
+         <!-- <h1>{{item.apellido}}, {{item.clave}}</h1>
           <p>Empleado • {{item.tipo}}</p>
-          <p>CUIL • {{item.cuil}}</p>
+          <p>CUIL • {{item.cuil}}</p>-->
+
+          <h1>{{item.correo}}, {{item.nombre}}</h1>
+          <p>Cliente • {{item.tipo}}</p>
+         
     
           <button ion-button clear item-end (click)="MostrarQr(item.correo)">
             <ion-icon name="expand"></ion-icon>
@@ -86,16 +95,23 @@
             <ion-icon name="people"></ion-icon>
           </ion-thumbnail>
     
-          <h1>{{item.apellido}}, {{item.clave}}</h1>
+        <!--  <h1>{{item.apellido}}, {{item.clave}}</h1>
           <p>Empleado • {{item.tipo}}</p>
-          <p>CUIL • {{item.cuil}}</p>
+          <p>CUIL • {{item.cuil}}</p>-->
+
+          <h1>{{item.correo}}, {{item.nombre}}</h1>
+          <p>Cliente • {{item.tipo}}</p>
     
-          <button ion-button clear item-end (click)="MostrarPedidos(item.correo)">
+          <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">
             <ion-icon name="restaurant"></ion-icon>
           </button>
         </ion-item>
     
       </ion-list>
+
+     
+
+   
 
     </ion-content>
 

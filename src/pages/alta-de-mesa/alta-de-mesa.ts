@@ -24,11 +24,13 @@ export class AltaDeMesaPage {
   public db = firebase.firestore();
   public numeroMesa;
   public cantidadComensales;
-  public tipo;
+  public tipo="normal";
   public foto: string = "";
   public nombreFoto: string;
   public probandingg;
   public cerrarqr=false;
+  public esValido=false;
+  //public tipo="normal";
 
   public scanSub;
   public estado = "vertical-container";
@@ -52,11 +54,25 @@ export class AltaDeMesaPage {
   Alta()
   {
 
-    if (!this.numeroMesa || !this.cantidadComensales || !this.tipo)
+    if (!this.numeroMesa || !this.cantidadComensales || !this.tipo || this.foto=="")
     {
       this.presentToast("Todos los campos deben ser completados.");
       return;
     }
+
+    if(this.numeroMesa < 0 || this.numeroMesa > 10)
+    {
+      this.presentToast("Solo tenemos lugar para 10 mesas en el lugar")
+      return;
+    }
+
+    if(this.cantidadComensales < 0 || this.cantidadComensales > 4)
+    {
+      this.presentToast("Los comensales solo pueden ser de 1 a 4")
+      return;
+    }
+
+    
 
   /*  let mesasRef = this.firebase.database().ref("mesas");
 
@@ -71,23 +87,50 @@ export class AltaDeMesaPage {
 
      
     });*/
-    let mesasRef = this.firebase.database().ref("mesas");
 
-    let pictures = this.firebase.storage().ref(`mesas/${this.nombreFoto}`);
+    let verMesaRef = this.firebase.database().ref("mesas");
 
-    pictures.putString(this.foto, "data_url").then(() => {
+    verMesaRef.once("value", (snap) => {
 
-      pictures.getDownloadURL().then((url) => {
+      let data = snap.val();
+      this.esValido = true;
+     
 
-        mesasRef.push({
-          numeroMesa: this.numeroMesa,
-          cantidadComensales: this.cantidadComensales,
-          tipo: this.tipo,
-          img: url
-        });
-      });
+      for (let item in data) 
+      {
+
+        if (data[item].numeroMesa == parseInt(this.numeroMesa)) 
+        {
+
+          this.presentToast("La mesa ingresada ya esta registrada");
+          this.esValido = false;
+          break;
+        }
+      }
+      
     });
 
+    if (this.esValido) {
+          let mesasRef = this.firebase.database().ref("mesas");
+
+
+          let pictures = this.firebase.storage().ref(`mesas/${this.nombreFoto}`);
+
+          pictures.putString(this.foto, "data_url").then(() => {
+
+            pictures.getDownloadURL().then((url) => {
+
+              mesasRef.push({
+                numeroMesa: this.numeroMesa,
+                cantidadComensales: this.cantidadComensales,
+                tipo: this.tipo,
+                img: url
+              });
+            });
+          });
+
+    
+  }
   }
 
   presentToast(mensaje: string) {
