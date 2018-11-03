@@ -36,15 +36,15 @@
 
 
 
-<ion-content padding class="home">
+<!--<ion-content padding class="home">
 
     <ion-row class="logo-row">
-        <!-- <ion-col></ion-col> -->
+       
         <ion-col>
             <img src="assets/imgs/gamma/mapaderuta.jpg"/>
           
         </ion-col>
-        <!-- <ion-col></ion-col> -->
+        
       </ion-row>
 
       
@@ -96,4 +96,31 @@
       </ion-row>
     </form>
   </ion-toolbar>
+</ion-footer>-->
+
+
+
+
+<ion-content padding>
+
+
+    <img src="assets/imgs/gamma/mapaderuta.jpg"/>
+
+    <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>
+          <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>
+
+
+
+	<ion-list no-lines>
+		<ion-item *ngFor="let message of messagesList">
+			<h3>{{message.name}}</h3>
+			<p>{{message.message}}</p>
+		</ion-item>
+	</ion-list>
+</ion-content>
+<ion-footer>
+	<ion-item>
+		<ion-input type="text" placeholder="Escriba aqui..." [(ngModel)]="newmessage"></ion-input>
+		<button ion-button clear item-right (click)="send()">Enviar</button>
+	</ion-item>
 </ion-footer>

@@ -39,7 +39,7 @@
 
     
 
-    <ion-list-header>
+    <ion-list-header style="font-size: 150%;">
         Como se siente en el restaurante?
       </ion-list-header>
 
@@ -57,7 +57,7 @@
       
       <ion-item>
         
-        <ion-range value="1">
+        <ion-range [(ngModel)]="uno" min="1" max="3">
             <ion-icon range-left  name="sad"></ion-icon>
             <ion-icon range-right name="happy"></ion-icon>
 
@@ -79,7 +79,7 @@
       
       <ion-item >
          
-          <ion-input></ion-input>
+          <ion-input placeholder="Escriba su opinion" [(ngModel)]="dos"> </ion-input>
         </ion-item>
 
       </ion-col>
@@ -94,13 +94,16 @@
           </ion-row>
 
       <ion-row>
+
+        <ion-list radio-group style="margin: 0 30px 0 0;width: 70%;font-size: 150%;display:block;
+        margin: 0 auto;" [(ngModel)]="tres">
           <ion-col col-6>
 
       
      
       <ion-item>
           <ion-label>Si</ion-label>
-          <ion-radio value="1"></ion-radio>
+          <ion-radio value="si" checked ></ion-radio>
         </ion-item>
 
       </ion-col>
@@ -109,10 +112,15 @@
       
         <ion-item>
           <ion-label>No</ion-label>
-          <ion-radio value="2"></ion-radio>
+          <ion-radio value="no" ></ion-radio>
         </ion-item>
 
       </ion-col>
+
+    </ion-list>
+
+      
+
     </ion-row>
 
     <ion-row>
@@ -127,9 +135,9 @@
          
           <ion-item>
               <ion-label>Elija su opcion</ion-label>
-              <ion-select>
-                <ion-option value="1">Si</ion-option>
-                <ion-option value="2">No</ion-option>
+              <ion-select [(ngModel)]="cuatro">
+                <ion-option value="si">Si</ion-option>
+                <ion-option value="no">No</ion-option>
                 
               </ion-select>
             </ion-item>
@@ -145,12 +153,15 @@
             </ion-row>
 
         <ion-row>
+
+        
+
             <ion-col col-6>
 
 
           <ion-item>
               <ion-label >Si</ion-label>
-            <ion-checkbox value="Si" >Si</ion-checkbox>
+            <ion-checkbox [(ngModel)]="cinco"  value="si" checked>Si</ion-checkbox>
             
           </ion-item>
 
@@ -160,7 +171,7 @@
 
           <ion-item>
               <ion-label >No</ion-label>
-            <ion-checkbox value="no" >No</ion-checkbox>
+            <ion-checkbox  [(ngModel)]="cinco" value="no" >No</ion-checkbox>
 
             
           </ion-item>
@@ -168,22 +179,44 @@
 
 
         </ion-col>
+
+      
+
       </ion-row>
 
       <ion-row>
           <ion-col col-12>
-    
 
-          
+              <button ion-button outline color="red" style="margin: 0 30px 0 0;width: 70%;font-size: 150%;display:block;
+              margin: 0 auto;" (click)="SacarFoto()">Sacar
+                  foto</button>
+                
+    
+              
+            
 
         </ion-col>
+       <!-- <ion-col col-6>
+
+            <img [src]="foto" alt="">
+
+           
+
+        </ion-col>-->
       </ion-row>
+    <ion-row>
+      <ion-col col-12>
+          <img [src]="foto" alt="">
+      </ion-col>
+
+    </ion-row>
 
       <ion-row>
           <ion-col col-12>
     
 
-          <button  ion-button  color="red" (click)="enviarEncuesta()" >Enviar la encuesta</button>
+          <button  ion-button  color="red" style="margin: 0 30px 0 0;width: 70%;display: block;
+          margin: 0 auto;" (click)="enviarEncuesta()" >Enviar la encuesta</button>
 
         </ion-col>
       </ion-row>
@@ -196,6 +229,19 @@
 
 <ion-content padding *ngIf="probabilidad">
   <!-- style="display: block; width: 100%;height: 90%;" -->
+
+  <h2>Pregunta 1,Cuan limpio es el lugar?</h2>
+
+  <div class="col-xs-2 col-sm-2 col-md-2">
+      <canvas baseChart
+                  [data]="pieChartDataUno"
+                  [labels]="pieChartLabelsUno"
+                  [chartType]="pieChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+    </div>
+
+  <h2>Pregunta 3,le tratan bien sus jefes?</h2>
   
   <div class="col-xs-2 col-sm-2 col-md-2">
     <canvas baseChart
@@ -206,35 +252,32 @@
                 (chartClick)="chartClicked($event)"></canvas>
   </div>
 
-  <div class="col-xs-2 col-sm-2 col-md-2">
-    <canvas baseChart
-                [data]="pieChartData"
-                [labels]="pieChartLabels"
-                [chartType]="pieChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-  </div>
+  <h2>Pregunta 4,le pagan bien?</h2>
 
   <div class="col-xs-2 col-sm-2 col-md-2">
-    <canvas baseChart
-                [data]="pieChartData"
-                [labels]="pieChartLabels"
-                [chartType]="pieChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-  </div>
+      <canvas baseChart
+                  [data]="pieChartDataDos"
+                  [labels]="pieChartLabelsDos"
+                  [chartType]="pieChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+    </div>
 
-  <div class="col-xs-2 col-sm-2 col-md-2">
-    <canvas baseChart
-                [data]="pieChartData"
-                [labels]="pieChartLabels"
-                [chartType]="pieChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-8 text-center" style="margin-top: 10px;height: 50%">
+    <h2>Pregunta 5,Dejaria de trabajar aca?</h2>
+
+    <div class="col-xs-2 col-sm-2 col-md-2">
+        <canvas baseChart
+                    [data]="pieChartDataCinco"
+                    [labels]="pieChartLabelsCinco"
+                    [chartType]="pieChartType"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+      </div>
+
+  
+  <!--<div class="col-xs-12 col-sm-6 col-md-8 text-center" style="margin-top: 10px;height: 50%">
     <button (click)="randomizeType()" style="display: inline-block">Toggle</button>
-  </div>
+  </div>-->
  
 
 </ion-content>

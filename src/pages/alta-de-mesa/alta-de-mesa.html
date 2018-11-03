@@ -160,7 +160,7 @@
         </ion-navbar>
       </ion-header>
 
-      <ion-content >
+      <ion-content class ="content" *ngIf="probandingg">
           <ion-row >
          
             <ion-col>
@@ -170,25 +170,37 @@
           
           </ion-row>
           <div >
-            <form >
+            
               <ion-row>
                 <ion-col>
                   <ion-list inset>
                     
                     <ion-item>
-                      <ion-input type="text" placeholder="Numero de mesa" name="email" ></ion-input>
+                      <ion-input type="text" placeholder="Numero de mesa" name="email" [(ngModel)]="numeroMesa" ></ion-input>
                     </ion-item>
                     
                     <ion-item>
-                      <ion-input type="password" placeholder="Cantidad de comensales" name="password"></ion-input>
+                      <ion-input type="text" placeholder="Cantidad de comensales" name="password" [(ngModel)]="cantidadComensales"></ion-input>
                     </ion-item>
       
-                    <ion-item>
-                        <ion-input type="password" placeholder="Tipo" name="password"></ion-input>
-                      </ion-item>
+                  
+
+                      <select [(ngModel)]="tipo" style="margin: 0 30px 0 0;width: 70%;display: block;
+                      margin: 0 auto;">
+                       <option value="normal">Tipo de mesa normal</option>
+                        <option value="vip">Tipo de mesa vip</option>
+                        <option value="discapacitados">tipo de mesa discapacitados</option>
+                        
+                        
+                      </select>
       
                       <ion-item>
-                          <ion-input type="file" [id]="pic"></ion-input>
+                       
+
+                        <img [src]="foto" alt="">
+
+                        <button ion-button outline color="red" style="margin: 0 30px 0 0;width: 70%;font-size: 150%;" (click)="SacarFoto()">Sacar
+                          foto</button>
                         </ion-item>
                     
                   </ion-list>
@@ -199,14 +211,16 @@
                 <ion-col class="signup-col">
       
       
-                  <button ion-button class="submit-btn" color="red" >Dar de alta la mesa</button>
+                  <button ion-button class="submit-btn" color="red" style="margin: 0 30px 0 0;width: 70%;display: block;
+                  margin: 0 auto;" (click)="Alta()" >Dar de alta la mesa</button>
       
-                  <button ion-button class="submit-btn" color="red" >Lector de codigo qr de la mesa</button>
+                  <button ion-button class="submit-btn" color="red" style="margin: 0 30px 0 0;width: 70%;display: block;
+                  margin: 0 auto;" (click)="Leer()" >Lector de codigo qr de la mesa</button>
                   
                 </ion-col>
               </ion-row>
               
-            </form>
+           
             <ion-row>
               <ion-col class="signup-col">
                 
@@ -216,5 +230,45 @@
             </ion-row>
             
           </div>
+
+         <!-- <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
+            <ion-icon name="close"></ion-icon>
+          </button>-->
+          
+
         </ion-content>
+
+        <!--<ion-header>
+            <ion-toolbar   color="haderColor">
+              <ion-title>
+                QR Tarayıcı
+              </ion-title>
+              <ion-buttons start>
+                <button ion-button (tap)="dismiss()">
+                  <span ion-text color="white" showWhen="ios">Kapat</span>
+                  <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          
+          
+            <ion-content class="content" scroll="true" overflow-scroll="true">
+              <button class="button" ion-button (click)="Leer()">qrscanner</button>
+            </ion-content>-->
+
+            <ion-footer *ngIf="cerrarqr">
+              <ion-toolbar>
+                <ion-title>Footer</ion-title>
+                <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
+                  <ion-icon name="close"></ion-icon>
+                </button>
+              </ion-toolbar>
+            </ion-footer>
+
+
+
+        
+
+    
 

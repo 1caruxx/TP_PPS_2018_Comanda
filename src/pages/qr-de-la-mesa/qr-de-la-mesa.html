@@ -33,7 +33,7 @@
 </ion-header>
 
     <ion-content padding class="home">
-        <div class="center">
+     <!--   <div class="center">
           <ion-row>
             <h1>Mesa:</h1>
           </ion-row>
@@ -49,6 +49,78 @@
 
         <div class="center button">
           <button ion-button class="submit-btn" >Acceder a encuesta de satisfaccion</button>
-        </div>
+        </div>-->
         
       </ion-content>
+
+      <ion-content  *ngIf="probandingg">
+
+         
+
+
+
+
+      <h2 class="titulo">Lista de personas en espera</h2>
+
+      <ion-list>
+
+        <ion-item *ngFor="let item of espera">
+          <ion-thumbnail item-start>
+            <!--<img src={{item.img}}>-->
+            <ion-icon name="person"></ion-icon>
+          </ion-thumbnail>
+    
+         <!-- <h1>{{item.apellido}}, {{item.clave}}</h1>
+          <p>Empleado • {{item.tipo}}</p>
+          <p>CUIL • {{item.cuil}}</p>-->
+
+          <h1>{{item.correo}}, {{item.nombre}}</h1>
+          <p>Cliente • {{item.tipo}}</p>
+         
+    
+          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+            <ion-icon name="expand"></ion-icon>
+          </button>
+        </ion-item>
+    
+      </ion-list>
+
+      <h2 class="titulo">Lista de personas Atendidas</h2>
+
+      <ion-list>
+
+        <ion-item *ngFor="let item of atendidos">
+          <ion-thumbnail item-start>
+            <!--<img src={{item.img}}>-->
+            <ion-icon name="people"></ion-icon>
+          </ion-thumbnail>
+    
+        <!--  <h1>{{item.apellido}}, {{item.clave}}</h1>
+          <p>Empleado • {{item.tipo}}</p>
+          <p>CUIL • {{item.cuil}}</p>-->
+
+          <h1>{{item.correo}}, {{item.nombre}}</h1>
+          <p>Cliente • {{item.tipo}}</p>
+    
+          <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">
+            <ion-icon name="restaurant"></ion-icon>
+          </button>
+        </ion-item>
+    
+      </ion-list>
+
+     
+
+   
+
+    </ion-content>
+
+
+      <ion-footer *ngIf="cerrarqr">
+        <ion-toolbar>
+          <ion-title>Footer</ion-title>
+          <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-toolbar>
+      </ion-footer>
