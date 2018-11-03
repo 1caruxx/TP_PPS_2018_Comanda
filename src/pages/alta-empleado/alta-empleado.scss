@@ -72,7 +72,7 @@ page-alta-empleado {
         width: 100%;
         flex-direction: column;
         align-items: center;
-        background-color: rgba(0, 0, 0, 0.3);
+        //background-color: rgba(0, 0, 0, 0.3);
         padding-top: 20px;
     }
 
@@ -92,7 +92,7 @@ page-alta-empleado {
     h1 {
         font-size: 80px;
         font-weight: 100;
-        color: white;
+        color: color($colors, red);
         font-family: lobster;
         margin-bottom: 25px;
     }

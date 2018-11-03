@@ -45,7 +45,7 @@
 page-alta-duenio-supervisor {
 
     ion-content {
-        background-image: url('../../assets/imgs/alfa/manos-estrechandose.jpg');
+        background-image: url('../../assets/imgs/alfa/supervisor-bgn.jpg');
         background-size: cover; 
         background-position: center;
     }
@@ -92,7 +92,7 @@ page-alta-duenio-supervisor {
     h1 {
         font-size: 80px;
         font-weight: 100;
-        color: white;
+        color: color($colors, red);
         font-family: lobster;
         margin-bottom: 25px;
     }

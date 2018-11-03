@@ -23,7 +23,14 @@ $app-direction: ltr;
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
 
-
+$range-md-bar-height: 5px;
+$range-md-knob-width: 50px;
+$range-md-tick-width: 1px;
+$range-md-tick-height: 20px;
+$range-md-tick-border-radius: 0%;
+$range-md-pin-color: transparent;
+$range-md-pin-background-color: transparent !important;
+$range-md-pin-min-background-color: transparent;
 
 // Named Color Variables
 // --------------------------------------------------

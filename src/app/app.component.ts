@@ -9,6 +9,7 @@ import { LoginPage } from "../pages/login/login";
 import { PrincipalPage } from "../pages/principal/principal";
 import { AltaDuenioSupervisorPage } from "../pages/alta-duenio-supervisor/alta-duenio-supervisor";
 import { AltaEmpleadoPage } from "../pages/alta-empleado/alta-empleado";
+import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
 import { PerfilPage } from "../pages/perfil/perfil";
 

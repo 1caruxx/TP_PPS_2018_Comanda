@@ -10,6 +10,13 @@
   </ion-navbar>
 </ion-header>
 
+<div class="imagen" [ngClass]="{'ocultar':ocultarImagen,'opacidad':true}">
+
+  <ion-icon name="close" (click)="OcultarImagen()"></ion-icon>
+  <img [src]="image" alt="">
+
+</div>
+
 <ion-content>
 
   <h2 class="titulo">Empleados</h2>
@@ -17,15 +24,15 @@
   <ion-list>
 
     <ion-item *ngFor="let item of empleados">
-      <ion-thumbnail item-start>
+      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">
         <img src={{item.img}}>
       </ion-thumbnail>
 
       <h1>{{item.apellido}}, {{item.nombre}}</h1>
       <p>Empleado • {{item.tipo}}</p>
-      <p>CUIL • {{item.CUIL}}</p>
+      <p>CUIL • {{item.cuil}}</p>
 
-      <button ion-button clear item-end (click)="MostrarEncuesta()">
+      <button ion-button clear item-end (click)="MostrarEncuesta(item)">
         <ion-icon name="clipboard"></ion-icon>
       </button>
     </ion-item>
@@ -37,15 +44,16 @@
   <ion-list>
 
     <ion-item *ngFor="let item of clientes">
+
       <ion-thumbnail item-start>
-        <img src={{item.img}}>
+        <img src={{item.img}} />
       </ion-thumbnail>
 
       <h1>{{item.apellido}}, {{item.nombre}}</h1>
-      <p>Empleado • {{item.tipo}}</p>
-      <p>CUIL • {{item.CUIL}}</p>
+      <p>{{item.tipo}}</p>
+      <p>DNI • {{item.dni}}</p>
 
-      <button ion-button clear item-end (click)="MostrarEncuesta()">
+      <button ion-button clear item-end (click)="MostrarEncuesta(item)">
         <ion-icon name="clipboard"></ion-icon>
       </button>
     </ion-item>

@@ -14,7 +14,7 @@
     <button (click)="SetearUsuario('cocinero@gmail.com', '444444')">Cocinero</button>
     <button (click)="SetearUsuario('bartender@gmail.com', '555555')">Bartender</button>
     <button (click)="SetearUsuario('metre@gmail.com', '666666')">Metre</button>
-    <button (click)="SetearUsuario('cliente@gmail.com', '777777')">Cliente</button>
+    <button (click)="SetearUsuario('uncliente@hotmail.com', '111111')">Cliente</button>
     <button (click)="SetearUsuario('anonimo@gmail.com', '888888')">Anonimo</button>
   </div>
 
@@ -33,7 +33,7 @@
 
     <span>
       ¿No tienes una cuenta?
-      <a href="">Registrate</a>
+      <a (click)="Redireccionar()">Registrate</a>
     </span>
 
     <button ion-button outline color="light" (click)="Login()" [disabled]="estadoBoton">{{textoDelBoton}}</button>

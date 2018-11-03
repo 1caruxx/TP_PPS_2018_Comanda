@@ -23,7 +23,7 @@ export class VerificarTipoProvider {
         acciones = [
           { accion: "Agregar un dueño o supervisor", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
           { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
-          { accion: "Nueva mesa.", img: "ocupar-mesa.jpg", ruta: "./" }
+          { accion: "Nueva mesa", img: "ocupar-mesa.jpg", ruta: "./" }
         ];
         break;
 

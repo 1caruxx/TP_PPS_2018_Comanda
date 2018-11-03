@@ -32,6 +32,7 @@ export class AltaDuenioSupervisorPage {
 
   public scanSub;
   public estado = "vertical-container";
+  public ocultarQR = false;
 
   public estadoBoton: boolean = false;
   public ocultarAlert: boolean = true;
@@ -50,6 +51,12 @@ export class AltaDuenioSupervisorPage {
 
     this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
+    setInterval(() => {
+      if(this.ocultarQR) {
+        this.OcultarLectorQR();
+        this.ocultarQR = false;
+      }
+    }, 500);
   }
 
   ionViewDidLoad() {
@@ -208,7 +215,8 @@ export class AltaDuenioSupervisorPage {
             // this.apellido = datos.apellido;
             // this.dni = datos.dni;
 
-            this.estado = "vertical-container";
+            //this.estado = "vertical-container";
+            this.ocultarQR = true;
           });
 
           this.qrScanner.show().then(() => {

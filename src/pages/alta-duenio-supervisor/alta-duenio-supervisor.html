@@ -52,12 +52,12 @@
     <img [src]="foto" alt="">
 
     <div class="header" style="width: 75%;margin: 20px 0 20px 0;">
-      <button ion-button outline color="light" class="alta" style="margin: 0 30px 0 0;width: 50%" (click)="SacarFoto()">Sacar
+      <button ion-button color="red" class="alta" style="margin: 0 30px 0 0;width: 50%" (click)="SacarFoto()">Sacar
         foto</button>
-      <button ion-button outline color="light" class="alta" style="margin: 0;width: 50%" (click)="InicializarLectorQR()">QR</button>
+      <button ion-button  color="red" class="alta" style="margin: 0;width: 50%" (click)="InicializarLectorQR()">QR</button>
     </div>
 
-    <button ion-button outline color="light" [disabled]="estadoBoton" class="alta" (click)="Registrar()">Registrar</button>
+    <button ion-button color="red" [disabled]="estadoBoton" class="alta" (click)="Registrar()">Registrar</button>
   </div>
 
   <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
