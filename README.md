@@ -72,5 +72,5 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 
 ## Profesores
 
-* Maximiliano Neiner
+* [Maximiliano Neiner](https://github.com/maxineiner)
 * [Octavio villegas](https://github.com/octaviovillegas)
