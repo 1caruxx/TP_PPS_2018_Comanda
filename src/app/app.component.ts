@@ -2,18 +2,13 @@ import { Component } from '@angular/core';
 import { Platform , ModalController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente'
-import { AltaPlatosPage } from '../pages/alta-platos/alta-platos';
+//import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente'
+//import { AltaPlatosPage } from '../pages/alta-platos/alta-platos';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SplashPage } from '../pages/splash/splash';
 
 import { LoginPage } from "../pages/login/login";
 import { PrincipalPage } from "../pages/principal/principal";
-import { AltaDuenioSupervisorPage } from "../pages/alta-duenio-supervisor/alta-duenio-supervisor";
-import { AltaEmpleadoPage } from "../pages/alta-empleado/alta-empleado";
-import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
-import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
-import { PerfilPage } from "../pages/perfil/perfil";
 
 @Component({
   templateUrl: 'app.html'

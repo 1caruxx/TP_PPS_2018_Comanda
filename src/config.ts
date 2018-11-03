@@ -1,5 +1,5 @@
 export const firebaseConfig = {
-    fire: {
+   fire: {
         apiKey: "AIzaSyCfFyfD0HvlYR-hemHRBxN3Y_cQB1ihMLM",
         authDomain: "comanda-4aa6a.firebaseapp.com",
         databaseURL: "https://comanda-4aa6a.firebaseio.com",
@@ -7,4 +7,7 @@ export const firebaseConfig = {
         storageBucket: "comanda-4aa6a.appspot.com",
         messagingSenderId: "372543132419"    
     }
+
+
+  
 };

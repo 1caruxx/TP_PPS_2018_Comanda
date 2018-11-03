@@ -1,24 +1,72 @@
-<div class="platos">
 
-    <h1 class="tituloPlatos">Nuestros platos:</h1>
-
-
-  <div class="plato">
-    <img src="assets/imgs/beta/empanada.jpg"><h2>Empanadas</h2> 
-    <span>$100,00</span><button ion-button>Elegir</button> <label>Cantidad</label>
-    <input ion-input type="number">
+<div class="alert" [ngClass]="{'mostrarAlert':mostrarAlert}">
+    <h1>{{mensaje}}</h1>
   </div>
-  <div class="plato">
-      <img src="assets/imgs/beta/pizza.jpg">
-    </div>
-    <div class="plato">
-        <img src="assets/imgs/beta/milanesa.jpg">
+<div class="platos" [ngClass]="{'ocultar':ocultarPlatos}">
+
+    <h1 class="tituloPlatos"  >{{titulo}}:</h1>
+
+    <div class="elPlato">
+ 
+      <div class="plato"  *ngFor="let plato of platos">
+        
+          <div class="elegido" [id]="plato.carga.nombre">
+            
+              <img src="assets/imgs/beta/ok.png" id="img">
+              </div>
+             
+        <img [src]="plato.carga.foto1" class="platoImagen" (click)="mostrarSlide(plato.carga.foto1,plato.carga.foto2,plato.carga.foto3,plato.carga.nombre,plato.carga.desc)" ><h2>{{plato.carga.nombre}}</h2> 
+        <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value)">Elegir</button> <label class="platoCant">Cantidad</label>
+        <input class="inpCantidad"  #cant  placeholder="0" ion-input type="number">
       </div>
-      <div class="plato">
-          <img src="assets/imgs/beta/hamburguesa.jpg">
-        </div>
-       
+        <div class="slide" [ngClass]="{'mostrarSlide':mostrarslide}">
+  
+          <ion-buttons end>
+            <button ion-button outline (click)="cerrarSlide()">
+              <ion-icon ios="ios-close" md="md-close" class="cerrarSlide" style="color:white"></ion-icon>
+            </button>
+          </ion-buttons>
+          <img [src]="foto" class="foto"  (swipe)="swipeLeftEvent($event)">
+            <h1 class="tituloslide">{{nombre}}</h1> 
+            <h2 class="descSlide">{{desc}}</h2> 
+         
+         </div>
+    </div>
+       <button ion-button class="aceptarBtn" color="red" color="celeste" (click)="AceptarPedido()">Aceptar</button>
+       <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido()">Cancelar</button>
 </div>
+<div class="platos" [ngClass]="{'ocultar':ocultarBebidas}">
+
+  <h1 class="tituloPlatos"  >{{titulo}}:</h1>
+
+  <div class="elPlato">
+    <div class="plato"  *ngFor="let plato of bebidas">
+    
+      <div class="elegido" [id]="plato.carga.nombre">
+       
+          <img  src="assets/imgs/beta/ok.png" id="img" >
+      </div>
+      <img [src]="plato.carga.foto1" class="platoImagen" (click)="mostrarSlide(plato.carga.foto1,plato.carga.foto2,plato.carga.foto3,plato.carga.nombre,plato.carga.desc)" ><h2>{{plato.carga.nombre}}</h2> 
+      <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value)">Elegir</button> <label class="platoCant">Cantidad</label>
+      <input class="inpCantidad"  #cant  placeholder="0" ion-input type="number">
+ 
+    </div>
+    <div class="slide" [ngClass]="{'mostrarSlide':mostrarslide}">
+      <ion-buttons end>
+          <button ion-button outline (click)="cerrarSlide()">
+            <ion-icon ios="ios-close" md="md-close" class="cerrarSlide" style="color:white"></ion-icon>
+          </button>
+      </ion-buttons>
+      <img [src]="foto" class="foto" (swipe)="swipeLeftEvent($event)">
+      <h1 class="tituloslide">{{nombre}}</h1> 
+      <h2 class="descSlide">{{desc}}</h2> 
+       
+  </div>
+  </div>
+     <button ion-button class="aceptarBtn" color="red" color="celeste" (click)="AceptarPedido()">Aceptar</button>
+     <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido()">Cancelar</button>
+</div>
+
  <ion-header>
   <ion-navbar color="red">
 
@@ -43,11 +91,13 @@
 
 <ion-content>
   <div class="contenido">
-      <h1 class="tituloPag">¡Haga su pedido!</h1>
-      <button class="btnPlatos" ion-button color="secondary" >Elegir platos</button>
-      <button class="btnBebidas" ion-button color="secondary" >Elegir bebidas</button>
-      <input class="inpDireccion" type="text" placeholder="Su direcci&oacute;n">
-      <button class="btnPedir" ion-button color="danger" >¡Pedir!</button>
+      <h1 class="tituloPag" [ngClass]="{'ocultarTit':ocultarTitulo}">¡Haga su pedido!</h1>
+      <div class="botonespp">
+            <button class="btnPlatos" (click)="Platos()" ion-button color="danger"  ><img src="assets/imgs/beta/comida.png"> Platos</button>
+            <button class="btnBebidas"  (click)="Bebidas()" ion-button color="danger" ><img src="assets/imgs/beta/bebidas.png">Bebidas</button>
+      </div>
+      <!--input class="inpDireccion" type="text" placeholder="Su direcci&oacute;n"-->
+      <button class="btnPedir" (click)="PedirFinal()" ion-button color="danger" >¡Pedir!</button>
     </div>
 
 </ion-content>

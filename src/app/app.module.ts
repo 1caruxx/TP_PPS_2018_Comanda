@@ -24,7 +24,7 @@ import {  EncuestaClientePage } from '../pages/encuesta-cliente/encuesta-cliente
 import { PedirPlatosPage } from '../pages/pedir-platos/pedir-platos';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-<<<<<<< HEAD
+
 import { SplashPage } from '../pages/splash/splash';
 import { AltaDeMesaPage } from '../pages/alta-de-mesa/alta-de-mesa';
 import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-de-empleado';
@@ -34,18 +34,21 @@ import { HttpModule } from '@angular/http';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { ChartsModule } from 'ng2-charts';
 import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
-=======
-import { Camera } from '@ionic-native/camera';
+
 import { QRScanner } from '@ionic-native/qr-scanner';
->>>>>>> lareu_alfa
+
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
+
+
+import { Camera } from '@ionic-native/camera';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 
 import { ComponentsModule } from "../components/components.module";
+
 
 @NgModule({
   declarations: [
@@ -79,15 +82,9 @@ import { ComponentsModule } from "../components/components.module";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-<<<<<<< HEAD
-    // AngularFireModule.initializeApp(firebaseConfig.fire),
-    ChartsModule,
-    HttpModule
-=======
     AngularFireModule.initializeApp(firebaseConfig.fire),
     ChartsModule,
     ComponentsModule
->>>>>>> lareu_alfa
   ],
   bootstrap: [IonicApp],
   entryComponents: [

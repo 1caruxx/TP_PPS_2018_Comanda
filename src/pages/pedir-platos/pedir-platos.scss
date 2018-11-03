@@ -1,5 +1,6 @@
 page-pedir-platos {
     @import url('https://fonts.googleapis.com/css?family=Boogaloo');
+    @import url('https://fonts.googleapis.com/css?family=Mali|Spicy+Rice');
     ion-navbar {
         padding: 20px 10px !important;
 
@@ -10,11 +11,91 @@ page-pedir-platos {
 
     ion-navbar ion-icon { font-size: 50px !important; }
  
-    .scroll-content
+    
+    .slide
     {
-        overflow-x: hidden!important;
-        overflow-y: hidden!important;
-    }
+        position:absolute;
+       z-index:4000;
+        display:none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        background: orangered;
+       
+        }
+      
+        .tituloslide
+        {
+            text-align: center;
+            font-family: 'Lobster', cursive;
+            color:white;
+            font-family: 'Mali', cursive;
+            background: black;
+    margin-top: 0;
+
+
+        }
+        .descSlide
+        {  
+            text-align: left;
+            font-family: 'Lobster', cursive;
+          
+            font-family: 'Mali', cursive;
+          
+        }
+        .button-outline-md
+        {
+            border:none;
+        }
+        .imgTransparente
+        {
+            position:absolute;
+            z-index:3000;
+           display:none;
+            position: absolute;
+            z-index: 3000;
+            width: 100%;
+            opacity: .2;
+          
+        
+            height: 124px;
+          
+            top: 0px;
+        }
+     .alert
+     {
+         position:absolute;
+         z-index:1000;
+         width: 80%;
+         left:10%;
+         border-radius:5%;
+         background: red;
+    text-align: center;
+    top:50%;
+    display:none;
+    animation:fadeInDown 2s 1 ease-in-out;  
+     }
+     .mostrarAlert
+     {
+         display:block;
+     }
+     .alert h1
+     {
+        font-family: 'Lobster', cursive;
+        color:white;
+     }
+   
+      .foto
+      {
+        height: 50%;
+        width: 90%;
+        margin-left: 5%;
+      }
+      
+        .mostrarSlide
+        {
+            display:block;
+        }
     .contenido
     {
        
@@ -25,6 +106,7 @@ page-pedir-platos {
         background: url("../assets/imgs/beta/fondoPedido.jpg");
         background-size:100% 100%;
         position:relative;
+      
     }
     .tituloPag
     {
@@ -44,19 +126,59 @@ page-pedir-platos {
      
         margin-bottom:10%;
     }
-    .btnBebidas, .btnPlatos
-    {
-        width:70%;
-        margin-left:15%;
-
-    }
+ 
     .btnPlatos
     {
         margin-bottom:5%;
+        width: 104px;
+        height: 104px;
+        margin-left: 15%;
+        border-radius: 104px;
+        position: relative;
+        box-shadow: 0 2px 17px 0 black;
+    }
+    .btnPlatos img
+    {
+        max-width: 100%;
+        border: 0;
+        width: 60px;
+        position: absolute;
+        top: 0;
+    }
+    .btnPlatos span
+    {
+        margin-top:23%;
+    }
+    .btnBebidas 
+    {
+        margin-bottom:5%;
+        width: 104px;
+        height: 104px;
+        margin-left: 15%;
+        border-radius: 104px;
+        position: relative;
+        box-shadow: 0 2px 17px 0 black;
+    }
+    .btnBebidas img
+    {
+        max-width: 100%;
+        border: 0;
+        width: 60px;
+        position: absolute;
+        top: 5px;
+        height: 50px;
+    }
+    .btnBebidas span
+    {
+        margin-top:23%;
+    }
+    .botonespp
+    {
+        margin-top:17%;
     }
     .inpDireccion
     {
-        margin-top: 15%;
+        margin-top: 5%;
         width: 70%;
         margin-left: 15%;
         background: #f7f5f2b8;;
@@ -78,7 +200,7 @@ page-pedir-platos {
        {
         width: 50%;
         margin-left: 25%;
-        margin-top: 15%;
+        margin-top: 25%;
       
         font-size: 1.7em;
         height: 15%;
@@ -90,32 +212,190 @@ page-pedir-platos {
            z-index:1000;
          
            width: 100%;
-           height: 70%;
-           top: 25%;
+           height: 75%;
+           top: 24%;
            background: orangered;
            overflow:scroll;
            
-        display: none;           
+               
+       }
+       .elPlato
+       {
+        width: 100%;
+        
+        /* border: 5px solid red; */
+        overflow: scroll;
+        background: white;
+      
+        height: 76%;
+        /* border: 5px solid red; */
+        overflow: scroll;
+        background: white;
+        /* margin-top: -20px; */
+        margin-top: -9%;
        }
    
        .plato{
-          position: relative;
-           width:100%;
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative;
+      // height: 30%;
+      height:110px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
     
-           box-sizing: border-box;
-           position: relative;
-   
-           height: 25%;
-           -webkit-box-sizing: border-box;
-           box-sizing: border-box;
-           border-top: 1px solid white;
-           border-bottom: 1px solid white;
+        border-bottom: 1px solid grey;
        }
-       .plato img{
+       .platoImagen{
         width: 20%;
         position: absolute;
         left: 2%;
         top: 15%;
         height: 70%;
        }
+       #img
+       {
+        width: 20%;
+        position: absolute;
+        right: 2%;
+        top: 35%;
+        height: 60%;
+       }
+.elegido
+{
+    position:absolute;
+    z-index:3000;
+   display:none;
+    position: absolute;
+    z-index: 3000;
+    width: 100%;
+  
+  
+
+    height: 124px;
+    background-color:rgba(236, 15, 15, 0.61);
+    top: -17px;
 }
+.mostrarElegido
+{
+    display:block;
+}
+.cerrarSlide
+{
+    font-size:2.5em;
+}
+       .plato .precio
+       {
+        position: absolute;
+        right: 5%;
+        top: 3%;
+        font-size: 1.5em;
+       } 
+       .platoCant
+       {
+        position: absolute;
+        left: 25%;
+        bottom: 17%;
+        font-size: 1.5em;
+       }
+
+       .plato h2
+       {
+           margin-left:25%;
+       }
+       .plato button
+       {
+        position: absolute;
+        right: 2%;
+        bottom: 5%;
+        width: 30%;
+       }
+       .ocultar
+       {
+           display:none;
+       }
+       .ocultarTit
+       {
+           visibility: hidden;
+       }
+       .inpCantidad
+       {
+        margin-left: 50%;
+        margin-top: 7%;
+        width: 10%;
+        height: 30%;
+       }
+       .aceptarBtn
+       {
+              
+    width: 30%;
+  
+    position: absolute;
+    bottom: 0%;
+    left: 17.5%;
+       }
+       .cancelarBtn
+       {
+        width: 30%;
+  
+        position: absolute;
+        bottom: 0%;
+        right:  17.5%;
+
+       }
+       @media  screen and(max-height:"550px")
+       {
+           .aceptarBtn, .cancelarBtn
+           {
+               display:none;
+           }
+           
+           .elPlato {
+              height:65%;
+           }
+           .contenido
+           {
+               height: 600px!important;
+           }
+         .platos
+         {
+             height: 95%;
+         }
+           
+       }
+/*-----------------------------Animacion----------------------------------*/
+@-webkit-keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+  }
+ 
+    }
