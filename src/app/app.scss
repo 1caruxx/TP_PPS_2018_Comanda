@@ -21,3 +21,13 @@
     top: 0;
     left: 0;
 }
+
+.infoToast { 
+    .toast-message { 
+        background: #0CB7F2;
+    } 
+}
+
+ion-app.cameraView, ion-app.cameraView ion-content, ion-app.cameraView .nav-decor > *:not(.close) {
+    background: transparent none !important;
+}

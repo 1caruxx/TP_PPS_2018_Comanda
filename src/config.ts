@@ -5,6 +5,6 @@ export const firebaseConfig = {
         databaseURL: "https://comanda-4aa6a.firebaseio.com",
         projectId: "comanda-4aa6a",
         storageBucket: "comanda-4aa6a.appspot.com",
-        messagingSenderId: "372543132419"
+        messagingSenderId: "372543132419"    
     }
 };

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { AltaDuenioSupervisorPage } from "../../pages/alta-duenio-supervisor/alta-duenio-supervisor";
@@ -48,10 +47,9 @@ export class VerificarTipoProvider {
 
       case "supervisor":
         acciones = [
-          { accion: "Nuevo dueño o supervisor.", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
-          { accion: "Nuevo empleado.", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: ListadoSupervisorPage },
-          { accion: "Nueva mesa.", img: "ocupar-mesa.jpg", ruta: AltaDeMesaPage }
+          { accion: "Agregar un dueño o supervisor", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
+          { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
+          { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: ListadoSupervisorPage }
         ];
         break;
 
@@ -95,7 +93,7 @@ export class VerificarTipoProvider {
         ];
         break;
 
-        case "cliente-registrado":
+        case "cliente":
         acciones = [
           { accion: "Ingresar al local.", img: "entrada.jpg", ruta: QrIngresoLocalPage },
           { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: PedirPlatosPage },
@@ -105,7 +103,7 @@ export class VerificarTipoProvider {
         ];
         break;
 
-        case "cliente-anonimo":
+        case "anonimo":
         acciones = [
           { accion: "Ingresar al local.", img: "entrada.jpg", ruta: QrIngresoLocalPage },
           { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: PedirPlatosPage },

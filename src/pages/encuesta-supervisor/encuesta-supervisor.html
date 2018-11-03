@@ -18,7 +18,7 @@
 
 <ion-content>
 
-  <h1>Califique la conducta.</h1>
+  <h1>Califique la conducta de {{usuario.apellido}}, {{usuario.nombre}}.</h1>
 
   <div class="encuesta">
     <div id="divCanvas" class="canvas">
@@ -29,12 +29,16 @@
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
     </div>
-    
-    <ion-range [(ngModel)]="singleValue" color="red" pin="true" min="1" max="5" snaps="true" style="width: 50%;position: relative;left: -50px;"></ion-range>
 
+    <div style="display: flex;flex-direction: column; align-items:center;justify-content: center;width:150%;position: relative;left: -50px;right:-50;background-color: rgba(0, 0, 0, .5)">
+    
+      <ion-range [(ngModel)]="conducta" color="red" pin="true" min="1" max="5" snaps="true" style="width: 100%;position: relative;"></ion-range>
+      <span>hola mundo</span>
+
+    </div> 
   </div>
 
-  <h1>¿Tuvo algún inconveniente con esta persona en horas de servicio?</h1>
+  <h1>¿Tuvo algún inconveniente con {{usuario.apellido}}, {{usuario.nombre}} en horas de servicio?</h1>
 
   <div class="encuesta">
 
@@ -61,7 +65,7 @@
 
   </div>
 
-  <h1>Seleccione el/los aspectos a tener en cuenta.</h1>
+  <h1>Seleccione el/los aspectos a tener en cuenta de {{usuario.apellido}}, {{usuario.nombre}}.</h1>
 
   <div class="encuesta">
 
@@ -136,6 +140,6 @@
 
   </div>
 
-  <button ion-button color="red" class="enviar">Enviar encuesta</button>
+  <button ion-button color="red" class="enviar" (click)="HacerEncuesta()">Enviar encuesta</button>
 
 </ion-content>
