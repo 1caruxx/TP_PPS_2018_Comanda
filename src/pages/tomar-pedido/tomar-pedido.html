@@ -87,17 +87,17 @@
         </ion-navbar>
       </ion-header>
        
-      <ion-content>
+     <!-- <ion-content>
         <ion-list class="accordion-list">
          
-         <!-- <ion-list-header *ngFor="let item of information; let i = index" no-lines no-padding>
+          <ion-list-header *ngFor="let item of information; let i = index" no-lines no-padding>
            
-            <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+           <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
               <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
               <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
                 {{ item.name }}
             </button>
-       
+          
             <ion-list *ngIf="item.children && item.open" no-lines>
               
               <ion-list-header *ngFor="let child of item.children; let j = index" no-padding>
@@ -136,15 +136,12 @@
               
             </ion-list>
     
-                -->
-                <ion-list-header *ngFor="let item of user_data; let i = index" no-lines no-padding>
-                  
-                <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
-                  <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
-                  <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
-                    {{ item.numeroMesa }}
-                </button>
+                
+               
 
+              
+
+        
 
                   
 
@@ -158,3 +155,36 @@
         <button ion-button class="submit-btn" color="red" style="margin: 0 30px 0 0;width: 70%" (click)="probando()" >Dar de alta la mesa</button>
       
       </ion-content>
+    -->
+
+    
+
+    <ion-content>
+
+
+
+        <h2 class="titulo">Lista de pedidos</h2>
+
+        <ion-list>
+  
+          <ion-item *ngFor="let item of user_data">
+            <ion-thumbnail item-start>
+              <!--<img src={{item.img}}>-->
+              <ion-icon name="person"></ion-icon>
+            </ion-thumbnail>
+      
+            <h1>{{item.correo}}, {{item.nombre}}</h1>
+            <p>Cliente • {{item.tipo}}</p>
+           
+      
+            <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+              <ion-icon name="expand"></ion-icon>
+            </button>
+          </ion-item>
+      
+        </ion-list>
+  
+
+
+
+    </ion-content>

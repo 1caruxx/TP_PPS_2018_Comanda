@@ -23,6 +23,9 @@ export class TomarPedidoPage {
   user_data= [];
   public firebase = firebase;
   public db = firebase.firestore();
+  public cocina: Array<any>;
+  public bartender: Array<any>;
+  public pedidos: Array<any>;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
@@ -33,9 +36,9 @@ export class TomarPedidoPage {
       this.information = data;
     })
 
-    //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
-    let pedidosRef = this.firebase.database().ref("mesas");
+   /* let pedidosRef = this.firebase.database().ref("mesas");
 
     pedidosRef.once("value", (snap) => {
 
@@ -54,7 +57,39 @@ export class TomarPedidoPage {
 
 
       
-    });
+    });*/
+
+    this.cocina = [];
+    this.bartender = [];
+    this.pedidos = [];
+
+    let pedidosRef = this.firebase.database().ref("probandopedidos");
+
+   /* pedidosRef.once("value", (snap) => {
+
+      //let data = snap.val();
+     // let esValido = true;
+     let result = snap.val();
+
+     for(let k in result){ 
+      this.user_data.push({
+       numeroMesa : k,
+       pedido : result[k].cocinero, 
+       name : "adasdasd"
+     });
+    }*/
+
+  
+    
+
+    //alert(this.user_data);
+
+
+
+
+
+      
+    
       
 
 
@@ -67,11 +102,14 @@ export class TomarPedidoPage {
   }
 
   toggleSection(i) {
-    this.information[i].open = !this.information[i].open;
+    //this.information[i].open = !this.information[i].open;
+    this.user_data[i].open = !this.user_data[i].open;
   }
  
   toggleItem(i, j) {
-    this.information[i].children[j].open = !this.information[i].children[j].open;
+    //this.information[i].children[j].open = !this.information[i].children[j].open;
+    this.user_data[i].cocinero[j].open = !this.user_data[i].cocinero[j].open;
+
   }
 
 

@@ -25,14 +25,28 @@ export class EncuestaDeEmpleadoPage {
   public db = firebase.firestore();
   public foto: string = "";
   public nombreFoto: string;
-  public uno="d";
-  public dos="f";
-  public tres="g";
-  public cuatro="s";
-  public cinco="e";
+  public uno;
+  public dos;
+  public tres;
+  public cuatro;
+  public cinco;
+
+  public pregUnoPrimeraRespuesta=0;
+  public pregUnoSegundaRespuesta=0;
+  public pregUnoTerceraRespuesta=0;
+
+  public pregTresPrimeraRespuesta=0;
+  public pregTresSegundaRespuesta=0;
+
+  public pregCuatroPrimeraRespuesta=0;
+  public pregCuatroSegundaRespuesta=0;
+
+  public pregCincoPrimeraRespuesta=0;
+  public pregCincoSegundaRespuesta=0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
    {
+     this.encuesta();
 
 
   }
@@ -51,8 +65,20 @@ export class EncuestaDeEmpleadoPage {
   public pieChartType:string = 'pie';
  
   // Pie
-  public pieChartLabels:string[] = ['Bueno', 'Malo'];
-  public pieChartData:number[] = [300, 500];
+  //public pieChartLabels:string[] = ['Bueno', 'Malo'];
+  //public pieChartData:number[] = [300, 500];
+
+  public pieChartLabelsUno:string[];
+  public pieChartDataUno:number[];
+
+  public pieChartLabels:string[];
+  public pieChartData:number[];
+
+  public pieChartLabelsDos:string[];
+  public pieChartDataDos:number[];
+
+  public piechartlabelCinco:string[];
+  public pieChartDataCinco:number[];
  
   public randomizeType():void {
     
@@ -78,6 +104,12 @@ export class EncuestaDeEmpleadoPage {
       return;
     }
 
+    if(this.foto=="")
+    {
+      this.presentToast("Tiene que cargar una foto");
+      return;
+    }
+
   
     let mesasRef = this.firebase.database().ref("encuestaDeEmpleado");
 
@@ -99,7 +131,13 @@ export class EncuestaDeEmpleadoPage {
     });
 
 
+    this.presentToast("la encuesta fue cargada con exito");
+    
 
+  
+
+
+    //this.navCtrl
 
   }
 
@@ -142,6 +180,132 @@ export class EncuestaDeEmpleadoPage {
     });
 
     toast.present();
+  }
+
+  encuesta()
+  {
+
+    let probRef = this.firebase.database().ref("encuestaDeEmpleado");
+
+    probRef.once("value", (snap) => {
+
+      let data = snap.val();
+      //this.esValido = true;
+     
+
+      for (let item in data) 
+      {
+
+        if (data[item].uno == 1) 
+        {
+
+          this.pregUnoPrimeraRespuesta++;
+        
+          
+        }
+        if (data[item].uno == 2) 
+        {
+
+         this.pregUnoSegundaRespuesta++;
+        
+          
+        }
+
+        if (data[item].uno == 3) 
+        {
+
+          this.pregUnoTerceraRespuesta++;
+        
+          
+        }
+
+        if (data[item].tres == "si") 
+        {
+
+          this.pregTresPrimeraRespuesta++
+         // alert("entre");
+        
+          
+        }
+
+        if (data[item].tres == "no") 
+        {
+
+          this.pregTresSegundaRespuesta++;
+        
+          
+        }
+
+        if (data[item].cuatro == "si") 
+        {
+
+          this.pregCuatroPrimeraRespuesta++;
+        
+          
+        }
+
+        if (data[item].cuatro == "no") 
+        {
+
+          this.pregCuatroSegundaRespuesta++;
+        
+          
+        }
+
+        if (data[item].cinco == "si") 
+        {
+
+          this.pregCincoPrimeraRespuesta++;
+        
+          
+        }
+
+        if (data[item].cinco == "no") 
+        {
+
+          this.pregCincoSegundaRespuesta++;
+        
+          
+        }
+
+
+
+
+
+      }
+      
+      
+    }).then(() => 
+    {
+      this.pieChartLabels = ['si', 'no'];
+    //this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
+    this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
+
+    this.pieChartLabelsDos = ['si', 'no'];
+    this.pieChartDataDos = [this.pregCuatroPrimeraRespuesta, this.pregCuatroPrimeraRespuesta];
+
+    this.piechartlabelCinco = ['si', 'no'];
+    this.pieChartDataCinco = [this.pregCincoPrimeraRespuesta, this.pregCincoSegundaRespuesta];
+
+    this.pieChartLabelsUno = ["bien","masomenos","mal"];
+    this.pieChartDataUno = [this.pregUnoPrimeraRespuesta,this.pregUnoSegundaRespuesta,this.pregUnoTerceraRespuesta];
+
+
+    
+
+    this.encuestita=false;
+    this.probabilidad=true;
+
+
+
+
+    });
+      
+
+
+    
+
+
   }
 
  

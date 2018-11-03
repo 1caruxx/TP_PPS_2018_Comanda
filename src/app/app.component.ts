@@ -15,7 +15,7 @@ import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = QrDeLaMesaPage;
+  rootPage:any = EncuestaDeEmpleadoPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController) {
     platform.ready().then(() => {
