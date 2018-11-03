@@ -76,7 +76,7 @@ export class QrDeLaMesaPage {
               .catch((e: any) => this.presentToast(e));
 
 */
-    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
     
     setInterval(() => {
@@ -118,7 +118,8 @@ export class QrDeLaMesaPage {
     this.atendidos = [];
 
 
-    let genteRef = this.firebase.database().ref("usuarios/clientes");
+    //let genteRef = this.firebase.database().ref("usuarios/clientes");
+    let genteRef = this.firebase.database().ref("usuarios");
 
     genteRef.once("value", (snap) => {
 
@@ -351,7 +352,8 @@ export class QrDeLaMesaPage {
 
 
 
-                                    var ref = this.firebase.database().ref("usuarios/clientes");
+                                    //var ref = this.firebase.database().ref("usuarios/clientes");
+                                    var ref = this.firebase.database().ref("usuarios");
              
                                     ref.once('value', (snap) => {
                                         var data = snap.val();

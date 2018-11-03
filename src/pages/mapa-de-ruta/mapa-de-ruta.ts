@@ -22,7 +22,7 @@ export class MapaDeRutaPage {
 	name;
 	newmessage;
   messagesList;
-  nombre="juanPerez";
+  nombre="lucas";
 
   ListadoDeChats=["asd","probando","gg"];
 
@@ -76,9 +76,27 @@ export class MapaDeRutaPage {
 
 
   send(){
+
+	this.ref = firebase.database().ref('mensajes/' + this.nombre);
+
+  	
+  	this.ref.on('value',data => {
+  		let tmp = [];
+  		data.forEach( data => {
+  			tmp.push({
+  				key: data.key,
+  				name: data.val().name,
+  				message: data.val().message
+  			})
+  		});
+  		this.messagesList = tmp;
+  	});
+
+
   	// add new data to firebase
   	this.ref.push({
-  		name: this.name.username,
+		  //name: this.name.username,
+		  name: "lucas",
   		message: this.newmessage
   	});
   }

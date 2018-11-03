@@ -98,15 +98,19 @@
   </ion-toolbar>
 </ion-footer>-->
 
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic 2 Firebase Chat
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+
+
 
 <ion-content padding>
+
+
+    <img src="assets/imgs/gamma/mapaderuta.jpg"/>
+
+    <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>
+          <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>
+
+
+
 	<ion-list no-lines>
 		<ion-item *ngFor="let message of messagesList">
 			<h3>{{message.name}}</h3>
@@ -116,7 +120,7 @@
 </ion-content>
 <ion-footer>
 	<ion-item>
-		<ion-input type="text" placeholder="type here..." [(ngModel)]="newmessage"></ion-input>
-		<button ion-button clear item-right (click)="send()">Send</button>
+		<ion-input type="text" placeholder="Escriba aqui..." [(ngModel)]="newmessage"></ion-input>
+		<button ion-button clear item-right (click)="send()">Enviar</button>
 	</ion-item>
 </ion-footer>

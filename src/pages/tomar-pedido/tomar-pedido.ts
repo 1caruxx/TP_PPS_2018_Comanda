@@ -36,7 +36,7 @@ export class TomarPedidoPage {
       this.information = data;
     })
 
-    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
    /* let pedidosRef = this.firebase.database().ref("mesas");
 
