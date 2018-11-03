@@ -46,7 +46,7 @@ export class EncuestaDeEmpleadoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
    {
-     this.encuesta();
+     //this.encuesta();
 
 
   }
@@ -128,10 +128,17 @@ export class EncuestaDeEmpleadoPage {
           img: url
         });
       });
+    }).then(() => {
+
+      this.presentToast("la encuesta fue cargada con exito");
+      this.encuesta();
+
+
+
     });
 
 
-    this.presentToast("la encuesta fue cargada con exito");
+    
     
 
   

@@ -134,12 +134,12 @@ export class QrDeLaMesaPage {
     }).then(() => {
       this.espera = this.usuarios.filter(item => {
 
-        return item.mesa == null;
+        return item.mesa == null && item.tipo=="cliente";
       });
 
       this.atendidos = this.usuarios.filter(item => {
 
-        return item.mesa != null;
+        return item.mesa != null && item.tipo=="cliente";
       });
 
 
