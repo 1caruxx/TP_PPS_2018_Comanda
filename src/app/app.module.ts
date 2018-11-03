@@ -85,7 +85,8 @@ import { ComponentsModule } from "../components/components.module";
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig.fire),
     ChartsModule,
-    ComponentsModule
+    ComponentsModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
