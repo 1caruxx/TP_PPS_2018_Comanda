@@ -57,7 +57,17 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 * [ ] O- Pedir mesa.
 * [ ] S- Mapa de ruta hasta el domiciolio de entrega.
 
-**Fecha de inicio:**<br />
+---
+
+* [x] Icono y Splash de la aplicacion
+* [x] Sonido de inicio de la aplicacion
+* [x] vista y logica de alta de mesa
+* [x] vista y logica de encuesta de empleado listo
+* [x] vista y logica de qrdelamesa listo
+* [x] vista de mapa de ruta hasta el domicilio de la entrega listo
+
+
+**Fecha de inicio:** 19/10/2018<br />
 **Fecha de fin:**
 
 ## Profesores
