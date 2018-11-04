@@ -163,18 +163,55 @@
 
 
 
-        <h2 class="titulo">Lista de pedidos</h2>
+        
 
         <ion-list>
+
+            <h2 class="titulo">Lista de pedidos Mesa 4 Cocina</h2>
+
+            <button ion-button clear item-end (click)="pregunta1()">
+              
+                <ion-icon name="alarm"></ion-icon>
+              </button>
+              
+              <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+                
+                  <ion-icon name="checkmark-circle"></ion-icon>
+                </button>
   
-          <ion-item *ngFor="let item of user_data">
+          <ion-item *ngFor="let item of pedidosCocinaCuatro">
+            <ion-thumbnail item-start>
+              <!--<img src={{item.img}}>-->
+              <ion-icon name="restaurant"></ion-icon>
+            </ion-thumbnail>
+      
+          <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+            <p>Cliente • {{item.tipo}}</p>-->
+            <h1>nombre:{{item.nombre}}</h1>
+            <p>cantidad:{{item.cantidad}}</p>
+
+
+
+  
+          </ion-item>
+
+
+      </ion-list>
+
+      <ion-list>
+
+          <h2 class="titulo">Lista de pedidos Mesa 4 Bartender</h2>
+
+          <ion-item *ngFor="let item of pedidosBartenderCuatro">
             <ion-thumbnail item-start>
               <!--<img src={{item.img}}>-->
               <ion-icon name="person"></ion-icon>
             </ion-thumbnail>
       
-            <h1>{{item.correo}}, {{item.nombre}}</h1>
-            <p>Cliente • {{item.tipo}}</p>
+          <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+            <p>Cliente • {{item.tipo}}</p>-->
+            <h1>nombre:{{item.nombre}}</h1>
+            <p>cantidad:{{item.cantidad}}</p>
            
       
             <button ion-button clear item-end (click)="MostrarQr(item.correo)">
@@ -183,8 +220,92 @@
           </ion-item>
       
         </ion-list>
+
+        <ion-list>
+
+            <h2 class="titulo">Lista de pedidos Mesa 5 Cocina</h2>
+
+            <button ion-button clear item-end (click)="pregunta2()">
+              
+                <ion-icon name="alarm"></ion-icon>
+              </button>
+
+           
+  
+          <ion-item *ngFor="let item of pedidosCocinaCinco">
+            <ion-thumbnail item-start>
+              <!--<img src={{item.img}}>-->
+              <ion-icon name="person"></ion-icon>
+            </ion-thumbnail>
+      
+          <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+            <p>Cliente • {{item.tipo}}</p>-->
+            <h1>nombre:{{item.nombre}}</h1>
+            <p>cantidad:{{item.cantidad}}</p>
+           
+      
+           
+          </ion-item>
+
+
+      </ion-list>
+
+      <ion-list>
+
+          <h2 class="titulo">Lista de pedidos Mesa 5 Bartender</h2>
+
+        <ion-item *ngFor="let item of pedidosBartenderCinco">
+          <ion-thumbnail item-start>
+            <!--<img src={{item.img}}>-->
+            <ion-icon name="person"></ion-icon>
+          </ion-thumbnail>
+    
+        <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+          <p>Cliente • {{item.tipo}}</p>-->
+          <h1>nombre:{{item.nombre}}</h1>
+          <p>cantidad:{{item.cantidad}}</p>
+         
+    
+          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+            <ion-icon name="expand"></ion-icon>
+          </button>
+        </ion-item>
+
+
+    </ion-list>
+
+  
   
 
 
 
     </ion-content>
+
+    <div class="pregunta1"  [ngClass]="{'noMostrar':ocultar}">
+        <div class="laPregunta1">
+           
+            <h2>¿Cual es el tiempo minimo para este pedido?</h2>
+     
+            <ion-item>
+        
+                <ion-input placeholder="Escribalo aqui"  [(ngModel)]="tiempoMesaCuatro"></ion-input>
+              </ion-item>
+              <button class="aceptar"  (click)="Aceptar()"  ion-button color="red">Aceptar</button>
+              
+          </div>
+      </div>
+
+
+      <div class="pregunta2"  [ngClass]="{'noMostrar':ocultarDos}">
+          <div class="laPregunta2">
+             
+              <h2>¿Cual es el tiempo minimo para este pedido?</h2>
+       
+              <ion-item>
+          
+                  <ion-input placeholder="Escribalo aqui"  [(ngModel)]="tiempoMesaCinco"></ion-input>
+                </ion-item>
+                <button class="aceptar"  (click)="Aceptar()"  ion-button color="red">Aceptar</button>
+                
+            </div>
+        </div>

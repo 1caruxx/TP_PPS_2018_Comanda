@@ -26,6 +26,16 @@ export class TomarPedidoPage {
   public cocina: Array<any>;
   public bartender: Array<any>;
   public pedidos: Array<any>;
+  public pedidosCocinaCuatro: Array<any>;
+  public pedidosBartenderCuatro: Array<any>;
+  public pedidosCocinaCinco: Array <any>;
+  public pedidosBartenderCinco: Array <any>;
+
+  public tiempoMesaCuatro;
+  public tiempoMesaCinco;
+
+  public ocultar:boolean;
+  public ocultarDos:boolean;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
@@ -59,11 +69,121 @@ export class TomarPedidoPage {
       
     });*/
 
+    this.ocultar=true;
+    this.ocultarDos=true;
+
     this.cocina = [];
     this.bartender = [];
     this.pedidos = [];
 
-    let pedidosRef = this.firebase.database().ref("probandopedidos");
+    this.pedidosCocinaCuatro= [];
+    this.pedidosBartenderCuatro=[];
+
+    this.pedidosCocinaCinco=[];
+    this.pedidosBartenderCinco=[];
+
+    //PEDIDOS MESA 4
+    let pedidosMesaCuatro = this.firebase.database().ref("pedidos/mesa4/");
+
+
+    pedidosMesaCuatro.once("value", (snap) => {
+
+      let result = snap.val();
+
+      for(let k in result)
+      { 
+        if(k=="cocinero")
+          {
+            for(let a in result[k])
+            {  
+              if(a!="estado")
+              {
+                this.pedidosCocinaCuatro.push(result[k][a]);
+              }
+               
+               
+            }
+       
+          }
+
+          if(k=="bartender")
+          {
+            for(let a in result[k])
+            {  
+              if(a!="estado")
+              {
+                this.pedidosBartenderCuatro.push(result[k][a]);
+              }
+                            
+            }
+
+            
+          }
+
+          if(k=="tiempo")
+          {
+            this.tiempoMesaCuatro=result[k];
+          }
+
+        
+      
+      }
+      
+    });
+
+
+
+
+    //PEDIDOS MESA 5
+
+
+    let pedidosMesaCinco = this.firebase.database().ref("pedidos/mesa5/");
+
+
+    pedidosMesaCinco.once("value", (snap) => {
+
+      let result = snap.val();
+
+      for(let k in result)
+      { 
+        if(k=="cocinero")
+          {
+            for(let a in result[k])
+            {  
+              if(a!="estado")
+              {
+                this.pedidosCocinaCinco.push(result[k][a]);
+              }
+               
+               
+            }
+       
+          }
+
+          if(k=="bartender")
+          {
+            for(let a in result[k])
+            {  
+              if(a!="estado")
+              {
+                this.pedidosBartenderCinco.push(result[k][a]);
+              }
+                            
+            }
+
+            
+          }
+
+          if(k=="tiempo")
+          {
+            this.tiempoMesaCinco=result[k];
+          }
+
+        
+      
+      }
+      
+    });
 
    /* pedidosRef.once("value", (snap) => {
 
@@ -145,6 +265,56 @@ export class TomarPedidoPage {
 
     
   }
- 
+
+  pregunta1()
+  {
+    this.ocultar=false;
+    
+    
+  
+  }
+
+  pregunta2()
+  {
+    this.ocultarDos=false;
+    
+    
+  
+  }
+
+  Aceptar()
+  {
+    this.ocultar=true;
+    this.ocultarDos=true;
+
+    //this.tiempoMesaCuatro;
+
+    var refDos = this.firebase.database().ref("mesas");
+                        
+                        refDos.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if (4 == data[key].numeroMesa) 
+                              {
+                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                refDos.child(key).update(data[key]);
+
+                                
+                              }
+
+                              
+                            }
+
+                            
+                          });
+  }
+
+
+
 
 }

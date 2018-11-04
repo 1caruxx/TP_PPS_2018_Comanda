@@ -176,11 +176,11 @@
                   <ion-list inset>
                     
                     <ion-item>
-                      <ion-input type="text" placeholder="Numero de mesa" name="email" [(ngModel)]="numeroMesa" ></ion-input>
+                      <ion-input type="text" class="numeroMesa" placeholder="Numero de mesa" name="email" [(ngModel)]="numeroMesa" ></ion-input>
                     </ion-item>
                     
                     <ion-item>
-                      <ion-input type="text" placeholder="Cantidad de comensales" name="password" [(ngModel)]="cantidadComensales"></ion-input>
+                      <ion-input type="text" class="cantidadComensales"  placeholder="Cantidad de comensales" name="password" [(ngModel)]="cantidadComensales"></ion-input>
                     </ion-item>
       
                   
@@ -194,14 +194,14 @@
                         
                       </select>
       
-                      <ion-item>
+                      <!--<ion-item>-->
                        
 
                         <img [src]="foto" alt="">
+                       <!--ion-button outline color="red"-->
 
-                        <button ion-button outline color="red" style="margin: 0 30px 0 0;width: 70%;font-size: 150%;" (click)="SacarFoto()">Sacar
-                          foto</button>
-                        </ion-item>
+                        
+                     <!--   </ion-item>-->
                     
                   </ion-list>
                 </ion-col>
@@ -209,13 +209,14 @@
               
               <ion-row>
                 <ion-col class="signup-col">
+
+                    <button ion-button outline color="red" class="sacarFoto" (click)="SacarFoto()">Sacar
+                        foto</button>
       
       
-                  <button ion-button class="submit-btn" color="red" style="margin: 0 30px 0 0;width: 70%;display: block;
-                  margin: 0 auto;" (click)="Alta()" >Dar de alta la mesa</button>
+                  <button ion-button class="submit-btn" color="red" class="botonAlta" (click)="Alta()" >Dar de alta la mesa</button>
       
-                  <button ion-button class="submit-btn" color="red" style="margin: 0 30px 0 0;width: 70%;display: block;
-                  margin: 0 auto;" (click)="Leer()" >Lector de codigo qr de la mesa</button>
+                 <!-- <button ion-button class="submit-btn" color="red" class="botonLeerQr" (click)="Leer()" >Lector de codigo qr de la mesa</button>-->
                   
                 </ion-col>
               </ion-row>

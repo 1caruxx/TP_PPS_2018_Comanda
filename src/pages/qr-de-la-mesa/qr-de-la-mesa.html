@@ -74,8 +74,8 @@
           <p>Empleado • {{item.tipo}}</p>
           <p>CUIL • {{item.cuil}}</p>-->
 
-          <h1>{{item.correo}}, {{item.nombre}}</h1>
-          <p>Cliente • {{item.tipo}}</p>
+          <h1 style="color:black;">{{item.correo}}, {{item.nombre}}</h1>
+          <p style="color:black;">Tipo : • {{item.tipo}}</p>
          
     
           <button ion-button clear item-end (click)="MostrarQr(item.correo)">
@@ -99,8 +99,8 @@
           <p>Empleado • {{item.tipo}}</p>
           <p>CUIL • {{item.cuil}}</p>-->
 
-          <h1>{{item.correo}}, {{item.nombre}}</h1>
-          <p>Cliente • {{item.tipo}}</p>
+          <h1 style="color:black;"> {{item.correo}}, {{item.nombre}}</h1>
+          <p  style="color:black;">Tipo : • {{item.tipo}}</p>
     
           <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">
             <ion-icon name="restaurant"></ion-icon>
