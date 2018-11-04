@@ -2,6 +2,17 @@
 <div class="alert" [ngClass]="{'mostrarAlert':mostrarAlert}">
     <h1>{{mensaje}}</h1>
   </div>
+  <div class="alert3" [ngClass]="{'mostrarAlert2':mostrarAlert3}">
+    <h1>{{mensaje}}</h1>
+  </div>
+  <div class="elAlert2" [ngClass]="{'mostrarAlert2':mostrarAlert2}">
+  <div class="alert2" >
+    <h1>Ingrese por favor el n&uacute;mero de mesa</h1>
+    <input type="number"[(ngModel)]="mesa">
+    <button ion-button color="red" (click)="AceptarAlert2()">Aceptar</button>
+    <button ion-button color="red" (click)="CancelarAlert2()">Cancelar</button>
+  </div>
+  </div>
 <div class="platos" [ngClass]="{'ocultar':ocultarPlatos}">
 
     <h1 class="tituloPlatos"  >{{titulo}}:</h1>
@@ -16,7 +27,7 @@
               </div>
              
         <img [src]="plato.carga.foto1" class="platoImagen" (click)="mostrarSlide(plato.carga.foto1,plato.carga.foto2,plato.carga.foto3,plato.carga.nombre,plato.carga.desc)" ><h2>{{plato.carga.nombre}}</h2> 
-        <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value)">Elegir</button> <label class="platoCant">Cantidad</label>
+        <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value,plato.carga.es, plato.carga.tiempo)">Elegir</button> <label class="platoCant">Cantidad</label>
         <input class="inpCantidad"  #cant  placeholder="0" ion-input type="number">
       </div>
         <div class="slide" [ngClass]="{'mostrarSlide':mostrarslide}">
@@ -47,8 +58,8 @@
           <img  src="assets/imgs/beta/ok.png" id="img" >
       </div>
       <img [src]="plato.carga.foto1" class="platoImagen" (click)="mostrarSlide(plato.carga.foto1,plato.carga.foto2,plato.carga.foto3,plato.carga.nombre,plato.carga.desc)" ><h2>{{plato.carga.nombre}}</h2> 
-      <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value)">Elegir</button> <label class="platoCant">Cantidad</label>
-      <input class="inpCantidad"  #cant  placeholder="0" ion-input type="number">
+      <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value,plato.carga.es, 'cero')">Elegir</button> <label class="platoCant">Cantidad</label>
+      <input class="inpCantidad"  #cant  [value]="cantidadNueva" placeholder="0" ion-input type="number">
  
     </div>
     <div class="slide" [ngClass]="{'mostrarSlide':mostrarslide}">
