@@ -2,26 +2,79 @@
   Generated template for the RegistroClientePage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<div class="vertical">
+  Ionic pages and navigation.-->
+  <div class="alert" [ngClass]="{'mostrarAlert':mostrarAlert}">
+    <h1>El usuario se registr&oacute; exitosamente!!</h1>
+  </div>
+  <ion-header>
+  <ion-navbar color="red">
+
     
-  <div class="cabecera">
+ 
+
+    <span class="tituloPagina">Registro </span>
+
+
+
+    <ion-buttons end>
+        <button ion-button>
+          <ion-icon name="power"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+    </ion-navbar>
+  </ion-header>
+  
+  
+<ion-content [ngClass]="{'ocultar-fondo':ocultarContenido}">
+<div class="vertical" [ngClass]="{'ocultar2':ocultarContenido}">
+    
+  <div class="cabecera" [ngClass]="{'ocultar':ocultarCabecera}">
     <img class="logo" src="assets/imgs/icon.png" >
-    <h1 id="cab">Registro</h1>
+    <!--h1 id="cab">Registro Cliente</h1-->
    
   </div>
-  <div class="form">
-    <h2>Alta de cliente</h2>
-  
-    <input type="text"  [(ngModel)]="userActual" placeholder="nombre" name="nombre"><br>
+  <div class="form" *ngIf="formReg">
+    <h2 class="tituloForm">Registro cliente</h2>
+    <button ion-button class="btnCerrar" (click)="cerrarForm()">
+        <ion-icon name="close"></ion-icon>
+
+      </button>
+    <input type="text" class="miInput" [(ngModel)]="nombre" placeholder="nombre" name="nombre"><br>
     
-    <input type="text" placeholder="apellido" name="pass" [(ngModel)]="passActual" name="pass" ><br>
-    <input type="number" placeholder="D.N.I" name="pass"  name="pass" ><br>
-
-    <button ion-button color="dark" (click)="Login()">FOTO</button>
-    <button ion-button color="dark" (click)="Login()">Leer DNI con QR</button>
-    <button id="btnRegistrar" ion-button color="danger" (click)="Login()">Registrar</button>
+    <input type="text" class="miInput" placeholder="apellido" name="pass" [(ngModel)]="apellido"  ><br>
+    <input type="number" class="miInput" placeholder="D.N.I" name="pass" [(ngModel)]="dni" name="pass" ><br>
+    <input type="text" class="miInput" placeholder="Correo" name="pass" [(ngModel)]="correo"  ><br>
+    <input type="text" class="miInput" placeholder="Contraseña" name="pass" [(ngModel)]="pass" ><br>
+    <button ion-button color="dark" (click)="tomarFoto()">FOTO</button>
+    <button ion-button color="dark" (click)="scanear()">Leer DNI con QR</button>
+    <button id="btnRegistrar" ion-button color="dark" outline (click)="Registrar()">Registrar</button>
   </div>
+  <div class="form"  *ngIf="formAnon">
+    
+      <h2 class="tituloForm">Registro de an&oacute;nimo</h2>
+      <button ion-button class="btnCerrar" (click)="cerrarForm()" id="btnCerrar">
+          <ion-icon name="close"></ion-icon>
 
+        </button>
+    
+      <input type="text" class="miInput" [(ngModel)]="nombre" placeholder="nombre" name="nombre"><br>
+      <input type="text" class="miInput" placeholder="Correo" name="pass" [(ngModel)]="correo"  ><br>
+      <input type="text" class="miInput"  placeholder="Contraseña" name="pass" [(ngModel)]="pass"  ><br>
+      <button ion-button color="dark" (click)="tomarFoto()">FOTO</button>
+    
+      <button id="btnRegistrar" ion-button color="dark" outline (click)="RegistrarAnonimo()">Registrar</button>
+    </div>
+  <div class="inicial" *ngIf="formInicial" >
+    <h1>Elija el tipo de usuario que desea ser:</h1>
+    <div class="botonesInicial">
+      <button ion-button (click)="ElegirUsuario('registrado')" class="botonesInicio" color="dark">Cliente</button>
+      <button ion-button (click)="ElegirUsuario('anonimo')" class="botonesInicio" color="dark">An&oacute;nimo</button>
+    </div>
+  </div>
+  
 </div>
+<button ion-button color="red" class="close" (click)="hideCamera()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-content>

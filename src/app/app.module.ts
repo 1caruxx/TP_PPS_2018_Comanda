@@ -18,7 +18,8 @@ import { Camera } from '@ionic-native/camera';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
-
+import { QRScanner } from '@ionic-native/qr-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 
 @NgModule({
@@ -56,8 +57,10 @@ import { firebaseConfig } from '../config';
     StatusBar,
     SplashScreen,
     Camera,
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AngularFireAuth
+    AngularFireAuth,
+    QRScanner
 
   ]
 })
