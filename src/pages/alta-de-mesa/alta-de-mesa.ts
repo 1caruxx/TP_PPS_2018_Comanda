@@ -60,13 +60,13 @@ export class AltaDeMesaPage {
       return;
     }
 
-    if(this.numeroMesa < 0 || this.numeroMesa > 10)
+    if(this.numeroMesa < 1 || this.numeroMesa > 10)
     {
       this.presentToast("Solo tenemos lugar para 10 mesas en el lugar")
       return;
     }
 
-    if(this.cantidadComensales < 0 || this.cantidadComensales > 4)
+    if(this.cantidadComensales < 1 || this.cantidadComensales > 4)
     {
       this.presentToast("Los comensales solo pueden ser de 1 a 4")
       return;
@@ -114,7 +114,7 @@ export class AltaDeMesaPage {
           let mesasRef = this.firebase.database().ref("mesas");
 
 
-          let pictures = this.firebase.storage().ref(`mesas/${this.nombreFoto}`);
+          let pictures = this.firebase.storage().ref(`mesas/${this.nombreFoto+"mesaNumero:"+this.numeroMesa}`);
 
           pictures.putString(this.foto, "data_url").then(() => {
 
@@ -126,8 +126,16 @@ export class AltaDeMesaPage {
                 tipo: this.tipo,
                 img: url
               });
+
+              
             });
+
+            this.presentToast("La mesa se pudo cargar con exito");
+          this.navCtrl.setRoot(this.navCtrl.getActive().component);
+
           });
+
+          
 
     
   }

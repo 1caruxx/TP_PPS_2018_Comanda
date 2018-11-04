@@ -36,7 +36,7 @@ page-tomar-pedido {
         background-position: center; 
     }
 
-    .pregunta1, .pregunta2, .pregunta3, .pregunta4, .pregunta5, .pregunta6
+    .pregunta1, .pregunta2, .pregunta3, .pregunta4, .pregunta5, .pregunta6, .pregunta7, .pregunta8, .pregunta9, .pregunta10 
     {
         position: absolute;
         z-index: 1000;
@@ -48,7 +48,7 @@ page-tomar-pedido {
         background: #0000009e;
     }
 
-    .laPregunta1, .laPregunta2, .laPregunta3, .laPregunta4, .laPregunta5, .laPregunta6
+    .laPregunta1, .laPregunta2, .laPregunta3, .laPregunta4, .laPregunta5, .laPregunta6, .laPregunta7, .laPregunta8, .laPregunta9, .laPregunta10
     {
         width: 100%;
         padding-bottom:5%;
@@ -60,7 +60,7 @@ page-tomar-pedido {
         transition: .5s;
     }
 
-    .laPregunta1 h2, .laPregunta2 h2, .laPregunta3 h2 , .laPregunta4 h2, .laPregunta5 h2 , .laPregunta6 h2  {
+    .laPregunta1 h2, .laPregunta2 h2, .laPregunta3 h2 , .laPregunta4 h2, .laPregunta5 h2 , .laPregunta6 h2 , .laPregunta7 h2 , .laPregunta8 h2 , .laPregunta9 h2 , .laPregunta10 h2   {
         font-family: 'Lobster', cursive;
      text-align: center;
     }
