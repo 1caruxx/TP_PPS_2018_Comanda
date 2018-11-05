@@ -12,6 +12,7 @@ import { AltaEmpleadoPage } from "../pages/alta-empleado/alta-empleado";
 import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
 import { PerfilPage } from "../pages/perfil/perfil";
+import { CuentaPage } from "../pages/cuenta/cuenta";
 
 @Component({
   templateUrl: 'app.html'

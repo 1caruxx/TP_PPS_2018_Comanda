@@ -1,0 +1,123 @@
+@font-face {
+    src: url("../../assets/fonts/Tangerine-Regular.ttf");
+    font-family: tangerine;
+}
+
+@mixin dottedBorder($color: #8f8f8f, $orientation: horizontal, $position: top, $spacing: 5px, $size: 1px) {
+    background-position: $position;
+    @if $orientation == horizontal {
+      background-image: linear-gradient(to right, $color $size/$spacing * 100%, rgba(255,255,255,0) 0%);
+      background-size: $spacing $size;
+      background-repeat: repeat-x;
+    }
+    @else {
+      background-image: linear-gradient($color $size/$spacing * 100%, rgba(255,255,255,0) 0%);
+      background-size: $size $spacing;
+      background-repeat: repeat-y;
+    }
+    .ie9 & {
+      border-#{$position}:1px dotted $color;      
+    }
+  }
+
+page-cuenta {
+
+    .scroll-content {
+        background-image: url('../../assets/imgs/alfa/cuenta.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+
+    h1 {
+        text-align: center;
+        font-family: tangerine;
+        font-size: 60px;
+        border-bottom: solid 1px black; 
+        display: inline;
+    }
+
+    .puntos {
+        width: 100%;
+        @include dottedBorder(color($colors, red), $orientation: horizontal, $position: bottom, $spacing: 10px, $size: 2px);
+        height: 5px;
+    }
+
+    .cuenta {
+        width: 100%;
+        border: solid 4px color($colors, red);
+        outline: solid 2px color($colors, red);
+        outline-offset: 5px;
+        padding: 10px;
+
+        div {
+            margin: 15px 0 15px 0;
+            font-size: 18px;
+        }
+
+        div:nth-last-of-type(2) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        button[ion-button] {
+            padding: 30px 50px 30px 50px !important;
+            margin: 25px auto 0 auto;
+            display: block;
+            font-size: 20px;
+        }
+
+    }
+
+    .total {
+        color: color($colors, red);
+        font-size: 30px;
+        text-transform: uppercase;
+    }
+
+    ul {
+        padding: 0px;
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 25px; 
+      
+        &.rating li {
+          padding: 5px 10px !important;
+          background: none;
+          color: color($colors, red);
+      
+          ion-icon {
+            font-size: 50px;
+          }
+        }
+    }
+
+    .rating {
+        font-size: 20px;
+        text-align: center;
+        display: block;
+    }
+
+    .animation-target {
+        animation-name: jelly;
+        animation-duration: 1000ms;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+    }
+
+    .ocultar {
+        display: none;
+    }
+
+}

@@ -4,6 +4,7 @@ import { AltaDuenioSupervisorPage } from "../../pages/alta-duenio-supervisor/alt
 import { AltaEmpleadoPage } from "../../pages/alta-empleado/alta-empleado";
 import { ListadoSupervisorPage } from "../../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../../pages/reserva/reserva";
+import { CuentaPage } from "../../pages/cuenta/cuenta";
 
 @Injectable()
 export class VerificarTipoProvider {
@@ -78,7 +79,7 @@ export class VerificarTipoProvider {
           { accion: "Ingresar al local", img: "entrada.jpg", ruta: "./" },
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
           { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" },
-          { accion: "Dar propina", img: "propina.jpg", ruta: "./" },
+          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
           { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage }
         ];
         break;
@@ -88,7 +89,7 @@ export class VerificarTipoProvider {
           { accion: "Ingresar al local.", img: "entrada.jpg", ruta: "./" },
           { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: "./" },
           { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" },
-          { accion: "Dar propina.", img: "propina.jpg", ruta: "./" }
+          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage }
         ];
         break;
     }

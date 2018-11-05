@@ -8,7 +8,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @IonicPage()
 @Component({
@@ -30,9 +30,6 @@ export class AltaEmpleadoPage {
   public foto: string = "";
   public nombreFoto: string;
 
-  public scanSub;
-  public estado = "vertical-container";
-
   public estadoBoton: boolean = false;
   public ocultarAlert: boolean = true;
   public alertTitulo;
@@ -46,7 +43,7 @@ export class AltaEmpleadoPage {
     private authInstance: AngularFireAuth,
     private toastCtrl: ToastController,
     private camera: Camera,
-    private qrScanner: QRScanner) {
+    private barcodeScanner: BarcodeScanner) {
 
     this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
   }
@@ -55,9 +52,7 @@ export class AltaEmpleadoPage {
     console.log('ionViewDidLoad AltaEmpleadoPage');
   }
 
-  ionViewDidLeave() {
-    this.OcultarLectorQR();
-  }
+  ionViewDidLeave() { }
 
   Registrar() {
 
@@ -211,55 +206,16 @@ export class AltaEmpleadoPage {
 
   InicializarLectorQR() {
 
-    this.qrScanner.prepare()
-      .then((status: QRScannerStatus) => {
+    let options = { prompt : "Escaneá el DNI", formats: "PDF_417" };
 
-        if (status.authorized) {
+    this.barcodeScanner.scan(options).then(barcodeData => {
 
-          this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
+      let dniDatos = barcodeData.text.split("@");
+      this.apellido = dniDatos[1];
+      this.nombre = dniDatos[2];
+      this.dni = dniDatos[4];
+    }).catch(err => { });
 
-            //this.vibration.vibrate(300);
-            alert(text);
-            // let datos = JSON.parse(text);
-
-            // this.nombre = datos.nombre;
-            // this.apellido = datos.apellido;
-            // this.dni = datos.dni;
-
-            this.estado = "vertical-container";
-          });
-
-          this.qrScanner.show().then(() => {
-
-            (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
-            (window.document.querySelector('.close') as HTMLElement).classList.add('mostrar');
-            (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "transparent";
-            this.estado = "ocultar";
-          });
-
-        } else if (status.denied) {
-          // camera permission was permanently denied
-          // you must use QRScanner.openSettings() method to guide the user to the settings page
-          // then they can grant the permission from there
-
-        } else {
-          // permission was denied, but not permanently. You can ask for permission again at a later time.
-        }
-      })
-      .catch((e: any) => this.presentToast(e));
-  }
-
-  OcultarLectorQR() {
-
-    this.qrScanner.hide().then(() => {
-
-      (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
-      (window.document.querySelector('.close') as HTMLElement).classList.remove('mostrar');
-      (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "#FDE8C9";
-      this.estado = "vertical-container";
-    });
-
-    this.scanSub.unsubscribe();
   }
 
   ValidarNumero(numero: string) {

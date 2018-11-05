@@ -16,11 +16,12 @@ import { AltaEmpleadoPage } from "../pages/alta-empleado/alta-empleado";
 import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
 import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../pages/reserva/reserva";
+import { CuentaPage } from "../pages/cuenta/cuenta";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Camera } from '@ionic-native/camera';
-import { QRScanner } from '@ionic-native/qr-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
 
@@ -30,6 +31,7 @@ import { firebaseConfig } from '../config';
 import { ChartsModule } from 'ng2-charts';
 
 import { ComponentsModule } from "../components/components.module";
+import { Ionic2RatingModule } from 'ionic2-rating';
 
 @NgModule({
   declarations: [
@@ -45,14 +47,16 @@ import { ComponentsModule } from "../components/components.module";
     AltaEmpleadoPage,
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
-    ReservaPage
+    ReservaPage,
+    CuentaPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig.fire),
     ChartsModule,
-    ComponentsModule
+    ComponentsModule,
+    Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,7 +72,8 @@ import { ComponentsModule } from "../components/components.module";
     AltaEmpleadoPage,
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
-    ReservaPage
+    ReservaPage,
+    CuentaPage
   ],
   providers: [
     StatusBar,
@@ -77,7 +82,7 @@ import { ComponentsModule } from "../components/components.module";
     VerificarTipoProvider,
     AngularFireAuth,
     Camera,
-    QRScanner
+    BarcodeScanner
   ]
 })
 export class AppModule {}
