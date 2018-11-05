@@ -171,6 +171,7 @@ export class RegistroClientePage {
                   usuariosRef.push({
                     nombre: this.nombre,
                     tipo: "anonimo",
+                    correo:this.correo,
                     clave: this.pass,
                     img: this.foto
                   }).then(() => {

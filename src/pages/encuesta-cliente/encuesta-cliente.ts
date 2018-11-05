@@ -18,6 +18,7 @@ import { PedirPlatosPage } from '../pedir-platos/pedir-platos';
   templateUrl: 'encuesta-cliente.html',
 })
 export class EncuestaClientePage {
+  correo:string;
 
   cliente:string;
  ocultar:boolean;
@@ -54,14 +55,17 @@ mostrarfoto3:boolean;
     this.ocultarBoton2=false;
     this.ocultarBoton3=false;
     this.ocultar6=true;
-   
+    this.correo=localStorage.getItem("usuario");
+
+    this.correo =(JSON.parse(this.correo)).nombre;
     this.mostrarfoto1=false;
     this.mostrarfoto2=false;
     this.mostrarfoto3=false;
 
     //setear esta variable con el cliente sacado del local storage
     this.cliente ="yoCliente";
-    this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    //DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!
+   // this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
   }
 
@@ -224,9 +228,10 @@ mostrarfoto3:boolean;
       preg5:this.resp5,
       foto1:this.foto1,
       foto2:this.foto2,
-      foto3:this.foto3
+      foto3:this.foto3,
+      cliente:this.correo
     };
-    let mensaje = firebase.database().ref().child("encuestaCliente/"+this.cliente);
+    let mensaje = firebase.database().ref().child("encuestaCliente/");
     mensaje.push(carga);
 
   }

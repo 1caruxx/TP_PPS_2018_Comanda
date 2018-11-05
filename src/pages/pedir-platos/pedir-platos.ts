@@ -58,17 +58,17 @@ contador;
     this.mostrarslide=false;
     this.TraerPlatos();
     this.contador=0;
-    this.tipo1="mozo";
- /* this.tipo1 = localStorage.getItem("usuario");
+    
+  this.tipo1 = localStorage.getItem("usuario");
   this.tipo1 =(JSON.parse(this.tipo1)).tipo;
     this.ocultarTitulo=false;
     this.correo=localStorage.getItem("usuario");
 
-    this.correo =(JSON.parse(this.correo)).correo;*/
+    this.correo =(JSON.parse(this.correo)).correo;
     this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
 this.foto="";
-
-this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+//DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!!!
+//this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
 if(this.tipo1=="mozo")
 {
   this.mostrarAlert2=true;

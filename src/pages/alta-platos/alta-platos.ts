@@ -70,8 +70,11 @@ ocultarTiempo:boolean;
     this.ocultarTiempo=false;
     this.carga="platos";
     //Descomentar esta linea antes de hacer el push
-    /*this.tipo = localStorage.getItem("usuario");
-  this.tipo =(JSON.parse(this.tipo)).tipo;*/
+    this.tipo = localStorage.getItem("usuario");
+    this.tipo =JSON.parse(this.tipo).tipo;
+   this.cantMostrar="grs";
+ //this.tipo =
+ 
 
     if(this.tipo=="cocinero")
     {
@@ -95,7 +98,7 @@ ocultarTiempo:boolean;
   }
   pedido()
   {
-    if(this.tipo=="cocinero")
+    /*if(this.tipo=="cocinero")
     {
       this.tipo="bartender";
       this.esCocinero=false;
@@ -110,7 +113,7 @@ ocultarTiempo:boolean;
      
     }
   
-
+*/
 
   }
   opcion(valor)
@@ -163,7 +166,7 @@ ocultarTiempo:boolean;
     this.mostrarfoto2=false;
     this.mostrarbtn3=true;
     this.mostrarfoto3=false;
-    this.navCtrl.push(PedirPlatosPage);
+  
   }
   async tomarFoto1()
   {
