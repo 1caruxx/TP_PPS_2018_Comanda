@@ -31,17 +31,20 @@ export class PedirPlatosPage {
   mostrarAlert2:boolean=false;
   mostrarAlert3:boolean=false;
   valor:number;
+  miValor:number=undefined;
   foto1;
   foto2;
+  eligio:boolean=false;
   foto3;
   nombre;
+  yaPidio:boolean=false;
   desc;
   cantidadNueva=undefined;
   tipo:string;
   tipo1:string;
   mesa;
   foto;
- 
+ tiempoPedido:number=0;
   correo:string;
   pedido:any[]=[];
   ocultarBebidas:boolean;
@@ -139,9 +142,11 @@ if(this.tipo1=="mozo")
     }
   
   }
-  ElegirPlato(nombre, valor, es, tiempo, para, precio)
+  ElegirPlato(nombre, valor, es, tiempo, para, precio, id)
   {
-    
+   this.miValor=undefined;
+     
+    console.log(id);
     
     if(valor<=0 )
     {
@@ -162,6 +167,7 @@ if(this.tipo1=="mozo")
       return;
     }
 
+
     if(tiempo=="cero")
     {
       tiempo=0;
@@ -171,9 +177,10 @@ if(this.tipo1=="mozo")
    
 
 
-    this.pedido.push({cant:valor, nombre:nombre, es:es, tiempo:tiempo, para:para, precio:precio});
+    this.pedido.push({cant:valor, nombre:nombre, es:es, tiempo:tiempo, para:para, precio:precio, id:id});
     console.log(this.pedido);
-    (window.document.querySelector('#'+nombre) as HTMLElement).classList.add("mostrarElegido");
+    (window.document.querySelector('#'+id) as HTMLElement).classList.add("mostrarElegido");
+
     valor=0;
   }
   mostrarSlide(foto1,foto2,foto3,nombre,desc)
@@ -222,8 +229,12 @@ if(this.tipo1=="mozo")
   }
   Platos()
   {
+  
+      this.miValor=undefined;
+     
+   
 
-    this.valor=null;
+  
     console.log(this.valor);
     this.ocultarPlatos =false;
     this.ocultarTitulo=true;
@@ -232,6 +243,7 @@ if(this.tipo1=="mozo")
   }
   Bebidas()
   {
+    this.miValor=undefined;
     this.ocultarPlatos =true;
     this.valor=undefined;
     this.ocultarBebidas =false;
@@ -243,7 +255,7 @@ if(this.tipo1=="mozo")
     this.ocultarPlatos =true;
     this.ocultarTitulo=false;
     this.ocultarBebidas=true;
-
+   
 
   }
   cerrarSlide()
@@ -265,10 +277,49 @@ var data =snap.val();
           if(data[key].carga.es=="plato")
           {
             this.platos.push(data[key]);
+           
+           
+            let nombre =(this.platos[this.platos.length-1].carga.nombre).split(" ");
+            console.log(this.platos[this.platos.length-1].carga.nombre);
+            if(nombre.length>1)
+            {
+              let nombreFinal="";
+              for(let i=0;i<nombre.length;i++)
+              {
+                nombreFinal=nombreFinal+ nombre[i];
+
+              }
+              this.platos[this.platos.length-1].carga.id=nombreFinal;
+              console.log("id compuesto de nombre"+this.platos[this.platos.length-1].carga.id);
+            }
+            else
+            {
+              this.platos[this.platos.length-1].carga.id= this.platos[this.platos.length-1].carga.nombre;
+              console.log("id  de nombre simple" +this.platos[this.platos.length-1].carga.id);
+            }
           }
           else
           {
             this.bebidas.push(data[key]);
+           
+            let nombre =(this.bebidas[this.bebidas.length-1].carga.nombre).split(" ");
+            if(nombre.length>1)
+            {
+              let nombreFinal="";
+              for(let i=0;i<nombre.length;i++)
+              {
+                nombreFinal=nombreFinal+ nombre[i];
+
+              }
+              this.bebidas[this.bebidas.length-1].carga.id=nombreFinal;
+            
+            }
+            else
+            {
+              this.bebidas[this.bebidas.length-1].carga.id= this.bebidas[this.bebidas.length-1].carga.nombre;
+            
+            }
+
           }
 
           
@@ -282,15 +333,19 @@ var data =snap.val();
   }
   AceptarPedido()
   {
+    this.eligio=true;
     this.Cerrar();
   }
   CancelarPedido()
   {
+    this.eligio=false;
+   
     for(let i=0;i<this.pedido.length;i++)
     {
-      (window.document.querySelector('#'+this.pedido[i].nombre) as HTMLElement).classList.remove("mostrarElegido");
-
+      (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+    
     }
+    
     this.pedido.splice(0, this.pedido.length);
     console.log(this.pedido);
     this.valor=undefined;
@@ -315,44 +370,102 @@ var data =snap.val();
     let mensaje2 = firebase.database().ref().child("pedidos/"+"mesa"+this.mesa+"/bartender");
    let tiempoMax=0;
    let nodoPadre:any;
+   let tieneBartender:boolean=false;
+   let tieneCocinero:boolean=false;
     for(let i=0;i<this.pedido.length;i++)
     {
 
-      console.log(this.pedido[i].es);
+      console.log(this.pedido[i].para);
       if(this.pedido[i].para=="bartender")
       {
+        console.log(this.pedido[i]);
+        tieneBartender=true;
         mensaje2.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant, precio:this.pedido[i].precio});
-        break;
+    
       }
       if(this.pedido[i].para=="cocinero")
       {
+        tieneCocinero=true;
         if(tiempoMax<this.pedido[i].tiempo)
         {
           tiempoMax=this.pedido[i].tiempo;
         }
         mensaje.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant, precio:this.pedido[i].precio});
+        this.yaPidio=true;
       }
 
       
     }
-    mensaje.update({estado:"tomado"});
-    mensaje2.update({estado:"tomado"});
+    if(tieneCocinero)
+    {
+      mensaje.update({estado:"tomado"});
+    }
+    if(tieneBartender)
+    {
+      mensaje2.update({estado:"tomado"});
+    }
+    //Establecer tiempo:
+    let refTiempo = firebase.database().ref().child("pedidos/"+"mesa"+this.mesa);
+    refTiempo.once("value", (snap) => {
 
-    let mensaje3  =firebase.database().ref().child("pedidos/"+"mesa"+this.mesa);
-    mensaje3.update({tiempo:tiempoMax}).then(()=>{
+      let data = snap.val();
+
+     let tiempo= data.tiempo;
+     if(!tiempo  || tiempo< tiempoMax )
+     {
+
+      let mensaje3  =firebase.database().ref().child("pedidos/"+"mesa"+this.mesa);
+  
+      mensaje3.update({tiempo:tiempoMax}).then(()=>{
+        for(let i=0;i<this.pedido.length;i++)
+        {
+          (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+    
+        }
+        this.pedido=[];
+    
+    
+      });
+
+
+     }
+     if(tiempo>tiempoMax)
+     {
       for(let i=0;i<this.pedido.length;i++)
       {
-        (window.document.querySelector('#'+this.pedido[i].nombre) as HTMLElement).classList.remove("mostrarElegido");
+        (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
   
       }
-      
-      
       this.pedido=[];
-    
-    
+
+
+     }
+
     });
-     
+
+
+  /*
+
+    let mensaje3  =firebase.database().ref().child("pedidos/"+"mesa"+this.mesa);
+  
+      mensaje3.update({tiempo:tiempoMax}).then(()=>{
+        for(let i=0;i<this.pedido.length;i++)
+        {
+          (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+    
+        }
+        this.pedido=[];
+    
+    
+      });
+    }
+  */
+    
       
+      
+    
+     
+      this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
     this.mostrarAlert=true;
     setTimeout(()=>{
 
