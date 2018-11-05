@@ -1,5 +1,35 @@
 page-mapa-de-ruta {
 
+  .scroll-content {
+
+    overflow: auto;  /* redundant, but just in case */
+    display: flex; /* redundant, but just in case */
+    flex-direction: column-reverse;
+}
+
+ion-content {
+  background-image: url('../../assets/imgs/gamma/cht.jpg');
+  background-size: cover; 
+  background-position: center;
+}
+
+.item
+{
+  background-color: transparent;
+  //width:50%;
+
+}
+
+.item-block
+{
+
+}
+
+.item-md
+{
+
+}
+
    /* .chat-message {
         width: 80%;
         min-height: 40px;

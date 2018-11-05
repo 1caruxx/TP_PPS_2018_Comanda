@@ -20,7 +20,7 @@
 <ion-header>
   <ion-navbar color="red">
     <ion-title>
-      Mapa de ruta hasta el domicilio de entrega
+      Mapa de ruta
     </ion-title>
 
     <ion-buttons end>
@@ -101,7 +101,37 @@
 
 
 
-<ion-content padding>
+<ion-content>
+
+  <div>
+
+    <ion-list>
+
+        <h2 class="titulo">Lista de empleados con pedidos realizados</h2>
+    
+       
+    
+      <ion-item *ngFor="let item of clientesConPedidos">
+        <ion-thumbnail item-start>
+          <!--<img src={{item.img}}>-->
+          <ion-icon name="restaurant"></ion-icon>
+        </ion-thumbnail>
+    
+      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+        <p>Cliente • {{item.tipo}}</p>-->
+        <h1>nombre:{{item.nombre}}</h1>
+        <p>cantidad:{{item.cantidad}}</p>
+    
+    
+    
+    
+      </ion-item>
+    
+    
+    </ion-list>
+
+
+
 
 
     <img src="assets/imgs/gamma/mapaderuta.jpg"/>
@@ -109,6 +139,9 @@
     <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>
           <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>
 
+          
+
+        
 
 
 	<ion-list no-lines>
@@ -116,8 +149,13 @@
 			<h3>{{message.name}}</h3>
 			<p>{{message.message}}</p>
 		</ion-item>
-	</ion-list>
+  </ion-list>
+  
+
+</div>
 </ion-content>
+
+
 <ion-footer>
 	<ion-item>
 		<ion-input type="text" placeholder="Escriba aqui..." [(ngModel)]="newmessage"></ion-input>

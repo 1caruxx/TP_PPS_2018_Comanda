@@ -94,6 +94,11 @@ export class TomarPedidoPage {
   public ocultarDiez:boolean;
 
 
+  public usuario;
+  public vistaCocinero:boolean;
+  public vistaBartender:boolean;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
   {
 
@@ -101,6 +106,8 @@ export class TomarPedidoPage {
     localData.subscribe(data => {
       this.information = data;
     })
+
+
 
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
@@ -125,7 +132,24 @@ export class TomarPedidoPage {
       
     });*/
 
+
+
     //this.ocultar=true;
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    if(this.usuario.tipo=="cocinero")
+    {
+      this.vistaCocinero=true;
+    }
+
+    if(this.usuario.tipo=="bartender")
+    {
+      this.vistaBartender=true;
+    }
+
+
+
     this.ocultarUno=true;
     this.ocultarDos=true;
     this.ocultarTres=true;
@@ -1006,6 +1030,213 @@ export class TomarPedidoPage {
     this.ocultarDiez=true;
 
     
+  }
+
+  terminarPedidoUnoCocinero()
+  {
+
+
+  }
+
+  TerminarPedidoUnoBartender()
+  {
+
+  }
+
+  terminarPedidoDosCocinero()
+  {
+
+    var refTerminarDosCocinero = this.firebase.database().ref("pedidos/mesa2/");
+                        
+                  refTerminarDosCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+                              if(k=="cocinero")
+                                {
+                                  for(let a in data[k])
+                                  {  
+                                   // if(a=="estado")
+                                    //{
+                                      //this.pedidosCocinaDos.push(data[k][a]);
+                                    //}
+                                    data[k].estado = "terminado";
+                                    refTerminarDosCocinero.child(k).update(data[k]);
+                                     
+                                     
+                                  }
+
+                                }
+
+                              }
+
+                          });
+
+
+
+
+
+  }
+
+  TerminarPedidoDosBartender()
+  {
+
+  }
+
+  terminarPedidoTresCocinero()
+  {
+    var refTerminarTresCocinero = this.firebase.database().ref("pedidos/mesa3/");
+                        
+                  refTerminarTresCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+                              if(k=="cocinero")
+                                {
+                                  for(let a in data[k])
+                                  {  
+                                   // if(a=="estado")
+                                    //{
+                                      //this.pedidosCocinaDos.push(data[k][a]);
+                                    //}
+                                    data[k].estado = "terminado";
+                                    refTerminarTresCocinero.child(k).update(data[k]);
+                                     
+                                     
+                                  }
+
+                                }
+
+                              }
+
+                            //this.estaLibre=true;
+                          // ocup=true;
+                          /*  for(var key in data)
+                            {
+
+                              if (3 == data[key].numeroMesa) 
+                              {
+                                data[key].tiempoMinimo = this.tiempoMesaSeis;
+                                refTerminarTresCocinero.child(key).update(data[key]);
+
+                                
+                              }
+
+                              
+                            }*/
+      
+                          });
+
+  }
+
+  terminarPedidoTresBartender()
+  {
+    var refTerminarTresBartender = this.firebase.database().ref("pedidos/mesa3/");
+                        
+    refTerminarTresBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarTresBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
+
+
+
+  }
+
+  terminarPedidoCuatroCocinero()
+  {
+
+  }
+
+  terminarPedidoCuatroBartender()
+  {
+    
+  }
+
+  terminarPedidoCincoCocinero()
+  {
+
+  }
+
+  terminarPedidoCincoBartender()
+  {
+
+  }
+
+  terminarPedidoSeisCocinero()
+  {
+
+  }
+
+  terminarPedidoSeisBartender()
+  {
+
+  }
+
+  terminarPedidoSieteCocinero()
+  {
+
+  }
+
+  terminarPedidoSieteBartender()
+  {
+
+  }
+
+  terminarPedidoOchoCocinero()
+  {
+
+  }
+
+  terminarPedidoOchoBartender()
+  {
+
+  }
+
+  terminarPedidoNueveCocinero()
+  {
+
+  }
+
+  terminarPedidoNueveBartender()
+  {
+
+  }
+
+  terminarPedidoDiezCocinero()
+  {
+
+  }
+
+  terminarPedidoDiezBartender()
+  {
+
   }
 
 

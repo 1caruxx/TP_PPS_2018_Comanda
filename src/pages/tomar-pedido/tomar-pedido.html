@@ -161,7 +161,7 @@
 
     <ion-content>
 
-        <ion-list>
+        <ion-list *ngIf="vistaCocinero">
 
             <h2 class="titulo">Lista de pedidos Mesa 1 Cocina</h2>
 
@@ -170,7 +170,7 @@
                 <ion-icon name="alarm"></ion-icon>
               </button>
               
-              <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+              <button ion-button clear item-end (click)="terminarPedidoUnoCocinero()">
                 
                   <ion-icon name="checkmark-circle"></ion-icon>
                 </button>
@@ -194,13 +194,13 @@
 
       </ion-list>
 
-      <ion-list>
+      <ion-list *ngIf="vistaBartender">
 
           <h2 class="titulo">Lista de pedidos Mesa 1 Bartender</h2>
 
           
             
-            <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+            <button ion-button clear item-end (click)="TerminarPedidoUnoBartender()">
               
                 <ion-icon name="checkmark-circle"></ion-icon>
               </button>
@@ -224,7 +224,7 @@
 
     </ion-list>
 
-    <ion-list>
+    <ion-list *ngIf="vistaCocinero">
 
         <h2 class="titulo">Lista de pedidos Mesa 2 Cocina</h2>
 
@@ -233,7 +233,7 @@
             <ion-icon name="alarm"></ion-icon>
           </button>
           
-          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+          <button ion-button clear item-end (click)="terminarPedidoDosCocinero()">
             
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
@@ -257,13 +257,13 @@
 
   </ion-list>
 
-  <ion-list>
+  <ion-list *ngIf="vistaBartender">
 
       <h2 class="titulo">Lista de pedidos Mesa 2 Bartender</h2>
 
      
         
-        <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+        <button ion-button clear item-end (click)="TerminarPedidoDosBartender()">
           
             <ion-icon name="checkmark-circle"></ion-icon>
           </button>
@@ -287,7 +287,7 @@
 
 </ion-list>
 
-<ion-list>
+<ion-list *ngIf="vistaCocinero">
 
     <h2 class="titulo">Lista de pedidos Mesa 3 Cocina</h2>
 
@@ -296,7 +296,7 @@
         <ion-icon name="alarm"></ion-icon>
       </button>
       
-      <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+      <button ion-button clear item-end (click)="terminarPedidoTresCocinero()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
@@ -320,12 +320,12 @@
 
 </ion-list>
 
-<ion-list>
+<ion-list *ngIf="vistaBartender">
 
     <h2 class="titulo">Lista de pedidos Mesa 3 Bartender</h2>
 
       
-      <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+      <button ion-button clear item-end (click)="terminarPedidoTresBartender()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
@@ -359,7 +359,7 @@
 
         
 
-        <ion-list>
+        <ion-list *ngIf="vistaCocinero">
 
             <h2 class="titulo">Lista de pedidos Mesa 4 Cocina</h2>
 
@@ -368,7 +368,7 @@
                 <ion-icon name="alarm"></ion-icon>
               </button>
               
-              <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+              <button ion-button clear item-end (click)="terminarPedidoCuatroCocinero()">
                 
                   <ion-icon name="checkmark-circle"></ion-icon>
                 </button>
@@ -392,11 +392,11 @@
 
       </ion-list>
 
-      <ion-list>
+      <ion-list *ngIf="vistaBartender">
 
           <h2 class="titulo">Lista de pedidos Mesa 4 Bartender</h2>
 
-          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+          <button ion-button clear item-end (click)="terminarPedidoCuatroBartender()">
                 
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
@@ -420,7 +420,7 @@
       
         </ion-list>
 
-        <ion-list>
+        <ion-list *ngIf="vistaCocinero">
 
             <h2 class="titulo">Lista de pedidos Mesa 5 Cocina</h2>
 
@@ -429,7 +429,7 @@
                 <ion-icon name="alarm"></ion-icon>
               </button>
 
-              <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+              <button ion-button clear item-end (click)="terminarPedidoCincoCocinero()">
                 
                   <ion-icon name="checkmark-circle"></ion-icon>
                 </button>
@@ -454,11 +454,11 @@
 
       </ion-list>
 
-      <ion-list>
+      <ion-list *ngIf="vistaBartender">
 
           <h2 class="titulo">Lista de pedidos Mesa 5 Bartender</h2>
 
-          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+          <button ion-button clear item-end (click)="terminarPedidoCincoBartender()">
                 
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
@@ -481,7 +481,7 @@
 
     </ion-list>
 
-    <ion-list>
+    <ion-list *ngIf="vistaCocinero">
 
         <h2 class="titulo">Lista de pedidos Mesa 6 Cocina</h2>
 
@@ -490,7 +490,7 @@
             <ion-icon name="alarm"></ion-icon>
           </button>
           
-          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+          <button ion-button clear item-end (click)="terminarPedidoSeisCocinero()">
             
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
@@ -513,13 +513,13 @@
 
     </ion-list>
 
-    <ion-list>
+    <ion-list *ngIf="vistaBartender">
 
         <h2 class="titulo">Lista de pedidos Mesa 6 Bartender</h2>
 
         
           
-          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+          <button ion-button clear item-end (click)="terminarPedidoSeisBartender()">
             
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
@@ -543,7 +543,7 @@
     </ion-list>
     
 
-    <ion-list>
+    <ion-list *ngIf="vistaCocinero">
 
         <h2 class="titulo">Lista de pedidos Mesa 7 Cocina</h2>
 
@@ -552,7 +552,7 @@
             <ion-icon name="alarm"></ion-icon>
           </button>
           
-          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+          <button ion-button clear item-end (click)="terminarPedidoSieteCocinero()">
             
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
@@ -577,13 +577,13 @@
   </ion-list>
 
 
-  <ion-list>
+  <ion-list *ngIf="vistaBartender">
 
       <h2 class="titulo">Lista de pedidos Mesa 7 Bartender</h2>
 
       
         
-        <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+        <button ion-button clear item-end (click)="terminarPedidoSieteBartender()">
           
             <ion-icon name="checkmark-circle"></ion-icon>
           </button>
@@ -608,7 +608,7 @@
 </ion-list>
 
 
-<ion-list>
+<ion-list *ngIf="vistaCocinero">
 
     <h2 class="titulo">Lista de pedidos Mesa 8 Cocina</h2>
 
@@ -617,7 +617,7 @@
         <ion-icon name="alarm"></ion-icon>
       </button>
       
-      <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+      <button ion-button clear item-end (click)="terminarPedidoOchoCocinero()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
@@ -642,13 +642,13 @@
 </ion-list>
 
 
-<ion-list>
+<ion-list *ngIf="vistaBartender">
 
     <h2 class="titulo">Lista de pedidos Mesa 8 Bartender</h2>
 
     
       
-      <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+      <button ion-button clear item-end (click)="terminarPedidoOchoBartender()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
@@ -673,7 +673,7 @@
 </ion-list>
 
 
-<ion-list>
+<ion-list *ngIf="vistaCocinero">
 
     <h2 class="titulo">Lista de pedidos Mesa 9 Cocina</h2>
 
@@ -682,7 +682,7 @@
         <ion-icon name="alarm"></ion-icon>
       </button>
       
-      <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+      <button ion-button clear item-end (click)="terminarPedidoNueveCocinero()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
@@ -706,13 +706,13 @@
 
 </ion-list>
 
-<ion-list>
+<ion-list *ngIf="vistaBartender">
 
     <h2 class="titulo">Lista de pedidos Mesa 9 Bartender</h2>
 
     
       
-      <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+      <button ion-button clear item-end (click)="terminarPedidoNueveBartender()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
@@ -736,7 +736,7 @@
 
 </ion-list>
 
-<ion-list>
+<ion-list *ngIf="vistaCocinero">
 
     <h2 class="titulo">Lista de pedidos Mesa 10 Cocina</h2>
 
@@ -745,7 +745,7 @@
         <ion-icon name="alarm"></ion-icon>
       </button>
       
-      <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+      <button ion-button clear item-end (click)="terminarPedidoDiezCocinero()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
@@ -769,13 +769,13 @@
 
 </ion-list>
 
-<ion-list>
+<ion-list *ngIf="vistaBartender">
 
     <h2 class="titulo">Lista de pedidos Mesa 10 Bartender</h2>
 
     
       
-      <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+      <button ion-button clear item-end (click)="terminarPedidoDiezBartender()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
