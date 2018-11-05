@@ -136,7 +136,7 @@ page-pedir-platos {
      
         margin-top: 5%;
     }
-     }
+     
      .alert3
      {
         position: absolute;
@@ -181,7 +181,9 @@ page-pedir-platos {
         display: flex;
         flex-direction: column;
         background: url("../assets/imgs/beta/madera.jpg");
-        background-repeat: repeat-x repeat-y;
+        background-repeat:  repeat-y;
+        background-size: 100%;
+        background-repeat: repeat-y;
         position:relative;
       
     }
@@ -480,4 +482,4 @@ page-pedir-platos {
     animation-name: fadeInDown;
   }
  
-    
+}

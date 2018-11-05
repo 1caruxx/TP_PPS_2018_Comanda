@@ -4,6 +4,9 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<div class="alert3" [ngClass]="{'mostrarAlert3':mostrarAlert3}">
+    <h1>{{mensaje}}</h1>
+  </div>
 <ion-header>
   <ion-navbar color="red">
 
@@ -51,28 +54,83 @@
 
 <ion-content >
 {{error}}
+<div class="paraCocinero" *ngIf="esCocinero" >
   <div class="contenido" [ngClass]="{'ocultar':ocultar}">
     <h1 class="titulo">Alta de platos y bebidas.</h1>
     <h2 class="tituloCheck">¿Qu&eacute; desea cargar?</h2>
     <div class="opciones" radio-group [(ngModel)]="carga"> 
             
           <div class="opcion2">
-                    <ion-label for="radio1">Bebidas</ion-label>
+                    <ion-label for="radio1">Bebida</ion-label>
                     <ion-radio id="radio1" value="bebidas" (ionSelect)="opcion()"></ion-radio>
         
           </div>
           <div class="opcion1">
-              <ion-label for="radio2"> Platos</ion-label>
+              <ion-label for="radio2"> Plato</ion-label>
               <ion-radio id="radio2" value="platos"  (ionSelect)="opcion()"></ion-radio>
         </div>
   </div>
-  <input class="nombrePlato" type="text" [(ngModel)]="nombre" placeholder="Nombre del plato o bebida">
+  <h2 class="tituloCheck"  *ngIf="cocineroBebida">¿Qu&eacute; bebida cargara?</h2>
+  <div class="opcionesBebidas" radio-group [(ngModel)]="tipoBebida" *ngIf="cocineroBebida"> 
+          
+        <div class="bebidaOpcion1">
+                  <ion-label for="radio1">Agua</ion-label>
+                  <ion-radio id="radio1" value="agua" (ionSelect)="opcion('salir')"></ion-radio>
+      
+        </div>
+        <div class="bebidaOpcion2">
+            <ion-label for="radio2"> jugo</ion-label>
+            <ion-radio id="radio2" value="jugo"  (ionSelect)="opcion('salir')"></ion-radio>
+      </div>
+      <div class="bebidaOpcion3">
+          <ion-label for="radio2"> Gaseosa</ion-label>
+          <ion-radio id="radio2" value="gaseosa"  (ionSelect)="opcion('salir')"></ion-radio>
+    </div>
+</div>
+
+  <input class="nombrePlato" type="text" [(ngModel)]="nombre" placeholder="Nombre ">
   <textarea class="descripcion" [(ngModel)]="descripcion" placeholder="Descripci&oacute;n..."></textarea>
- <div class="tiempoDiv" [ngClass]="{'ocultar':ocultarTiempo}"> <ion-input class="tiempo"  [(ngModel)]="tiempo" type="number" ></ion-input><label class="tiempoLabel">mins de elaboraci&oacute;n</label>
+ <div class="tiempoDiv" [ngClass]="{'ocultar':ocultarTiempo}"> <input class="tiempo"  [(ngModel)]="tiempo" type="text" ><label class="tiempoLabel">mins de elaboraci&oacute;n</label>
   </div>  
-  <div class="tiempoDiv"> <ion-input class="tiempo" type="number" [(ngModel)]="cantidad" ></ion-input><label class="tiempoLabel">Cantidad de {{cantMostrar}}</label>
+  <div class="tiempoDiv"> <input class="tiempo" type="text" [(ngModel)]="cantidad" ><label class="tiempoLabel">Cantidad de {{cantMostrar}}</label>
   </div>  
-  <div class="precioDiv"> <label class="precioLabel">$</label><ion-input [(ngModel)]="precio" class="precio" type="number" ></ion-input><label class="tiempoLabel">Precio</label>
+  <div class="precioDiv"> <label class="precioLabel">$</label><input [(ngModel)]="precio" class="precio" type="text"> <label class="tiempoLabel">Precio</label>
+    <button ion-button color="dark" (click)="pedido()" outline class="Qr1">Leer QR</button>
+ 
+  </div>  
+ 
+
+ 
+    <div class="elContenido" >
+      <h1 class="titulo">Fotos</h1>
+      <button ion-button color="dark"   [ngClass]="{'mostrarBoton':mostrarbtn1}" (click)="tomarFoto1()" class="Foto1">  <ion-icon ios="ios-camera" md="md-camera"></ion-icon> </button>
+      <img class="laFoto1" [src]="foto1" [ngClass]="{'mostrarLaFoto':mostrarfoto1}" >
+      <button ion-button color="dark" [ngClass]="{'mostrarBoton':mostrarbtn2}" (click)="tomarFoto2()" class="Foto2">   <ion-icon ios="ios-camera" md="md-camera"></ion-icon></button>
+      <img class="laFoto2" [src]="foto2"  [ngClass]="{'mostrarLaFoto':mostrarfoto2}">
+      <button ion-button color="dark"  [ngClass]="{'mostrarBoton':mostrarbtn3}" (click)="tomarFoto3()" class="Foto3">  <ion-icon ios="ios-camera" md="md-camera"></ion-icon> </button>
+      <img class="laFoto3" [src]="foto3" [ngClass]="{'mostrarLaFoto':mostrarfoto3}">
+      <div class="botones">
+          <button ion-button color="red" (click)="Cargar()"  class="TomarFotos"> Cargar</button>
+          <button ion-button color="red" (click)="Cancelar()" class="Qr">Cancelar</button>
+        
+        </div>
+    </div>
+  </div>
+
+</div>
+<div class="paraBartender"  *ngIf="esBartender">
+  <div class="contenido" [ngClass]="{'ocultar':ocultar}">
+    <h1 class="titulo">Alta de  bebidas y/o tragos.</h1>
+    
+         
+  </div>
+  <input class="nombrePlato" type="text" [(ngModel)]="nombre" placeholder="Nombre de la bebida o trago">
+  <textarea class="descripcion" [(ngModel)]="descripcion" placeholder="Descripci&oacute;n..."></textarea>
+ <div class="tiempoDiv" [ngClass]="{'ocultar':ocultarTiempo}"> <input class="tiempo"  [(ngModel)]="tiempo" type="text" ><label class="tiempoLabel">mins de elaboraci&oacute;n</label>
+  </div>  
+  <div class="tiempoDiv"> <input class="tiempo" type="text" [(ngModel)]="cantidad" ><label class="tiempoLabel">Cantidad de cc</label>
+  </div>  
+  <div class="precioDiv"> <label class="precioLabel">$</label><input [(ngModel)]="precio" class="precio" type="text" ><label class="tiempoLabel">Precio</label>
     <button ion-button color="dark" (click)="pedido()" outline class="Qr1">Leer QR</button>
  
   </div>  

@@ -41,6 +41,7 @@ export class PedirPlatosPage {
   tipo1:string;
   mesa;
   foto;
+ 
   correo:string;
   pedido:any[]=[];
   ocultarBebidas:boolean;
@@ -54,12 +55,13 @@ contador;
     this.mostrarslide=false;
     this.TraerPlatos();
     this.contador=0;
-  this.tipo1 = localStorage.getItem("usuario");
+    this.tipo1="mozo";
+ /* this.tipo1 = localStorage.getItem("usuario");
   this.tipo1 =(JSON.parse(this.tipo1)).tipo;
     this.ocultarTitulo=false;
     this.correo=localStorage.getItem("usuario");
 
-    this.correo =(JSON.parse(this.correo)).correo;
+    this.correo =(JSON.parse(this.correo)).correo;*/
     this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
 this.foto="";
 
@@ -137,7 +139,7 @@ if(this.tipo1=="mozo")
     }
   
   }
-  ElegirPlato(nombre, valor, es, tiempo)
+  ElegirPlato(nombre, valor, es, tiempo, para, precio)
   {
     
     
@@ -151,6 +153,7 @@ if(this.tipo1=="mozo")
         setTimeout(()=>{
 
           this.mostrarAlert3=false;
+          this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
         }, 3000);
         return;
       }
@@ -168,7 +171,7 @@ if(this.tipo1=="mozo")
    
 
 
-    this.pedido.push({cant:valor, nombre:nombre, es:es, tiempo});
+    this.pedido.push({cant:valor, nombre:nombre, es:es, tiempo:tiempo, para:para, precio:precio});
     console.log(this.pedido);
     (window.document.querySelector('#'+nombre) as HTMLElement).classList.add("mostrarElegido");
     valor=0;
@@ -316,18 +319,18 @@ var data =snap.val();
     {
 
       console.log(this.pedido[i].es);
-      if(this.pedido[i].es=="bebida")
+      if(this.pedido[i].para=="bartender")
       {
-        mensaje2.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant});
+        mensaje2.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant, precio:this.pedido[i].precio});
         break;
       }
-      if(this.pedido[i].es=="plato")
+      if(this.pedido[i].para=="cocinero")
       {
         if(tiempoMax<this.pedido[i].tiempo)
         {
           tiempoMax=this.pedido[i].tiempo;
         }
-        mensaje.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant});
+        mensaje.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant, precio:this.pedido[i].precio});
       }
 
       

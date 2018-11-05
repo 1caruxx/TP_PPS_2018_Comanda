@@ -26,6 +26,43 @@ page-alta-platos {
         text-align: center;
         border-bottom: 2px solid black;
     }
+    .label-md {
+        margin: 13px 0px 13px 0;
+    }
+    .opcionesBebidas
+    {
+        display:flex;
+        justify-content: space-around;
+        margin-bottom: 10%;
+        text-align: center;
+    }
+    .alert3
+    {
+       position: absolute;
+       z-index: 5000;
+       width: 80%;
+       padding:10%;
+       left: 10%;
+       border-radius: 5%;
+       background: #cf4946;
+       text-align: center;
+       top: 36%;
+       justify-content: center;
+       
+       flex-direction: column;
+   display:none;
+
+    }
+    .mostrarAlert3
+    {
+        display:flex!important;
+    }
+    .alert3 h1
+    {
+       font-family: 'Lobster', cursive;
+       color:white;
+    }
+
     .contenido, .contenido2
     {
        
@@ -172,7 +209,7 @@ page-alta-platos {
     justify-content: space-between;
     margin-bottom: 7%;
     }
-    .opcion1, .opcion2
+    .opcion1, .opcion2, .bebidaOpcion1, .bebidaOpcion2, .bebidaOpcion3
     {
         font-family: 'Rancho', cursive;
         font-size: 1.7em;
