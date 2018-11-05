@@ -42,6 +42,11 @@ export class QrDeLaMesaPage {
   public pedidos=false;
 
 
+  public usuario;
+  public vistaMozo:boolean;
+  public vistaCliente:boolean;
+
+
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private qrScanner: QRScanner,private toastCtrl: ToastController,private authInstance: AngularFireAuth)
@@ -77,6 +82,18 @@ export class QrDeLaMesaPage {
 
 */
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    if(this.usuario.tipo=="mozo")
+    {
+      this.vistaMozo=true;
+    }
+
+    if(this.usuario.tipo=="cliente" || this.usuario.tipo=="anonimo")
+    {
+      this.vistaCliente=true;
+    }
 
     
     setInterval(() => {
@@ -495,6 +512,75 @@ export class QrDeLaMesaPage {
 
     });*/
     //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+
+  }
+
+
+  MostrarTiempoEsperaCliente()
+  {
+
+
+        this.cerrarqr=true;
+          this.probandingg=false;
+
+          this.qrScanner.prepare()
+          .then((status: QRScannerStatus) => {
+
+            if (status.authorized) {
+
+              this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
+
+                
+            
+                  //alert(text);
+
+                  var refDos = this.firebase.database().ref("mesas");
+                        
+                        refDos.once('value', (snap) => {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+                                if (text == data[key].numeroMesa) 
+                                {
+                                    alert(data[key].tiempoMinimo);
+                                    break;
+                                                                                        
+                                }
+                              }
+                            });
+
+
+
+                 // this.Modificar(correo,text);
+
+
+
+                  this.ocultarQR = true;
+
+               
+              });
+
+              this.qrScanner.show().then(() => {
+
+                (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
+                (window.document.querySelector('.close') as HTMLElement).classList.add('mostrar');
+                (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "transparent";
+                //this.estado = "ocultar";
+              });
+
+            } else if (status.denied) {
+           
+
+            } else {
+              
+            }
+          })
+          .catch((e: any) => this.presentToast(e));
+
+
+
 
   }
 

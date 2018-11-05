@@ -854,6 +854,30 @@ export class TomarPedidoPage {
 
     this.ocultarUno=true;
 
+    var refUno = this.firebase.database().ref("mesas");
+                        
+                        refUno.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if (1 == data[key].numeroMesa) 
+                              {
+                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                refUno.child(key).update(data[key]);
+
+                                
+                              }
+
+                              
+                            }
+
+                            
+                          });
+
     //this.tiempoMesaCuatro;
 
     /*var refUno = this.firebase.database().ref("mesas");
@@ -890,6 +914,30 @@ export class TomarPedidoPage {
 
     this.ocultarDos=true;
 
+    var refDos = this.firebase.database().ref("mesas");
+                        
+                        refDos.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if (2 == data[key].numeroMesa) 
+                              {
+                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                refDos.child(key).update(data[key]);
+
+                                
+                              }
+
+                              
+                            }
+
+                            
+                          });
+
     
   }
 
@@ -897,6 +945,31 @@ export class TomarPedidoPage {
   {
 
     this.ocultarTres=true;
+
+    var refTres = this.firebase.database().ref("mesas");
+                        
+                        refTres.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if (3 == data[key].numeroMesa) 
+                              {
+                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                refTres.child(key).update(data[key]);
+
+                                
+                              }
+
+                              
+                            }
+
+                            
+                          });
+
 
     
   }
@@ -1005,6 +1078,30 @@ export class TomarPedidoPage {
 
     this.ocultarSiete=true;
 
+    var refSiete = this.firebase.database().ref("mesas");
+                        
+                        refSiete.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if (7 == data[key].numeroMesa) 
+                              {
+                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                refSiete.child(key).update(data[key]);
+
+                                
+                              }
+
+                              
+                            }
+
+                            
+                          });
+
     
   }
 
@@ -1012,6 +1109,30 @@ export class TomarPedidoPage {
   {
 
     this.ocultarOcho=true;
+
+    var refOcho = this.firebase.database().ref("mesas");
+                        
+                        refOcho.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if (8 == data[key].numeroMesa) 
+                              {
+                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                refOcho.child(key).update(data[key]);
+
+                                
+                              }
+
+                              
+                            }
+
+                            
+                          });
 
     
   }
@@ -1021,6 +1142,30 @@ export class TomarPedidoPage {
 
     this.ocultarNueve=true;
 
+    var refNueve = this.firebase.database().ref("mesas");
+                        
+                        refNueve.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if (9 == data[key].numeroMesa) 
+                              {
+                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                refNueve.child(key).update(data[key]);
+
+                                
+                              }
+
+                              
+                            }
+
+                            
+                          });
+
     
   }
 
@@ -1029,17 +1174,103 @@ export class TomarPedidoPage {
 
     this.ocultarDiez=true;
 
+    var refDiez = this.firebase.database().ref("mesas");
+                        
+                        refDiez.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if (10 == data[key].numeroMesa) 
+                              {
+                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                refDiez.child(key).update(data[key]);
+
+                                
+                              }
+
+                              
+                            }
+
+                            
+                          });
+
     
   }
 
   terminarPedidoUnoCocinero()
   {
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/mesa1/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+                              if(k=="cocinero")
+                                {
+                                  for(let a in data[k])
+                                  {  
+                                   // if(a=="estado")
+                                    //{
+                                      //this.pedidosCocinaDos.push(data[k][a]);
+                                    //}
+                                    data[k].estado = "terminado";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                     
+                                     
+                                  }
+
+                                }
+
+                              }
+
+                          });
+
+
 
 
   }
 
   TerminarPedidoUnoBartender()
   {
+
+    var refTerminarUnoBartender = this.firebase.database().ref("pedidos/mesa1/");
+                        
+    refTerminarUnoBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarUnoBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
+
+
+
 
   }
 
@@ -1082,6 +1313,36 @@ export class TomarPedidoPage {
 
   TerminarPedidoDosBartender()
   {
+
+    var refTerminarDosBartender = this.firebase.database().ref("pedidos/mesa2/");
+                        
+    refTerminarDosBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarDosBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
 
   }
 
@@ -1172,70 +1433,477 @@ export class TomarPedidoPage {
   terminarPedidoCuatroCocinero()
   {
 
+    var refTerminarCuatroCocinero = this.firebase.database().ref("pedidos/mesa4/");
+                        
+                  refTerminarCuatroCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+                              if(k=="cocinero")
+                                {
+                                  for(let a in data[k])
+                                  {  
+                                   // if(a=="estado")
+                                    //{
+                                      //this.pedidosCocinaDos.push(data[k][a]);
+                                    //}
+                                    data[k].estado = "terminado";
+                                    refTerminarCuatroCocinero.child(k).update(data[k]);
+                                     
+                                     
+                                  }
+
+                                }
+
+                              }
+
+                          });
+
   }
 
   terminarPedidoCuatroBartender()
   {
+
+    var refTerminarCuatroBartender = this.firebase.database().ref("pedidos/mesa4/");
+                        
+    refTerminarCuatroBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarCuatroBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
     
   }
 
   terminarPedidoCincoCocinero()
   {
 
+    var refTerminarCincoCocinero = this.firebase.database().ref("pedidos/mesa5/");
+                        
+    refTerminarCincoCocinero.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="cocinero")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarCincoCocinero.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            });
+
   }
 
   terminarPedidoCincoBartender()
   {
+
+    var refTerminarCincoBartender = this.firebase.database().ref("pedidos/mesa5/");
+                        
+    refTerminarCincoBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarCincoBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
+
 
   }
 
   terminarPedidoSeisCocinero()
   {
 
+    var refTerminarSeisCocinero = this.firebase.database().ref("pedidos/mesa6/");
+                        
+    refTerminarSeisCocinero.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="cocinero")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarSeisCocinero.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            });
+
   }
 
   terminarPedidoSeisBartender()
   {
+
+    var refTerminarSeisBartender = this.firebase.database().ref("pedidos/mesa6/");
+                        
+    refTerminarSeisBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarSeisBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
 
   }
 
   terminarPedidoSieteCocinero()
   {
 
+    var refTerminarSieteCocinero = this.firebase.database().ref("pedidos/mesa7/");
+                        
+    refTerminarSieteCocinero.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="cocinero")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarSieteCocinero.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            });
+
   }
 
   terminarPedidoSieteBartender()
   {
+
+    var refTerminarSieteBartender = this.firebase.database().ref("pedidos/mesa7/");
+                        
+    refTerminarSieteBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarSieteBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
 
   }
 
   terminarPedidoOchoCocinero()
   {
 
+    var refTerminarOchoCocinero = this.firebase.database().ref("pedidos/mesa8/");
+                        
+    refTerminarOchoCocinero.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="cocinero")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarOchoCocinero.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            });
+
   }
 
   terminarPedidoOchoBartender()
   {
+
+    var refTerminarOchoBartender = this.firebase.database().ref("pedidos/mesa8/");
+                        
+    refTerminarOchoBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarOchoBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
 
   }
 
   terminarPedidoNueveCocinero()
   {
 
+    var refTerminarNueveCocinero = this.firebase.database().ref("pedidos/mesa9/");
+                        
+    refTerminarNueveCocinero.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="cocinero")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarNueveCocinero.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            });
+
   }
 
   terminarPedidoNueveBartender()
   {
+
+    var refTerminarNueveBartender = this.firebase.database().ref("pedidos/mesa9/");
+                        
+    refTerminarNueveBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarNueveBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
 
   }
 
   terminarPedidoDiezCocinero()
   {
 
+    var refTerminarDiezCocinero = this.firebase.database().ref("pedidos/mesa10/");
+                        
+    refTerminarDiezCocinero.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="cocinero")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarDiezCocinero.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            });
+
   }
 
   terminarPedidoDiezBartender()
   {
+
+    var refTerminarDiezBartender = this.firebase.database().ref("pedidos/mesa10/");
+                        
+    refTerminarDiezBartender.once('value', (snap) => 
+          {
+              var data = snap.val();
+
+              for(let k in data)
+              { 
+                if(k=="bartender")
+                  {
+                    for(let a in data[k])
+                    {  
+                     // if(a=="estado")
+                      //{
+                        //this.pedidosCocinaDos.push(data[k][a]);
+                      //}
+                      data[k].estado = "terminado";
+                      refTerminarDiezBartender.child(k).update(data[k]);
+                       
+                       
+                    }
+
+                  }
+
+                }
+
+            
+
+            });
 
   }
 

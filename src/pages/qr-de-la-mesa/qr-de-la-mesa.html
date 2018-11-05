@@ -55,6 +55,8 @@
 
       <ion-content  *ngIf="probandingg">
 
+         <div *ngIf="vistaMozo">
+
          
 
 
@@ -111,7 +113,16 @@
 
      
 
-   
+    </div>
+
+    <div *ngIf="vistaCliente">
+
+        <button ion-button clear item-end (click)="MostrarTiempoEsperaCliente()">
+            <ion-icon name="expand"></ion-icon>
+          </button>
+
+
+    </div>
 
     </ion-content>
 
