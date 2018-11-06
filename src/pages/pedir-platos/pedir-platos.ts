@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 import firebase from "firebase";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
@@ -44,6 +44,7 @@ export class PedirPlatosPage {
   tipo1:string;
   mesa;
   foto;
+  apreto=1;
  tiempoPedido:number=0;
   correo:string;
   pedido:any[]=[];
@@ -52,7 +53,15 @@ export class PedirPlatosPage {
   mostrarslide:boolean;
   ocultarTitulo:boolean;
 contador;
-  constructor(public navCtrl: NavController, public navParams: NavParams,   private authInstance: AngularFireAuth,private alertCtrl: AlertController) {
+  constructor
+  (
+    public navCtrl: NavController,
+     public navParams: NavParams, 
+       private authInstance: AngularFireAuth,
+       private alertCtrl: AlertController,
+       private toastCtrl: ToastController,
+      )
+       {
     this.ocultarPlatos = true;
     this.ocultarBebidas=true;
     this.mostrarslide=false;
@@ -89,13 +98,81 @@ if(this.tipo1=="mozo")
   }
   AceptarAlert2()
   {
+
+    let valida:boolean=true;
+    //Valido el campo de la mesa
     if(!this.mesa)
     {
-      alert("ingrese el numero de mesa");
+      valida=false;
+      this.mensaje="Ingrese el numero de mesa";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+
+        this.mostrarAlert3=false;
+        this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos";
+      },2000);
       return;
     }
-    this.mostrarAlert2=false;
+
+    //Valido que la mesa exista:
+
+let mensaje = firebase.database().ref().child("mesas/");
+mensaje.once("value",(snap)=>{
+ let esta:boolean =false;
+ let ocupada:boolean=false;
+  var data =snap.val();
+  for (let item in data) {
+
+    if (data[item].numeroMesa == this.mesa) 
+    {
+      esta=true;
+      if(data[item].estado=="ocupada")
+      {
+        ocupada=true;
+
+      }
+     
+    }
+    
+  }
+
+  if(!esta)
+  {
+    this.presentToast("El numero de mesa ingresado no existe!!");
+
+      return;
+  }
+  else
+  {
+    //Aca valido que la mesa no esta ocupada
    
+
+     if(ocupada)
+     {
+      this.presentToast("La mesa ingresada esta ocupada elija otra por favor");
+ 
+     return;
+
+     }
+     else
+     {
+       this.mostrarAlert2=false;
+
+     }
+   
+    
+
+  }
+
+
+});
+
+   //Valido que la mesa no este ocupada
+   
+      
+    
+
+ 
   }
   swipeLeftEvent($event)
   {
@@ -142,6 +219,17 @@ if(this.tipo1=="mozo")
     }
   
   }
+  presentToast(mensaje: string) {
+
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 3000,
+      position: 'top',
+      cssClass: "infoToast"
+    });
+
+    toast.present();
+  } 
   ElegirPlato(nombre, valor, es, tiempo, para, precio, id)
   {
    this.miValor=undefined;
@@ -194,6 +282,7 @@ if(this.tipo1=="mozo")
     this.mostrarslide=true;
   }
   
+
 
   presentPrompt() {
     let alert = this.alertCtrl.create({

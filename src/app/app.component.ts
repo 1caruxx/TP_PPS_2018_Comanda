@@ -7,7 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 //import { QrIngresoLocalPage } from '../pages/qr-ingreso-local/qr-ingreso-local';
 //import {  EncuestaClientePage } from '../pages/encuesta-cliente/encuesta-cliente';
-//import { PedirPlatosPage } from '../pages/pedir-platos/pedir-platos';
+import { PedirPlatosPage } from '../pages/pedir-platos/pedir-platos';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,8 +18,8 @@ export class MyApp {
       
    
 
-rootPage:any =   TabsPage  ;
-//rootPage:any =   AltaPlatosPage;
+//rootPage:any =   TabsPage  ;
+rootPage:any =   PedirPlatosPage ;
  
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
