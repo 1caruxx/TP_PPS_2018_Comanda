@@ -19,7 +19,9 @@
 
 <ion-content>
 
-  <h2 class="titulo">Empleados</h2>
+  <ng-container *ngIf="ocultarSpinner">
+    <h2 class="titulo">Empleados</h2>
+  </ng-container>
 
   <ion-list>
 
@@ -39,13 +41,15 @@
 
   </ion-list>
 
-  <h2 class="titulo">Clientes</h2>
+  <ng-container *ngIf="ocultarSpinner">
+    <h2 class="titulo">Clientes</h2>
+  </ng-container>
 
   <ion-list>
 
     <ion-item *ngFor="let item of clientes">
 
-      <ion-thumbnail item-start>
+      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">
         <img src={{item.img}} />
       </ion-thumbnail>
 
@@ -59,5 +63,7 @@
     </ion-item>
 
   </ion-list>
+
+  <app-spinner [ngClass]="{'ocultar':ocultarSpinner}"></app-spinner>
 
 </ion-content>

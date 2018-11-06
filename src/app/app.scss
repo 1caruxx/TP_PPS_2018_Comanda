@@ -114,7 +114,6 @@
         color: white;
         font-family: roboto;
         border: none;
-
     }
 
     p {
@@ -125,6 +124,10 @@
         width: 90%;
         color: white;
     }
+}
+
+.mostrar {
+    display: block !important;
 }
 
 .modal-wrapper {

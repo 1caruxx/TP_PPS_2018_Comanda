@@ -19,6 +19,7 @@ export class ListadoSupervisorPage {
 
   public image = "";
   public ocultarImagen = true;
+  public ocultarSpinner: boolean = false;
 
   public firebase = firebase;
 
@@ -48,6 +49,8 @@ export class ListadoSupervisorPage {
 
         return item.tipo == "cliente" || item.tipo == "anonimo";
       });
+
+      this.ocultarSpinner = true;
     });
   }
 
