@@ -4,6 +4,7 @@ import firebase from "firebase";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { PedirPlatosPage } from '../pedir-platos/pedir-platos';
+import { QrIngresoLocalPage } from '../qr-ingreso-local/qr-ingreso-local';
 
 /**
  * Generated class for the EncuestaClientePage page.
@@ -55,9 +56,10 @@ mostrarfoto3:boolean;
     this.ocultarBoton2=false;
     this.ocultarBoton3=false;
     this.ocultar6=true;
-    this.correo=localStorage.getItem("usuario");
+    /*this.correo=localStorage.getItem("usuario");
 
-    this.correo =(JSON.parse(this.correo)).nombre;
+    this.correo =(JSON.parse(this.correo)).nombre;*/
+    this.correo="miCorreo@correo.com";
     this.mostrarfoto1=false;
     this.mostrarfoto2=false;
     this.mostrarfoto3=false;
@@ -65,7 +67,7 @@ mostrarfoto3:boolean;
     //setear esta variable con el cliente sacado del local storage
     this.cliente ="yoCliente";
     //DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!
-   // this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
   }
 
@@ -233,6 +235,6 @@ mostrarfoto3:boolean;
     };
     let mensaje = firebase.database().ref().child("encuestaCliente/");
     mensaje.push(carga);
-
+    this.navCtrl.push(QrIngresoLocalPage);
   }
 }

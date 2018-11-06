@@ -77,7 +77,7 @@ contador;
     this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
 this.foto="";
 //DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!!!
-//this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
 if(this.tipo1=="mozo")
 {
   this.mostrarAlert2=true;
@@ -503,7 +503,7 @@ var data =snap.val();
      if(!tiempo  || tiempo< tiempoMax )
      {
 
-      let mensaje3  =firebase.database().ref().child("pedidos/"+"mesa"+this.mesa);
+      let mensaje3  =firebase.database().ref().child("pedidos/"+this.mesa);
   
       mensaje3.update({tiempo:tiempoMax}).then(()=>{
         for(let i=0;i<this.pedido.length;i++)

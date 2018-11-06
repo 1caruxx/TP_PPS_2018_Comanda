@@ -23,13 +23,19 @@ export class QrIngresoLocalPage {
   mensaje:string;
   desplegarEncuesta:boolean=false;
   claveActual;
-
+foto1="";
+foto2;
+foto3;
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth) {
     this.correo=localStorage.getItem("usuario");
+   // this.foto1="assets/imgs/beta/comida.png";
+    this.foto2="assets/imgs/beta/comida.png";
+    this.foto3="assets/imgs/beta/comida.png";
 
-    this.correo =(JSON.parse(this.correo)).correo;
+    //this.correo =(JSON.parse(this.correo)).correo;
+    this.correo="lucas@soylucas.com";
     //DESCOMENTAR PARA TRABAJAR A NIVEL LOCAL!!!!!!!
-   // this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+    this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
 
     this.TraerEncuestas();
   }
