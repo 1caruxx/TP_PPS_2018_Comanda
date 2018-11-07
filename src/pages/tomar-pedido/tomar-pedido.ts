@@ -200,7 +200,7 @@ export class TomarPedidoPage {
     //PEDIDOS MESA 1
 
 
-    let pedidosMesaUno = this.firebase.database().ref("pedidos/mesa1/");
+    let pedidosMesaUno = this.firebase.database().ref("pedidos/1/");
 
 
     pedidosMesaUno.once("value", (snap) => {
@@ -251,7 +251,7 @@ export class TomarPedidoPage {
     //PEDIDOS MESA 2
 
 
-    let pedidosMesaDos = this.firebase.database().ref("pedidos/mesa2/");
+    let pedidosMesaDos = this.firebase.database().ref("pedidos/2/");
 
 
     pedidosMesaDos.once("value", (snap) => {
@@ -302,7 +302,7 @@ export class TomarPedidoPage {
      //PEDIDOS MESA 3
 
 
-     let pedidosMesaTres = this.firebase.database().ref("pedidos/mesa3/");
+     let pedidosMesaTres = this.firebase.database().ref("pedidos/3/");
 
 
      pedidosMesaTres.once("value", (snap) => {
@@ -356,7 +356,7 @@ export class TomarPedidoPage {
 
 
     //PEDIDOS MESA 4
-    let pedidosMesaCuatro = this.firebase.database().ref("pedidos/mesa4/");
+    let pedidosMesaCuatro = this.firebase.database().ref("pedidos/4/");
 
 
     pedidosMesaCuatro.once("value", (snap) => {
@@ -410,7 +410,7 @@ export class TomarPedidoPage {
     //PEDIDOS MESA 5
 
 
-    let pedidosMesaCinco = this.firebase.database().ref("pedidos/mesa5/");
+    let pedidosMesaCinco = this.firebase.database().ref("pedidos/5/");
 
 
     pedidosMesaCinco.once("value", (snap) => {
@@ -461,7 +461,7 @@ export class TomarPedidoPage {
 
     //MESA SEIS
 
-    let pedidosMesaSeis = this.firebase.database().ref("pedidos/mesa6/");
+    let pedidosMesaSeis = this.firebase.database().ref("pedidos/6/");
 
 
     pedidosMesaSeis.once("value", (snap) => {
@@ -512,7 +512,7 @@ export class TomarPedidoPage {
      //PEDIDOS MESA 7
 
 
-     let pedidosMesaSiete = this.firebase.database().ref("pedidos/mesa7/");
+     let pedidosMesaSiete = this.firebase.database().ref("pedidos/7/");
 
 
      pedidosMesaSiete.once("value", (snap) => {
@@ -563,7 +563,7 @@ export class TomarPedidoPage {
       //PEDIDOS MESA 8
 
 
-    let pedidosMesaOcho = this.firebase.database().ref("pedidos/mesa8/");
+    let pedidosMesaOcho = this.firebase.database().ref("pedidos/8/");
 
 
     pedidosMesaOcho.once("value", (snap) => {
@@ -611,7 +611,7 @@ export class TomarPedidoPage {
       
     });
 
-    let pedidosMesaNueve = this.firebase.database().ref("pedidos/mesa9/");
+    let pedidosMesaNueve = this.firebase.database().ref("pedidos/9/");
 
 
     pedidosMesaNueve.once("value", (snap) => {
@@ -659,7 +659,7 @@ export class TomarPedidoPage {
       
     });
 
-    let pedidosMesaDiez = this.firebase.database().ref("pedidos/mesa10/");
+    let pedidosMesaDiez = this.firebase.database().ref("pedidos/10/");
 
 
     pedidosMesaDiez.once("value", (snap) => {
@@ -1203,7 +1203,7 @@ export class TomarPedidoPage {
 
   terminarPedidoUnoCocinero()
   {
-    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/mesa1/");
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/1/");
                         
                   refTerminarUnoCocinero.once('value', (snap) => 
                         {
@@ -1239,7 +1239,7 @@ export class TomarPedidoPage {
   TerminarPedidoUnoBartender()
   {
 
-    var refTerminarUnoBartender = this.firebase.database().ref("pedidos/mesa1/");
+    var refTerminarUnoBartender = this.firebase.database().ref("pedidos/1/");
                         
     refTerminarUnoBartender.once('value', (snap) => 
           {
@@ -1277,7 +1277,7 @@ export class TomarPedidoPage {
   terminarPedidoDosCocinero()
   {
 
-    var refTerminarDosCocinero = this.firebase.database().ref("pedidos/mesa2/");
+    var refTerminarDosCocinero = this.firebase.database().ref("pedidos/2/");
                         
                   refTerminarDosCocinero.once('value', (snap) => 
                         {
@@ -1314,7 +1314,7 @@ export class TomarPedidoPage {
   TerminarPedidoDosBartender()
   {
 
-    var refTerminarDosBartender = this.firebase.database().ref("pedidos/mesa2/");
+    var refTerminarDosBartender = this.firebase.database().ref("pedidos/2/");
                         
     refTerminarDosBartender.once('value', (snap) => 
           {
@@ -1348,7 +1348,7 @@ export class TomarPedidoPage {
 
   terminarPedidoTresCocinero()
   {
-    var refTerminarTresCocinero = this.firebase.database().ref("pedidos/mesa3/");
+    var refTerminarTresCocinero = this.firebase.database().ref("pedidos/3/");
                         
                   refTerminarTresCocinero.once('value', (snap) => 
                         {
@@ -1396,7 +1396,7 @@ export class TomarPedidoPage {
 
   terminarPedidoTresBartender()
   {
-    var refTerminarTresBartender = this.firebase.database().ref("pedidos/mesa3/");
+    var refTerminarTresBartender = this.firebase.database().ref("pedidos/3/");
                         
     refTerminarTresBartender.once('value', (snap) => 
           {
@@ -1433,7 +1433,7 @@ export class TomarPedidoPage {
   terminarPedidoCuatroCocinero()
   {
 
-    var refTerminarCuatroCocinero = this.firebase.database().ref("pedidos/mesa4/");
+    var refTerminarCuatroCocinero = this.firebase.database().ref("pedidos/4/");
                         
                   refTerminarCuatroCocinero.once('value', (snap) => 
                         {
@@ -1466,7 +1466,7 @@ export class TomarPedidoPage {
   terminarPedidoCuatroBartender()
   {
 
-    var refTerminarCuatroBartender = this.firebase.database().ref("pedidos/mesa4/");
+    var refTerminarCuatroBartender = this.firebase.database().ref("pedidos/4/");
                         
     refTerminarCuatroBartender.once('value', (snap) => 
           {
@@ -1501,7 +1501,7 @@ export class TomarPedidoPage {
   terminarPedidoCincoCocinero()
   {
 
-    var refTerminarCincoCocinero = this.firebase.database().ref("pedidos/mesa5/");
+    var refTerminarCincoCocinero = this.firebase.database().ref("pedidos/5/");
                         
     refTerminarCincoCocinero.once('value', (snap) => 
           {
@@ -1534,7 +1534,7 @@ export class TomarPedidoPage {
   terminarPedidoCincoBartender()
   {
 
-    var refTerminarCincoBartender = this.firebase.database().ref("pedidos/mesa5/");
+    var refTerminarCincoBartender = this.firebase.database().ref("pedidos/5/");
                         
     refTerminarCincoBartender.once('value', (snap) => 
           {
@@ -1570,7 +1570,7 @@ export class TomarPedidoPage {
   terminarPedidoSeisCocinero()
   {
 
-    var refTerminarSeisCocinero = this.firebase.database().ref("pedidos/mesa6/");
+    var refTerminarSeisCocinero = this.firebase.database().ref("pedidos/6/");
                         
     refTerminarSeisCocinero.once('value', (snap) => 
           {
@@ -1603,7 +1603,7 @@ export class TomarPedidoPage {
   terminarPedidoSeisBartender()
   {
 
-    var refTerminarSeisBartender = this.firebase.database().ref("pedidos/mesa6/");
+    var refTerminarSeisBartender = this.firebase.database().ref("pedidos/6/");
                         
     refTerminarSeisBartender.once('value', (snap) => 
           {
@@ -1638,7 +1638,7 @@ export class TomarPedidoPage {
   terminarPedidoSieteCocinero()
   {
 
-    var refTerminarSieteCocinero = this.firebase.database().ref("pedidos/mesa7/");
+    var refTerminarSieteCocinero = this.firebase.database().ref("pedidos/7/");
                         
     refTerminarSieteCocinero.once('value', (snap) => 
           {
@@ -1671,7 +1671,7 @@ export class TomarPedidoPage {
   terminarPedidoSieteBartender()
   {
 
-    var refTerminarSieteBartender = this.firebase.database().ref("pedidos/mesa7/");
+    var refTerminarSieteBartender = this.firebase.database().ref("pedidos/7/");
                         
     refTerminarSieteBartender.once('value', (snap) => 
           {
@@ -1706,7 +1706,7 @@ export class TomarPedidoPage {
   terminarPedidoOchoCocinero()
   {
 
-    var refTerminarOchoCocinero = this.firebase.database().ref("pedidos/mesa8/");
+    var refTerminarOchoCocinero = this.firebase.database().ref("pedidos/8/");
                         
     refTerminarOchoCocinero.once('value', (snap) => 
           {
@@ -1739,7 +1739,7 @@ export class TomarPedidoPage {
   terminarPedidoOchoBartender()
   {
 
-    var refTerminarOchoBartender = this.firebase.database().ref("pedidos/mesa8/");
+    var refTerminarOchoBartender = this.firebase.database().ref("pedidos/8/");
                         
     refTerminarOchoBartender.once('value', (snap) => 
           {
@@ -1774,7 +1774,7 @@ export class TomarPedidoPage {
   terminarPedidoNueveCocinero()
   {
 
-    var refTerminarNueveCocinero = this.firebase.database().ref("pedidos/mesa9/");
+    var refTerminarNueveCocinero = this.firebase.database().ref("pedidos/9/");
                         
     refTerminarNueveCocinero.once('value', (snap) => 
           {
@@ -1807,7 +1807,7 @@ export class TomarPedidoPage {
   terminarPedidoNueveBartender()
   {
 
-    var refTerminarNueveBartender = this.firebase.database().ref("pedidos/mesa9/");
+    var refTerminarNueveBartender = this.firebase.database().ref("pedidos/9/");
                         
     refTerminarNueveBartender.once('value', (snap) => 
           {
@@ -1842,7 +1842,7 @@ export class TomarPedidoPage {
   terminarPedidoDiezCocinero()
   {
 
-    var refTerminarDiezCocinero = this.firebase.database().ref("pedidos/mesa10/");
+    var refTerminarDiezCocinero = this.firebase.database().ref("pedidos/10/");
                         
     refTerminarDiezCocinero.once('value', (snap) => 
           {
@@ -1875,7 +1875,7 @@ export class TomarPedidoPage {
   terminarPedidoDiezBartender()
   {
 
-    var refTerminarDiezBartender = this.firebase.database().ref("pedidos/mesa10/");
+    var refTerminarDiezBartender = this.firebase.database().ref("pedidos/10/");
                         
     refTerminarDiezBartender.once('value', (snap) => 
           {

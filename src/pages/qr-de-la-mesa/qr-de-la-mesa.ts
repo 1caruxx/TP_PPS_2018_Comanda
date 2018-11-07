@@ -276,7 +276,7 @@ export class QrDeLaMesaPage {
 
 
                                     data[key].cliente = correo;
-                                    data[key].estado = "ocupado";
+                                    data[key].estado = "ocupada";
                                     refDos.child(key).update(data[key]);
                                     //alert("bienvenido,se relaciono la mesa tres")
 
