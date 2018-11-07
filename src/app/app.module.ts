@@ -25,7 +25,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 
 import { Camera } from '@ionic-native/camera';
-import { QRScanner } from '@ionic-native/qr-scanner';
+
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 @NgModule({
   declarations: [
@@ -70,7 +72,7 @@ import { QRScanner } from '@ionic-native/qr-scanner';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
     Camera,
-    QRScanner
+    BarcodeScanner
   ]
 })
 export class AppModule {}

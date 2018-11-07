@@ -4,7 +4,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+//import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 /**
  * Generated class for the AltaDeMesaPage page.
@@ -36,8 +36,7 @@ export class AltaDeMesaPage {
   public estado = "vertical-container";
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera,
-    private qrScanner: QRScanner)
+  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
    {
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
     this.probandingg=true;
@@ -124,6 +123,7 @@ export class AltaDeMesaPage {
                 numeroMesa: this.numeroMesa,
                 cantidadComensales: this.cantidadComensales,
                 tipo: this.tipo,
+                estado: "libre",
                 img: url
               });
 
@@ -182,31 +182,8 @@ export class AltaDeMesaPage {
 
   Leer()
   {
-   /* this.qrScanner.prepare()
-          .then((status: QRScannerStatus) => {
-            if (status.authorized) {
-              // camera permission was granted
-
-
-              // start scanning
-              let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-                console.log('Scanned something', text);
-
-                this.qrScanner.hide(); // hide camera preview
-                scanSub.unsubscribe(); // stop scanning
-              });
-
-            } else if (status.denied) {
-              // camera permission was permanently denied
-              // you must use QRScanner.openSettings() method to guide the user to the settings page
-              // then they can grant the permission from there
-            } else {
-              // permission was denied, but not permanently. You can ask for permission again at a later time.
-            }
-          })
-          .catch((e: any) => console.log('Error is', e));
-
-*/
+    /*
+   
 this.cerrarqr=true;
 this.probandingg=false;
 
@@ -217,17 +194,10 @@ this.qrScanner.prepare()
 
     this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
 
-      //this.vibration.vibrate(300);
+     
       alert(text);
-      //this.OcultarLectorQR();
+     
       
-      
-      
-      // let datos = JSON.parse(text);
-
-      // this.nombre = datos.nombre;
-      // this.apellido = datos.apellido;
-      // this.dni = datos.dni;
 
       this.estado = "vertical-container";
     });
@@ -241,33 +211,35 @@ this.qrScanner.prepare()
     });
 
   } else if (status.denied) {
-    // camera permission was permanently denied
-    // you must use QRScanner.openSettings() method to guide the user to the settings page
-    // then they can grant the permission from there
+   
 
   } else {
-    // permission was denied, but not permanently. You can ask for permission again at a later time.
+   
   }
 })
 .catch((e: any) => this.presentToast(e));
+
+*/
 
 
 
   }
 
   OcultarLectorQR() {
+    /*
 
     this.qrScanner.hide().then(() => {
 
       (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
       (window.document.querySelector('.close') as HTMLElement).classList.remove('mostrar');
-      //(window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "#FDE8C9";
+      
       this.estado = "vertical-container";
       this.probandingg=true;
       this.cerrarqr=false;
     });
 
     this.scanSub.unsubscribe();
+    */
   }
 
 

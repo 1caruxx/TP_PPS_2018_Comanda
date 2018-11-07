@@ -866,7 +866,7 @@ export class TomarPedidoPage {
 
                               if (1 == data[key].numeroMesa) 
                               {
-                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                data[key].tiempoMinimo = this.tiempoMesaUno;
                                 refUno.child(key).update(data[key]);
 
                                 
@@ -926,7 +926,7 @@ export class TomarPedidoPage {
 
                               if (2 == data[key].numeroMesa) 
                               {
-                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                data[key].tiempoMinimo = this.tiempoMesaDos;
                                 refDos.child(key).update(data[key]);
 
                                 
@@ -958,7 +958,7 @@ export class TomarPedidoPage {
 
                               if (3 == data[key].numeroMesa) 
                               {
-                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                data[key].tiempoMinimo = this.tiempoMesaTres;
                                 refTres.child(key).update(data[key]);
 
                                 
@@ -1090,7 +1090,7 @@ export class TomarPedidoPage {
 
                               if (7 == data[key].numeroMesa) 
                               {
-                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                data[key].tiempoMinimo = this.tiempoMesaSiete;
                                 refSiete.child(key).update(data[key]);
 
                                 
@@ -1122,7 +1122,7 @@ export class TomarPedidoPage {
 
                               if (8 == data[key].numeroMesa) 
                               {
-                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                data[key].tiempoMinimo = this.tiempoMesaOcho;
                                 refOcho.child(key).update(data[key]);
 
                                 
@@ -1154,7 +1154,7 @@ export class TomarPedidoPage {
 
                               if (9 == data[key].numeroMesa) 
                               {
-                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                data[key].tiempoMinimo = this.tiempoMesaNueve;
                                 refNueve.child(key).update(data[key]);
 
                                 
@@ -1186,7 +1186,7 @@ export class TomarPedidoPage {
 
                               if (10 == data[key].numeroMesa) 
                               {
-                                data[key].tiempoMinimo = this.tiempoMesaCuatro;
+                                data[key].tiempoMinimo = this.tiempoMesaDiez;
                                 refDiez.child(key).update(data[key]);
 
                                 

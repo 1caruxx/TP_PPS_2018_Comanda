@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import 'rxjs/add/operator/map'
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 
 /**
@@ -46,10 +46,14 @@ export class QrDeLaMesaPage {
   public vistaMozo:boolean;
   public vistaCliente:boolean;
 
+  options : any;
+
+  miScan;
+
 
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private qrScanner: QRScanner,private toastCtrl: ToastController,private authInstance: AngularFireAuth)
+  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController,private authInstance: AngularFireAuth,private barcode: BarcodeScanner)
    {
                  /* this.qrScanner.prepare()
               .then((status: QRScannerStatus) => {
@@ -82,6 +86,8 @@ export class QrDeLaMesaPage {
 
 */
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+
+   // this.vistaMozo=true;
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -189,116 +195,23 @@ export class QrDeLaMesaPage {
   MostrarQr(correo)
   {
 
-          this.cerrarqr=true;
+         /* this.cerrarqr=true;
           this.probandingg=false;
 
           this.qrScanner.prepare()
           .then((status: QRScannerStatus) => {
+            .then((status) => {
 
             if (status.authorized) {
 
               this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
 
-                
-               // alert(text);
-
-                //if(text=="1")
-                //{
-                  //alert("bienvenido,se relaciono al cliente con la mesa " + text)
+             
                   alert(text);
                   this.Modificar(correo,text);
                   this.ocultarQR = true;
 
-               /*   var refDos = this.firebase.database().ref("mesas");
-             
-                  refDos.on('value', function (snap) {
-                      var data2 = snap.val();
-                      this.estaLibre=true;
-                      for(var key2 in data2){
-                          if (parseInt(text) == parseInt(data2[key2].numeroMesa)) 
-                          {
-
-                            data2[key2].cliente = correo;
-                              refDos.child(key2).update(data2[key2]);
-
-                          
-     
-                          };                  
-                      }
-                  });*/
-
-                /*  var ref = this.firebase.database().ref("usuarios/clientes");
-             
-                  ref.on('value', function (snap) {
-                      var data = snap.val();
-                      for(var key in data){
-                          if (correo == data[key].correo) {
-                              data[key].mesa = text;
-                             // this.clientovich = data[key].correo;
-                              ref.child(key).update(data[key]);
-                              alert("bienvenido,se relaciono al cliente con la mesa " + text)
-                              //this.presentToast("Se pudo cargar al cliente con exito")
-
-                             
-      
- 
-                          };                  
-                      }
-                  });
-
-                  var refDos = this.firebase.database().ref("mesas");
-             
-                  refDos.on('value', function (snap) {
-                      var data2 = snap.val();
-                      this.estaLibre=true;
-                      for(var key2 in data2){
-                          if ("2" == data2[key2].numeroMesa) 
-                          {
-
-                            data2[key2].cliente = correo;
-                              refDos.child(key2).update(data2[key2]);
-
-                          
-     
-                          };                  
-                      }
-                  });*/
-
-               /*   if(this.estaLibre)
-                  {
-                    var ref = this.firebase.database().ref("usuarios");
-             
-                    ref.on('value', function (snap) {
-                        var data = snap.val();
-                        for(var key in data){
-                            if (correo == data[key].correo) {
-                                data[key].mesa = text;
-                               // this.clientovich = data[key].correo;
-                                ref.child(key).update(data[key]);
-                                alert("bienvenido,se relaciono al cliente con la mesa " + text)
-                                //this.presentToast("Se pudo cargar al cliente con exito")
-  
-                               
-        
-   
-                            };                  
-                        }
-                    });
-
-
-                  }*/
-
-              
-
-
-              //  }
-
-
-
-
-             // this.ocultarQR = true;
-
-               // this.estado = "vertical-container";
+           
               });
 
               this.qrScanner.show().then(() => {
@@ -317,23 +230,22 @@ export class QrDeLaMesaPage {
             }
           })
           .catch((e: any) => this.presentToast(e));
-
+*/
 
   }
 
   OcultarLectorQR() {
-
+/*
     this.qrScanner.hide().then(() => {
 
       (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
       (window.document.querySelector('.close') as HTMLElement).classList.remove('mostrar');
-      //(window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "#FDE8C9";
-      //this.estado = "vertical-container";
+      
       this.probandingg=true;
       this.cerrarqr=false;
     });
 
-    this.scanSub.unsubscribe();
+    this.scanSub.unsubscribe();*/
   }
 
   Modificar(correo,text)
@@ -364,8 +276,9 @@ export class QrDeLaMesaPage {
 
 
                                     data[key].cliente = correo;
+                                    data[key].estado = "ocupado";
                                     refDos.child(key).update(data[key]);
-                                    alert("bienvenido,se relaciono la mesa tres")
+                                    //alert("bienvenido,se relaciono la mesa tres")
 
 
 
@@ -377,9 +290,10 @@ export class QrDeLaMesaPage {
                                         for(var key in data){
                                             if (correo == data[key].correo) {
                                                 data[key].mesa = text;
+                                                data[key].estado = "atendido";
                                                
                                                 ref.child(key).update(data[key]);
-                                                alert("bienvenido,se relaciono al cliente con la mesa " + 3);
+                                                alert("Listo,se relaciono al cliente con la mesa " + text);
                                                 this.navCtrl.setRoot(this.navCtrl.getActive().component);
                                                 
                                                 
@@ -519,12 +433,13 @@ export class QrDeLaMesaPage {
   MostrarTiempoEsperaCliente()
   {
 
-
+/*
         this.cerrarqr=true;
           this.probandingg=false;
 
           this.qrScanner.prepare()
-          .then((status: QRScannerStatus) => {
+          //.then((status: QRScannerStatus) => {
+            .then((status) => {
 
             if (status.authorized) {
 
@@ -532,14 +447,13 @@ export class QrDeLaMesaPage {
 
                 
             
-                  //alert(text);
+                
 
                   var refDos = this.firebase.database().ref("mesas");
                         
                         refDos.once('value', (snap) => {
                             var data = snap.val();
-                            //this.estaLibre=true;
-                          // ocup=true;
+                           
                             for(var key in data)
                             {
                                 if (text == data[key].numeroMesa) 
@@ -553,7 +467,7 @@ export class QrDeLaMesaPage {
 
 
 
-                 // this.Modificar(correo,text);
+                 
 
 
 
@@ -567,7 +481,7 @@ export class QrDeLaMesaPage {
                 (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
                 (window.document.querySelector('.close') as HTMLElement).classList.add('mostrar');
                 (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "transparent";
-                //this.estado = "ocultar";
+               
               });
 
             } else if (status.denied) {
@@ -579,6 +493,70 @@ export class QrDeLaMesaPage {
           })
           .catch((e: any) => this.presentToast(e));
 
+
+          */
+
+  }
+
+  probandoBarcode(correo)
+  {
+
+  /*  this.options = { prompt : "Escaneá tu DNI", formats: "PDF_417" }
+
+    this.barcode.scan(this.options).then((barcodeData) => {
+        this.miScan = (barcodeData.text);
+        alert(this.miScan);
+    }, (error) => {
+       
+    });*/
+
+    this.barcode.scan().then(barcodeData => {
+      this.Modificar(correo,barcodeData.text);
+        alert(barcodeData.text);
+    });
+
+  }
+
+  ocuparMesaBarcode(correo)
+  {
+    this.barcode.scan().then(barcodeData => {
+      this.Modificar(correo,barcodeData.text);
+        alert(barcodeData.text);
+    });
+
+
+  }
+
+  mostrarTiempoBarcode()
+  {
+
+
+    this.barcode.scan().then(barcodeData => {
+
+
+
+     
+        //alert(barcodeData.text);
+        var refDos = this.firebase.database().ref("mesas");
+                        
+        refDos.once('value', (snap) => {
+            var data = snap.val();
+           
+            for(var key in data)
+            {
+                if (barcodeData.text == data[key].numeroMesa) 
+                {
+                    alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
+                    break;
+                                                                        
+                }
+              }
+            });
+
+
+
+
+    });
 
 
 
