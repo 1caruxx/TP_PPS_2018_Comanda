@@ -76,20 +76,21 @@ export class VerificarTipoProvider {
 
         case "cliente":
         acciones = [
+          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
           { accion: "Ingresar al local", img: "entrada.jpg", ruta: "./" },
+          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
           { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" },
-          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
           { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage }
         ];
         break;
 
         case "anonimo":
         acciones = [
-          { accion: "Ingresar al local.", img: "entrada.jpg", ruta: "./" },
+          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
+          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
           { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: "./" },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" },
-          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage }
+          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" }
         ];
         break;
     }

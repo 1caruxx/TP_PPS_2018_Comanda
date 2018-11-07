@@ -16,7 +16,7 @@
     <h1>{{alertTitulo}}</h1>
     <p>{{alertMensaje}}</p>
     <div class="botones">
-      <button ion-button outline (click)="alertHandler()">Ahora no</button>
+      <button ion-button outline (click)="Logout()" *ngIf="alertMostrarBotonCancelar">Ahora no</button>
       <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
     </div>
   </div>

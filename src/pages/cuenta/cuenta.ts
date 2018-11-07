@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
+import { LoginPage } from "../login/login";
 import { PrincipalPage } from "../principal/principal";
 
 import firebase from "firebase";
@@ -37,6 +38,7 @@ export class CuentaPage {
   public alertMensaje;
   public alertMensajeBoton;
   public alertHandler;
+  public alertMostrarBotonCancelar = true;
 
   constructor(
     public navCtrl: NavController,
@@ -169,8 +171,9 @@ export class CuentaPage {
 
     } else {
 
-      let clienteRef =  this.firebase.database().ref("usuarios").child(this.keyCliente);
-      let mesaRef = this.firebase.database().ref("pedidos").child(this.mesa);
+      let clienteRef = this.firebase.database().ref("usuarios").child(this.keyCliente);
+      let pedidoRef = this.firebase.database().ref("pedidos").child(this.mesa);
+      let mesaRef = this.firebase.database().ref("mesas");
 
       this.estadoBoton = true;
       this.ocultarSpinner = false;
@@ -179,9 +182,39 @@ export class CuentaPage {
         estado: "pago"
       }).then(() => {
 
-        //mesaRef.remove().then
-        this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
-        this.ocultarSpinner = true;
+        pedidoRef.remove().then(() => {
+
+          mesaRef.once("value", (snap) => {
+
+            let data = snap.val();
+
+            for (let item in data) {
+
+              if (data[item].numeroMesa == this.mesa) {
+
+                mesaRef.child(item).update({
+                  estado: "libre"
+                }).then(() => {
+
+                  if (true) {
+
+                    this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
+                  } /*else {
+
+                    this.alertMostrarBotonCancelar = false;
+                    this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante!", "Finalizar", this.Logout);
+                  }*/
+
+                  this.ocultarSpinner = true;
+                });
+
+                break;
+              }
+            }
+          }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+
+        }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+
       }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
 
     }
@@ -208,9 +241,33 @@ export class CuentaPage {
   }
 
   Redireccionar() {
-    //this.navCtrl.setRoot(PrincipalPage);
+    this.navCtrl.setRoot(PrincipalPage);
+  }
 
-    console.log("esto no esta bien")
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+
+            localStorage.clear();
+            this.navCtrl.setRoot(LoginPage);
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 }
