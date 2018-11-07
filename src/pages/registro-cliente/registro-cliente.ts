@@ -49,7 +49,7 @@ export class RegistroClientePage {
       private alertCtrl: AlertController
   ) 
   {
-    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+  //  this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
       this.formReg =false;
       this.formInicial=true;
       this.formAnon=false;

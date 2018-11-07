@@ -77,7 +77,7 @@ contador;
     this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
 this.foto="";
 //DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!!!
-this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+//this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
 if(this.tipo1=="mozo")
 {
   this.mostrarAlert2=true;

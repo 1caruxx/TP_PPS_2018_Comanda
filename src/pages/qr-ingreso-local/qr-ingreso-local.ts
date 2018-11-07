@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from "firebase";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { RegistroClientePage } from '../registro-cliente/registro-cliente';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 /**
  * Generated class for the QrIngresoLocalPage page.
@@ -26,7 +27,14 @@ export class QrIngresoLocalPage {
 foto1="";
 foto2;
 foto3;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth) {
+options : any;
+  constructor(
+    public navCtrl: NavController,
+     public navParams: NavParams,
+     private authInstance: AngularFireAuth,
+     private barcodeScanner: BarcodeScanner
+    ) 
+    {
     this.correo=localStorage.getItem("usuario");
    // this.foto1="assets/imgs/beta/comida.png";
     this.foto2="assets/imgs/beta/comida.png";
@@ -35,7 +43,7 @@ foto3;
     //this.correo =(JSON.parse(this.correo)).correo;
     this.correo="lucas@soylucas.com";
     //DESCOMENTAR PARA TRABAJAR A NIVEL LOCAL!!!!!!!
-    this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+  //  this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
 
     this.TraerEncuestas();
   }
@@ -61,14 +69,42 @@ var data =snap.val();
   }
   leerQr()
   { 
-    this.mensaje="Bienvenido!! Se ha anunciado con exito, en breve vendra el mozo a atenderlo";
-  this.mostrarAlert3=true;
-  this.desplegarEncuesta=true;
-  setTimeout(()=>{
+    this.options = { prompt : "Escaneá el qr de la puerta", formats: 'QR_CODE' }
 
-    this.mostrarAlert3=false;
+    this.barcodeScanner.scan(this.options).then((barcodeData) => {
+        let miScan = (barcodeData.text);
 
-  }, 3000);
+        alert(miScan);
+        if(barcodeData.text==="bienvenido")
+        {
+          this.mensaje="Bienvenido!! Se ha anunciado con éxito, en breve vendra el mozo a atenderlo";
+          this.mostrarAlert3=true;
+          this.desplegarEncuesta=true;
+          setTimeout(()=>{
+        
+            this.mostrarAlert3=false;
+            return;
+        
+          }, 3000);
+
+        }
+        else
+        {
+          this.mensaje="Qr no valido";
+          this.mostrarAlert3=true;
+          
+          setTimeout(()=>{
+        
+            this.mostrarAlert3=false;
+            return;
+        
+          }, 3000);
+        }
+    }, (error) => {
+        //this.errorHandler.mostrarErrorLiteral(error);
+    });
+
+   
 
     
     let usuariosRef = firebase.database().ref("usuarios");

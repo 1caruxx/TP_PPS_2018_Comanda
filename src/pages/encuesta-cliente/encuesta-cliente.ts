@@ -114,7 +114,7 @@ mostrarChart:boolean=false;
     //setear esta variable con el cliente sacado del local storage
     this.cliente ="yoCliente";
     //DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!
-    this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+  //  this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
     Chart.defaults.global.legend.display = false;
     let encuestaRef =firebase.database().ref("encuestaCliente/");
     encuestaRef.once("value", (snap) => {
