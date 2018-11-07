@@ -18,7 +18,7 @@ import { Camera } from '@ionic-native/camera';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
-import { QRScanner } from '@ionic-native/qr-scanner';
+
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ChartsModule } from 'ng2-charts';
 
@@ -63,7 +63,7 @@ import { ChartsModule } from 'ng2-charts';
     BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
-    QRScanner
+  
 
   ]
 })
