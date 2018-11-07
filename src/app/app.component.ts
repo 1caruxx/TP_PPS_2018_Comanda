@@ -19,7 +19,7 @@ export class MyApp {
    
 
 //rootPage:any =   TabsPage  ;
-rootPage:any =   PedirPlatosPage ;
+rootPage:any =   EncuestaClientePage  ;
  
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

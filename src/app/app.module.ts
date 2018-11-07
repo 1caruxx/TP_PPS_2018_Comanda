@@ -20,6 +20,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 import { QRScanner } from '@ionic-native/qr-scanner';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -38,7 +39,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    ChartsModule,
     AngularFireModule.initializeApp(firebaseConfig.fire)
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [

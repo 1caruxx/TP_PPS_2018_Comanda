@@ -4,108 +4,10 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<div class="pregunta1"  [ngClass]="{'noMostrar':ocultar}">
-  <div class="laPregunta1" radio-group [(ngModel)]="resp1">
-      <h2>¿Se siente c&oacute;modo en el restaurant?</h2>
-     
-      <ion-item>
-          <ion-label>Si</ion-label>
-          <ion-radio value="Si"></ion-radio>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label>No</ion-label>
-          <ion-radio value="No"></ion-radio>
-        </ion-item>
-        <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
-    </div>
-</div>
-<div class="pregunta2"  [ngClass]="{'noMostrar':ocultar2}">
-    <div class="laPregunta2">
-        <h2>¿Como calificar&iacute;a la atenci&oacute;n?</h2>
-       
-        <ion-item>
-            <ion-label>Elija su opci&oacute;n</ion-label>
-            <ion-select  okText="Ok" [(ngModel)]="resp2" cancelText="Cancelar">
-                <ion-option  value=" muy mala">Muy mala</ion-option>
-                <ion-option value="mala">Mala</ion-option>
-                <ion-option value="regular">Regular</ion-option>
-                <ion-option value="Buena">Buena</ion-option>
-                <ion-option value="Muy buena">Muy Buena</ion-option>
-              </ion-select>
-          </ion-item>
-          <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
-      </div>
+<div class="alert3" [ngClass]="{'mostrarAlert3':mostrarAlert3}">
+    <h1>{{mensaje}}</h1>
   </div>
-  <div class="pregunta3"  [ngClass]="{'noMostrar':ocultar3}">
-      <div class="laPregunta3">
-          <h2>¿Cu&aacute;les considera nuestros puntos fuertes?</h2>
-         
-          <ion-item>
-              <ion-label >La comodidad del sal&oacute;n</ion-label>
-            <ion-checkbox [(ngModel)]="resp3comodidad" >Si</ion-checkbox>
-            
-          </ion-item>
 
-          <ion-item>
-              <ion-label >Nuestros platos</ion-label>
-            <ion-checkbox  [(ngModel)]="resp3platos" >No</ion-checkbox>
-            
-          </ion-item>
-          <ion-item>
-                <ion-label >Nuestros precios</ion-label>
-              <ion-checkbox  [(ngModel)]="resp3precios" >No</ion-checkbox>
-              
-            </ion-item>
-            <ion-item>
-                    <ion-label >Nuestra atenci&oacute;n</ion-label>
-                  <ion-checkbox  [(ngModel)]="resp3atencion" >No</ion-checkbox>
-                  
-                </ion-item>
-            <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
-        </div>
-    </div>
-    <div class="pregunta4"  [ngClass]="{'noMostrar':ocultar4}">
-        <div class="laPregunta4">
-            <h2>¿Que tan buenos son nuestros platos?</h2>
-           
-            <ion-item>
-        
-                <ion-range [(ngModel)]="resp4" min="1" max="10" pin="true" >
-                    <ion-icon range-left  name="sad"></ion-icon>
-                    <ion-icon range-right name="happy"></ion-icon>
-        
-                </ion-range>
-              </ion-item>
-              <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
-          </div>
-      </div>
-      <div class="pregunta5"  [ngClass]="{'noMostrar':ocultar5}">
-          <div class="laPregunta5">
-              <h2>¿Qu&eacute;  piensa qu&eacute; es lo mejor del restaurante?</h2>
-             
-              <ion-item>
-          
-                  <ion-input placeholder="Escribalo aqui" [(ngModel)]="resp5"></ion-input>
-                </ion-item>
-                <button class="aceptar" (click)="Aceptar()"  ion-button color="red">Aceptar</button>
-            </div>
-        </div>
-        <div class="pregunta6"  [ngClass]="{'noMostrar':ocultar6}">
-            <div class="laPregunta6">
-                <h2>Tome algunas fotos(m&aacute;ximo 3) relacionadas a sus respuestas</h2>
-               
-              
-            
-                    <button ion-button color="dark"   (click)="Foto1()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton1}" >  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button> 
-                    <img class="laFoto1" [src]="foto1" [ngClass]="{'mostrarLaFoto':mostrarfoto1}" >
-                    <button ion-button color="dark"   (click)="Foto2()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton2}">  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button>
-                    <img class="laFoto2" [src]="foto2" [ngClass]="{'mostrarLaFoto':mostrarfoto2}" >
-                    <button ion-button color="dark"  (click)="Foto3()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton3}">  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button>
-                    <img class="laFoto3" [src]="foto3" [ngClass]="{'mostrarLaFoto':mostrarfoto3}" >
-                    <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
-              </div>
-          </div>
 <ion-header>
     <ion-navbar color="red">
   
@@ -128,15 +30,207 @@
 
 
 <ion-content >
+       
     <div class="contenido">
+            <div class="pregunta1"  [ngClass]="{'noMostrar':ocultar}">
+    
+                    <div class="laPregunta1" radio-group [(ngModel)]="resp1">
+                        
+                        <h2>¿Se siente c&oacute;modo en el restaurant?</h2>
+                       
+                        <ion-item>
+                            <ion-label>Si</ion-label>
+                            <ion-radio value="Si"></ion-radio>
+                          </ion-item>
+                        
+                          <ion-item>
+                            <ion-label>No</ion-label>
+                            <ion-radio value="No"></ion-radio>
+                          </ion-item>
+                          <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+                          <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                                  <ion-icon class="iconoChart" name="stats"></ion-icon>
+                                  </button>
+                          <div id="divCanvas" class="canvas" [ngClass]="{'mostrarChart':mostrarChart}">
+                                  <button ion-button class="cerrarChart" (click)="cerrarChart()" color="light">
+                                          <ion-icon name="close"></ion-icon>
+                                      </button>
+                                  <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
+                                  <canvas baseChart
+                                          [data]="pregunta1Data"
+                                          [labels]="pregunta1Labels"
+                                          [chartType]="doughnutChartType"
+                                          (chartHover)="chartHovered($event)"
+                                          (chartClick)="chartClicked($event)"></canvas>
+                                </div>
+                      </div>
+                  
+                  </div>
+                  <div class="pregunta2"  [ngClass]="{'noMostrar':ocultar2}">
+                      <div class="laPregunta2">
+                            
+                          <h2>¿Como calificar&iacute;a la atenci&oacute;n?</h2>
+                         
+                          <ion-item>
+                              <ion-label>Elija su opci&oacute;n</ion-label>
+                              <ion-select  okText="Ok" [(ngModel)]="resp2" cancelText="Cancelar">
+                                  <ion-option  value="muy mala">Muy mala</ion-option>
+                                  <ion-option value="mala">Mala</ion-option>
+                                  <ion-option value="regular">Regular</ion-option>
+                                  <ion-option value="buena">Buena</ion-option>
+                                  <ion-option value="muy buena">Muy Buena</ion-option>
+                                </ion-select>
+                            </ion-item>
+                            <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+                            <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                                  <ion-icon class="iconoChart" name="stats"></ion-icon>
+                                  </button>
+                            <div id="divCanvas" class="canvas" [ngClass]="{'mostrarChart':mostrarChart}" >
+                                  <button ion-button class="cerrarChart" (click)="cerrarChart()" color="light">
+                                  <ion-icon name="close"></ion-icon>
+                              </button>
+                                  <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
+                                  <canvas baseChart
+                                          [data]="pregunta2Data"
+                                          [labels]="pregunta2Labels"
+                                          [chartType]="doughnutChartType"
+                                          (chartHover)="chartHovered($event)"
+                                          (chartClick)="chartClicked($event)"></canvas>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="pregunta3"  [ngClass]="{'noMostrar':ocultar3}">
+                        <div class="laPregunta3">
+                             
+                            <h2>¿Cu&aacute;les considera nuestros puntos fuertes?</h2>
+                           
+                            <ion-item>
+                                <ion-label >La comodidad del sal&oacute;n</ion-label>
+                              <ion-checkbox [(ngModel)]="resp3comodidad" >Si</ion-checkbox>
+                              
+                            </ion-item>
+                  
+                            <ion-item>
+                                <ion-label >Nuestros platos</ion-label>
+                              <ion-checkbox  [(ngModel)]="resp3platos" >No</ion-checkbox>
+                              
+                            </ion-item>
+                            <ion-item>
+                                  <ion-label >Nuestros precios</ion-label>
+                                <ion-checkbox  [(ngModel)]="resp3precios" >No</ion-checkbox>
+                                
+                              </ion-item>
+                              <ion-item>
+                                      <ion-label >Nuestra atenci&oacute;n</ion-label>
+                                    <ion-checkbox  [(ngModel)]="resp3atencion" >No</ion-checkbox>
+                                    
+                                  </ion-item>
+                              <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+                              <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                                      <ion-icon class="iconoChart" name="stats"></ion-icon>
+                                      </button>
+                              <div id="divCanvas" class="canvas" [ngClass]="{'mostrarChart':mostrarChart}">
+                                      <button ion-button class="cerrarChart" (click)="cerrarChart()" color="light">
+                                              <ion-icon name="close"></ion-icon>
+                                          </button>
+                                          <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
+                                      <canvas baseChart
+                                              [data]="pregunta3Data"
+                                              [labels]="pregunta3Labels"
+                                              [chartType]="doughnutChartType"
+                                              (chartHover)="chartHovered($event)"
+                                              (chartClick)="chartClicked($event)"></canvas>
+                                    </div>
+                          </div>
+                      </div>
+                      <div class="pregunta4"  [ngClass]="{'noMostrar':ocultar4}">
+                          <div class="laPregunta4">
+                                  
+                            
+                              <h2>¿Que tan buenos son nuestros platos?</h2>
+                             
+                              <ion-item>
+                          
+                                  <ion-range [(ngModel)]="resp4" min="1" max="7" pin="true" (ngModelChange)="ModificarTextoRange()" >
+                                          <ion-icon range-left  name="sad"></ion-icon>
+                                          <ion-icon range-right name="happy"></ion-icon>
+                            
+                          
+                                  </ion-range>
+                                  
+                                </ion-item>
+                                <span>{{textoRange}}</span>
+                                <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+                                <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                                      <ion-icon class="iconoChart" name="stats"></ion-icon>
+                                      </button>
+                                <div id="divCanvas" class="canvas"  [ngClass]="{'mostrarChart':mostrarChart}" >
+                                      <button ion-button class="cerrarChart" (click)="cerrarChart()" color="light">
+                                              <ion-icon name="close"></ion-icon>
+                                          </button>
+                                          <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
+                                      <canvas baseChart
+                                              [data]="pregunta4Data"
+                                              [labels]="pregunta4Labels"
+                                              [chartType]="doughnutChartType"
+                                              (chartHover)="chartHovered($event)"
+                                              (chartClick)="chartClicked($event)"></canvas>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="pregunta5"  [ngClass]="{'noMostrar':ocultar5}">
+                            <div class="laPregunta5">
+                                 
+                              <h2>¿Del 1 al 10, qué puntaje le pondrias a nuestro restaurante?</h2>
+                               
+                                <ion-item>
+                            
+                                    <input type="text" class="miInput" placeholder="Escribalo aqui" [(ngModel)]="resp5">
+                                  </ion-item>
+                                  <button class="aceptar" (click)="Aceptar5()"  ion-button color="red">Aceptar</button>
+                                  <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                                          <ion-icon class="iconoChart" name="stats"></ion-icon>
+                                          </button>
+                  
+                                  <div id="divCanvas" class="canvas" [ngClass]="{'mostrarChart':mostrarChart}">
+                                          <button ion-button class="cerrarChart" (click)="cerrarChart()" color="light">
+                                                  <ion-icon name="close"></ion-icon>
+                                              </button>
+                                              <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
+                                          <canvas baseChart
+                                                  [data]="pregunta5Data"
+                                                  [labels]="pregunta5Labels"
+                                                  [chartType]="doughnutChartType"
+                                                  (chartHover)="chartHovered($event)"
+                                                  (chartClick)="chartClicked($event)"></canvas>
+                                        </div>
+                              </div>
+                          </div>
+                          <div class="pregunta6"  [ngClass]="{'noMostrar':ocultar6}">
+                              <div class="laPregunta6">
+                                  <h2>Tome algunas fotos(m&aacute;ximo 3) relacionadas a sus respuestas</h2>
+                                 
+                                
+                              
+                                      <button ion-button color="dark"   (click)="Foto1()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton1}" >  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button> 
+                                      <img class="laFoto1" [src]="foto1" [ngClass]="{'mostrarLaFoto':mostrarfoto1}" >
+                                      <button ion-button color="dark"   (click)="Foto2()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton2}">  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button>
+                                      <img class="laFoto2" [src]="foto2" [ngClass]="{'mostrarLaFoto':mostrarfoto2}" >
+                                      <button ion-button color="dark"  (click)="Foto3()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton3}">  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button>
+                                      <img class="laFoto3" [src]="foto3" [ngClass]="{'mostrarLaFoto':mostrarfoto3}" >
+                                      <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+                                </div>
+                            </div>
         <h1 class="tituloPag">¿Qu&eacute; piensa de nosotros?</h1>
         <p class="info">Ayudenos a brindarle una mejor atenci&oacute;n cada vez, con la siguiente encuesta:</p>
-        <button ion-button color="light" (click)="pregunta1()" outline>Pregunta I</button>
-         <button ion-button color="light" (click)="pregunta2()"  outline>Pregunta II</button>
-         <button ion-button color="light" (click)="pregunta3()" outline>Pregunta III</button>
-         <button ion-button color="light"  (click)="pregunta4()" outline>Pregunta IV</button>
-         <button ion-button color="light" (click)="pregunta5()" outline>Pregunta V</button>
-         <button ion-button color="light" (click)="pregunta6()" outline>Fotos(Opcional)</button>
+        <button ion-button color="light" class="btnContenido" (click)="pregunta1()" outline>Pregunta I</button>
+         <button ion-button color="light" class="btnContenido" (click)="pregunta2()"  outline>Pregunta II</button>
+         <button ion-button color="light"class="btnContenido"  (click)="pregunta3()" outline>Pregunta III</button>
+         <button ion-button color="light"   class="btnContenido" (click)="pregunta4()" outline>Pregunta IV</button>
+         <button ion-button color="light" class="btnContenido" (click)="pregunta5()" outline>Pregunta V</button>
+
+      
+         <button ion-button color="light"class="btnContenido" (click)="pregunta6()" outline>Fotos(Opcional)</button>
          <button class="enviar" (click)= "SubirEncuesta()" ion-button color="red">Enviar encuesta</button>
       </div>
     

@@ -424,6 +424,7 @@ var data =snap.val();
   {
     this.eligio=true;
     this.Cerrar();
+    
   }
   CancelarPedido()
   {
