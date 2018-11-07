@@ -44,9 +44,12 @@ export class EncuestaDeEmpleadoPage {
   public pregCincoPrimeraRespuesta=0;
   public pregCincoSegundaRespuesta=0;
 
+  public usuario;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
-   {
+  {
      //this.encuesta();
+     this.usuario = JSON.parse(localStorage.getItem("desloguear"));
 
 
   }
@@ -132,6 +135,7 @@ export class EncuestaDeEmpleadoPage {
 
       this.presentToast("la encuesta fue cargada con exito");
       this.encuesta();
+
 
 
 
