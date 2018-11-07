@@ -98,6 +98,28 @@ export class TomarPedidoPage {
   public vistaCocinero:boolean;
   public vistaBartender:boolean;
 
+  public vistaCocinaMesaUno:boolean;
+  public vistaCocinaMesaDos:boolean;
+  public vistaCocinaMesaTres:boolean;
+  public vistaCocinaMesaCuatro:boolean;
+  public vistaCocinaMesaCinco:boolean;
+  public vistaCocinaMesaSeis:boolean;
+  public vistaCocinaMesaSiete:boolean;
+  public vistaCocinaMesaOcho:boolean;
+  public vistaCocinaMesaNueve:boolean;
+  public vistaCocinaMesaDiez:boolean;
+
+  public vistaBartenderMesaUno:boolean;
+  public vistaBartenderMesaDos:boolean;
+  public vistaBartenderMesaTres:boolean;
+  public vistaBartenderMesaCuatro:boolean;
+  public vistaBartenderMesaCinco:boolean;
+  public vistaBartenderMesaSeis:boolean;
+  public vistaBartenderMesaSiete:boolean;
+  public vistaBartenderMesaOcho:boolean;
+  public vistaBartenderMesaNueve:boolean;
+  public vistaBartenderMesaDiez:boolean;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
   {
@@ -106,6 +128,28 @@ export class TomarPedidoPage {
     localData.subscribe(data => {
       this.information = data;
     })
+
+    this.vistaCocinaMesaUno=false;
+    this.vistaCocinaMesaDos=false;
+    this.vistaCocinaMesaTres=false;
+    this.vistaCocinaMesaCuatro=false;
+    this.vistaCocinaMesaCinco=false;
+    this.vistaCocinaMesaSeis=false;
+    this.vistaCocinaMesaSiete=false;
+    this.vistaCocinaMesaOcho=false;
+    this.vistaCocinaMesaNueve=false;
+    this.vistaCocinaMesaDiez=false;
+
+    this.vistaBartenderMesaUno=false;
+    this.vistaBartenderMesaDos=false;
+    this.vistaBartenderMesaTres=false;
+    this.vistaBartenderMesaCuatro=false;
+    this.vistaBartenderMesaCinco=false;
+    this.vistaBartenderMesaSeis=false;
+    this.vistaBartenderMesaSiete=false;
+    this.vistaBartenderMesaOcho=false;
+    this.vistaBartenderMesaNueve=false;
+    this.vistaBartenderMesaDiez=false;
 
 
 
@@ -136,7 +180,9 @@ export class TomarPedidoPage {
 
     //this.ocultar=true;
 
-    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    this.vistaCocinero=true;
+
+    /*this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     if(this.usuario.tipo=="cocinero")
     {
@@ -146,7 +192,7 @@ export class TomarPedidoPage {
     if(this.usuario.tipo=="bartender")
     {
       this.vistaBartender=true;
-    }
+    }*/
 
 
 
@@ -211,6 +257,9 @@ export class TomarPedidoPage {
       { 
         if(k=="cocinero")
           {
+              this.vistaBartenderMesaUno=true;
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -225,6 +274,10 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+            this.vistaBartenderMesaUno=true;
+
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -262,6 +315,9 @@ export class TomarPedidoPage {
       { 
         if(k=="cocinero")
           {
+
+            this.vistaCocinaMesaDos=true;
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -276,6 +332,10 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            this.vistaBartenderMesaDos=true;
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -313,6 +373,11 @@ export class TomarPedidoPage {
        { 
          if(k=="cocinero")
            {
+
+            this.vistaCocinaMesaTres=true;
+
+
+
              for(let a in result[k])
              {  
                if(a!="estado")
@@ -327,6 +392,10 @@ export class TomarPedidoPage {
  
            if(k=="bartender")
            {
+
+            this.vistaBartenderMesaTres=true;
+
+
              for(let a in result[k])
              {  
                if(a!="estado")
@@ -367,6 +436,11 @@ export class TomarPedidoPage {
       { 
         if(k=="cocinero")
           {
+
+            this.vistaCocinaMesaCuatro=true;
+
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -381,6 +455,11 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            this.vistaBartenderMesaCuatro=true;
+
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -419,8 +498,15 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+        //this.vistaCocinaMesaCinco=true;
+
+
         if(k=="cocinero")
           {
+
+            this.vistaCocinaMesaCinco=true;
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -435,6 +521,11 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            this.vistaBartenderMesaCinco=true;
+
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -472,6 +563,11 @@ export class TomarPedidoPage {
       { 
         if(k=="cocinero")
           {
+
+            this.vistaCocinaMesaSeis=true;
+
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -486,6 +582,11 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            this.vistaBartenderMesaSeis=true;
+
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -523,6 +624,10 @@ export class TomarPedidoPage {
        { 
          if(k=="cocinero")
            {
+
+            this.vistaCocinaMesaSiete=true;
+
+
              for(let a in result[k])
              {  
                if(a!="estado")
@@ -537,6 +642,11 @@ export class TomarPedidoPage {
  
            if(k=="bartender")
            {
+
+            this.vistaBartenderMesaSiete=true;
+
+
+
              for(let a in result[k])
              {  
                if(a!="estado")
@@ -574,6 +684,11 @@ export class TomarPedidoPage {
       { 
         if(k=="cocinero")
           {
+
+            this.vistaCocinaMesaOcho=true;
+
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -588,6 +703,11 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            this.vistaBartenderMesaOcho=true;
+
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -622,6 +742,10 @@ export class TomarPedidoPage {
       { 
         if(k=="cocinero")
           {
+
+            this.vistaCocinaMesaNueve=true;
+
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -636,6 +760,8 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+              this.vistaBartenderMesaNueve=true;
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -670,6 +796,9 @@ export class TomarPedidoPage {
       { 
         if(k=="cocinero")
           {
+
+            this.vistaCocinaMesaDiez=true;
+
             for(let a in result[k])
             {  
               if(a!="estado")
@@ -684,6 +813,10 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            this.vistaBartenderMesaDiez=true;
+
+
             for(let a in result[k])
             {  
               if(a!="estado")

@@ -163,6 +163,8 @@
 
         <ion-list *ngIf="vistaCocinero">
 
+          <div *ngIf="vistaCocinaMesaUno">
+
             <h2 class="titulo">Lista de pedidos Mesa 1 Cocina</h2>
 
             <button ion-button clear item-end (click)="pregunta1()">
@@ -191,10 +193,14 @@
   
           </ion-item>
 
+        </div>
+
 
       </ion-list>
 
       <ion-list *ngIf="vistaBartender">
+
+        <div *ngIf="vistaBartenderMesaUno">
 
           <h2 class="titulo">Lista de pedidos Mesa 1 Bartender</h2>
 
@@ -222,9 +228,13 @@
         </ion-item>
 
 
+      </div>
+
     </ion-list>
 
     <ion-list *ngIf="vistaCocinero">
+
+        <div *ngIf="vistaCocinaMesaDos">
 
         <h2 class="titulo">Lista de pedidos Mesa 2 Cocina</h2>
 
@@ -254,10 +264,18 @@
 
       </ion-item>
 
+      </div>
+
+
+
 
   </ion-list>
 
   <ion-list *ngIf="vistaBartender">
+
+      <div *ngIf="vistaBartenderMesaDos">
+
+
 
       <h2 class="titulo">Lista de pedidos Mesa 2 Bartender</h2>
 
@@ -284,10 +302,13 @@
 
     </ion-item>
 
+    </div>
 
 </ion-list>
 
 <ion-list *ngIf="vistaCocinero">
+
+    <div *ngIf="vistaCocinaMesaTres">
 
     <h2 class="titulo">Lista de pedidos Mesa 3 Cocina</h2>
 
@@ -317,10 +338,14 @@
 
   </ion-item>
 
+    </div>
+
 
 </ion-list>
 
 <ion-list *ngIf="vistaBartender">
+
+    <div *ngIf="vistaBartenderMesaTres">
 
     <h2 class="titulo">Lista de pedidos Mesa 3 Bartender</h2>
 
@@ -346,6 +371,8 @@
 
   </ion-item>
 
+  </div>
+
 
 </ion-list>
 
@@ -360,6 +387,8 @@
         
 
         <ion-list *ngIf="vistaCocinero">
+
+            <div *ngIf="vistaCocinaMesaCuatro">
 
             <h2 class="titulo">Lista de pedidos Mesa 4 Cocina</h2>
 
@@ -389,10 +418,14 @@
   
           </ion-item>
 
+          </div>
+
 
       </ion-list>
 
       <ion-list *ngIf="vistaBartender">
+
+          <div *ngIf="vistaBartenderMesaCuatro">
 
           <h2 class="titulo">Lista de pedidos Mesa 4 Bartender</h2>
 
@@ -417,10 +450,14 @@
       
             
           </ion-item>
+
+          </div>
       
         </ion-list>
 
         <ion-list *ngIf="vistaCocinero">
+
+          <div *ngIf="vistaCocinaMesaCinco">
 
             <h2 class="titulo">Lista de pedidos Mesa 5 Cocina</h2>
 
@@ -451,10 +488,14 @@
            
           </ion-item>
 
+        </div>
+
 
       </ion-list>
 
       <ion-list *ngIf="vistaBartender">
+
+          <div *ngIf="vistaBartenderMesaCinco">
 
           <h2 class="titulo">Lista de pedidos Mesa 5 Bartender</h2>
 
@@ -478,10 +519,14 @@
           
         </ion-item>
 
+          </div>
+
 
     </ion-list>
 
     <ion-list *ngIf="vistaCocinero">
+
+        <div *ngIf="vistaCocinaMesaSeis">
 
         <h2 class="titulo">Lista de pedidos Mesa 6 Cocina</h2>
 
@@ -511,9 +556,13 @@
 
       </ion-item>
 
+        </div>
+
     </ion-list>
 
     <ion-list *ngIf="vistaBartender">
+      
+        <div *ngIf="vistaBartenderMesaSeis">
 
         <h2 class="titulo">Lista de pedidos Mesa 6 Bartender</h2>
 
@@ -540,10 +589,14 @@
 
       </ion-item>
 
+        </div>
+
     </ion-list>
     
 
     <ion-list *ngIf="vistaCocinero">
+
+        <div *ngIf="vistaCocinaMesaSiete">
 
         <h2 class="titulo">Lista de pedidos Mesa 7 Cocina</h2>
 
@@ -573,11 +626,15 @@
 
       </ion-item>
 
+        </div>
+
 
   </ion-list>
 
 
   <ion-list *ngIf="vistaBartender">
+
+      <div *ngIf="vistaBartenderMesaSiete">
 
       <h2 class="titulo">Lista de pedidos Mesa 7 Bartender</h2>
 
@@ -604,11 +661,15 @@
 
     </ion-item>
 
+      </div>
+
 
 </ion-list>
 
 
 <ion-list *ngIf="vistaCocinero">
+
+    <div *ngIf="vistaCocinaMesaOcho">
 
     <h2 class="titulo">Lista de pedidos Mesa 8 Cocina</h2>
 
@@ -638,11 +699,15 @@
 
   </ion-item>
 
+    </div>
+
 
 </ion-list>
 
 
 <ion-list *ngIf="vistaBartender">
+
+    <div *ngIf="vistaBartenderMesaOcho">
 
     <h2 class="titulo">Lista de pedidos Mesa 8 Bartender</h2>
 
@@ -669,11 +734,15 @@
 
   </ion-item>
 
+    </div>
+
 
 </ion-list>
 
 
 <ion-list *ngIf="vistaCocinero">
+
+    <div *ngIf="vistaCocinaMesaNueve">
 
     <h2 class="titulo">Lista de pedidos Mesa 9 Cocina</h2>
 
@@ -703,10 +772,14 @@
 
   </ion-item>
 
+    </div>
+
 
 </ion-list>
 
 <ion-list *ngIf="vistaBartender">
+
+    <div *ngIf="vistaBartenderMesaNueve">
 
     <h2 class="titulo">Lista de pedidos Mesa 9 Bartender</h2>
 
@@ -733,10 +806,14 @@
 
   </ion-item>
 
+    </div>
+
 
 </ion-list>
 
 <ion-list *ngIf="vistaCocinero">
+
+    <div *ngIf="vistaCocinaMesaDiez">
 
     <h2 class="titulo">Lista de pedidos Mesa 10 Cocina</h2>
 
@@ -766,10 +843,14 @@
 
   </ion-item>
 
+    </div>
+
 
 </ion-list>
 
 <ion-list *ngIf="vistaBartender">
+
+    <div *ngIf="vistaBartenderMesaDiez">
 
     <h2 class="titulo">Lista de pedidos Mesa 10 Bartender</h2>
 
@@ -795,6 +876,8 @@
 
 
   </ion-item>
+
+    </div>
 
 
 </ion-list>

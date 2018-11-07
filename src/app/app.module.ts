@@ -27,6 +27,8 @@ import { firebaseConfig } from '../config';
 import { Camera } from '@ionic-native/camera';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
+
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     EncuestaDeEmpleadoPage,
     QrDeLaMesaPage,
     TomarPedidoPage,
-    MapaDeRutaPage
+    MapaDeRutaPage,
+    JuegoQuinterosPage
 
   ],
   imports: [
@@ -63,7 +66,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     EncuestaDeEmpleadoPage,
     QrDeLaMesaPage,
     TomarPedidoPage,
-    MapaDeRutaPage
+    MapaDeRutaPage,
+    JuegoQuinterosPage
   ],
   providers: [
     StatusBar,
