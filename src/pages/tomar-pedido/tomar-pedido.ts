@@ -300,6 +300,13 @@ export class TomarPedidoPage {
       { 
         if(k=="cocinero")
           {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
+
               this.vistaCocinaMesaUno=true;
 
 
@@ -317,6 +324,13 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
+
             this.vistaBartenderMesaUno=true;
 
 
@@ -359,6 +373,11 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
             this.vistaCocinaMesaDos=true;
 
             for(let a in result[k])
@@ -375,6 +394,11 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
 
             this.vistaBartenderMesaDos=true;
 
@@ -417,6 +441,11 @@ export class TomarPedidoPage {
          if(k=="cocinero")
            {
 
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
             this.vistaCocinaMesaTres=true;
 
 
@@ -435,6 +464,11 @@ export class TomarPedidoPage {
  
            if(k=="bartender")
            {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
 
             this.vistaBartenderMesaTres=true;
 
@@ -480,6 +514,11 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
             this.vistaCocinaMesaCuatro=true;
 
 
@@ -498,6 +537,12 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
 
             this.vistaBartenderMesaCuatro=true;
 
@@ -547,6 +592,11 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
             this.vistaCocinaMesaCinco=true;
 
 
@@ -564,6 +614,11 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
 
             this.vistaBartenderMesaCinco=true;
 
@@ -607,6 +662,11 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
             this.vistaCocinaMesaSeis=true;
 
 
@@ -625,6 +685,11 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
 
             this.vistaBartenderMesaSeis=true;
 
@@ -668,6 +733,13 @@ export class TomarPedidoPage {
          if(k=="cocinero")
            {
 
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
+
+
             this.vistaCocinaMesaSiete=true;
 
 
@@ -685,6 +757,11 @@ export class TomarPedidoPage {
  
            if(k=="bartender")
            {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
 
             this.vistaBartenderMesaSiete=true;
 
@@ -728,6 +805,11 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
             this.vistaCocinaMesaOcho=true;
 
 
@@ -746,6 +828,11 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
 
             this.vistaBartenderMesaOcho=true;
 
@@ -786,6 +873,11 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
             this.vistaCocinaMesaNueve=true;
 
 
@@ -803,6 +895,13 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
+
               this.vistaBartenderMesaNueve=true;
 
             for(let a in result[k])
@@ -840,6 +939,11 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
+
             this.vistaCocinaMesaDiez=true;
 
             for(let a in result[k])
@@ -856,6 +960,11 @@ export class TomarPedidoPage {
 
           if(k=="bartender")
           {
+
+            if(result[k].estado == "terminado")
+            {
+              break;
+            }
 
             this.vistaBartenderMesaDiez=true;
 
@@ -1427,6 +1536,8 @@ export class TomarPedidoPage {
                                     //}
                                     data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
+
+                                    //this.navCtrl.setRoot(this.navCtrl.getActive().component);
                                      
                                      
                                   }
@@ -1435,6 +1546,11 @@ export class TomarPedidoPage {
 
                               }
 
+                              
+
+                          }).then(() => 
+                          {
+                            this.navCtrl.setRoot(this.navCtrl.getActive().component);
                           });
 
 
@@ -1473,6 +1589,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
 
@@ -1509,6 +1628,9 @@ export class TomarPedidoPage {
 
                               }
 
+                          }).then(() => 
+                          {
+                            this.navCtrl.setRoot(this.navCtrl.getActive().component);
                           });
 
 
@@ -1548,6 +1670,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1596,6 +1721,9 @@ export class TomarPedidoPage {
                               
                             }*/
       
+                          }).then(() => 
+                          {
+                            this.navCtrl.setRoot(this.navCtrl.getActive().component);
                           });
 
   }
@@ -1630,6 +1758,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
 
@@ -1665,6 +1796,9 @@ export class TomarPedidoPage {
 
                               }
 
+                          }).then(() => 
+                          {
+                            this.navCtrl.setRoot(this.navCtrl.getActive().component);
                           });
 
   }
@@ -1700,6 +1834,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
     
   }
@@ -1733,6 +1870,9 @@ export class TomarPedidoPage {
 
                 }
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1768,6 +1908,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
 
@@ -1802,6 +1945,9 @@ export class TomarPedidoPage {
 
                 }
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1837,6 +1983,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1870,6 +2019,9 @@ export class TomarPedidoPage {
 
                 }
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1905,6 +2057,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1938,6 +2093,9 @@ export class TomarPedidoPage {
 
                 }
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1973,6 +2131,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2006,6 +2167,9 @@ export class TomarPedidoPage {
 
                 }
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2041,6 +2205,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2074,6 +2241,9 @@ export class TomarPedidoPage {
 
                 }
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2109,6 +2279,9 @@ export class TomarPedidoPage {
 
             
 
+            }).then(() => 
+            {
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }

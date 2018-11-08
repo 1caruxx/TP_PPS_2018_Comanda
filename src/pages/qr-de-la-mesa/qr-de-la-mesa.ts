@@ -535,6 +535,8 @@ export class QrDeLaMesaPage {
   {
     let banderita=0;
 
+    let usuario = JSON.parse(localStorage.getItem("usuario"));
+
     this.barcode.scan().then(barcodeData => {
 
 
@@ -550,9 +552,28 @@ export class QrDeLaMesaPage {
             {
                 if (barcodeData.text == data[key].numeroMesa) 
                 {
+                  if(data[key].correo==usuario.correo)
+                  {
+                    if(data[key].tiempoMinimo!=null)
+                    {
                     alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
                     banderita=1;
                     break;
+
+                    }
+                    else
+                    {
+                      alert("Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo");
+                      break;
+                    }
+                    
+                  }
+                  else
+                  {
+                    alert("Esa no es su mesa");
+                    break;
+                  }
+                    
                                                                         
                 }
                 
