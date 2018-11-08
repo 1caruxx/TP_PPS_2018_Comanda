@@ -42,7 +42,7 @@ export class ListadoSupervisorPage {
     }).then(() => {
       this.empleados = this.usuarios.filter(item => {
 
-        return item.tipo == "mozo" || item.tipo == "cocinero" || item.tipo == "bartender" || item.tipo == "metre" || item.tipo == "cajero";
+        return item.tipo == "mozo" || item.tipo == "cocinero" || item.tipo == "bartender" || item.tipo == "metre" || item.tipo == "repartidor";
       });
 
       this.clientes = this.usuarios.filter(item => {

@@ -55,7 +55,7 @@ export class VerificarTipoProvider {
 
       case "bartender":
         acciones = [
-          { accion: "Tomar un pedido.", img: "pedido.jpg", ruta: "./" },
+          { accion: "Tomar un pedido", img: "pedido.jpg", ruta: "./" },
           { accion: "Agregar un plato o bebida", img: "nueva-comida.jpg", ruta: "./" },
           { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" }
         ];
@@ -68,9 +68,9 @@ export class VerificarTipoProvider {
         ];
         break;
 
-      case "cajero":
+      case "repartidor":
         acciones = [
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" }
+          { accion: "Mapa de ruta", img: "mapa.jpg", ruta: "./" }
         ];
         break;
 
@@ -89,7 +89,7 @@ export class VerificarTipoProvider {
         acciones = [
           { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
           { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
-          { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: "./" },
+          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
           { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" }
         ];
         break;

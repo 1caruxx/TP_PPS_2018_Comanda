@@ -27,11 +27,12 @@ export class PrincipalPage {
     this.acciones = this.verificarTipo.RetornarAcciones();
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
-    if(this.usuario.tipo == "cliente" || this.usuario.tipo == "anonimo") {
+    if (this.usuario.tipo == "cliente" || this.usuario.tipo == "anonimo") {
 
       this.accionesRespaldoCliente = this.acciones;
 
       let usuarioRef = this.firebase.database().ref("usuarios");
+      let pedidoRef;
 
       usuarioRef.once("value", (snap) => {
 
@@ -42,6 +43,7 @@ export class PrincipalPage {
           if (data[item].correo == this.usuario.correo) {
 
             this.usuarioKey = item;
+            pedidoRef = this.firebase.database().ref("pedidos").child(data[item].mesa);
             break;
           }
         }
@@ -49,6 +51,7 @@ export class PrincipalPage {
         console.clear();
         usuarioRef.child(this.usuarioKey).child("estado").on("value", (snap) => {
           let data = snap.val();
+          let flag = true;
           console.log(this.usuarioKey)
           console.log(data);
 
@@ -78,6 +81,35 @@ export class PrincipalPage {
               this.acciones[0] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[2] : this.accionesRespaldoCliente[1];
               // this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
+
+              if (flag) {
+                flag = false;
+                let estaComiendo;
+                pedidoRef.on("value", (snap) => {
+
+                  let data = snap.val();
+                  estaComiendo = true;
+
+                  for (let item in data) {
+
+                    if (data[item].estado && data[item].estado != "terminado") {
+
+                      estaComiendo = false;
+                      break;
+                    }
+                  }
+
+                  console.log(`booleano que determina si esta comiendo o no antes de su if: ${estaComiendo}`);
+
+                  if (estaComiendo) {
+
+                    usuarioRef.child(this.usuarioKey).update({
+                      estado: "comiendo"
+                    })
+                  }
+                });
+              }
+
               break;
 
             /*
@@ -95,7 +127,7 @@ export class PrincipalPage {
               //this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
               break;
-          
+
             /*
              * 
              * El cliente no esta en espera, atendido, comiendo, esperando la comida, puede ser undefined o pago
@@ -104,13 +136,13 @@ export class PrincipalPage {
              *  
              */
             default:
-            console.log("entre al default")
+              console.log("entre al default")
               this.acciones[0] = this.accionesRespaldoCliente[1];
               this.acciones[1] = this.accionesRespaldoCliente[5];
               break;
           }
         });
-      }).catch(() => console.log("Algo salio mal...") );
+      }).catch(() => console.log("Algo salio mal..."));
     }
 
   }
@@ -147,7 +179,7 @@ export class PrincipalPage {
               || this.usuario.tipo == "cocinero"
               || this.usuario.tipo == "bartender"
               || this.usuario.tipo == "metre"
-              || this.usuario.tipo == "cajero") {
+              || this.usuario.tipo == "repartidor") {
 
               this.navCtrl.setRoot(LoginPage);
             } else {

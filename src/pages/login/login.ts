@@ -128,7 +128,7 @@ export class LoginPage {
                     case "cocinero":
                     case "bartender":
                     case "metre":
-                    case "cajero":
+                    case "repartidor":
                       this.navCtrl.setRoot(AltaEmpleadoPage);
                       break;
 
@@ -189,7 +189,7 @@ export class LoginPage {
           //   case "cocinero":
           //   case "bartender":
           //   case "metre":
-          //   case "cajero":
+          //   case "repartidor":
           //     this.navCtrl.setRoot(PrincipalPage);
           //     break;
 
