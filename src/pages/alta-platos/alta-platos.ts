@@ -7,6 +7,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import "firebase/firestore";
 import { PedirPlatosPage } from '../pedir-platos/pedir-platos';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 /**
  * Generated class for the AltaPlatosPage page.
  *
@@ -35,6 +36,7 @@ export class AltaPlatosPage {
   esCocinero:boolean=false;
   esBartender:boolean=false;
   tipo;
+  ocultarQr:boolean=true;
   mensaje;
   mostrarAlert3:boolean=false;
   tipoBebida="";
@@ -48,7 +50,7 @@ cantidad;
 precio;
 image1;
 carga;
-
+options : any;
 imageName1;
 bebida:boolean;
 plato:boolean;
@@ -58,7 +60,14 @@ cantMostrar;
 ocultarTiempo:boolean;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private aut:AngularFireAuth) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+     private camera: Camera,
+      private aut:AngularFireAuth,
+      private barcodeScanner: BarcodeScanner
+
+    ) {
     this.ocultar=false;
     this.mostrar=false;
     this.mostrarbtn1=true;
@@ -69,9 +78,11 @@ ocultarTiempo:boolean;
     this.mostrarfoto3=false;
     this.ocultarTiempo=false;
     this.carga="platos";
+
     //Descomentar esta linea antes de hacer el push
-    this.tipo = localStorage.getItem("usuario");
-    this.tipo =JSON.parse(this.tipo).tipo;
+   this.tipo = localStorage.getItem("usuario");
+   this.tipo =JSON.parse(this.tipo).tipo;
+  // this.tipo="cocinero";
    this.cantMostrar="grs";
  //this.tipo =
  
@@ -92,7 +103,7 @@ ocultarTiempo:boolean;
 
   ionViewDidLoad() {
      
-        AngularFireModule.initializeApp(firebaseConfig.fire);
+       // AngularFireModule.initializeApp(firebaseConfig.fire);
 
     console.log('ionViewDidLoad AltaPlatosPage');
   }
@@ -133,7 +144,7 @@ ocultarTiempo:boolean;
       this.cantidad="";
       this.nombre="";
       this.descripcion="";
-
+      this.ocultarQr=true;
     }
     if(this.carga=="bebidas")
     {
@@ -145,6 +156,7 @@ ocultarTiempo:boolean;
       this.cantidad="";
       this.nombre="";
       this.descripcion="";
+      this.ocultarQr=false;
 
     }
    
@@ -154,6 +166,41 @@ ocultarTiempo:boolean;
   {
     this.ocultar=true;
     this.mostrar=true;
+
+  }
+  LeerQr()
+  {
+    this.options = { prompt : "Escaneá el qr de la puerta", formats: 'QR_CODE' }
+
+   
+
+    this.barcodeScanner.scan(this.options).then((barcodeData) => {
+
+      let texto = (barcodeData.text);
+      alert(texto);
+      let miScan= (texto).split('@');
+
+      if(miScan[5]!="true")
+      {
+        alert("qr no valido");
+        return
+  
+      }
+
+      this.nombre= miScan[0];
+      this.descripcion= miScan[1];
+      this.tiempo=miScan[2];
+      this.cantidad=miScan[3];
+      this.precio=miScan[4];
+      this.tipoBebida=miScan[6];
+
+    });
+        
+  //  let cadena ="vino@vino tinto@0@750@200@true@gaseosa";
+     
+
+    
+  
 
   }
   Cancelar()
@@ -166,6 +213,21 @@ ocultarTiempo:boolean;
     this.mostrarfoto2=false;
     this.mostrarbtn3=true;
     this.mostrarfoto3=false;
+    console.log(this.tipo);
+
+    if(this.tipo=="cocinero")
+    {
+      
+      this.tipo="bartender";
+      this.esBartender=true;
+      this.esCocinero=false;
+    }
+    else
+    {
+      this.tipo="cocinero";
+      this.esCocinero=true;
+      this.esBartender=false;
+    }
   
   }
   async tomarFoto1()

@@ -95,7 +95,7 @@
   <div class="tiempoDiv"> <input class="tiempo" type="text" [(ngModel)]="cantidad" ><label class="tiempoLabel">Cantidad de {{cantMostrar}}</label>
   </div>  
   <div class="precioDiv"> <label class="precioLabel">$</label><input [(ngModel)]="precio" class="precio" type="text"> <label class="tiempoLabel">Precio</label>
-    <button ion-button color="dark" (click)="pedido()" outline class="Qr1">Leer QR</button>
+    <button ion-button color="dark"  [ngClass]="{'ocultar':ocultarQr}"(click)="LeerQr()" outline class="Qr1">Leer QR</button>
  
   </div>  
  
@@ -131,7 +131,7 @@
   <div class="tiempoDiv"> <input class="tiempo" type="text" [(ngModel)]="cantidad" ><label class="tiempoLabel">Cantidad de cc</label>
   </div>  
   <div class="precioDiv"> <label class="precioLabel">$</label><input [(ngModel)]="precio" class="precio" type="text" ><label class="tiempoLabel">Precio</label>
-    <button ion-button color="dark" (click)="pedido()" outline class="Qr1">Leer QR</button>
+    <button ion-button color="dark" (click)="LeerQr()" outline class="Qr1">Leer QR</button>
  
   </div>  
  

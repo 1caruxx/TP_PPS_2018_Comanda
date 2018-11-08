@@ -26,6 +26,7 @@ export class PedirPlatosPage {
   ocultarPlatos:boolean;
   cantidad:number;
   titulo:string;
+  claveUsuarioActual;
   platos:any[]=[];
   bebidas:any[]=[];
   mostrarAlert2:boolean=false;
@@ -81,6 +82,8 @@ this.foto="";
 if(this.tipo1=="mozo")
 {
   this.mostrarAlert2=true;
+  
+  return
 }
     this.TraerTipoMesa();
    
@@ -125,6 +128,8 @@ mensaje.once("value",(snap)=>{
 
     if (data[item].numeroMesa == this.mesa) 
     {
+      console.log(this.mesa);
+      console.log(data[item].estado);
       esta=true;
       if(data[item].estado=="ocupada")
       {
@@ -147,9 +152,9 @@ mensaje.once("value",(snap)=>{
     //Aca valido que la mesa no esta ocupada
    
 
-     if(ocupada)
+     if(!ocupada)
      {
-      this.presentToast("La mesa ingresada esta ocupada elija otra por favor");
+      this.presentToast("La mesa ingresada no es la corrcta ya que esta vacia");
  
      return;
 
@@ -157,6 +162,7 @@ mensaje.once("value",(snap)=>{
      else
      {
        this.mostrarAlert2=false;
+       this.TraerClaveMozo();
 
      }
    
@@ -268,7 +274,7 @@ mensaje.once("value",(snap)=>{
     this.pedido.push({cant:valor, nombre:nombre, es:es, tiempo:tiempo, para:para, precio:precio, id:id});
     console.log(this.pedido);
     (window.document.querySelector('#'+id) as HTMLElement).classList.add("mostrarElegido");
-
+    console.log(this.pedido);
     valor=0;
   }
   mostrarSlide(foto1,foto2,foto3,nombre,desc)
@@ -456,8 +462,8 @@ var data =snap.val();
       return;
     }
   
-    let mensaje = firebase.database().ref().child("pedidos/"+"mesa"+this.mesa+"/cocinero");
-    let mensaje2 = firebase.database().ref().child("pedidos/"+"mesa"+this.mesa+"/bartender");
+    let mensaje = firebase.database().ref().child("pedidos/"+this.mesa+"/cocinero");
+    let mensaje2 = firebase.database().ref().child("pedidos/"+this.mesa+"/bartender");
    let tiempoMax=0;
    let nodoPadre:any;
    let tieneBartender:boolean=false;
@@ -468,6 +474,7 @@ var data =snap.val();
       console.log(this.pedido[i].para);
       if(this.pedido[i].para=="bartender")
       {
+        console.log("El de abajo es de bartender");
         console.log(this.pedido[i]);
         tieneBartender=true;
         mensaje2.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant, precio:this.pedido[i].precio});
@@ -475,11 +482,15 @@ var data =snap.val();
       }
       if(this.pedido[i].para=="cocinero")
       {
+        console.log("El de abajo es de cocinero");
+        console.log(this.pedido[i]);
+        
         tieneCocinero=true;
         if(tiempoMax<this.pedido[i].tiempo)
         {
           tiempoMax=this.pedido[i].tiempo;
         }
+        console.log(this.pedido[i].nombre);
         mensaje.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant, precio:this.pedido[i].precio});
         this.yaPidio=true;
       }
@@ -488,14 +499,32 @@ var data =snap.val();
     }
     if(tieneCocinero)
     {
-      mensaje.update({estado:"tomado"});
+      mensaje.update({estado:"tomado"}).then(()=>{
+
+        for(let i=0;i<this.pedido.length;i++)
+        {
+          (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+    
+        }
+        this.pedido=[];
+    
+      });
     }
     if(tieneBartender)
     {
-      mensaje2.update({estado:"tomado"});
+      mensaje2.update({estado:"tomado"}).then(()=>{
+
+        for(let i=0;i<this.pedido.length;i++)
+        {
+          (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+    
+        }
+        this.pedido=[];
+    
+      });;
     }
     //Establecer tiempo:
-    let refTiempo = firebase.database().ref().child("pedidos/"+"mesa"+this.mesa);
+    let refTiempo = firebase.database().ref().child("pedidos/"+this.mesa);
     refTiempo.once("value", (snap) => {
 
       let data = snap.val();
@@ -532,24 +561,13 @@ var data =snap.val();
      }
 
     });
+ //Guardo el estado pidio  al cliente
 
-
-  /*
-
-    let mensaje3  =firebase.database().ref().child("pedidos/"+"mesa"+this.mesa);
+      let usuariosRef = firebase.database().ref().child("usuarios/"+this.claveUsuarioActual);
+      usuariosRef.update({estado:"pidio"});
+      
+  console.log(this.claveUsuarioActual);
   
-      mensaje3.update({tiempo:tiempoMax}).then(()=>{
-        for(let i=0;i<this.pedido.length;i++)
-        {
-          (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
-    
-        }
-        this.pedido=[];
-    
-    
-      });
-    }
-  */
     
       
       
@@ -563,30 +581,69 @@ var data =snap.val();
     }, 4000);
     
   }
+TraerClaveMozo()
+{
+  let usuariosRef = firebase.database().ref("usuarios");
+     usuariosRef.once("value", (snap) => {
 
+      let data = snap.val();
+      let esValido = true;
+
+      for (let key in data) {
+
+      
+         
+     
+      
+        
+
+            if(data[key].mesa==this.mesa)
+            {
+              this.claveUsuarioActual=key;
+              break;
+            }
+
+      
+    
+      
+      }
+      console.log(this.mesa + this.tipo);
+
+  });
+
+}
   TraerTipoMesa()
   {
-    if(this.tipo1=="mozo")
+/*   if(this.tipo1=="mozo")
     {
       return;
-    }
+    }*/
     let usuariosRef = firebase.database().ref("usuarios");
      usuariosRef.once("value", (snap) => {
 
       let data = snap.val();
       let esValido = true;
 
-      for (let item in data) {
+      for (let key in data) {
 
-        if (data[item].correo == this.correo) {
-
-          
-          this.tipo = data[item].tipo;
+        if (data[key].correo == this.correo) {
+         
+          this.tipo = data[key].tipo;
       
           if(this.tipo!="mozo")
           {
-            this.mesa=data[item].mesa;
-          
+            this.mesa=data[key].mesa;
+            this.claveUsuarioActual=key;
+            return;
+          }
+
+          if(this.tipo1=="mozo")
+          {
+            if(data[key].mesa==this.mesa)
+            {
+              this.claveUsuarioActual=key;
+            }
+
           }
           break;
         }

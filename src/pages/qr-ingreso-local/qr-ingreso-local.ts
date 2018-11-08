@@ -12,7 +12,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
  * Ionic pages and navigation.
  */
 
-//FER EN LA LINEA 94 TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL.
+//FER EN LA LINEA 120 TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL.
 @Component({
   selector: 'page-qr-ingreso-local',
   templateUrl: 'qr-ingreso-local.html',
@@ -35,15 +35,16 @@ options : any;
      private barcodeScanner: BarcodeScanner
     ) 
     {
+      //ANTES DE SUBIR A GITHUB  DESCOMENTO STAS LINEAS:
     this.correo=localStorage.getItem("usuario");
-   // this.foto1="assets/imgs/beta/comida.png";
+   /* this.foto1="assets/imgs/beta/comida.png";
     this.foto2="assets/imgs/beta/comida.png";
-    this.foto3="assets/imgs/beta/comida.png";
+    this.foto3="assets/imgs/beta/comida.png";*/
 
-    //this.correo =(JSON.parse(this.correo)).correo;
-    this.correo="lucas@soylucas.com";
+    this.correo =(JSON.parse(this.correo)).correo;
+  // this.correo="lucas@soylucas.com";
     //DESCOMENTAR PARA TRABAJAR A NIVEL LOCAL!!!!!!!
-  //  this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+  // this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
 
     this.TraerEncuestas();
   }
@@ -83,9 +84,54 @@ var data =snap.val();
           setTimeout(()=>{
         
             this.mostrarAlert3=false;
-            return;
+            
         
           }, 3000);
+
+
+          //Aca cambio el estado del usuario y escucho al cambio d este estado
+          let usuariosRef = firebase.database().ref("usuarios");
+          usuariosRef.once("value", (snap) => {
+      
+           let data = snap.val();
+           let esValido = true;
+      
+           for (var key in data) {
+      
+             if (data[key].correo == this.correo) {
+            
+            let usuario= data[key];
+            usuario.estado="espera";
+            console.log(usuario);
+           
+         
+            let usuariosRef = firebase.database().ref("usuarios/"+key);
+            this.claveActual=key;
+            usuariosRef.set(usuario).then(()=>{
+      
+           
+          usuariosRef.on("value",(snap)=>{
+      
+            var data =snap.val();
+            console.log(data);
+            if(data.estado!="espera")
+            {
+              //FER EN ESTA LINEA TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL
+              this.navCtrl.setRoot(RegistroClientePage);
+            }
+         
+          });
+      
+      
+              
+            });
+            
+        
+             }
+           }
+           
+      
+       });
 
         }
         else
@@ -107,48 +153,7 @@ var data =snap.val();
    
 
     
-    let usuariosRef = firebase.database().ref("usuarios");
-    usuariosRef.once("value", (snap) => {
-
-     let data = snap.val();
-     let esValido = true;
-
-     for (var key in data) {
-
-       if (data[key].correo == this.correo) {
-      
-      let usuario= data[key];
-      usuario.estado="espera";
-      console.log(usuario);
-     
    
-      let usuariosRef = firebase.database().ref("usuarios/"+key);
-      this.claveActual=key;
-      usuariosRef.set(usuario).then(()=>{
-
-     
-    usuariosRef.on("value",(snap)=>{
-
-      var data =snap.val();
-      console.log(data);
-      if(data.estado!="espera")
-      {
-        //FER EN ESTA LINEA TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL
-        this.navCtrl.setRoot(RegistroClientePage);
-      }
-   
-    });
-
-
-        
-      });
-      
-  
-       }
-     }
-     
-
- });
 
   }
 
