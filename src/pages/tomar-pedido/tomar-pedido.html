@@ -167,15 +167,23 @@
 
             <h2 class="titulo">Lista de pedidos Mesa 1 Cocina</h2>
 
+            <div *ngIf="ponerTiempoMesaCocinaUnoIcono">
+
             <button ion-button clear item-end (click)="pregunta1()">
               
                 <ion-icon name="alarm"></ion-icon>
               </button>
+
+            </div>
+
+            <div *ngIf="terminarPedidoMesaCocinaUnoIcono">
               
               <button ion-button clear item-end (click)="terminarPedidoUnoCocinero()">
                 
                   <ion-icon name="checkmark-circle"></ion-icon>
                 </button>
+
+              </div>
   
           <ion-item *ngFor="let item of pedidosCocinaUno">
             <ion-thumbnail item-start>
@@ -238,15 +246,23 @@
 
         <h2 class="titulo">Lista de pedidos Mesa 2 Cocina</h2>
 
+        <div *ngIf="ponerTiempoMesaCocinaDosIcono">
+
         <button ion-button clear item-end (click)="pregunta2()">
           
             <ion-icon name="alarm"></ion-icon>
           </button>
+
+        </div>
+
+        <div *ngIf="terminarPedidoMesaCocinaDosIcono">
           
           <button ion-button clear item-end (click)="terminarPedidoDosCocinero()">
             
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
+
+          </div>
 
       <ion-item *ngFor="let item of pedidosCocinaDos">
         <ion-thumbnail item-start>
@@ -312,15 +328,24 @@
 
     <h2 class="titulo">Lista de pedidos Mesa 3 Cocina</h2>
 
+    <div *ngIf="ponerTiempoMesaCocinaTresIcono">
+
     <button ion-button clear item-end (click)="pregunta3()">
       
         <ion-icon name="alarm"></ion-icon>
       </button>
       
+    </div>
+  
+    <div *ngIf="terminarPedidoMesaCocinaTresIcono">
+
+    
       <button ion-button clear item-end (click)="terminarPedidoTresCocinero()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
+
+      </div>
 
   <ion-item *ngFor="let item of pedidosCocinaTres">
     <ion-thumbnail item-start>
@@ -349,6 +374,7 @@
 
     <h2 class="titulo">Lista de pedidos Mesa 3 Bartender</h2>
 
+    
       
       <button ion-button clear item-end (click)="terminarPedidoTresBartender()">
         
@@ -392,15 +418,23 @@
 
             <h2 class="titulo">Lista de pedidos Mesa 4 Cocina</h2>
 
+            <div *ngIf="ponerTiempoMesaCocinaCuatroIcono">
+
             <button ion-button clear item-end (click)="pregunta4()">
               
                 <ion-icon name="alarm"></ion-icon>
               </button>
+
+            </div>
+
+            <div *ngIf="terminarPedidoMesaCocinaCuatroIcono">
               
               <button ion-button clear item-end (click)="terminarPedidoCuatroCocinero()">
                 
                   <ion-icon name="checkmark-circle"></ion-icon>
                 </button>
+
+              </div>
   
           <ion-item *ngFor="let item of pedidosCocinaCuatro">
             <ion-thumbnail item-start>
@@ -461,15 +495,24 @@
 
             <h2 class="titulo">Lista de pedidos Mesa 5 Cocina</h2>
 
+
+            <div *ngIf="ponerTiempoMesaCocinaCincoIcono">
+
             <button ion-button clear item-end (click)="pregunta5()">
               
                 <ion-icon name="alarm"></ion-icon>
               </button>
 
+            </div>
+
+            <div *ngIf="terminarPedidoMesaCocinaCincoIcono">
+
               <button ion-button clear item-end (click)="terminarPedidoCincoCocinero()">
                 
                   <ion-icon name="checkmark-circle"></ion-icon>
                 </button>
+
+              </div>
 
            
   
@@ -499,10 +542,16 @@
 
           <h2 class="titulo">Lista de pedidos Mesa 5 Bartender</h2>
 
+          
+
           <button ion-button clear item-end (click)="terminarPedidoCincoBartender()">
                 
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
+
+         
+
+
 
         <ion-item *ngFor="let item of pedidosBartenderCinco">
           <ion-thumbnail item-start>
@@ -530,15 +579,23 @@
 
         <h2 class="titulo">Lista de pedidos Mesa 6 Cocina</h2>
 
+        <div *ngIf="ponerTiempoMesaCocinaSeisIcono">
+
         <button ion-button clear item-end (click)="pregunta6()">
           
             <ion-icon name="alarm"></ion-icon>
           </button>
+
+        </div>
+
+        <div *ngIf="terminarPedidoMesaCocinaSeisIcono">
           
           <button ion-button clear item-end (click)="terminarPedidoSeisCocinero()">
             
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
+
+          </div>
 
       <ion-item *ngFor="let item of pedidosCocinaSeis">
         <ion-thumbnail item-start>
@@ -565,6 +622,8 @@
         <div *ngIf="vistaBartenderMesaSeis">
 
         <h2 class="titulo">Lista de pedidos Mesa 6 Bartender</h2>
+
+
 
         
           
@@ -600,15 +659,23 @@
 
         <h2 class="titulo">Lista de pedidos Mesa 7 Cocina</h2>
 
+        <div *ngIf="ponerTiempoMesaCocinaSieteIcono">
+
         <button ion-button clear item-end (click)="pregunta7()">
           
             <ion-icon name="alarm"></ion-icon>
           </button>
+
+        </div>
+
+        <div *ngIf="terminarPedidoMesaCocinaSieteIcono">
           
           <button ion-button clear item-end (click)="terminarPedidoSieteCocinero()">
             
               <ion-icon name="checkmark-circle"></ion-icon>
             </button>
+
+          </div>
 
       <ion-item *ngFor="let item of pedidosCocinaSiete">
         <ion-thumbnail item-start>
@@ -673,15 +740,23 @@
 
     <h2 class="titulo">Lista de pedidos Mesa 8 Cocina</h2>
 
+    <div *ngIf="ponerTiempoMesaCocinaOchoIcono">
+
     <button ion-button clear item-end (click)="pregunta8()">
       
         <ion-icon name="alarm"></ion-icon>
       </button>
+
+    </div>
+
+    <div *ngIf="terminarPedidoMesaCocinaOchoIcono">
       
       <button ion-button clear item-end (click)="terminarPedidoOchoCocinero()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
+
+      </div>
 
   <ion-item *ngFor="let item of pedidosCocinaOcho">
     <ion-thumbnail item-start>
@@ -746,15 +821,23 @@
 
     <h2 class="titulo">Lista de pedidos Mesa 9 Cocina</h2>
 
+    <div *ngIf="ponerTiempoMesaCocinaNueveIcono">
+
     <button ion-button clear item-end (click)="pregunta9()">
       
         <ion-icon name="alarm"></ion-icon>
       </button>
+
+    </div>
+
+    <div *ngIf="terminarPedidoMesaCocinaNueveIcono">
       
       <button ion-button clear item-end (click)="terminarPedidoNueveCocinero()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
+
+      </div>
 
   <ion-item *ngFor="let item of pedidosCocinaNueve">
     <ion-thumbnail item-start>
@@ -817,15 +900,23 @@
 
     <h2 class="titulo">Lista de pedidos Mesa 10 Cocina</h2>
 
+    <div *ngIf="ponerTiempoMesaCocinaDiezIcono">
+
     <button ion-button clear item-end (click)="pregunta10()">
       
         <ion-icon name="alarm"></ion-icon>
       </button>
+
+    </div>
+
+    <div *ngIf="terminarPedidoMesaCocinaDiezIcono">
       
       <button ion-button clear item-end (click)="terminarPedidoDiezCocinero()">
         
           <ion-icon name="checkmark-circle"></ion-icon>
         </button>
+
+      </div>
 
   <ion-item *ngFor="let item of pedidosCocinaDiez">
     <ion-thumbnail item-start>

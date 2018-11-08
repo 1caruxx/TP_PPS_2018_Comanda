@@ -71,5 +71,22 @@ page-tomar-pedido {
         transition: .5s;
     }
 
+    .ion-md-alarm:before {
+        content: "\f274";
+        font-size:40px;
+    }
+
+    .ion-md-checkmark-circle:before {
+        content: "\f2bb";
+        font-size:40px;
+        padding-left: 200px;
+    }
+
+    .ion-md-restaurant:before {
+        content: "\f36c";
+        font-size: 70px;
+    }
+
+
     
 }

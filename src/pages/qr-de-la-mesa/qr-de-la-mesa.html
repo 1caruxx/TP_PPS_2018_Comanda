@@ -119,9 +119,11 @@
 
     <div *ngIf="vistaCliente">
 
-        <button ion-button clear item-end (click)="mostrarTiempoBarcode()">
+       <!-- <button ion-button clear item-end (click)="mostrarTiempoBarcode()">
             <ion-icon name="expand"></ion-icon>
-          </button>
+          </button>-->
+
+          <button ion-button class="submit-btn" color="red" class="botonAlta" (click)="mostrarTiempoBarcode()" >Escanear Mesa</button>
 
 
     </div>

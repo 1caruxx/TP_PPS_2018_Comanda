@@ -157,12 +157,14 @@ export class QrDeLaMesaPage {
     }).then(() => {
       this.espera = this.usuarios.filter(item => {
 
-        return item.mesa == null && item.tipo=="cliente" || item.mesa == null && item.tipo=="anonimo";
+        //return item.mesa == null && item.tipo=="cliente" || item.mesa == null && item.tipo=="anonimo" || item.estado=="espera";
+        return item.estado=="espera";
       });
 
       this.atendidos = this.usuarios.filter(item => {
 
-        return item.mesa != null && item.tipo=="cliente" || item.mesa != null && item.tipo=="anonimo";
+       //return item.mesa != null && item.tipo=="cliente" || item.mesa != null && item.tipo=="anonimo" || item.estado=="atendido";
+       return item.estado=="atendido";
       });
 
 
@@ -263,7 +265,9 @@ export class QrDeLaMesaPage {
                             for(var key in data){
                                 if (text == data[key].numeroMesa) {
 
-                                  if(data[key].cliente!=null)
+                                  //if(data[key].cliente!=null)
+                                  //CAMBIE ESTA LINEA
+                                  if(data[key].estado=="ocupada")
                                   {
                                     this.estaLibre=false;
                                     //ocup=false;
@@ -529,7 +533,7 @@ export class QrDeLaMesaPage {
 
   mostrarTiempoBarcode()
   {
-
+    let banderita=0;
 
     this.barcode.scan().then(barcodeData => {
 
@@ -547,11 +551,18 @@ export class QrDeLaMesaPage {
                 if (barcodeData.text == data[key].numeroMesa) 
                 {
                     alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
+                    banderita=1;
                     break;
                                                                         
                 }
+                
               }
             });
+
+            if(banderita==0)
+            {
+              alert("Por favor escanee una mesa valida");
+            }
 
 
 

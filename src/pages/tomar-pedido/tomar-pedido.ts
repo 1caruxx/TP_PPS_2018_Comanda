@@ -120,6 +120,27 @@ export class TomarPedidoPage {
   public vistaBartenderMesaNueve:boolean;
   public vistaBartenderMesaDiez:boolean;
 
+  public ponerTiempoMesaCocinaUnoIcono:boolean
+  public terminarPedidoMesaCocinaUnoIcono:boolean;
+  public ponerTiempoMesaCocinaDosIcono:boolean
+  public terminarPedidoMesaCocinaDosIcono:boolean;
+  public ponerTiempoMesaCocinaTresIcono:boolean
+  public terminarPedidoMesaCocinaTresIcono:boolean;
+  public ponerTiempoMesaCocinaCuatroIcono:boolean
+  public terminarPedidoMesaCocinaCuatroIcono:boolean;
+  public ponerTiempoMesaCocinaCincoIcono:boolean
+  public terminarPedidoMesaCocinaCincoIcono:boolean;
+  public ponerTiempoMesaCocinaSeisIcono:boolean
+  public terminarPedidoMesaCocinaSeisIcono:boolean;
+  public ponerTiempoMesaCocinaSieteIcono:boolean
+  public terminarPedidoMesaCocinaSieteIcono:boolean;
+  public ponerTiempoMesaCocinaOchoIcono:boolean
+  public terminarPedidoMesaCocinaOchoIcono:boolean;
+  public ponerTiempoMesaCocinaNueveIcono:boolean
+  public terminarPedidoMesaCocinaNueveIcono:boolean;
+  public ponerTiempoMesaCocinaDiezIcono:boolean
+  public terminarPedidoMesaCocinaDiezIcono:boolean;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
   {
@@ -128,6 +149,28 @@ export class TomarPedidoPage {
     localData.subscribe(data => {
       this.information = data;
     })
+
+    this.ponerTiempoMesaCocinaUnoIcono=true;
+    this.terminarPedidoMesaCocinaUnoIcono=false;
+    this.ponerTiempoMesaCocinaDosIcono=true;
+    this.terminarPedidoMesaCocinaDosIcono=false;
+    this.ponerTiempoMesaCocinaTresIcono=true;
+    this.terminarPedidoMesaCocinaTresIcono=false;
+    this.ponerTiempoMesaCocinaCuatroIcono=true;
+    this.terminarPedidoMesaCocinaCuatroIcono=false;
+    this.ponerTiempoMesaCocinaCincoIcono=true;
+    this.terminarPedidoMesaCocinaCincoIcono=false;
+    this.ponerTiempoMesaCocinaSeisIcono=true;
+    this.terminarPedidoMesaCocinaSeisIcono=false;
+    this.ponerTiempoMesaCocinaSieteIcono=true;
+    this.terminarPedidoMesaCocinaSieteIcono=false;
+    this.ponerTiempoMesaCocinaOchoIcono=true;
+    this.terminarPedidoMesaCocinaOchoIcono=false;
+    this.ponerTiempoMesaCocinaNueveIcono=true;
+    this.terminarPedidoMesaCocinaNueveIcono=false;
+    this.ponerTiempoMesaCocinaDiezIcono=true;
+    this.terminarPedidoMesaCocinaDiezIcono=false;
+
 
     this.vistaCocinaMesaUno=false;
     this.vistaCocinaMesaDos=false;
@@ -257,7 +300,7 @@ export class TomarPedidoPage {
       { 
         if(k=="cocinero")
           {
-              this.vistaBartenderMesaUno=true;
+              this.vistaCocinaMesaUno=true;
 
 
             for(let a in result[k])
@@ -1001,6 +1044,9 @@ export class TomarPedidoPage {
                               {
                                 data[key].tiempoMinimo = this.tiempoMesaUno;
                                 refUno.child(key).update(data[key]);
+                                
+                                this.ponerTiempoMesaCocinaUnoIcono=false;
+                                this.terminarPedidoMesaCocinaUnoIcono=true;
 
                                 
                               }
@@ -1062,6 +1108,9 @@ export class TomarPedidoPage {
                                 data[key].tiempoMinimo = this.tiempoMesaDos;
                                 refDos.child(key).update(data[key]);
 
+                                this.ponerTiempoMesaCocinaDosIcono=false;
+                                this.terminarPedidoMesaCocinaDosIcono=true;
+
                                 
                               }
 
@@ -1093,6 +1142,9 @@ export class TomarPedidoPage {
                               {
                                 data[key].tiempoMinimo = this.tiempoMesaTres;
                                 refTres.child(key).update(data[key]);
+
+                                this.ponerTiempoMesaCocinaTresIcono=false;
+                                this.terminarPedidoMesaCocinaTresIcono=true;
 
                                 
                               }
@@ -1130,6 +1182,9 @@ export class TomarPedidoPage {
                                 data[key].tiempoMinimo = this.tiempoMesaCuatro;
                                 refCuatro.child(key).update(data[key]);
 
+                                this.ponerTiempoMesaCocinaCuatroIcono=false;
+                                this.terminarPedidoMesaCocinaCuatroIcono=true;
+
                                 
                               }
 
@@ -1161,6 +1216,9 @@ export class TomarPedidoPage {
                               {
                                 data[key].tiempoMinimo = this.tiempoMesaCinco;
                                 refCinco.child(key).update(data[key]);
+
+                                this.ponerTiempoMesaCocinaCincoIcono=false;
+                                this.terminarPedidoMesaCocinaCincoIcono=true;
 
                                 
                               }
@@ -1195,6 +1253,9 @@ export class TomarPedidoPage {
                                 data[key].tiempoMinimo = this.tiempoMesaSeis;
                                 refSeis.child(key).update(data[key]);
 
+                                this.ponerTiempoMesaCocinaSeisIcono=false;
+                                this.terminarPedidoMesaCocinaSeisIcono=true;
+
                                 
                               }
 
@@ -1225,6 +1286,9 @@ export class TomarPedidoPage {
                               {
                                 data[key].tiempoMinimo = this.tiempoMesaSiete;
                                 refSiete.child(key).update(data[key]);
+
+                                this.ponerTiempoMesaCocinaSieteIcono=false;
+                                this.terminarPedidoMesaCocinaSieteIcono=true;
 
                                 
                               }
@@ -1258,6 +1322,9 @@ export class TomarPedidoPage {
                                 data[key].tiempoMinimo = this.tiempoMesaOcho;
                                 refOcho.child(key).update(data[key]);
 
+                                this.ponerTiempoMesaCocinaOchoIcono=false;
+                                this.terminarPedidoMesaCocinaOchoIcono=true;
+
                                 
                               }
 
@@ -1290,6 +1357,9 @@ export class TomarPedidoPage {
                                 data[key].tiempoMinimo = this.tiempoMesaNueve;
                                 refNueve.child(key).update(data[key]);
 
+                                this.ponerTiempoMesaCocinaNueveIcono=false;
+                                this.terminarPedidoMesaCocinaNueveIcono=true;
+
                                 
                               }
 
@@ -1321,6 +1391,9 @@ export class TomarPedidoPage {
                               {
                                 data[key].tiempoMinimo = this.tiempoMesaDiez;
                                 refDiez.child(key).update(data[key]);
+
+                                this.ponerTiempoMesaCocinaDiezIcono=false;
+                                this.terminarPedidoMesaCocinaDiezIcono=true;
 
                                 
                               }
