@@ -97,9 +97,9 @@ public alertHandler;
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
     //this.vistaCliente=true;
-    this.vistaMozo=true;
+    //his.vistaMozo=true;
 
-   /* this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
     if(this.usuario.tipo=="mozo")
     {
@@ -109,7 +109,7 @@ public alertHandler;
     if(this.usuario.tipo=="cliente" || this.usuario.tipo=="anonimo")
     {
       this.vistaCliente=true;
-    }*/
+    }
 
     
     setInterval(() => {
@@ -670,6 +670,42 @@ public alertHandler;
   {
     this.ocultarAlert=true;
 
+  }
+
+  Logout() 
+  
+  {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              this.navCtrl.setRoot("");
+            } else {
+              localStorage.clear();
+              this.navCtrl.setRoot("");
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
   

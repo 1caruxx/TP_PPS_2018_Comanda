@@ -141,6 +141,17 @@ export class TomarPedidoPage {
   public ponerTiempoMesaCocinaDiezIcono:boolean
   public terminarPedidoMesaCocinaDiezIcono:boolean;
 
+  public tiempoMinimoUno;
+  public tiempoMinimoDos;
+  public tiempoMinimoTres;
+  public tiempoMinimoCuatro;
+  public tiempoMinimoCinco;
+  public tiempoMinimoSeis;
+  public tiempoMinimoSiete;
+  public tiempoMinimoOcho;
+  public tiempoMinimoNueve;
+  public tiempoMinimoDiez;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
   {
@@ -292,7 +303,12 @@ export class TomarPedidoPage {
     let pedidosMesaUno = this.firebase.database().ref("pedidos/1/");
 
 
-    pedidosMesaUno.once("value", (snap) => {
+    pedidosMesaUno.on("value", (snap) => {
+
+      this.vistaCocinaMesaUno=false;
+      this.vistaBartenderMesaUno=false;
+      this.pedidosCocinaUno=[];
+      this.pedidosBartenderUno=[];
 
       let result = snap.val();
 
@@ -364,7 +380,12 @@ export class TomarPedidoPage {
     let pedidosMesaDos = this.firebase.database().ref("pedidos/2/");
 
 
-    pedidosMesaDos.once("value", (snap) => {
+    pedidosMesaDos.on("value", (snap) => {
+
+      this.vistaBartenderMesaDos=false;
+      this.vistaCocinaMesaDos=false;
+      this.pedidosCocinaDos=[];
+      this.pedidosBartenderDos=[];
 
       let result = snap.val();
 
@@ -432,7 +453,12 @@ export class TomarPedidoPage {
      let pedidosMesaTres = this.firebase.database().ref("pedidos/3/");
 
 
-     pedidosMesaTres.once("value", (snap) => {
+     pedidosMesaTres.on("value", (snap) => {
+
+      this.vistaCocinaMesaTres=false;
+      this.vistaBartenderMesaTres=false;
+      this.pedidosCocinaTres=[];
+      this.pedidosBartenderTres=[];
  
        let result = snap.val();
  
@@ -505,7 +531,12 @@ export class TomarPedidoPage {
     let pedidosMesaCuatro = this.firebase.database().ref("pedidos/4/");
 
 
-    pedidosMesaCuatro.once("value", (snap) => {
+    pedidosMesaCuatro.on("value", (snap) => {
+
+      this.vistaCocinaMesaCuatro=false;
+      this.vistaBartenderMesaCuatro=false;
+      this.pedidosCocinaCuatro=[];
+      this.pedidosBartenderCuatro=[];
 
       let result = snap.val();
 
@@ -580,7 +611,12 @@ export class TomarPedidoPage {
     let pedidosMesaCinco = this.firebase.database().ref("pedidos/5/");
 
 
-    pedidosMesaCinco.once("value", (snap) => {
+    pedidosMesaCinco.on("value", (snap) => {
+
+      this.vistaCocinaMesaCinco=false;
+      this.vistaBartenderMesaCinco=false;
+      this.pedidosCocinaCinco=[];
+      this.pedidosBartenderCinco=[];
 
       let result = snap.val();
 
@@ -653,7 +689,12 @@ export class TomarPedidoPage {
     let pedidosMesaSeis = this.firebase.database().ref("pedidos/6/");
 
 
-    pedidosMesaSeis.once("value", (snap) => {
+    pedidosMesaSeis.on("value", (snap) => {
+
+      this.vistaCocinaMesaSeis=false;
+      this.vistaBartenderMesaSeis=false;
+      this.pedidosCocinaSeis=[];
+      this.pedidosBartenderSeis=[];
 
       let result = snap.val();
 
@@ -724,7 +765,12 @@ export class TomarPedidoPage {
      let pedidosMesaSiete = this.firebase.database().ref("pedidos/7/");
 
 
-     pedidosMesaSiete.once("value", (snap) => {
+     pedidosMesaSiete.on("value", (snap) => {
+
+      this.vistaCocinaMesaSiete=false;
+      this.vistaBartenderMesaSiete=false;
+      this.pedidosCocinaSiete=[];
+      this.pedidosBartenderSiete=[];
  
        let result = snap.val();
  
@@ -796,7 +842,12 @@ export class TomarPedidoPage {
     let pedidosMesaOcho = this.firebase.database().ref("pedidos/8/");
 
 
-    pedidosMesaOcho.once("value", (snap) => {
+    pedidosMesaOcho.on("value", (snap) => {
+
+      this.vistaCocinaMesaOcho=false;
+      this.vistaBartenderMesaOcho=false;
+      this.pedidosCocinaOcho=[];
+      this.pedidosBartenderOcho=[];
 
       let result = snap.val();
 
@@ -864,7 +915,12 @@ export class TomarPedidoPage {
     let pedidosMesaNueve = this.firebase.database().ref("pedidos/9/");
 
 
-    pedidosMesaNueve.once("value", (snap) => {
+    pedidosMesaNueve.on("value", (snap) => {
+
+      this.vistaCocinaMesaNueve=false;
+      this.vistaBartenderMesaNueve=false;
+      this.pedidosCocinaNueve=[];
+      this.pedidosBartenderNueve=[];
 
       let result = snap.val();
 
@@ -930,7 +986,12 @@ export class TomarPedidoPage {
     let pedidosMesaDiez = this.firebase.database().ref("pedidos/10/");
 
 
-    pedidosMesaDiez.once("value", (snap) => {
+    pedidosMesaDiez.on("value", (snap) => {
+
+      this.vistaCocinaMesaDiez=false;
+      this.vistaBartenderMesaDiez=false;
+      this.pedidosCocinaDiez=[];
+      this.pedidosBartenderDiez=[];
 
       let result = snap.val();
 
@@ -1075,6 +1136,7 @@ export class TomarPedidoPage {
 
   pregunta1()
   {
+    this.tiempoMinimoUno=this.tiempoMesaUno;
     this.ocultarUno=false;
     
     
@@ -1083,7 +1145,9 @@ export class TomarPedidoPage {
 
   pregunta2()
   {
+    this.tiempoMinimoDos=this.tiempoMesaDos;
     this.ocultarDos=false;
+
     
     
   
@@ -1091,6 +1155,7 @@ export class TomarPedidoPage {
 
   pregunta3()
   {
+    this.tiempoMinimoTres=this.tiempoMesaTres;
     this.ocultarTres=false;
     
     
@@ -1099,36 +1164,43 @@ export class TomarPedidoPage {
 
   pregunta4()
   {
+    this.tiempoMinimoCuatro=this.tiempoMesaCuatro;
     this.ocultarCuatro=false;
   }
 
   pregunta5()
   {
+    this.tiempoMinimoCinco=this.tiempoMesaCinco;
     this.ocultarCinco=false;
   }
 
   pregunta6()
   {
+    this.tiempoMinimoSeis=this.tiempoMesaSeis;
     this.ocultarSeis=false;
   }
 
   pregunta7()
   {
+    this.tiempoMinimoSiete=this.tiempoMesaSiete;
     this.ocultarSiete=false;
   }
 
   pregunta8()
   {
+    this.tiempoMinimoOcho=this.tiempoMesaOcho;
     this.ocultarOcho=false;
   }
 
   pregunta9()
   {
+    this.tiempoMinimoNueve=this.tiempoMesaNueve;
     this.ocultarNueve=false;
   }
 
   pregunta10()
   {
+    this.tiempoMinimoDiez=this.tiempoMesaDiez;
     this.ocultarDiez=false;
   }
 
@@ -1136,6 +1208,13 @@ export class TomarPedidoPage {
 
   Aceptar1()
   {
+
+    if(this.tiempoMesaUno<this.tiempoMinimoUno)
+    {
+     this.ocultarUno=true;
+     alert("Ponga un tiempo mayor o igual del indicado")
+      return;
+    }
 
     this.ocultarUno=true;
 
@@ -1199,6 +1278,16 @@ export class TomarPedidoPage {
 
   Aceptar2()
   {
+    
+   // while(this.tiempoMesaDos)
+   //let z=this.tiempoMesaDos;
+
+   if(this.tiempoMesaDos<this.tiempoMinimoDos)
+   {
+    this.ocultarDos=true;
+    alert("Ponga un tiempo mayor o igual del indicado")
+     return;
+   }
 
     this.ocultarDos=true;
 
@@ -1235,6 +1324,13 @@ export class TomarPedidoPage {
   Aceptar3()
   {
 
+    if(this.tiempoMesaTres<this.tiempoMinimoTres)
+    {
+     this.ocultarTres=true;
+     alert("Ponga un tiempo mayor o igual del indicado")
+      return;
+    }
+
     this.ocultarTres=true;
 
     var refTres = this.firebase.database().ref("mesas");
@@ -1270,6 +1366,14 @@ export class TomarPedidoPage {
 
   Aceptar4()
   {
+
+    if(this.tiempoMesaCuatro<this.tiempoMinimoCuatro)
+    {
+     this.ocultarCuatro=true;
+     alert("Ponga un tiempo mayor o igual del indicado")
+      return;
+    }
+
     //this.ocultar=true;
     //this.ocultarDos=true;
     this.ocultarCuatro=true;
@@ -1306,6 +1410,13 @@ export class TomarPedidoPage {
 
   Aceptar5()
   {
+
+    if(this.tiempoMesaCinco<this.tiempoMinimoCinco)
+    {
+     this.ocultarCinco=true;
+     alert("Ponga un tiempo mayor o igual del indicado")
+      return;
+    }
     //this.ocultar=true;
     this.ocultarCinco=true;
 
@@ -1341,6 +1452,14 @@ export class TomarPedidoPage {
 
   Aceptar6()
   {
+
+    if(this.tiempoMesaSeis<this.tiempoMinimoSeis)
+    {
+     this.ocultarSeis=true;
+     alert("Ponga un tiempo mayor o igual del indicado")
+      return;
+    }
+
     //this.ocultar=true;
     //this.ocultarTres=true;
     this.ocultarSeis=true;
@@ -1379,6 +1498,13 @@ export class TomarPedidoPage {
   Aceptar7()
   {
 
+    if(this.tiempoMesaSiete<this.tiempoMinimoSiete)
+    {
+     this.ocultarSiete=true;
+     alert("Ponga un tiempo mayor o igual del indicado")
+      return;
+    }
+
     this.ocultarSiete=true;
 
     var refSiete = this.firebase.database().ref("mesas");
@@ -1413,6 +1539,13 @@ export class TomarPedidoPage {
 
   Aceptar8()
   {
+
+    if(this.tiempoMesaOcho<this.tiempoMinimoOcho)
+    {
+     this.ocultarOcho=true;
+     alert("Ponga un tiempo mayor o igual del indicado")
+      return;
+    }
 
     this.ocultarOcho=true;
 
@@ -1449,6 +1582,13 @@ export class TomarPedidoPage {
   Aceptar9()
   {
 
+    if(this.tiempoMesaNueve<this.tiempoMinimoNueve)
+    {
+     this.ocultarNueve=true;
+     alert("Ponga un tiempo mayor o igual del indicado")
+      return;
+    }
+
     this.ocultarNueve=true;
 
     var refNueve = this.firebase.database().ref("mesas");
@@ -1483,6 +1623,13 @@ export class TomarPedidoPage {
 
   Aceptar10()
   {
+
+    if(this.tiempoMesaDiez<this.tiempoMinimoDiez)
+    {
+     this.ocultarDiez=true;
+     alert("Ponga un tiempo mayor o igual del indicado")
+      return;
+    }
 
     this.ocultarDiez=true;
 
@@ -1550,7 +1697,7 @@ export class TomarPedidoPage {
 
                           }).then(() => 
                           {
-                            this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                           // this.navCtrl.setRoot(this.navCtrl.getActive().component);
                           });
 
 
@@ -1591,7 +1738,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+             // this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
 
@@ -1630,7 +1777,7 @@ export class TomarPedidoPage {
 
                           }).then(() => 
                           {
-                            this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                            //this.navCtrl.setRoot(this.navCtrl.getActive().component);
                           });
 
 
@@ -1672,7 +1819,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+             // this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1723,7 +1870,7 @@ export class TomarPedidoPage {
       
                           }).then(() => 
                           {
-                            this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                           // this.navCtrl.setRoot(this.navCtrl.getActive().component);
                           });
 
   }
@@ -1760,7 +1907,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+             // this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
 
@@ -1798,7 +1945,7 @@ export class TomarPedidoPage {
 
                           }).then(() => 
                           {
-                            this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                         //   this.navCtrl.setRoot(this.navCtrl.getActive().component);
                           });
 
   }
@@ -1836,7 +1983,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+            //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
     
   }
@@ -1872,7 +2019,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+            //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1910,7 +2057,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+             // this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
 
@@ -1947,7 +2094,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+             // this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -1985,7 +2132,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+              //this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2021,7 +2168,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+             // this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2059,7 +2206,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+             // this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2095,7 +2242,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+              //this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2133,7 +2280,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+              //this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2169,7 +2316,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+              //this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2207,7 +2354,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+              //this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2243,7 +2390,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+              //this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }
@@ -2281,7 +2428,7 @@ export class TomarPedidoPage {
 
             }).then(() => 
             {
-              this.navCtrl.setRoot(this.navCtrl.getActive().component);
+             // this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
   }

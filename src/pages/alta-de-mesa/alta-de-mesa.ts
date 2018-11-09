@@ -34,12 +34,16 @@ export class AltaDeMesaPage {
 
   public scanSub;
   public estado = "vertical-container";
+
+  public usuario;
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
    {
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
     this.probandingg=true;
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
 
   }
@@ -252,6 +256,43 @@ this.qrScanner.prepare()
 
     this.scanSub.unsubscribe();
     */
+  }
+
+  Logout() 
+  {
+
+    
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              this.navCtrl.setRoot("");
+            } else {
+              localStorage.clear();
+              this.navCtrl.setRoot("");
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 
