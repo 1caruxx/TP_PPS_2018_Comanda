@@ -103,7 +103,7 @@ export class AltaDeMesaPage {
 
           this.presentToast("La mesa ingresada ya esta registrada");
           this.esValido = false;
-          break;
+          //break;
         }
       }
       
@@ -125,15 +125,27 @@ export class AltaDeMesaPage {
                 tipo: this.tipo,
                 estado: "libre",
                 img: url
-              });
+              }).then(() => 
+              {
+                //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                this.numeroMesa="";
+                this.cantidadComensales="";
+                this.foto="";
+              });;
 
               
             });
 
-            this.presentToast("La mesa se pudo cargar con exito");
-          this.navCtrl.setRoot(this.navCtrl.getActive().component);
+            /*this.presentToast("La mesa se pudo cargar con exito");
+            this.numeroMesa="";
+            this.cantidadComensales="";
+            this.foto="";*/
+         // this.navCtrl.setRoot(this.navCtrl.getActive().component);
+
+
 
           });
+
 
           
 

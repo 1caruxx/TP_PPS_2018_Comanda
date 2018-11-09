@@ -51,6 +51,15 @@ export class QrDeLaMesaPage {
   miScan;
 
 
+public estadoBoton: boolean = false;
+public ocultarAlert: boolean = true;
+public alertTitulo;
+public alertMensaje;
+public alertMensajeBoton;
+public alertHandler;
+
+
+
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController,private authInstance: AngularFireAuth,private barcode: BarcodeScanner)
@@ -87,10 +96,11 @@ export class QrDeLaMesaPage {
 */
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
-   // this.vistaMozo=true;
+    //this.vistaCliente=true;
+    this.vistaMozo=true;
 
-    this.usuario = JSON.parse(localStorage.getItem("usuario"));
-
+   /* this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    
     if(this.usuario.tipo=="mozo")
     {
       this.vistaMozo=true;
@@ -99,7 +109,7 @@ export class QrDeLaMesaPage {
     if(this.usuario.tipo=="cliente" || this.usuario.tipo=="anonimo")
     {
       this.vistaCliente=true;
-    }
+    }*/
 
     
     setInterval(() => {
@@ -142,7 +152,7 @@ export class QrDeLaMesaPage {
 
 
     //let genteRef = this.firebase.database().ref("usuarios/clientes");
-    let genteRef = this.firebase.database().ref("usuarios");
+   /* let genteRef = this.firebase.database().ref("usuarios");
 
     genteRef.once("value", (snap) => {
 
@@ -157,20 +167,58 @@ export class QrDeLaMesaPage {
     }).then(() => {
       this.espera = this.usuarios.filter(item => {
 
-        //return item.mesa == null && item.tipo=="cliente" || item.mesa == null && item.tipo=="anonimo" || item.estado=="espera";
+        
         return item.estado=="espera";
       });
 
       this.atendidos = this.usuarios.filter(item => {
 
-       //return item.mesa != null && item.tipo=="cliente" || item.mesa != null && item.tipo=="anonimo" || item.estado=="atendido";
+       
        return item.estado=="atendido";
       });
 
 
       
 
+    });*/
+
+    let genteRef = this.firebase.database().ref("usuarios");
+
+    genteRef.on("value", (snap) => {
+
+      this.usuarios=[];
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        this.usuarios.push(data[item]);
+      }
+
+      this.espera = this.usuarios.filter(item => {
+
+        
+        return item.estado=="espera";
+      });
+
+      this.atendidos = this.usuarios.filter(item => {
+
+       
+       return item.estado=="atendido";
+      });
+
+      console.log(this.usuarios);
+
+
     });
+     
+
+
+      
+
+    
+
+    
 
 
 
@@ -271,7 +319,8 @@ export class QrDeLaMesaPage {
                                   {
                                     this.estaLibre=false;
                                     //ocup=false;
-                                    alert("La mesa ya esta ocupada");
+                                   // alert("La mesa ya esta ocupada");
+                                   this.MostrarAlert("Error!", "La mesa ya esta ocupada", "Aceptar", this.limpiar);
                                     break;
                                     //return;
                                     
@@ -297,7 +346,8 @@ export class QrDeLaMesaPage {
                                                 data[key].estado = "atendido";
                                                
                                                 ref.child(key).update(data[key]);
-                                                alert("Listo,se relaciono al cliente con la mesa " + text);
+                                                //alert("Listo,se relaciono al cliente con la mesa " + text);
+                                                this.MostrarAlert("Exito!", "Listo,se relaciono al cliente con la mesa " + text, "Aceptar", this.limpiar);
                                                 this.navCtrl.setRoot(this.navCtrl.getActive().component);
                                                 
                                                 
@@ -525,7 +575,7 @@ export class QrDeLaMesaPage {
   {
     this.barcode.scan().then(barcodeData => {
       this.Modificar(correo,barcodeData.text);
-        alert(barcodeData.text);
+        //alert(barcodeData.text);
     });
 
 
@@ -550,27 +600,33 @@ export class QrDeLaMesaPage {
            
             for(var key in data)
             {
+                //if (barcodeData.text == data[key].numeroMesa)
                 if (barcodeData.text == data[key].numeroMesa) 
                 {
-                  if(data[key].correo==usuario.correo)
+                  if(data[key].cliente==usuario.correo)
                   {
                     if(data[key].tiempoMinimo!=null)
                     {
-                    alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
+                    //alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
+                    this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
                     banderita=1;
                     break;
 
                     }
                     else
                     {
-                      alert("Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo");
+                      //alert("Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo");
+                      this.MostrarAlert("A esperar!", "Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo", "Aceptar", this.limpiar);
+                      banderita=1;
                       break;
                     }
                     
                   }
                   else
                   {
-                    alert("Esa no es su mesa");
+                    //alert("Esa no es su mesa");
+                    this.MostrarAlert("Error!", "Esta no es su mesa", "Aceptar", this.limpiar);
+                    banderita=1;
                     break;
                   }
                     
@@ -578,12 +634,16 @@ export class QrDeLaMesaPage {
                 }
                 
               }
+            }).then(() => 
+            {
+              if(banderita==0)
+              {
+                //alert("Por favor escanee una mesa valida");
+                this.MostrarAlert("NOOOOOOOOOOOOOOO!", "por favor escanee una mesa valida", "Aceptar", this.limpiar);
+              }
             });
 
-            if(banderita==0)
-            {
-              alert("Por favor escanee una mesa valida");
-            }
+          
 
 
 
@@ -593,5 +653,25 @@ export class QrDeLaMesaPage {
 
 
   }
+
+
+  MostrarAlert(titulo: string, mensaje: string, mensajeBoton: string, handler) 
+  {
+    this.ocultarAlert = false;
+    this.alertTitulo = titulo;
+    this.alertMensaje = mensaje;
+    this.alertMensajeBoton = mensajeBoton;
+    this.alertHandler = handler;
+
+   
+  }
+
+  limpiar()
+  {
+    this.ocultarAlert=true;
+
+  }
+
+  
 
 }

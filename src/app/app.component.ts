@@ -16,7 +16,7 @@ import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TomarPedidoPage;
+  rootPage:any = QrDeLaMesaPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController) {
     platform.ready().then(() => {

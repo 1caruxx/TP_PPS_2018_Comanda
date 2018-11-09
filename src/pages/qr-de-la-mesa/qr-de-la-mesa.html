@@ -106,9 +106,9 @@
           <p  style="color:black;">Tipo : • {{item.tipo}}</p>
     
          <!-- <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">-->
-            <button ion-button clear item-end (click)="probandoBarcode()">
+            <!--<button ion-button clear item-end (click)="probandoBarcode()">
             <ion-icon name="restaurant"></ion-icon>
-          </button>
+          </button>-->
         </ion-item>
     
       </ion-list>
@@ -131,11 +131,25 @@
     </ion-content>
 
 
-      <ion-footer *ngIf="cerrarqr">
+    <div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+      <div class="alert-message animation-target">
+        <h1>{{alertTitulo}}</h1>
+        <p>{{alertMensaje}}</p>
+        <div class="botones">
+    
+          <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+        </div>
+      </div>
+    
+    </div>
+
+
+      <!--<ion-footer *ngIf="cerrarqr">
         <ion-toolbar>
           <ion-title>Footer</ion-title>
           <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
             <ion-icon name="close"></ion-icon>
           </button>
         </ion-toolbar>
-      </ion-footer>
+      </ion-footer>-->
