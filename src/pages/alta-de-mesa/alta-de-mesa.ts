@@ -6,6 +6,9 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 //import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
+//NANANANAN MUY CLAVE ESTE COMENTARIOOOOOOOOOOOOOO
+//LINEA 288 Y 291 FERNII
+
 /**
  * Generated class for the AltaDeMesaPage page.
  *

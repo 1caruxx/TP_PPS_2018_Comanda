@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map'
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
-
+//LINEA 2460 Y 2463
 /**
  * Generated class for the TomarPedidoPage page.
  *
@@ -2431,6 +2431,43 @@ export class TomarPedidoPage {
              // this.navCtrl.setRoot(this.navCtrl.getActive().component);
             });
 
+  }
+
+
+  Logout() 
+  
+  {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              this.navCtrl.setRoot("");
+            } else {
+              localStorage.clear();
+              this.navCtrl.setRoot("");
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 

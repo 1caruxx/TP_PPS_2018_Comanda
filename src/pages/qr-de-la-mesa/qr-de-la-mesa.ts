@@ -6,7 +6,7 @@ import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
-
+//LINEA 698 Y 701
 /**
  * Generated class for the QrDeLaMesaPage page.
  *
