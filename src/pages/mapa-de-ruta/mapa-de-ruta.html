@@ -103,7 +103,7 @@
 
 <ion-content>
 
-  <div>
+  <div *ngIf="clientes">
 
     <ion-list>
 
@@ -114,13 +114,17 @@
       <ion-item *ngFor="let item of clientesConPedidos">
         <ion-thumbnail item-start>
           <!--<img src={{item.img}}>-->
-          <ion-icon name="restaurant"></ion-icon>
+          <ion-icon name="contact"></ion-icon>
         </ion-thumbnail>
     
       <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
         <p>Cliente • {{item.tipo}}</p>-->
         <h1>nombre:{{item.nombre}}</h1>
-        <p>cantidad:{{item.cantidad}}</p>
+        <p>correo:{{item.correo}}</p>
+
+        <button ion-button clear item-end (click)="chatear(item)">
+            <ion-icon name="chatboxes"></ion-icon>
+          </button>
     
     
     
@@ -130,14 +134,18 @@
     
     </ion-list>
 
+    </div>
+
+    <div *ngIf="chat">
 
 
 
 
-    <img src="assets/imgs/gamma/mapaderuta.jpg"/>
+        <img src={{probando}}>
+    
 
-    <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>
-          <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>
+          <ion-label class="lb" >{{nombreCliente}}</ion-label>
+          <ion-label class="lb" >{{direccionCliente}}</ion-label>
 
           
 
@@ -145,18 +153,49 @@
 
 
 	<ion-list no-lines>
+
 		<ion-item *ngFor="let message of messagesList">
-			<h3>{{message.name}}</h3>
-			<p>{{message.message}}</p>
-		</ion-item>
+		<!--	<h3>{{message.name}}</h3>
+      <p>{{message.message}}</p>-->
+
+      <div class="chat-message" text-right *ngIf="message.name === probanding">
+          <div class="right-bubble">
+            <span class="msg-name">Yo</span>
+            
+            <p text-wrap>{{message.message}}</p>
+          </div>
+        </div>
+
+        <div class="chat-message" text-left *ngIf="message.name !== probanding">
+          <div class="left-bubble">
+            <span class="msg-name">{{message.name}}</span>
+            
+            <p text-wrap>{{message.message}}</p>
+          </div>
+        </div>
+      
+
+
+
+
+
+
+
+    </ion-item>
+    
+
+
+
   </ion-list>
   
 
 </div>
+
+
 </ion-content>
 
 
-<ion-footer>
+<ion-footer *ngIf="mandar">
 	<ion-item>
 		<ion-input type="text" placeholder="Escriba aqui..." [(ngModel)]="newmessage"></ion-input>
 		<button ion-button clear item-right (click)="send()">Enviar</button>

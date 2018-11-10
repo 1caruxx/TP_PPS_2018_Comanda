@@ -1,10 +1,21 @@
 page-mapa-de-ruta {
 
+  .ion-md-chatboxes:before {
+    content: "\f2b6";
+    font-size: 35px;
+    padding-right: 40px;
+}
+
+  .ion-md-contact:before {
+    content: "\f2d6";
+    font-size: 70px;
+}
+
   .scroll-content {
 
-    overflow: auto;  /* redundant, but just in case */
-    display: flex; /* redundant, but just in case */
-    flex-direction: column-reverse;
+    //overflow: auto;  /* redundant, but just in case */
+    //display: flex; /* redundant, but just in case */
+    //flex-direction: column-reverse;
 }
 
 ion-content {
@@ -30,7 +41,7 @@ ion-content {
 
 }
 
-   /* .chat-message {
+    .chat-message {
         width: 80%;
         min-height: 40px;
         .right-bubble {
@@ -133,11 +144,12 @@ ion-content {
         }
       }
 
-      .scroll-content {
+    /*  .scroll-content {
         background-image: url('../../assets/imgs/gamma/encuesta.jpg');
         background-size: cover; 
         background-position: center; 
     }
+    */
 
     .home {
         background-color: #f53d3d !important;
@@ -185,7 +197,7 @@ ion-content {
       text-align: center;
       //border-radius: 20px !important;
   }
-*/  
+
     
 
 
