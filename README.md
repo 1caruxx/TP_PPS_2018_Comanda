@@ -1,5 +1,7 @@
 # ![Logo](./src/assets/imgs/icon.png) La comanda
 
+![asdsda](./src/assets/imgs/gamma/1.png) QR Mesa 1
+
 Aplicación para dispositivos móviles desarollada en ionic3 que permitirá la gestión y el servicio de un restaurante ficticio. A través de esta aplicacion, distintas personas podrán registrarse e iniciar sesión y en base a su tipo de usuario, tendrán acceso a ciertas funcionalidades o no.
 
 ## Integrantes
