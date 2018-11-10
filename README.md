@@ -50,10 +50,10 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 
 **Objetivos a desarollar:**
 
-* [ ] E- Alta de mesa.
-* [ ] G- QR de la mesa.
-* [ ] J- Encuesta de empleado.
-* [ ] M- Tomar pedido.
+* [x] E- Alta de mesa.
+* [x] G- QR de la mesa.
+* [x] J- Encuesta de empleado.
+* [x] M- Tomar pedido.
 * [ ] O- Pedir mesa.
 * [ ] S- Mapa de ruta hasta el domiciolio de entrega.
 
