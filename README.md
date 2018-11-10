@@ -75,9 +75,7 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 * [Maximiliano Neiner](https://github.com/maxineiner)
 * [Octavio villegas](https://github.com/octaviovillegas)
 
-## QR De Bienvenida
-
-* QR Mesa 1
+## QR De Bienvenida o ingreso al local
 
 ![gfsxcws](./src/assets/imgs/gamma/bienvenido.png)
 
