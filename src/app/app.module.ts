@@ -28,6 +28,7 @@ import { Camera } from '@ionic-native/camera';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
+import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-ahora';
 
 
 
@@ -44,7 +45,8 @@ import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
     QrDeLaMesaPage,
     TomarPedidoPage,
     MapaDeRutaPage,
-    JuegoQuinterosPage
+    JuegoQuinterosPage,
+    TiempoDesdeAhoraPipe
 
   ],
   imports: [

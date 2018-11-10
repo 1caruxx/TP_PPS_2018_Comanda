@@ -175,9 +175,10 @@ export class MapaDeRutaPage {
   	// add new data to firebase
   	this.ref.push({
 		  //name: this.name.username,
-		    name: this.nombreCliente,
+		    name: "yo",
 			message: this.newmessage,
-			tipo:"delivery"
+			tiempo: Date(),
+			//tipo:"delivery"
 	  });
 	  
 
