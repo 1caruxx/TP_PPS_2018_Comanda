@@ -118,3 +118,20 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 ![klfkdgl](./src/assets/imgs/gamma/10.png)
 
 ## QRS Productos
+
+* QR Agua
+
+![klfdskdgl](./src/assets/imgs/gamma/agua.jpeg)
+
+* QR Cerveza
+
+![klfkdgl](./src/assets/imgs/gamma/cerveza.jpeg)
+
+* QR Coca Cola
+
+![sadklfkdgl](./src/assets/imgs/gamma/cocacola.jpeg)
+
+* QR Jugo de naranja
+
+![klfksdfdsadgl](./src/assets/imgs/gamma/juguitonaranja.jpeg)
+
