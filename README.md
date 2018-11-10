@@ -1,4 +1,4 @@
-# ![Logo](./src/assets/imgs/icon.png) La comanda
+﻿# ![Logo](./src/assets/imgs/icon.png) La comanda
 
 Aplicación para dispositivos móviles desarollada en ionic3 que permitirá la gestión y el servicio de un restaurante ficticio. A través de esta aplicacion, distintas personas podrán registrarse e iniciar sesión y en base a su tipo de usuario, tendrán acceso a ciertas funcionalidades o no.
 
@@ -43,6 +43,12 @@ Branch del proyecto: [vega_beta](https://github.com/1caruxx/TP_PPS_2018_Comanda/
 **Fecha de inicio:**<br />
 **Fecha de fin:**
 
+---
+[x] C- Alta de platos y bebidas.</br>
+[x] C- Alta de platos y bebidas.</br>
+[x] C- Alta de platos y bebidas.</br>
+[x] C- Alta de platos y bebidas.</br>
+[x] C- Alta de platos y bebidas.</br>
 ---
 
 ⬆️ Quinteros, Axel<br />
