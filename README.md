@@ -1,7 +1,5 @@
 # ![Logo](./src/assets/imgs/icon.png) La comanda
 
-![asdsda](./src/assets/imgs/gamma/1.png) QR Mesa 1
-
 Aplicación para dispositivos móviles desarollada en ionic3 que permitirá la gestión y el servicio de un restaurante ficticio. A través de esta aplicacion, distintas personas podrán registrarse e iniciar sesión y en base a su tipo de usuario, tendrán acceso a ciertas funcionalidades o no.
 
 ## Integrantes
@@ -69,10 +67,54 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 * [x] vista de mapa de ruta hasta el domicilio de la entrega listo
 
 
-**Fecha de inicio:** 19/10/2018<br />
-**Fecha de fin:**
+**Fecha de inicio:** 03/11/2018<br />
+**Fecha de fin:** 10/11/2018
 
 ## Profesores
 
 * [Maximiliano Neiner](https://github.com/maxineiner)
 * [Octavio villegas](https://github.com/octaviovillegas)
+
+##QRS Mesas
+
+* QR Mesa 1
+
+![asdsda](./src/assets/imgs/gamma/1.png)
+
+* QR Mesa 2
+
+![asdsdsda](./src/assets/imgs/gamma/2.png)
+
+* QR Mesa 3
+
+![asasdsda](./src/assets/imgs/gamma/3.png)
+
+* QR Mesa 4
+
+![asfdsdsda](./src/assets/imgs/gamma/4.png)
+
+* QR Mesa 5
+
+![asda](./src/assets/imgs/gamma/5.png)
+
+* QR Mesa 6
+
+![addsda](./src/assets/imgs/gamma/6.png)
+
+* QR Mesa 7
+
+![sda](./src/assets/imgs/gamma/7.png)
+
+* QR Mesa 8
+
+![cxzxc](./src/assets/imgs/gamma/8.png)
+
+* QR Mesa 9
+
+![gvcds](./src/assets/imgs/gamma/9.png)
+
+* QR Mesa 10
+
+![klfkdgl](./src/assets/imgs/gamma/10.png)
+
+##QRS Productos
