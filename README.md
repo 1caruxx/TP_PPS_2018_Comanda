@@ -75,7 +75,7 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 * [Maximiliano Neiner](https://github.com/maxineiner)
 * [Octavio villegas](https://github.com/octaviovillegas)
 
-##QRS Mesas
+## QRS Mesas
 
 * QR Mesa 1
 
@@ -117,4 +117,4 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 
 ![klfkdgl](./src/assets/imgs/gamma/10.png)
 
-##QRS Productos
+## QRS Productos
