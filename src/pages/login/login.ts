@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 
 import { PrincipalPage } from "../principal/principal";
 import { RegistroClientePage } from "../registro-cliente/registro-cliente";
+import { EncuestaDeEmpleadoPage } from "../encuesta-de-empleado/encuesta-de-empleado";
+import { QrIngresoLocalPage } from "../qr-ingreso-local/qr-ingreso-local";
 
 import { AngularFireAuth } from "angularfire2/auth";
 import firebase from "firebase";
@@ -132,12 +134,12 @@ export class LoginPage {
                     case "bartender":
                     case "metre":
                     case "repartidor":
-                      this.navCtrl.setRoot(AltaEmpleadoPage);
+                      this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
                       break;
 
                     case "cliente":
                       if(estado == "espera")
-                        this.navCtrl.setRoot(ListadoSupervisorPage);
+                        this.navCtrl.setRoot(QrIngresoLocalPage);
                       else
                         this.navCtrl.setRoot(PrincipalPage);
                       break;
@@ -148,7 +150,7 @@ export class LoginPage {
                       if(estado == "atendido" || estado == "pidio" || estado == "comiendo")
                         this.navCtrl.setRoot(PrincipalPage);
                       else
-                        this.navCtrl.setRoot(ListadoSupervisorPage);
+                        this.navCtrl.setRoot(QrIngresoLocalPage);
                       break;
 
                       // siempre a principal (dueño, supervisor, cliente (registrado))

@@ -18,12 +18,6 @@ import { QrDeLaMesaPage } from '../../pages/qr-de-la-mesa/qr-de-la-mesa';
 import { TomarPedidoPage } from '../../pages/tomar-pedido/tomar-pedido';
 import { MapaDeRutaPage } from '../../pages/mapa-de-ruta/mapa-de-ruta';
 
-/*
-  Generated class for the VerificarTipoProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class VerificarTipoProvider {
 
@@ -40,9 +34,9 @@ export class VerificarTipoProvider {
 
       case "dueño":
         acciones = [
-          { accion: "Nuevo dueño o supervisor.", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
-          { accion: "Nuevo empleado.", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
-          { accion: "Nueva mesa.", img: "ocupar-mesa.jpg", ruta: AltaDeMesaPage }
+          { accion: "Agregar un dueño o supervisor", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
+          { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
+          { accion: "Nueva mesa", img: "ocupar-mesa.jpg", ruta: AltaDeMesaPage }
         ];
         break;
 
@@ -56,73 +50,59 @@ export class VerificarTipoProvider {
 
       case "mozo":
         acciones = [
-          { accion: "Ocupar una mesa.", img: "ocupar-mesa.jpg", ruta: QrDeLaMesaPage },
-          { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: PedirPlatosPage },
-          { accion: "Nuevo cliente.", img: "nuevo-cliente.jpg", ruta: RegistroClientePage },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaDeEmpleadoPage },
-          { accion: "Mapa de ruta.", img: "encuesta.jpg", ruta: MapaDeRutaPage }
+          { accion: "Ocupar una mesa", img: "ocupar-mesa.jpg", ruta: QrDeLaMesaPage },
+          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
+          { accion: "Agregar un cliente", img: "nuevo-cliente.jpg", ruta: RegistroClientePage }
+          // { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: EncuestaDeEmpleadoPage }
         ];
         break;
 
       case "cocinero":
         acciones = [
-          { accion: "Tomar un pedido.", img: "pedido.jpg", ruta: TomarPedidoPage },
-          { accion: "Nuevo plato o bebida.", img: "nueva-comida.jpg", ruta: AltaPlatosPage },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaDeEmpleadoPage }
+          { accion: "Tomar un pedido", img: "pedido.jpg", ruta: TomarPedidoPage },
+          { accion: "Agregar un plato o bebida", img: "nueva-comida.jpg", ruta: AltaPlatosPage }
+          // { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: EncuestaDeEmpleadoPage }
         ];
         break;
 
       case "bartender":
         acciones = [
-          { accion: "Tomar un pedido.", img: "pedido.jpg", ruta: TomarPedidoPage },
-          { accion: "Nuevo plato o bebida.", img: "nueva-comida.jpg", ruta: AltaPlatosPage },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaDeEmpleadoPage }
-          { accion: "Tomar un pedido", img: "pedido.jpg", ruta: "./" },
-          { accion: "Agregar un plato o bebida", img: "nueva-comida.jpg", ruta: "./" },
-          { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" }
+          { accion: "Tomar un pedido", img: "pedido.jpg", ruta: TomarPedidoPage },
+          { accion: "Agregar un plato o bebida", img: "nueva-comida.jpg", ruta: AltaPlatosPage }
+          // { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" }
         ];
         break;
 
       case "metre":
         acciones = [
-          { accion: "Ocupar una mesa.", img: "ocupar-mesa.jpg", ruta: QrDeLaMesaPage },
-          { accion: "Nuevo cliente.", img: "nuevo-cliente.jpg", ruta: RegistroClientePage },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaDeEmpleadoPage }
+          { accion: "Agregar un cliente", img: "nuevo-cliente.jpg", ruta: RegistroClientePage }
+          // { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" }
         ];
         break;
 
       case "repartidor":
         acciones = [
-          { accion: "Mapa de ruta", img: "mapa.jpg", ruta: "./" }
+          { accion: "Mapa de ruta", img: "mapa.jpg", ruta: MapaDeRutaPage }
         ];
         break;
 
         case "cliente":
         acciones = [
-          { accion: "Ingresar al local.", img: "entrada.jpg", ruta: QrIngresoLocalPage },
-          { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: PedirPlatosPage },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaClientePage },
-          { accion: "Dar propina.", img: "propina.jpg", ruta: "./" },
-          { accion: "Reservar.", img: "reserva.jpg", ruta: ReservaPage }
           { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
-          { accion: "Ingresar al local", img: "entrada.jpg", ruta: "./" },
-          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
-          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
-          { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" },
+          { accion: "Ingresar al local", img: "entrada.jpg", ruta: QrIngresoLocalPage },
+          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: QrDeLaMesaPage },
+          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
+          { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: EncuestaClientePage },
           { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage }
         ];
         break;
 
         case "anonimo":
         acciones = [
-          { accion: "Ingresar al local.", img: "entrada.jpg", ruta: QrIngresoLocalPage },
-          { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: PedirPlatosPage },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaClientePage },
-          { accion: "Dar propina.", img: "propina.jpg", ruta: "./" }
           { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
-          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
-          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" }
+          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: QrDeLaMesaPage },
+          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
+          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaClientePage }
         ];
         break;
     }

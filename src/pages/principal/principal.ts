@@ -5,6 +5,7 @@ import { VerificarTipoProvider } from "../../providers/verificar-tipo/verificar-
 
 import { LoginPage } from "../login/login";
 import { PerfilPage } from "../perfil/perfil";
+import { EncuestaDeEmpleadoPage } from "../encuesta-de-empleado/encuesta-de-empleado";
 
 import firebase from "firebase";
 import "firebase/firestore";
@@ -196,7 +197,9 @@ export class PrincipalPage {
               || this.usuario.tipo == "metre"
               || this.usuario.tipo == "repartidor") {
 
-              this.navCtrl.setRoot(LoginPage);
+              localStorage.setItem("desloguear", "true");
+              this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
             } else {
               localStorage.clear();
               this.navCtrl.setRoot(LoginPage);

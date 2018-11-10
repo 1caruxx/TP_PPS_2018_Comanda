@@ -29,6 +29,7 @@ export class AltaDuenioSupervisorPage {
   public tipo: string = "dueño";
   public foto: string = "";
   public nombreFoto: string;
+  public usuario: any;
 
   public estadoBoton: boolean = false;
   public ocultarAlert: boolean = true;
@@ -46,6 +47,7 @@ export class AltaDuenioSupervisorPage {
     private barcodeScanner: BarcodeScanner) {
 
     this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    this.usuario = localStorage.getItem("usuario");
   }
 
   ionViewDidLoad() {
@@ -249,8 +251,29 @@ export class AltaDuenioSupervisorPage {
 
   Logout() {
 
-    localStorage.clear();
-    this.navCtrl.setRoot(LoginPage);
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+           
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 }
