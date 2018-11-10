@@ -20,7 +20,7 @@
 <ion-header>
   <ion-navbar color="red">
     <ion-title>
-      Mapa de ruta hasta el domicilio de entrega
+      Mapa de ruta
     </ion-title>
 
     <ion-buttons end>
@@ -101,24 +101,101 @@
 
 
 
-<ion-content padding>
+<ion-content>
+
+  <div *ngIf="clientes">
+
+    <ion-list>
+
+        <h2 class="titulo">Lista de empleados con pedidos realizados</h2>
+    
+       
+    
+      <ion-item *ngFor="let item of clientesConPedidos">
+        <ion-thumbnail item-start>
+          <!--<img src={{item.img}}>-->
+          <ion-icon name="contact"></ion-icon>
+        </ion-thumbnail>
+    
+      <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+        <p>Cliente • {{item.tipo}}</p>-->
+        <h1>{{item.nombre}}</h1>
+        <p>correo:{{item.correo}}</p>
+
+        <button ion-button clear item-end (click)="chatear(item)">
+            <ion-icon name="chatboxes"></ion-icon>
+          </button>
+    
+    
+    
+    
+      </ion-item>
+    
+    
+    </ion-list>
+
+    </div>
+
+    <div *ngIf="chat">
 
 
-    <img src="assets/imgs/gamma/mapaderuta.jpg"/>
 
-    <ion-label class="lb" >Cliente: supercalifragilisticoespialidoso</ion-label>
-          <ion-label class="lb" >Direccion:  Av. Bartolomé Mitre 750</ion-label>
 
+        <img src={{probando}} style="width: 150px;">
+    
+
+          <ion-label class="lb" >{{nombreCliente}}</ion-label>
+          <ion-label class="lb" >{{direccionCliente}}</ion-label>
+
+          
+
+        
 
 
 	<ion-list no-lines>
+
 		<ion-item *ngFor="let message of messagesList">
-			<h3>{{message.name}}</h3>
-			<p>{{message.message}}</p>
-		</ion-item>
-	</ion-list>
+		<!--	<h3>{{message.name}}</h3>
+      <p>{{message.message}}</p>-->
+
+      <div class="chat-message" text-right *ngIf="message.name === probanding">
+          <div class="right-bubble">
+            <span class="msg-name">Yo</span>
+            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>
+            <p text-wrap>{{message.message}}</p>
+          </div>
+        </div>
+
+        <div class="chat-message" text-left *ngIf="message.name !== probanding">
+          <div class="left-bubble">
+            <span class="msg-name">{{message.name}}</span>
+            <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>
+            <p text-wrap>{{message.message}}</p>
+          </div>
+        </div>
+      
+
+
+
+
+
+
+
+    </ion-item>
+    
+
+
+
+  </ion-list>
+  
+
+</div>
+
+
 </ion-content>
-<ion-footer>
+
+
+<ion-footer *ngIf="mandar">
 	<ion-item>
 		<ion-input type="text" placeholder="Escriba aqui..." [(ngModel)]="newmessage"></ion-input>
 		<button ion-button clear item-right (click)="send()">Enviar</button>

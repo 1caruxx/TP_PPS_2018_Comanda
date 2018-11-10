@@ -1,0 +1,99 @@
+<!--
+  Generated template for the JuegoQuinterosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="red">
+      <ion-title>
+        JuegoQuinteros
+      </ion-title>
+  
+      <ion-buttons end>
+        <button ion-button (click)="Logout()">
+          <ion-icon name="power"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+
+               
+                  
+                   
+
+           
+
+
+
+            <div class="container">
+
+                    
+                            
+                                    <span style="padding-left: 30%">Tiempo restante: {{segundos}}</span>
+
+                  
+
+                                    <p class="question">{{question}}</p>
+                                  <!-- <ion-item>
+          
+                                      <ion-input placeholder="Escribalo aqui"  [(ngModel)]="question"></ion-input>
+                                    </ion-item>-->
+                                  
+                     
+
+                      
+
+                        <div class="row">
+
+                                <div class="col-sm-6 col-xs-8" style="
+                                padding-left: 30%;">
+                                    <input type="text" class="form-control" id="answer" placeholder="Responda aca!!!!" [(ngModel)]="userAnswer" x-webkit-speech onwebkitspeechchange="onVoiceAnswer()">
+                                </div>
+                              
+                                
+                                <div class="col-sm-2 col-xs-4 col-lg-6 col-xl-6">
+                                    <button class="btn btn-primary center-block full-width" (click)="onSubmitAnswer()" id="submitbutton">Responder</button>
+                                </div>
+                                
+                              <!-- <div class="col-sm-2 col-xs-4 col-lg-6 col-xl-6">
+                                    <button class="btn btn-danger center-block full-width" (click)="skipQuestion()">Skip</button>
+                                </div>-->
+                                
+                            </div>
+                
+                           <!-- <div>
+                                    <button class="btn btn-primary center-block full-width" (click)="Volver()" id="submitbutton">Volver</button>
+                                </div>
+                              
+                                <div>
+                                    <button class="btn btn-primary center-block full-width" (click)="Salir()" id="submitbutton">Salir</button>
+                                </div>-->
+                
+                      </div>
+
+
+
+              <div class="panel panel-default blackboard-outer">
+                  <div class="panel-body blackboard">
+                        
+                    <!-- <p class="question text-center">{{question}}</p>-->
+
+
+                    
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+</ion-content>

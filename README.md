@@ -63,10 +63,10 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 
 **Objetivos a desarollar:**
 
-* [ ] E- Alta de mesa.
-* [ ] G- QR de la mesa.
-* [ ] J- Encuesta de empleado.
-* [ ] M- Tomar pedido.
+* [x] E- Alta de mesa.
+* [x] G- QR de la mesa.
+* [x] J- Encuesta de empleado.
+* [x] M- Tomar pedido.
 * [ ] O- Pedir mesa.
 * [ ] S- Mapa de ruta hasta el domiciolio de entrega.
 
@@ -80,10 +80,75 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 * [x] vista de mapa de ruta hasta el domicilio de la entrega listo
 
 
-**Fecha de inicio:** 19/10/2018<br />
-**Fecha de fin:**
+**Fecha de inicio:** 03/11/2018<br />
+**Fecha de fin:** 10/11/2018
 
 ## Profesores
 
 * [Maximiliano Neiner](https://github.com/maxineiner)
 * [Octavio villegas](https://github.com/octaviovillegas)
+
+## QR De Bienvenida o ingreso al local
+
+![gfsxcws](./src/assets/imgs/gamma/bienvenido.png)
+
+## QRS Mesas
+
+* QR Mesa 1
+
+![asdsda](./src/assets/imgs/gamma/1.png)
+
+* QR Mesa 2
+
+![asdsdsda](./src/assets/imgs/gamma/2.png)
+
+* QR Mesa 3
+
+![asasdsda](./src/assets/imgs/gamma/3.png)
+
+* QR Mesa 4
+
+![asfdsdsda](./src/assets/imgs/gamma/4.png)
+
+* QR Mesa 5
+
+![asda](./src/assets/imgs/gamma/5.png)
+
+* QR Mesa 6
+
+![addsda](./src/assets/imgs/gamma/6.png)
+
+* QR Mesa 7
+
+![sda](./src/assets/imgs/gamma/7.png)
+
+* QR Mesa 8
+
+![cxzxc](./src/assets/imgs/gamma/8.png)
+
+* QR Mesa 9
+
+![gvcds](./src/assets/imgs/gamma/9.png)
+
+* QR Mesa 10
+
+![klfkdgl](./src/assets/imgs/gamma/10.png)
+
+## QRS Productos
+
+* QR Agua
+
+![klfdskdgl](./src/assets/imgs/gamma/agua.jpeg)
+
+* QR Cerveza
+
+![klfkdgl](./src/assets/imgs/gamma/cervezita.jpeg)
+
+* QR Coca Cola
+
+![sadklfkdgl](./src/assets/imgs/gamma/cocacola.jpeg)
+
+* QR Jugo de naranja
+
+![klfksdfdsadgl](./src/assets/imgs/gamma/juguitonaranja.jpeg)
+

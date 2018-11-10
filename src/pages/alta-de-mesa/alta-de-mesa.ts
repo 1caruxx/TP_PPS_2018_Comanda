@@ -4,7 +4,10 @@ import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+//import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+
+//NANANANAN MUY CLAVE ESTE COMENTARIOOOOOOOOOOOOOO
+//LINEA 288 Y 291 FERNII
 
 /**
  * Generated class for the AltaDeMesaPage page.
@@ -34,13 +37,16 @@ export class AltaDeMesaPage {
 
   public scanSub;
   public estado = "vertical-container";
+
+  public usuario;
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera,
-    private qrScanner: QRScanner)
+  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
    {
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
     this.probandingg=true;
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
 
   }
@@ -60,13 +66,13 @@ export class AltaDeMesaPage {
       return;
     }
 
-    if(this.numeroMesa < 0 || this.numeroMesa > 10)
+    if(this.numeroMesa < 1 || this.numeroMesa > 10)
     {
       this.presentToast("Solo tenemos lugar para 10 mesas en el lugar")
       return;
     }
 
-    if(this.cantidadComensales < 0 || this.cantidadComensales > 4)
+    if(this.cantidadComensales < 1 || this.cantidadComensales > 4)
     {
       this.presentToast("Los comensales solo pueden ser de 1 a 4")
       return;
@@ -104,7 +110,7 @@ export class AltaDeMesaPage {
 
           this.presentToast("La mesa ingresada ya esta registrada");
           this.esValido = false;
-          break;
+          //break;
         }
       }
       
@@ -114,7 +120,7 @@ export class AltaDeMesaPage {
           let mesasRef = this.firebase.database().ref("mesas");
 
 
-          let pictures = this.firebase.storage().ref(`mesas/${this.nombreFoto}`);
+          let pictures = this.firebase.storage().ref(`mesas/${this.nombreFoto+"mesaNumero:"+this.numeroMesa}`);
 
           pictures.putString(this.foto, "data_url").then(() => {
 
@@ -124,10 +130,31 @@ export class AltaDeMesaPage {
                 numeroMesa: this.numeroMesa,
                 cantidadComensales: this.cantidadComensales,
                 tipo: this.tipo,
+                estado: "libre",
                 img: url
-              });
+              }).then(() => 
+              {
+                //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                this.numeroMesa="";
+                this.cantidadComensales="";
+                this.foto="";
+              });;
+
+              
             });
+
+            /*this.presentToast("La mesa se pudo cargar con exito");
+            this.numeroMesa="";
+            this.cantidadComensales="";
+            this.foto="";*/
+         // this.navCtrl.setRoot(this.navCtrl.getActive().component);
+
+
+
           });
+
+
+          
 
     
   }
@@ -174,31 +201,8 @@ export class AltaDeMesaPage {
 
   Leer()
   {
-   /* this.qrScanner.prepare()
-          .then((status: QRScannerStatus) => {
-            if (status.authorized) {
-              // camera permission was granted
-
-
-              // start scanning
-              let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-                console.log('Scanned something', text);
-
-                this.qrScanner.hide(); // hide camera preview
-                scanSub.unsubscribe(); // stop scanning
-              });
-
-            } else if (status.denied) {
-              // camera permission was permanently denied
-              // you must use QRScanner.openSettings() method to guide the user to the settings page
-              // then they can grant the permission from there
-            } else {
-              // permission was denied, but not permanently. You can ask for permission again at a later time.
-            }
-          })
-          .catch((e: any) => console.log('Error is', e));
-
-*/
+    /*
+   
 this.cerrarqr=true;
 this.probandingg=false;
 
@@ -209,17 +213,10 @@ this.qrScanner.prepare()
 
     this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
 
-      //this.vibration.vibrate(300);
+     
       alert(text);
-      //this.OcultarLectorQR();
+     
       
-      
-      
-      // let datos = JSON.parse(text);
-
-      // this.nombre = datos.nombre;
-      // this.apellido = datos.apellido;
-      // this.dni = datos.dni;
 
       this.estado = "vertical-container";
     });
@@ -233,33 +230,72 @@ this.qrScanner.prepare()
     });
 
   } else if (status.denied) {
-    // camera permission was permanently denied
-    // you must use QRScanner.openSettings() method to guide the user to the settings page
-    // then they can grant the permission from there
+   
 
   } else {
-    // permission was denied, but not permanently. You can ask for permission again at a later time.
+   
   }
 })
 .catch((e: any) => this.presentToast(e));
+
+*/
 
 
 
   }
 
   OcultarLectorQR() {
+    /*
 
     this.qrScanner.hide().then(() => {
 
       (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
       (window.document.querySelector('.close') as HTMLElement).classList.remove('mostrar');
-      //(window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "#FDE8C9";
+      
       this.estado = "vertical-container";
       this.probandingg=true;
       this.cerrarqr=false;
     });
 
     this.scanSub.unsubscribe();
+    */
+  }
+
+  Logout() 
+  {
+
+    
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              this.navCtrl.setRoot("");
+            } else {
+              localStorage.clear();
+              this.navCtrl.setRoot("");
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 

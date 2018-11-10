@@ -5,6 +5,8 @@ import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 
+
+//LINEA 336    361 Y 364 LAJSDKLASDLKASJDLKAJDKLJDLK
 /**
  * Generated class for the EncuestaDeEmpleadoPage page.
  *
@@ -21,6 +23,10 @@ export class EncuestaDeEmpleadoPage {
 
   encuestita=true;
   probabilidad=false;
+
+  
+
+
   public firebase = firebase;
   public db = firebase.firestore();
   public foto: string = "";
@@ -29,7 +35,8 @@ export class EncuestaDeEmpleadoPage {
   public dos;
   public tres;
   public cuatro;
-  public cinco;
+  //public cinco;
+  public cinco = {item1: false, item2: false};
 
   public pregUnoPrimeraRespuesta=0;
   public pregUnoSegundaRespuesta=0;
@@ -44,8 +51,12 @@ export class EncuestaDeEmpleadoPage {
   public pregCincoPrimeraRespuesta=0;
   public pregCincoSegundaRespuesta=0;
 
+  public usuario;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
-   {
+  {
+     //this.encuesta();
+     this.usuario = JSON.parse(localStorage.getItem("desloguear"));
      //this.encuesta();
 
 
@@ -77,7 +88,7 @@ export class EncuestaDeEmpleadoPage {
   public pieChartLabelsDos:string[];
   public pieChartDataDos:number[];
 
-  public piechartlabelCinco:string[];
+  public pieChartLabelsCinco:string[];
   public pieChartDataCinco:number[];
  
   public randomizeType():void {
@@ -132,6 +143,7 @@ export class EncuestaDeEmpleadoPage {
 
       this.presentToast("la encuesta fue cargada con exito");
       this.encuesta();
+
 
 
 
@@ -259,7 +271,7 @@ export class EncuestaDeEmpleadoPage {
           
         }
 
-        if (data[item].cinco == "si") 
+        if (data[item].cinco.item1 == true) 
         {
 
           this.pregCincoPrimeraRespuesta++;
@@ -267,7 +279,7 @@ export class EncuestaDeEmpleadoPage {
           
         }
 
-        if (data[item].cinco == "no") 
+        if (data[item].cinco.item2 == true) 
         {
 
           this.pregCincoSegundaRespuesta++;
@@ -291,7 +303,7 @@ export class EncuestaDeEmpleadoPage {
     this.pieChartLabelsDos = ['si', 'no'];
     this.pieChartDataDos = [this.pregCuatroPrimeraRespuesta, this.pregCuatroPrimeraRespuesta];
 
-    this.piechartlabelCinco = ['si', 'no'];
+    this.pieChartLabelsCinco = ['si', 'no'];
     this.pieChartDataCinco = [this.pregCincoPrimeraRespuesta, this.pregCincoSegundaRespuesta];
 
     this.pieChartLabelsUno = ["bien","masomenos","mal"];
@@ -311,6 +323,64 @@ export class EncuestaDeEmpleadoPage {
 
 
     
+
+
+  }
+
+
+  Logout()
+  {
+
+    if(this.usuario==false)
+    {
+      this.navCtrl.pop();
+
+    }
+
+    if(this.usuario==true)
+    {
+      let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              this.navCtrl.setRoot("");
+            } else {
+              localStorage.clear();
+              this.navCtrl.setRoot("");
+            }
+          });
+
+          break;
+        }
+      }
+    });
+
+    
+
+
+
+    }
+
+
+
+    
+
+
 
 
   }

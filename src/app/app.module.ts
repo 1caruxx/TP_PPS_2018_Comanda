@@ -48,6 +48,9 @@ import { firebaseConfig } from '../config';
 import { ComponentsModule } from "../components/components.module";
 import { Ionic2RatingModule } from 'ionic2-rating';
 
+import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
+import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-ahora';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -75,7 +78,10 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     QrIngresoLocalPage,
     EncuestaClientePage,
     PedirPlatosPage,
-    CuentaPage
+    CuentaPage,
+    JuegoQuinterosPage,
+    TiempoDesdeAhoraPipe
+
   ],
   imports: [
     BrowserModule,
@@ -113,7 +119,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     QrDeLaMesaPage,
     TomarPedidoPage,
     MapaDeRutaPage,
-    CuentaPage
+    CuentaPage,
+    JuegoQuinterosPage
   ],
   providers: [
     StatusBar,

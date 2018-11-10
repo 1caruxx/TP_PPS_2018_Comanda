@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import 'rxjs/add/operator/map'
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
-
+//LINEA 698 Y 701
 /**
  * Generated class for the QrDeLaMesaPage page.
  *
@@ -42,9 +42,27 @@ export class QrDeLaMesaPage {
   public pedidos=false;
 
 
+  public usuario;
+  public vistaMozo:boolean;
+  public vistaCliente:boolean;
+
+  options : any;
+
+  miScan;
+
+
+public estadoBoton: boolean = false;
+public ocultarAlert: boolean = true;
+public alertTitulo;
+public alertMensaje;
+public alertMensajeBoton;
+public alertHandler;
+
+
+
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private qrScanner: QRScanner,private toastCtrl: ToastController,private authInstance: AngularFireAuth)
+  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl: ToastController,private authInstance: AngularFireAuth,private barcode: BarcodeScanner)
    {
                  /* this.qrScanner.prepare()
               .then((status: QRScannerStatus) => {
@@ -77,6 +95,21 @@ export class QrDeLaMesaPage {
 
 */
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+
+    //this.vistaCliente=true;
+    //his.vistaMozo=true;
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    
+    if(this.usuario.tipo=="mozo")
+    {
+      this.vistaMozo=true;
+    }
+
+    if(this.usuario.tipo=="cliente" || this.usuario.tipo=="anonimo")
+    {
+      this.vistaCliente=true;
+    }
 
     
     setInterval(() => {
@@ -119,7 +152,7 @@ export class QrDeLaMesaPage {
 
 
     //let genteRef = this.firebase.database().ref("usuarios/clientes");
-    let genteRef = this.firebase.database().ref("usuarios");
+   /* let genteRef = this.firebase.database().ref("usuarios");
 
     genteRef.once("value", (snap) => {
 
@@ -134,18 +167,58 @@ export class QrDeLaMesaPage {
     }).then(() => {
       this.espera = this.usuarios.filter(item => {
 
-        return item.mesa == null && item.tipo=="cliente";
+        
+        return item.estado=="espera";
       });
 
       this.atendidos = this.usuarios.filter(item => {
 
-        return item.mesa != null && item.tipo=="cliente";
+       
+       return item.estado=="atendido";
       });
 
 
       
 
+    });*/
+
+    let genteRef = this.firebase.database().ref("usuarios");
+
+    genteRef.on("value", (snap) => {
+
+      this.usuarios=[];
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        this.usuarios.push(data[item]);
+      }
+
+      this.espera = this.usuarios.filter(item => {
+
+        
+        return item.estado=="espera";
+      });
+
+      this.atendidos = this.usuarios.filter(item => {
+
+       
+       return item.estado=="atendido";
+      });
+
+      console.log(this.usuarios);
+
+
     });
+     
+
+
+      
+
+    
+
+    
 
 
 
@@ -172,116 +245,23 @@ export class QrDeLaMesaPage {
   MostrarQr(correo)
   {
 
-          this.cerrarqr=true;
+         /* this.cerrarqr=true;
           this.probandingg=false;
 
           this.qrScanner.prepare()
           .then((status: QRScannerStatus) => {
+            .then((status) => {
 
             if (status.authorized) {
 
               this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
 
-                
-               // alert(text);
-
-                //if(text=="1")
-                //{
-                  //alert("bienvenido,se relaciono al cliente con la mesa " + text)
+             
                   alert(text);
                   this.Modificar(correo,text);
                   this.ocultarQR = true;
 
-               /*   var refDos = this.firebase.database().ref("mesas");
-             
-                  refDos.on('value', function (snap) {
-                      var data2 = snap.val();
-                      this.estaLibre=true;
-                      for(var key2 in data2){
-                          if (parseInt(text) == parseInt(data2[key2].numeroMesa)) 
-                          {
-
-                            data2[key2].cliente = correo;
-                              refDos.child(key2).update(data2[key2]);
-
-                          
-     
-                          };                  
-                      }
-                  });*/
-
-                /*  var ref = this.firebase.database().ref("usuarios/clientes");
-             
-                  ref.on('value', function (snap) {
-                      var data = snap.val();
-                      for(var key in data){
-                          if (correo == data[key].correo) {
-                              data[key].mesa = text;
-                             // this.clientovich = data[key].correo;
-                              ref.child(key).update(data[key]);
-                              alert("bienvenido,se relaciono al cliente con la mesa " + text)
-                              //this.presentToast("Se pudo cargar al cliente con exito")
-
-                             
-      
- 
-                          };                  
-                      }
-                  });
-
-                  var refDos = this.firebase.database().ref("mesas");
-             
-                  refDos.on('value', function (snap) {
-                      var data2 = snap.val();
-                      this.estaLibre=true;
-                      for(var key2 in data2){
-                          if ("2" == data2[key2].numeroMesa) 
-                          {
-
-                            data2[key2].cliente = correo;
-                              refDos.child(key2).update(data2[key2]);
-
-                          
-     
-                          };                  
-                      }
-                  });*/
-
-               /*   if(this.estaLibre)
-                  {
-                    var ref = this.firebase.database().ref("usuarios");
-             
-                    ref.on('value', function (snap) {
-                        var data = snap.val();
-                        for(var key in data){
-                            if (correo == data[key].correo) {
-                                data[key].mesa = text;
-                               // this.clientovich = data[key].correo;
-                                ref.child(key).update(data[key]);
-                                alert("bienvenido,se relaciono al cliente con la mesa " + text)
-                                //this.presentToast("Se pudo cargar al cliente con exito")
-  
-                               
-        
-   
-                            };                  
-                        }
-                    });
-
-
-                  }*/
-
-              
-
-
-              //  }
-
-
-
-
-             // this.ocultarQR = true;
-
-               // this.estado = "vertical-container";
+           
               });
 
               this.qrScanner.show().then(() => {
@@ -300,23 +280,22 @@ export class QrDeLaMesaPage {
             }
           })
           .catch((e: any) => this.presentToast(e));
-
+*/
 
   }
 
   OcultarLectorQR() {
-
+/*
     this.qrScanner.hide().then(() => {
 
       (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
       (window.document.querySelector('.close') as HTMLElement).classList.remove('mostrar');
-      //(window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "#FDE8C9";
-      //this.estado = "vertical-container";
+      
       this.probandingg=true;
       this.cerrarqr=false;
     });
 
-    this.scanSub.unsubscribe();
+    this.scanSub.unsubscribe();*/
   }
 
   Modificar(correo,text)
@@ -334,11 +313,14 @@ export class QrDeLaMesaPage {
                             for(var key in data){
                                 if (text == data[key].numeroMesa) {
 
-                                  if(data[key].cliente!=null)
+                                  //if(data[key].cliente!=null)
+                                  //CAMBIE ESTA LINEA
+                                  if(data[key].estado=="ocupada")
                                   {
                                     this.estaLibre=false;
                                     //ocup=false;
-                                    alert("La mesa ya esta ocupada");
+                                   // alert("La mesa ya esta ocupada");
+                                   this.MostrarAlert("Error!", "La mesa ya esta ocupada", "Aceptar", this.limpiar);
                                     break;
                                     //return;
                                     
@@ -347,8 +329,9 @@ export class QrDeLaMesaPage {
 
 
                                     data[key].cliente = correo;
+                                    data[key].estado = "ocupada";
                                     refDos.child(key).update(data[key]);
-                                    alert("bienvenido,se relaciono la mesa tres")
+                                    //alert("bienvenido,se relaciono la mesa tres")
 
 
 
@@ -360,9 +343,11 @@ export class QrDeLaMesaPage {
                                         for(var key in data){
                                             if (correo == data[key].correo) {
                                                 data[key].mesa = text;
+                                                data[key].estado = "atendido";
                                                
                                                 ref.child(key).update(data[key]);
-                                                alert("bienvenido,se relaciono al cliente con la mesa " + 3);
+                                                //alert("Listo,se relaciono al cliente con la mesa " + text);
+                                                this.MostrarAlert("Exito!", "Listo,se relaciono al cliente con la mesa " + text, "Aceptar", this.limpiar);
                                                 this.navCtrl.setRoot(this.navCtrl.getActive().component);
                                                 
                                                 
@@ -497,5 +482,232 @@ export class QrDeLaMesaPage {
     //this.navCtrl.setRoot(this.navCtrl.getActive().component);
 
   }
+
+
+  MostrarTiempoEsperaCliente()
+  {
+
+/*
+        this.cerrarqr=true;
+          this.probandingg=false;
+
+          this.qrScanner.prepare()
+          //.then((status: QRScannerStatus) => {
+            .then((status) => {
+
+            if (status.authorized) {
+
+              this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
+
+                
+            
+                
+
+                  var refDos = this.firebase.database().ref("mesas");
+                        
+                        refDos.once('value', (snap) => {
+                            var data = snap.val();
+                           
+                            for(var key in data)
+                            {
+                                if (text == data[key].numeroMesa) 
+                                {
+                                    alert(data[key].tiempoMinimo);
+                                    break;
+                                                                                        
+                                }
+                              }
+                            });
+
+
+
+                 
+
+
+
+                  this.ocultarQR = true;
+
+               
+              });
+
+              this.qrScanner.show().then(() => {
+
+                (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
+                (window.document.querySelector('.close') as HTMLElement).classList.add('mostrar');
+                (window.document.querySelector('.scroll-content') as HTMLElement).style.backgroundColor = "transparent";
+               
+              });
+
+            } else if (status.denied) {
+           
+
+            } else {
+              
+            }
+          })
+          .catch((e: any) => this.presentToast(e));
+
+
+          */
+
+  }
+
+  probandoBarcode(correo)
+  {
+
+  /*  this.options = { prompt : "Escaneá tu DNI", formats: "PDF_417" }
+
+    this.barcode.scan(this.options).then((barcodeData) => {
+        this.miScan = (barcodeData.text);
+        alert(this.miScan);
+    }, (error) => {
+       
+    });*/
+
+    this.barcode.scan().then(barcodeData => {
+      this.Modificar(correo,barcodeData.text);
+        alert(barcodeData.text);
+    });
+
+  }
+
+  ocuparMesaBarcode(correo)
+  {
+    this.barcode.scan().then(barcodeData => {
+      this.Modificar(correo,barcodeData.text);
+        //alert(barcodeData.text);
+    });
+
+
+  }
+
+  mostrarTiempoBarcode()
+  {
+    let banderita=0;
+
+    let usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    this.barcode.scan().then(barcodeData => {
+
+
+
+     
+        //alert(barcodeData.text);
+        var refDos = this.firebase.database().ref("mesas");
+                        
+        refDos.once('value', (snap) => {
+            var data = snap.val();
+           
+            for(var key in data)
+            {
+                //if (barcodeData.text == data[key].numeroMesa)
+                if (barcodeData.text == data[key].numeroMesa) 
+                {
+                  if(data[key].cliente==usuario.correo)
+                  {
+                    if(data[key].tiempoMinimo!=null)
+                    {
+                    //alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
+                    this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
+                    banderita=1;
+                    break;
+
+                    }
+                    else
+                    {
+                      //alert("Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo");
+                      this.MostrarAlert("A esperar!", "Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo", "Aceptar", this.limpiar);
+                      banderita=1;
+                      break;
+                    }
+                    
+                  }
+                  else
+                  {
+                    //alert("Esa no es su mesa");
+                    this.MostrarAlert("Error!", "Esta no es su mesa", "Aceptar", this.limpiar);
+                    banderita=1;
+                    break;
+                  }
+                    
+                                                                        
+                }
+                
+              }
+            }).then(() => 
+            {
+              if(banderita==0)
+              {
+                //alert("Por favor escanee una mesa valida");
+                this.MostrarAlert("NOOOOOOOOOOOOOOO!", "por favor escanee una mesa valida", "Aceptar", this.limpiar);
+              }
+            });
+
+          
+
+
+
+
+    });
+
+
+
+  }
+
+
+  MostrarAlert(titulo: string, mensaje: string, mensajeBoton: string, handler) 
+  {
+    this.ocultarAlert = false;
+    this.alertTitulo = titulo;
+    this.alertMensaje = mensaje;
+    this.alertMensajeBoton = mensajeBoton;
+    this.alertHandler = handler;
+
+   
+  }
+
+  limpiar()
+  {
+    this.ocultarAlert=true;
+
+  }
+
+  Logout() 
+  
+  {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              this.navCtrl.setRoot("");
+            } else {
+              localStorage.clear();
+              this.navCtrl.setRoot("");
+            }
+          });
+
+          break;
+        }
+      }
+    });
+  }
+
+  
 
 }

@@ -55,6 +55,8 @@
 
       <ion-content  *ngIf="probandingg">
 
+         <div *ngIf="vistaMozo">
+
          
 
 
@@ -74,11 +76,12 @@
           <p>Empleado • {{item.tipo}}</p>
           <p>CUIL • {{item.cuil}}</p>-->
 
-          <h1>{{item.correo}}, {{item.nombre}}</h1>
-          <p>Cliente • {{item.tipo}}</p>
+          <h1 style="color:black;">{{item.correo}}, {{item.nombre}}</h1>
+          <p style="color:black;">Tipo : • {{item.tipo}}</p>
          
     
-          <button ion-button clear item-end (click)="MostrarQr(item.correo)">
+          <!--<button ion-button clear item-end (click)="MostrarQr(item.correo)">-->
+              <button ion-button clear item-end (click)="ocuparMesaBarcode(item.correo)">
             <ion-icon name="expand"></ion-icon>
           </button>
         </ion-item>
@@ -99,28 +102,54 @@
           <p>Empleado • {{item.tipo}}</p>
           <p>CUIL • {{item.cuil}}</p>-->
 
-          <h1>{{item.correo}}, {{item.nombre}}</h1>
-          <p>Cliente • {{item.tipo}}</p>
+          <h1 style="color:black;"> {{item.correo}}, {{item.nombre}}</h1>
+          <p  style="color:black;">Tipo : • {{item.tipo}}</p>
     
-          <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">
+         <!-- <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">-->
+            <!--<button ion-button clear item-end (click)="probandoBarcode()">
             <ion-icon name="restaurant"></ion-icon>
-          </button>
+          </button>-->
         </ion-item>
     
       </ion-list>
 
      
 
-   
+    </div>
+
+    <div *ngIf="vistaCliente">
+
+       <!-- <button ion-button clear item-end (click)="mostrarTiempoBarcode()">
+            <ion-icon name="expand"></ion-icon>
+          </button>-->
+
+          <button ion-button class="submit-btn" color="red" class="botonAlta" (click)="mostrarTiempoBarcode()" >Escanear Mesa</button>
+
+
+    </div>
 
     </ion-content>
 
 
-      <ion-footer *ngIf="cerrarqr">
+    <div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+      <div class="alert-message animation-target">
+        <h1>{{alertTitulo}}</h1>
+        <p>{{alertMensaje}}</p>
+        <div class="botones">
+    
+          <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+        </div>
+      </div>
+    
+    </div>
+
+
+      <!--<ion-footer *ngIf="cerrarqr">
         <ion-toolbar>
           <ion-title>Footer</ion-title>
           <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
             <ion-icon name="close"></ion-icon>
           </button>
         </ion-toolbar>
-      </ion-footer>
+      </ion-footer>-->
