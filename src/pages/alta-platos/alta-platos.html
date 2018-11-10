@@ -126,9 +126,9 @@
   </div>
   <input class="nombrePlato" type="text" [(ngModel)]="nombre" placeholder="Nombre de la bebida o trago">
   <textarea class="descripcion" [(ngModel)]="descripcion" placeholder="Descripci&oacute;n..."></textarea>
- <div class="tiempoDiv" [ngClass]="{'ocultar':ocultarTiempo}"> <input class="tiempo"  [(ngModel)]="tiempo" type="text" ><label class="tiempoLabel">mins de elaboraci&oacute;n</label>
+ <div class="tiempoDiv" [ngClass]="{'ocultar':ocultarTiempo}"> <input class="tiempo"  [(ngModel)]="tiempo"   type="text" ><label class="tiempoLabel">mins de elaboraci&oacute;n</label>
   </div>  
-  <div class="tiempoDiv"> <input class="tiempo" type="text" [(ngModel)]="cantidad" ><label class="tiempoLabel">Cantidad de cc</label>
+  <div class="tiempoDiv"> <input class="tiempo" type="text" [(ngModel)]="cantidad" ><label class="tiempoLabel">Cantidad de cent cúbicos.</label>
   </div>  
   <div class="precioDiv"> <label class="precioLabel">$</label><input [(ngModel)]="precio" class="precio" type="text" ><label class="tiempoLabel">Precio</label>
     <button ion-button color="dark" (click)="LeerQr()" outline class="Qr1">Leer QR</button>

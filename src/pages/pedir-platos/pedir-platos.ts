@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angul
 import firebase from "firebase";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
+import  {SpinnerComponent } from '../../components/spinner/spinner';
 
 
 
@@ -29,6 +30,7 @@ export class PedirPlatosPage {
   claveUsuarioActual;
   platos:any[]=[];
   bebidas:any[]=[];
+  mostrarSpinner:boolean=false;
   mostrarAlert2:boolean=false;
   mostrarAlert3:boolean=false;
   valor:number;
@@ -53,6 +55,7 @@ export class PedirPlatosPage {
   for="let plato of platos";
   mostrarslide:boolean;
   ocultarTitulo:boolean;
+  mostrarSpinnerPlatos:boolean=false;
 contador;
   constructor
   (
@@ -324,7 +327,11 @@ mensaje.once("value",(snap)=>{
   }
   Platos()
   {
-  
+    this.mostrarSpinnerPlatos=true;
+  if((this.platos.length>0))
+  {
+    this.mostrarSpinnerPlatos=false;
+  }
       this.miValor=undefined;
      
    
@@ -338,6 +345,12 @@ mensaje.once("value",(snap)=>{
   }
   Bebidas()
   {
+    this.mostrarSpinnerPlatos=true;
+    if((this.platos.length>0))
+    {
+      this.mostrarSpinnerPlatos=false;
+    }
+    
     this.miValor=undefined;
     this.ocultarPlatos =true;
     this.valor=undefined;
@@ -372,7 +385,7 @@ var data =snap.val();
           if(data[key].carga.es=="plato")
           {
             this.platos.push(data[key]);
-           
+           this.platos[this.platos.length-1].MiCantidad=undefined;
            
             let nombre =(this.platos[this.platos.length-1].carga.nombre).split(" ");
             console.log(this.platos[this.platos.length-1].carga.nombre);
@@ -396,6 +409,7 @@ var data =snap.val();
           else
           {
             this.bebidas.push(data[key]);
+            this.bebidas[this.bebidas.length-1].MiCantidad=undefined;
            
             let nombre =(this.bebidas[this.bebidas.length-1].carga.nombre).split(" ");
             if(nombre.length>1)
@@ -421,7 +435,7 @@ var data =snap.val();
 
         }
  
-        
+        this.mostrarSpinnerPlatos=false;
 
 
       });
@@ -441,6 +455,7 @@ var data =snap.val();
       (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
     
     }
+
     
     this.pedido.splice(0, this.pedido.length);
     console.log(this.pedido);
@@ -451,17 +466,18 @@ var data =snap.val();
   }
   PedirFinal()
   {
+    
     if(this.pedido.length<=0)
     {
       this.mensaje="No agrego ningun pedido a la orden";
       this.mostrarAlert3=true;
       setTimeout(()=>{
-
+        
         this.mostrarAlert3=false;
       }, 2000);
       return;
     }
-  
+    this.mostrarSpinner=true;
     let mensaje = firebase.database().ref().child("pedidos/"+this.mesa+"/cocinero");
     let mensaje2 = firebase.database().ref().child("pedidos/"+this.mesa+"/bartender");
    let tiempoMax=0;
@@ -571,13 +587,14 @@ var data =snap.val();
     
       
       
-    
+      this.mostrarSpinner=false;
      
       this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
     this.mostrarAlert=true;
     setTimeout(()=>{
 
       this.mostrarAlert=false;
+      this.navCtrl.pop();
     }, 4000);
     
   }

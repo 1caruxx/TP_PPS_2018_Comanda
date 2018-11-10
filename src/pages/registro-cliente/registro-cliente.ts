@@ -111,9 +111,10 @@ export class RegistroClientePage {
                 setTimeout(()=>{
             
                   this.mostrarAlert=false;
+                  this.LimpiarCampos();
+                  this.navCtrl.pop();
                 }, 4000);
-          this.LimpiarCampos();
-          this.navCtrl.pop();
+       
          
               });
            
@@ -171,18 +172,19 @@ export class RegistroClientePage {
                   usuariosRef.push({
                     nombre: this.nombre,
                     tipo: "anonimo",
-                    correo:this.correo,
+                    correo:correo,
                     clave: this.pass,
                     img: this.foto
                   }).then(() => {
     
                     this.mostrarAlert=true;
                     setTimeout(()=>{
-                
                       this.mostrarAlert=false;
+                      this.LimpiarCampos();
+                      this.navCtrl.pop();
+                    
                     }, 3000);
-              this.LimpiarCampos();
-              this.navCtrl.pop();
+            
              
                   });
                

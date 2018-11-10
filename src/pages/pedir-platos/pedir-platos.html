@@ -14,7 +14,7 @@
   </div>
   </div>
 <div class="platos" [ngClass]="{'ocultar':ocultarPlatos}">
-
+  <spinner *ngIf="mostrarSpinnerPlatos"></spinner>
     <h1 class="tituloPlatos"  >{{titulo}}:</h1>
 
     <div class="elPlato">
@@ -30,7 +30,7 @@
            
         <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value,plato.carga.es, plato.carga.tiempo,  plato.carga.para,plato.carga.precio, plato.carga.id)">Elegir</button> <label class="platoCant">Cantidad</label>
      
-        <input class="inpCantidad" [value]="miValor" [id]="plato.carga.id +'1'" #cant  placeholder="0" ion-input type="number">
+        <input class="inpCantidad" [value]="plato.carga.MiCantidad" [id]="plato.carga.id +'1'" #cant  placeholder="0" ion-input type="number">
       </div>
         <div class="slide" [ngClass]="{'mostrarSlide':mostrarslide}">
   
@@ -49,7 +49,7 @@
        <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido()">Cancelar</button>
 </div>
 <div class="platos" [ngClass]="{'ocultar':ocultarBebidas}">
-
+  <spinner *ngIf="mostrarSpinnerPlatos"></spinner>
   <h1 class="tituloPlatos"  >{{titulo}}:</h1>
 
   <div class="elPlato">
@@ -61,7 +61,7 @@
       </div>
       <img [src]="plato.carga.foto1" class="platoImagen" (click)="mostrarSlide(plato.carga.foto1,plato.carga.foto2,plato.carga.foto3,plato.carga.nombre,plato.carga.desc)" ><h2>{{plato.carga.nombre}}</h2> 
       <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value,plato.carga.es, 'cero',plato.carga.para, plato.carga.precio, plato.carga.id)">Elegir</button> <label class="platoCant">Cantidad</label>
-      <input class="inpCantidad"  #cant  [value]="cantidadNueva" placeholder="0" ion-input type="number">
+      <input class="inpCantidad"  #cant  [value]="plato.carga.MiCantidad" placeholder="0" ion-input type="number">
  
     </div>
     <div class="slide" [ngClass]="{'mostrarSlide':mostrarslide}">
@@ -112,5 +112,5 @@
       <!--input class="inpDireccion" type="text" placeholder="Su direcci&oacute;n"-->
       <button class="btnPedir" (click)="PedirFinal()" ion-button color="danger" >¡Pedir!</button>
     </div>
-
+    <spinner *ngIf="mostrarSpinner"></spinner>
 </ion-content>

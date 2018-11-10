@@ -82,7 +82,7 @@ ocultarTiempo:boolean;
     //Descomentar esta linea antes de hacer el push
    this.tipo = localStorage.getItem("usuario");
    this.tipo =JSON.parse(this.tipo).tipo;
-  // this.tipo="cocinero";
+ // this.tipo="cocinero";
    this.cantMostrar="grs";
  //this.tipo =
  
@@ -95,6 +95,7 @@ ocultarTiempo:boolean;
     else
     {
       this.esBartender=true;
+      this.ocultarTiempo=true;
     }
   
     //BORRAR ESTA LINEA ANTES DE HACER EL PUSH.
@@ -148,7 +149,7 @@ ocultarTiempo:boolean;
     }
     if(this.carga=="bebidas")
     {
-      this.cantMostrar ="cc";
+      this.cantMostrar ="cent. cúbicos";
       this.ocultarTiempo=true;
       this.cocineroBebida=true;
       this.tiempo="";
@@ -170,7 +171,7 @@ ocultarTiempo:boolean;
   }
   LeerQr()
   {
-    this.options = { prompt : "Escaneá el qr de la puerta", formats: 'QR_CODE' }
+    this.options = { prompt : "Escaneá el qr del producto", formats: 'QR_CODE' }
 
    
 
@@ -180,16 +181,39 @@ ocultarTiempo:boolean;
       alert(texto);
       let miScan= (texto).split('@');
 
+      if(miScan[5]==undefined)
+      {
+        this.mensaje="QR no válido";
+        this.mostrarAlert3=true;
+      
+        setTimeout(()=>{
+      
+          this.mostrarAlert3=false;
+          
+      
+        }, 3000);
+      return      
+      }
       if(miScan[5]!="true")
       {
-        alert("qr no valido");
-        return
+    
+        this.mensaje="QR no válido";
+        this.mostrarAlert3=true;
+      
+        setTimeout(()=>{
+      
+          this.mostrarAlert3=false;
+          
+      
+        }, 3000);
+      return 
+      
   
       }
 
       this.nombre= miScan[0];
       this.descripcion= miScan[1];
-      this.tiempo=miScan[2];
+  
       this.cantidad=miScan[3];
       this.precio=miScan[4];
       this.tipoBebida=miScan[6];
@@ -199,7 +223,6 @@ ocultarTiempo:boolean;
   //  let cadena ="vino@vino tinto@0@750@200@true@gaseosa";
      
 
-    
   
 
   }
@@ -215,19 +238,7 @@ ocultarTiempo:boolean;
     this.mostrarfoto3=false;
     console.log(this.tipo);
 
-    if(this.tipo=="cocinero")
-    {
-      
-      this.tipo="bartender";
-      this.esBartender=true;
-      this.esCocinero=false;
-    }
-    else
-    {
-      this.tipo="cocinero";
-      this.esCocinero=true;
-      this.esBartender=false;
-    }
+ 
   
   }
   async tomarFoto1()
@@ -597,7 +608,6 @@ ocultarTiempo:boolean;
         return;
       }
       if (!this.ValidarNumero(this.precio)) {
-        this.mensaje="El precio ingresado debe ser un numero";
         this.mostrarAlert3=true;
         setTimeout(()=>{
 

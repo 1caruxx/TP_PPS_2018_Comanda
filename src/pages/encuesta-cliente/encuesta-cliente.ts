@@ -103,10 +103,9 @@ mostrarChart:boolean=false;
     this.ocultarBoton2=false;
     this.ocultarBoton3=false;
     this.ocultar6=true;
-    /*this.correo=localStorage.getItem("usuario");
+    this.correo=localStorage.getItem("usuario");
 
-    this.correo =(JSON.parse(this.correo)).nombre;*/
-    this.correo="miCorreo@correo.com";
+    this.correo =(JSON.parse(this.correo)).nombre;
     this.mostrarfoto1=false;
     this.mostrarfoto2=false;
     this.mostrarfoto3=false;
@@ -537,8 +536,18 @@ mostrarChart:boolean=false;
       cliente:this.correo
     };
     let mensaje = firebase.database().ref().child("encuestaCliente/");
-    mensaje.push(carga);
-    this.navCtrl.push(QrIngresoLocalPage);
+    mensaje.push(carga).then(()=>{
+
+  this.mensaje="Muchas gracias por hacer la encuesta.";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+
+        this.mostrarAlert3=false;
+        this.navCtrl.pop();
+      }, 2000);
+
+    });
+   
   }
 
   ModificarTextoRange()
