@@ -125,7 +125,7 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 
 * QR Cerveza
 
-![klfkdgl](./src/assets/imgs/gamma/cerveza.jpeg)
+![klfkdgl](./src/assets/imgs/gamma/cervezita.jpeg)
 
 * QR Coca Cola
 
