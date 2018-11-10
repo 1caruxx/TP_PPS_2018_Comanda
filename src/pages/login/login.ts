@@ -101,14 +101,68 @@ export class LoginPage {
 
           let data = snap.val();
           let tipo;
+          let estado;
 
           for (let item in data) {
 
+            // if (data[item].correo == this.correo.toLowerCase()) {
+
+            //   localStorage.setItem("usuario", JSON.stringify(data[item]));
+            //   tipo = data[item].tipo;
+            //   break;
+            // }
+
             if (data[item].correo == this.correo.toLowerCase()) {
 
-              localStorage.setItem("usuario", JSON.stringify(data[item]));
-              tipo = data[item].tipo;
-              break;
+              if (!data[item].logueado) {
+
+                localStorage.setItem("usuario", JSON.stringify(data[item]));
+                tipo = data[item].tipo;
+                estado = data[item].estado;
+
+                usuariosRef.child(item).update({
+                  logueado: true
+                }).then(() => {
+
+                  switch (tipo) {
+
+                    // redirecciono a encuesta
+                    case "mozo":
+                    case "cocinero":
+                    case "bartender":
+                    case "metre":
+                    case "repartidor":
+                      this.navCtrl.setRoot(AltaEmpleadoPage);
+                      break;
+
+                    case "cliente":
+                      if(estado == "espera")
+                        this.navCtrl.setRoot(ListadoSupervisorPage);
+                      else
+                        this.navCtrl.setRoot(PrincipalPage);
+                      break;
+
+                    // redirecciono a qr si no esta dentro del local, pero a principal si, si lo esta.
+                    case "anonimo":
+
+                      if(estado == "atendido" || estado == "pidio" || estado == "comiendo")
+                        this.navCtrl.setRoot(PrincipalPage);
+                      else
+                        this.navCtrl.setRoot(ListadoSupervisorPage);
+                      break;
+
+                      // siempre a principal (dueño, supervisor, cliente (registrado))
+                    default:
+                      this.navCtrl.setRoot(PrincipalPage);
+                      break;
+                  }
+                });
+
+                break;
+              } else {
+
+                this.presentToast("Este usuario ya tiene una sesión activa actualmente.");
+              }
             }
           }
 
@@ -132,25 +186,25 @@ export class LoginPage {
           this.estadoBoton = false;
           this.textoDelBoton = "Ingresar";
 
-          switch(tipo) {
+          // switch (tipo) {
 
-            case "mozo":
-            case "cocinero":
-            case "bartender":
-            case "metre":
-            case "cajero":
-              this.navCtrl.setRoot(PrincipalPage);
-              break;
+          //   case "mozo":
+          //   case "cocinero":
+          //   case "bartender":
+          //   case "metre":
+          //   case "repartidor":
+          //     this.navCtrl.setRoot(PrincipalPage);
+          //     break;
 
-            case "cliente":
-            case "anonimo":
-              this.navCtrl.setRoot(PrincipalPage);
-              break;
+          //   case "cliente":
+          //   case "anonimo":
+          //     this.navCtrl.setRoot(PrincipalPage);
+          //     break;
 
-            default:
-              this.navCtrl.setRoot(PrincipalPage);
-              break;
-          }
+          //   default:
+          //     this.navCtrl.setRoot(PrincipalPage);
+          //     break;
+          // }
 
         });
       })

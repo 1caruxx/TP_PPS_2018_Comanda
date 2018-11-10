@@ -16,10 +16,10 @@ Branch del proyecto: [lareu_alfa](https://github.com/1caruxx/TP_PPS_2018_Comanda
 
 **Objetivos a desarollar:**
 
-* [ ] A- Alta dueño / supervisor.
-* [ ] B- Alta de empleados.
-* [ ] H- QR de propina.
-* [ ] K- Encuesta de supervisor.
+* [x] A- Alta dueño / supervisor.
+* [x] B- Alta de empleados.
+* [x] H- QR de propina.
+* [x] K- Encuesta de supervisor.
 * [ ] N- Hacer reservas agendadas.
 * [ ] Q- Hacer reservas agendadas.
 
@@ -28,13 +28,10 @@ Branch del proyecto: [lareu_alfa](https://github.com/1caruxx/TP_PPS_2018_Comanda
 * [x] Vista y funcionalidad de la pagina de inicio de sesion.
 * [x] Vista y funcionalidad de la pagina principal.
 * [x] Vista de la pagina del perfil del usuario.
-* [x] Vista y funcionalidad (falta leer QR) de la pagina para registrar dueños y supervisores.
-* [x] Vista y funcionalidad (falta leer QR) de la pagina para registrar empleados.
-* [x] Vista de la pagina de encuesta del supervisor.
 * [x] Vista de la pagina para realizar reservas.
 
-**Fecha de inicio:** 21/10/2018<br />
-**Fecha de fin:**
+**Fecha de inicio:** 03/11/2018<br />
+**Fecha de fin:** 10/11/2018
 
 ---
 

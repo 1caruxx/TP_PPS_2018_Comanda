@@ -58,6 +58,18 @@ page-encuesta-supervisor {
                 border-color: red;
             }
         }
+
+    }
+
+    .mi-range {
+        position: relative;
+        left: -50px;
+        right:-50;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width:150%;
     }
 
     .enviar {

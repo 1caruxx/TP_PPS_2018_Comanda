@@ -4,6 +4,7 @@ import { AltaDuenioSupervisorPage } from "../../pages/alta-duenio-supervisor/alt
 import { AltaEmpleadoPage } from "../../pages/alta-empleado/alta-empleado";
 import { ListadoSupervisorPage } from "../../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../../pages/reserva/reserva";
+import { CuentaPage } from "../../pages/cuenta/cuenta";
 
 import { RegistroClientePage } from '../../pages/registro-cliente/registro-cliente';
 import { AltaPlatosPage } from '../../pages/alta-platos/alta-platos';
@@ -76,6 +77,9 @@ export class VerificarTipoProvider {
           { accion: "Tomar un pedido.", img: "pedido.jpg", ruta: TomarPedidoPage },
           { accion: "Nuevo plato o bebida.", img: "nueva-comida.jpg", ruta: AltaPlatosPage },
           { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaDeEmpleadoPage }
+          { accion: "Tomar un pedido", img: "pedido.jpg", ruta: "./" },
+          { accion: "Agregar un plato o bebida", img: "nueva-comida.jpg", ruta: "./" },
+          { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" }
         ];
         break;
 
@@ -87,9 +91,9 @@ export class VerificarTipoProvider {
         ];
         break;
 
-      case "cajero":
+      case "repartidor":
         acciones = [
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" }
+          { accion: "Mapa de ruta", img: "mapa.jpg", ruta: "./" }
         ];
         break;
 
@@ -100,6 +104,12 @@ export class VerificarTipoProvider {
           { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaClientePage },
           { accion: "Dar propina.", img: "propina.jpg", ruta: "./" },
           { accion: "Reservar.", img: "reserva.jpg", ruta: ReservaPage }
+          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
+          { accion: "Ingresar al local", img: "entrada.jpg", ruta: "./" },
+          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
+          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
+          { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" },
+          { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage }
         ];
         break;
 
@@ -109,6 +119,10 @@ export class VerificarTipoProvider {
           { accion: "Hacer un pedido.", img: "pedido.jpg", ruta: PedirPlatosPage },
           { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaClientePage },
           { accion: "Dar propina.", img: "propina.jpg", ruta: "./" }
+          { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
+          { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
+          { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
+          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" }
         ];
         break;
     }

@@ -16,6 +16,7 @@ import { AltaEmpleadoPage } from "../pages/alta-empleado/alta-empleado";
 import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
 import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../pages/reserva/reserva";
+import { CuentaPage } from "../pages/cuenta/cuenta";
 
 import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente';
 import { AltaPlatosPage } from '../pages/alta-platos/alta-platos';
@@ -35,21 +36,17 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { ChartsModule } from 'ng2-charts';
 import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 
-import { QRScanner } from '@ionic-native/qr-scanner';
-
+import { Camera } from '@ionic-native/camera';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
-
-
-import { Camera } from '@ionic-native/camera';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 
 import { ComponentsModule } from "../components/components.module";
-
-
+import { Ionic2RatingModule } from 'ionic2-rating';
 
 @NgModule({
   declarations: [
@@ -78,7 +75,8 @@ import { ComponentsModule } from "../components/components.module";
     AltaPlatosPage,
     QrIngresoLocalPage,
     EncuestaClientePage,
-    PedirPlatosPage
+    PedirPlatosPage,
+    CuentaPage
   ],
   imports: [
     BrowserModule,
@@ -86,7 +84,8 @@ import { ComponentsModule } from "../components/components.module";
     AngularFireModule.initializeApp(firebaseConfig.fire),
     ChartsModule,
     ComponentsModule,
-    HttpModule
+    HttpModule,
+    Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -114,7 +113,8 @@ import { ComponentsModule } from "../components/components.module";
     PedirPlatosPage,
     QrDeLaMesaPage,
     TomarPedidoPage,
-    MapaDeRutaPage
+    MapaDeRutaPage,
+    CuentaPage
   ],
   providers: [
     StatusBar,
@@ -124,7 +124,7 @@ import { ComponentsModule } from "../components/components.module";
     VerificarTipoProvider,
     AngularFireAuth,
     Camera,
-    QRScanner
+    BarcodeScanner
   ]
 })
 export class AppModule {}

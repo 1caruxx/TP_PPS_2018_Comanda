@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+  <div class="alert-message animation-target">
+    <h1>{{alertTitulo}}</h1>
+    <p>{{alertMensaje}}</p>
+    <div class="botones">
+      <button ion-button outline (click)="Logout()" *ngIf="alertMostrarBotonCancelar">Ahora no</button>
+      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+    </div>
+  </div>
+  
+</div>
+
+<ion-content padding>
+
+    <!-- lucas@soylucas.com
+    Wwwwwwe -->
+
+  <div [class]="estado">
+
+    <div style="width: 100%;text-align: center;margin: 0;position: relative;">
+        <h1>Cuenta</h1>
+    </div>
+
+    <ng-container *ngFor="let item of pedidos">
+
+      <div>
+        <span>{{item.nombre}}</span><span style="float: right;">${{item.cantidad * item.precio}}</span>
+      </div>
+      <div class="puntos"></div>
+      
+    </ng-container>
+
+    <div>
+        <span>Propina</span><span style="float: right;">${{propinaTotal}}</span>
+    </div>
+    <div class="puntos"></div>
+
+    <div >
+        <span class="total">Total</span><span style="float: right;">${{total}}</span>
+    </div>
+    <div class="puntos"></div>
+
+    <span class="rating">¡Calificá nuestro servicio y dejá tu propina!</span>
+
+    <rating
+      [(ngModel)]="rate" 
+      readOnly="false" 
+      max="5" 
+      emptyStarIconName="star-outline" 
+      halfStarIconName="star-half" 
+      starIconName="star" 
+      nullable="false"
+      (ngModelChange)="Votar()">
+      
+    </rating>
+
+    <span class="rating">{{textoRate}} ({{propina}}% de propina)</span>
+
+    <button ion-button color="red" [disabled]="estadoBoton" (click)="Pagar()">{{textoDelBoton}}</button>
+
+  </div>
+
+  <app-spinner [ngClass]="{'ocultar':ocultarSpinner}"></app-spinner>
+
+</ion-content>

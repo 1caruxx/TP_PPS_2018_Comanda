@@ -1,4 +1,4 @@
-<ion-header [class]="estado">
+<ion-header>
   <ion-navbar color="red">
 
     <ion-buttons end>
@@ -25,7 +25,7 @@
 
 <ion-content [ngClass]="{'ocultar-fondo': estado == 'ocultar'}">
 
-  <div [class]="estado">
+  <div class="vertical-container">
 
     <img src="../../assets/imgs/alfa/logo.png">
 
@@ -49,6 +49,7 @@
       <option value="cocinero">Cocinero</option>
       <option value="bartender">Bartender</option>
       <option value="metre">Metre</option>
+      <option value="repartidor">Repartidor</option>
     </select>
 
     <img [src]="foto" alt="">
