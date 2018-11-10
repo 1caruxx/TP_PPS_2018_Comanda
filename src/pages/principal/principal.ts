@@ -43,21 +43,23 @@ export class PrincipalPage {
           if (data[item].correo == this.usuario.correo) {
 
             this.usuarioKey = item;
-            pedidoRef = this.firebase.database().ref("pedidos").child(data[item].mesa);
             break;
           }
         }
       }).then(() => {
-        console.clear();
-        usuarioRef.child(this.usuarioKey).child("estado").on("value", (snap) => {
-          let data = snap.val();
-          let flag = true;
-          console.log(this.usuarioKey)
-          console.log(data);
 
+        setInterval(() => {
+          this.acciones = this.acciones;
+        }, 500);
+
+        usuarioRef.child(this.usuarioKey).child("estado").on("value", (snap) => {
+
+          let data = snap.val();
+          let estadoCliente = data;
+          let flag = true;
           this.acciones = [];
 
-          switch (data) {
+          switch (estadoCliente) {
             /*
              * 
              * Puede hacer un pedido
@@ -85,29 +87,42 @@ export class PrincipalPage {
               if (flag) {
                 flag = false;
                 let estaComiendo;
-                pedidoRef.on("value", (snap) => {
+                usuarioRef.child(this.usuarioKey).once("value", (snap) => {
 
                   let data = snap.val();
-                  estaComiendo = true;
+                  pedidoRef = this.firebase.database().ref("pedidos").child(data.mesa);
+                }).then(() => {
 
-                  for (let item in data) {
+                  pedidoRef.on("value", (snap) => {
 
-                    if (data[item].estado && data[item].estado != "terminado") {
+                    if (estadoCliente != "pago") {
+                      let data = snap.val();
+                      estaComiendo = true;
 
-                      estaComiendo = false;
-                      break;
+                      for (let item in data) {
+
+                        if (data[item].estado && data[item].estado != "terminado") {
+
+                          estaComiendo = false;
+                          break;
+                        }
+                      }
+
+                      if (estaComiendo) {
+
+                        usuarioRef.child(this.usuarioKey).update({
+                          estado: "comiendo"
+                        })
+                      }
+
+
                     }
-                  }
 
-                  console.log(`booleano que determina si esta comiendo o no antes de su if: ${estaComiendo}`);
+                  });
 
-                  if (estaComiendo) {
+                })
 
-                    usuarioRef.child(this.usuarioKey).update({
-                      estado: "comiendo"
-                    })
-                  }
-                });
+
               }
 
               break;
@@ -126,6 +141,7 @@ export class PrincipalPage {
               //this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[2] : this.accionesRespaldoCliente[1];
               //this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
+
               break;
 
             /*
@@ -136,7 +152,6 @@ export class PrincipalPage {
              *  
              */
             default:
-              console.log("entre al default")
               this.acciones[0] = this.accionesRespaldoCliente[1];
               this.acciones[1] = this.accionesRespaldoCliente[5];
               break;
