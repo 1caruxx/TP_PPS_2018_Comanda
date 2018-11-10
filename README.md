@@ -45,10 +45,10 @@ Branch del proyecto: [vega_beta](https://github.com/1caruxx/TP_PPS_2018_Comanda/
 
 ---
 [x] C- Alta de platos y bebidas.</br>
-[x] C- Alta de platos y bebidas.</br>
-[x] C- Alta de platos y bebidas.</br>
-[x] C- Alta de platos y bebidas.</br>
-[x] C- Alta de platos y bebidas.</br>
+[x] C- Alta de cliente.</br>
+[x] C- QR de ingreso al local.</br>
+[x] C- Encuesta de cliente.</br>
+
 ---
 
 ⬆️ Quinteros, Axel<br />
