@@ -8,6 +8,87 @@ page-encuesta-cliente {
     }
 
     ion-navbar ion-icon { font-size: 50px !important; }
+    .alert3
+    {
+       position: absolute;
+       z-index: 5000;
+       width: 80%;
+       padding:10%;
+       left: 10%;
+       border-radius: 5%;
+       background: #cf4946;
+       text-align: center;
+       top: 36%;
+       justify-content: center;
+       
+       flex-direction: column;
+   display:none;
+
+    }
+    .mostrarAlert3
+    {
+        display:flex!important;
+    }
+    .alert3 h1
+    {
+       font-family: 'Lobster', cursive;
+       color:white;
+    }
+    .canvas {
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        position: relative;
+        display:none;
+        position: absolute;
+        z-index: 10000;
+        background: white;
+        
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+    .canvas h2
+    {
+        margin-top:10%;
+        font-family: 'Lobster', cursive;
+        text-align: center;
+    }
+    .cerrarChart
+    {
+        position: absolute;
+        right: 5px;
+        top: 0;
+        background: white;
+        border: none;
+        outline: none;
+        box-shadow: none;
+    }
+    .cerrarChart ion-icon
+    {
+        color:black;
+        font-size: 2em;
+    }
+    
+    .mostrarChart
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .btnChart
+    {
+        width: 40%;
+    /* height: 40%!important; */
+    height: 60px!important;
+    margin-top: 5%;
+    }
+    .iconoChart
+    {
+        font-size:3em;
+    }
+
+
+
 
     .scroll-content
     {
@@ -46,7 +127,8 @@ margin-top:0;
         box-sizing: border-box;
         font-size: 1.7em;
     }
-    .contenido button
+   
+    .contenido .btnContenido
     {
         width: 60%;
         margin-left: 20%;
@@ -71,18 +153,21 @@ margin-top:0;
         display:flex;
         justify-content: center;
         align-items:center; 
-        background: #0000009e;
+        background: rgba(0, 0, 0, 0.84);
     }
     .laPregunta1, .laPregunta2, .laPregunta3, .laPregunta4, .laPregunta5, .laPregunta6
     {
         width: 100%;
-        padding-bottom:5%;
+        height: 70%;
+
         background-color: white;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
         transition: .5s;
+        position: relative;
     }
     .noMostrar
     {
@@ -157,6 +242,11 @@ margin-top:0;
         top: 61%;
         display: none; 
     }
+    .miInput::placeholder
+    {
+        font-family: 'Sorts Mill Goudy', serif;
+
+    }
     .ocultarBoton
     {
         visibility: hidden;
@@ -166,7 +256,22 @@ margin-top:0;
     {
         display:block;
 
-    }
+      }  
+      
 
+    @media  screen and(max-height:"480px")
+    {
+        .laPregunta5 {
+            height:100%;
+        }
+        
+       .scroll-content
+       {
+           overflow: hidden;
+       }
+        
+   
+    }
+    
 
 }

@@ -65,7 +65,9 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-nativeaudio": {},
       "cordova-plugin-camera": {},
-      "phonegap-plugin-barcodescanner": {}
+      "phonegap-plugin-barcodescanner": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
       "android"

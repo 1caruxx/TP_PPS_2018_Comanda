@@ -6,9 +6,11 @@ import { Component } from '@angular/core';
 })
 export class SpinnerComponent {
 
-  constructor() {
+  text: string;
 
+  constructor() {
     console.log('Hello SpinnerComponent Component');
+    this.text = 'Hello World';
   }
 
 }

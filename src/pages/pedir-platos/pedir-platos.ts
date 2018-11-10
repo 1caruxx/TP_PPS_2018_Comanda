@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 import firebase from "firebase";
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import { AlertController } from 'ionic-angular';
+import  {SpinnerComponent } from '../../components/spinner/spinner';
 
 
 
@@ -20,44 +21,167 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class PedirPlatosPage {
   @ViewChild('cant') cant:any;
-
+  contErrores:number=0;
   mensaje:string;
   mostrarAlert:boolean=false;
   ocultarPlatos:boolean;
   cantidad:number;
   titulo:string;
+  claveUsuarioActual;
   platos:any[]=[];
   bebidas:any[]=[];
+  mostrarSpinner:boolean=false;
+  mostrarAlert2:boolean=false;
+  mostrarAlert3:boolean=false;
   valor:number;
+  miValor:number=undefined;
   foto1;
   foto2;
+  eligio:boolean=false;
   foto3;
   nombre;
+  yaPidio:boolean=false;
   desc;
+  cantidadNueva=undefined;
+  tipo:string;
+  tipo1:string;
+  mesa;
   foto;
+  apreto=1;
+ tiempoPedido:number=0;
+  correo:string;
   pedido:any[]=[];
   ocultarBebidas:boolean;
   for="let plato of platos";
   mostrarslide:boolean;
   ocultarTitulo:boolean;
+  mostrarSpinnerPlatos:boolean=false;
 contador;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor
+  (
+    public navCtrl: NavController,
+     public navParams: NavParams, 
+       private authInstance: AngularFireAuth,
+       private alertCtrl: AlertController,
+       private toastCtrl: ToastController,
+      )
+       {
     this.ocultarPlatos = true;
     this.ocultarBebidas=true;
     this.mostrarslide=false;
     this.TraerPlatos();
     this.contador=0;
+    
+  this.tipo1 = localStorage.getItem("usuario");
+  this.tipo1 =(JSON.parse(this.tipo1)).tipo;
     this.ocultarTitulo=false;
+    this.correo=localStorage.getItem("usuario");
+
+    this.correo =(JSON.parse(this.correo)).correo;
     this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
 this.foto="";
-
-    
+//DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!!!
+//this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+if(this.tipo1=="mozo")
+{
+  this.mostrarAlert2=true;
+  
+  return
+}
+    this.TraerTipoMesa();
+   
   }
   onChangeTime(value)
   {
     this.cantidad=value;
   }
   ionViewDidLoad() {
+ 
+  }
+  CancelarAlert2()
+  {
+    this.navCtrl.pop();
+  }
+  AceptarAlert2()
+  {
+
+    let valida:boolean=true;
+    //Valido el campo de la mesa
+    if(!this.mesa)
+    {
+      valida=false;
+      this.mensaje="Ingrese el numero de mesa";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+
+        this.mostrarAlert3=false;
+        this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos";
+      },2000);
+      return;
+    }
+
+    //Valido que la mesa exista:
+
+let mensaje = firebase.database().ref().child("mesas/");
+mensaje.once("value",(snap)=>{
+ let esta:boolean =false;
+ let ocupada:boolean=false;
+  var data =snap.val();
+  for (let item in data) {
+
+    if (data[item].numeroMesa == this.mesa) 
+    {
+      console.log(this.mesa);
+      console.log(data[item].estado);
+      esta=true;
+      if(data[item].estado=="ocupada")
+      {
+        ocupada=true;
+
+      }
+     
+    }
+    
+  }
+
+  if(!esta)
+  {
+    this.presentToast("El numero de mesa ingresado no existe!!");
+
+      return;
+  }
+  else
+  {
+    //Aca valido que la mesa no esta ocupada
+   
+
+     if(!ocupada)
+     {
+      this.presentToast("La mesa ingresada no es la corrcta ya que esta vacia");
+ 
+     return;
+
+     }
+     else
+     {
+       this.mostrarAlert2=false;
+       this.TraerClaveMozo();
+
+     }
+   
+    
+
+  }
+
+
+});
+
+   //Valido que la mesa no este ocupada
+   
+      
+    
+
+ 
   }
   swipeLeftEvent($event)
   {
@@ -104,19 +228,57 @@ this.foto="";
     }
   
   }
-  ElegirPlato(nombre, valor)
+  presentToast(mensaje: string) {
+
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 3000,
+      position: 'top',
+      cssClass: "infoToast"
+    });
+
+    toast.present();
+  } 
+  ElegirPlato(nombre, valor, es, tiempo, para, precio, id)
   {
+   this.miValor=undefined;
+     
+    console.log(id);
     
+    if(valor<=0 )
+    {
+      if(this.contErrores==3)
+      {
+        this.contErrores=0;
+        this.mensaje="Coloque la cantidad del elemento del menu";
+        this.mostrarAlert3=true;
+        setTimeout(()=>{
 
-   
+          this.mostrarAlert3=false;
+          this.mensaje="Su pedido ha sido enviado en breve se lo llevaremos...";
+        }, 3000);
+        return;
+      }
+      this.contErrores++;
+     
+      return;
+    }
+
+
+    if(tiempo=="cero")
+    {
+      tiempo=0;
+    }
  
- 
+  
    
 
 
-    this.pedido.push({cant:valor, nombre:nombre});
+    this.pedido.push({cant:valor, nombre:nombre, es:es, tiempo:tiempo, para:para, precio:precio, id:id});
     console.log(this.pedido);
-    (window.document.querySelector('#'+nombre) as HTMLElement).classList.add("mostrarElegido");
+    (window.document.querySelector('#'+id) as HTMLElement).classList.add("mostrarElegido");
+    console.log(this.pedido);
+    valor=0;
   }
   mostrarSlide(foto1,foto2,foto3,nombre,desc)
   {
@@ -128,10 +290,53 @@ this.foto="";
     this.desc=desc;
     this.mostrarslide=true;
   }
+  
+
+
+  presentPrompt() {
+    let alert = this.alertCtrl.create({
+      title: 'Mesa',
+      inputs: [
+        {
+          name: 'mesa',
+          placeholder: 'Ingrese numero de mesa'
+        },
+        {
+          name: 'number',
+          placeholder: 'numero',
+          type: 'number'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: data => {
+            this.mesa=data;
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
   Platos()
   {
+    this.mostrarSpinnerPlatos=true;
+  if((this.platos.length>0))
+  {
+    this.mostrarSpinnerPlatos=false;
+  }
+      this.miValor=undefined;
+     
+   
 
-    this.valor=null;
+  
     console.log(this.valor);
     this.ocultarPlatos =false;
     this.ocultarTitulo=true;
@@ -140,6 +345,13 @@ this.foto="";
   }
   Bebidas()
   {
+    this.mostrarSpinnerPlatos=true;
+    if((this.platos.length>0))
+    {
+      this.mostrarSpinnerPlatos=false;
+    }
+    
+    this.miValor=undefined;
     this.ocultarPlatos =true;
     this.valor=undefined;
     this.ocultarBebidas =false;
@@ -151,7 +363,7 @@ this.foto="";
     this.ocultarPlatos =true;
     this.ocultarTitulo=false;
     this.ocultarBebidas=true;
-
+   
 
   }
   cerrarSlide()
@@ -173,32 +385,78 @@ var data =snap.val();
           if(data[key].carga.es=="plato")
           {
             this.platos.push(data[key]);
+           this.platos[this.platos.length-1].MiCantidad=undefined;
+           
+            let nombre =(this.platos[this.platos.length-1].carga.nombre).split(" ");
+            console.log(this.platos[this.platos.length-1].carga.nombre);
+            if(nombre.length>1)
+            {
+              let nombreFinal="";
+              for(let i=0;i<nombre.length;i++)
+              {
+                nombreFinal=nombreFinal+ nombre[i];
+
+              }
+              this.platos[this.platos.length-1].carga.id=nombreFinal;
+              console.log("id compuesto de nombre"+this.platos[this.platos.length-1].carga.id);
+            }
+            else
+            {
+              this.platos[this.platos.length-1].carga.id= this.platos[this.platos.length-1].carga.nombre;
+              console.log("id  de nombre simple" +this.platos[this.platos.length-1].carga.id);
+            }
           }
           else
           {
             this.bebidas.push(data[key]);
+            this.bebidas[this.bebidas.length-1].MiCantidad=undefined;
+           
+            let nombre =(this.bebidas[this.bebidas.length-1].carga.nombre).split(" ");
+            if(nombre.length>1)
+            {
+              let nombreFinal="";
+              for(let i=0;i<nombre.length;i++)
+              {
+                nombreFinal=nombreFinal+ nombre[i];
+
+              }
+              this.bebidas[this.bebidas.length-1].carga.id=nombreFinal;
+            
+            }
+            else
+            {
+              this.bebidas[this.bebidas.length-1].carga.id= this.bebidas[this.bebidas.length-1].carga.nombre;
+            
+            }
+
           }
 
           
 
         }
  
-        
+        this.mostrarSpinnerPlatos=false;
 
 
       });
   }
   AceptarPedido()
   {
+    this.eligio=true;
     this.Cerrar();
+    
   }
   CancelarPedido()
   {
+    this.eligio=false;
+   
     for(let i=0;i<this.pedido.length;i++)
     {
-      (window.document.querySelector('#'+this.pedido[i].nombre) as HTMLElement).classList.remove("mostrarElegido");
-
+      (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+    
     }
+
+    
     this.pedido.splice(0, this.pedido.length);
     console.log(this.pedido);
     this.valor=undefined;
@@ -208,17 +466,207 @@ var data =snap.val();
   }
   PedirFinal()
   {
-    let mensaje = firebase.database().ref().child("pedidos");
-    let nodo= mensaje.push("Ignorar").key;
-    let mensaje2 = firebase.database().ref().child("pedidos/"+nodo);
+    
+    if(this.pedido.length<=0)
+    {
+      this.mensaje="No agrego ningun pedido a la orden";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+        
+        this.mostrarAlert3=false;
+      }, 2000);
+      return;
+    }
+    this.mostrarSpinner=true;
+    let mensaje = firebase.database().ref().child("pedidos/"+this.mesa+"/cocinero");
+    let mensaje2 = firebase.database().ref().child("pedidos/"+this.mesa+"/bartender");
+   let tiempoMax=0;
+   let nodoPadre:any;
+   let tieneBartender:boolean=false;
+   let tieneCocinero:boolean=false;
     for(let i=0;i<this.pedido.length;i++)
     {
-      mensaje2.push(this.pedido[i]);
+
+      console.log(this.pedido[i].para);
+      if(this.pedido[i].para=="bartender")
+      {
+        console.log("El de abajo es de bartender");
+        console.log(this.pedido[i]);
+        tieneBartender=true;
+        mensaje2.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant, precio:this.pedido[i].precio});
+    
+      }
+      if(this.pedido[i].para=="cocinero")
+      {
+        console.log("El de abajo es de cocinero");
+        console.log(this.pedido[i]);
+        
+        tieneCocinero=true;
+        if(tiempoMax<this.pedido[i].tiempo)
+        {
+          tiempoMax=this.pedido[i].tiempo;
+        }
+        console.log(this.pedido[i].nombre);
+        mensaje.push({nombre:this.pedido[i].nombre, cantidad:this.pedido[i].cant, precio:this.pedido[i].precio});
+        this.yaPidio=true;
+      }
+
+      
     }
+    if(tieneCocinero)
+    {
+      mensaje.update({estado:"tomado"}).then(()=>{
+
+        for(let i=0;i<this.pedido.length;i++)
+        {
+          (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+    
+        }
+        this.pedido=[];
+    
+      });
+    }
+    if(tieneBartender)
+    {
+      mensaje2.update({estado:"tomado"}).then(()=>{
+
+        for(let i=0;i<this.pedido.length;i++)
+        {
+          (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+    
+        }
+        this.pedido=[];
+    
+      });;
+    }
+    //Establecer tiempo:
+    let refTiempo = firebase.database().ref().child("pedidos/"+this.mesa);
+    refTiempo.once("value", (snap) => {
+
+      let data = snap.val();
+
+     let tiempo= data.tiempo;
+     if(!tiempo  || tiempo< tiempoMax )
+     {
+
+      let mensaje3  =firebase.database().ref().child("pedidos/"+this.mesa);
+  
+      mensaje3.update({tiempo:tiempoMax}).then(()=>{
+        for(let i=0;i<this.pedido.length;i++)
+        {
+          (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+    
+        }
+        this.pedido=[];
+    
+    
+      });
+
+
+     }
+     if(tiempo>tiempoMax)
+     {
+      for(let i=0;i<this.pedido.length;i++)
+      {
+        (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+  
+      }
+      this.pedido=[];
+
+
+     }
+
+    });
+ //Guardo el estado pidio  al cliente
+
+      let usuariosRef = firebase.database().ref().child("usuarios/"+this.claveUsuarioActual);
+      usuariosRef.update({estado:"pidio"});
+      
+  console.log(this.claveUsuarioActual);
+  
+    
+      
+      
+      this.mostrarSpinner=false;
+     
+      this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
     this.mostrarAlert=true;
     setTimeout(()=>{
 
       this.mostrarAlert=false;
+      this.navCtrl.pop();
     }, 4000);
+    
   }
+TraerClaveMozo()
+{
+  let usuariosRef = firebase.database().ref("usuarios");
+     usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+      let esValido = true;
+
+      for (let key in data) {
+
+      
+         
+     
+      
+        
+
+            if(data[key].mesa==this.mesa)
+            {
+              this.claveUsuarioActual=key;
+              break;
+            }
+
+      
+    
+      
+      }
+      console.log(this.mesa + this.tipo);
+
+  });
+
+}
+  TraerTipoMesa()
+  {
+/*   if(this.tipo1=="mozo")
+    {
+      return;
+    }*/
+    let usuariosRef = firebase.database().ref("usuarios");
+     usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+      let esValido = true;
+
+      for (let key in data) {
+
+        if (data[key].correo == this.correo) {
+         
+          this.tipo = data[key].tipo;
+      
+          if(this.tipo!="mozo")
+          {
+            this.mesa=data[key].mesa;
+            this.claveUsuarioActual=key;
+            return;
+          }
+
+          if(this.tipo1=="mozo")
+          {
+            if(data[key].mesa==this.mesa)
+            {
+              this.claveUsuarioActual=key;
+            }
+
+          }
+          break;
+        }
+      }
+      console.log(this.mesa + this.tipo);
+
+  });
+}
 }
