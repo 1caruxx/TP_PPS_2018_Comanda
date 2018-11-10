@@ -40,8 +40,8 @@ Branch del proyecto: [vega_beta](https://github.com/1caruxx/TP_PPS_2018_Comanda/
 * [ ] L- Pedir platos y bebidas.
 * [ ] P- Pedido de platos y bebidas.
 
-**Fecha de inicio:**<br />
-**Fecha de fin:**
+**Fecha de inicio:03/11/18**<br />
+**Fecha de fin:10/11/18**
 
 ---
 [x] C- Alta de platos y bebidas.</br>
