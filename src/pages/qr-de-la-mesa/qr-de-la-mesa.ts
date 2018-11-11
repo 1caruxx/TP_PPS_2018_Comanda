@@ -58,6 +58,18 @@ public alertMensaje;
 public alertMensajeBoton;
 public alertHandler;
 
+public pedidosPruebaUno : Array<any>;
+public pedidosPruebaDos : Array<any>;
+public pedidosPruebaTres : Array<any>;
+public pedidosPruebaCuatro : Array<any>;
+public pedidosPruebaCinco : Array<any>;
+public pedidosPruebaSeis : Array<any>;
+public pedidosPruebaSiete : Array<any>;
+public pedidosPruebaOcho : Array<any>;
+public pedidosPruebaNueve : Array<any>;
+public pedidosPruebaDiez : Array<any>;
+
+
 
 
   
@@ -149,6 +161,16 @@ public alertHandler;
     this.usuarios = [];
     this.espera = [];
     this.atendidos = [];
+    this.pedidosPruebaUno=[];
+    this.pedidosPruebaDos=[];
+    this.pedidosPruebaTres=[];
+    this.pedidosPruebaCuatro=[];
+    this.pedidosPruebaCinco=[];
+    this.pedidosPruebaSeis=[];
+    this.pedidosPruebaSiete=[];
+    this.pedidosPruebaOcho=[];
+    this.pedidosPruebaNueve=[];
+    this.pedidosPruebaDiez=[];
 
 
     //let genteRef = this.firebase.database().ref("usuarios/clientes");
@@ -211,12 +233,241 @@ public alertHandler;
 
 
     });
-     
-
 
       
+            let pedidosProbandoUno = this.firebase.database().ref("pedidos/1");
 
-    
+
+            pedidosProbandoUno.on("value", (snap) => {
+
+              this.pedidosPruebaDos=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaUno.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+            let pedidosProbandoDos = this.firebase.database().ref("pedidos/2");
+
+
+            pedidosProbandoDos.on("value", (snap) => {
+
+              this.pedidosPruebaDos=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaDos.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+            let pedidosProbandoTres = this.firebase.database().ref("pedidos/3");
+
+
+            pedidosProbandoTres.on("value", (snap) => {
+
+              this.pedidosPruebaTres=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaTres.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+            let pedidosProbandoCuatro = this.firebase.database().ref("pedidos/4");
+
+
+            pedidosProbandoCuatro.on("value", (snap) => {
+
+              this.pedidosPruebaCuatro=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaCuatro.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+            let pedidosProbandoCinco = this.firebase.database().ref("pedidos/5");
+
+
+            pedidosProbandoCinco.on("value", (snap) => {
+
+              this.pedidosPruebaCinco=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaCinco.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+            let pedidosProbandoSeis = this.firebase.database().ref("pedidos/6");
+
+
+            pedidosProbandoSeis.on("value", (snap) => {
+
+              this.pedidosPruebaSeis=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaSeis.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+            let pedidosProbandoSiete = this.firebase.database().ref("pedidos/7");
+
+
+            pedidosProbandoSiete.on("value", (snap) => {
+
+              this.pedidosPruebaSiete=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaSiete.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+            let pedidosProbandoOcho = this.firebase.database().ref("pedidos/8");
+
+
+            pedidosProbandoOcho.on("value", (snap) => {
+
+              this.pedidosPruebaOcho=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaOcho.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+            let pedidosProbandoNueve = this.firebase.database().ref("pedidos/9");
+
+
+            pedidosProbandoNueve.on("value", (snap) => {
+
+              this.pedidosPruebaNueve=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaNueve.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+            
+            let pedidosProbandoDiez = this.firebase.database().ref("pedidos/10");
+
+
+            pedidosProbandoDiez.on("value", (snap) => {
+
+              this.pedidosPruebaDiez=[];
+
+
+              let result = snap.val();
+
+              for(let k in result)
+              { 
+                if (result[k].estado && result[k].estado == "terminado")
+                {
+
+                  this.pedidosPruebaDiez.push(result[k]);
+
+                }
+
+              }
+              
+            });
+
+
+
 
     
 
@@ -706,6 +957,315 @@ public alertHandler;
         }
       }
     });
+  }
+
+  terminarPedidoUno()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/1/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaUno=[];
+                          });
+
+
+  }
+
+  terminarPedidoDos()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/2/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaDos=[];
+                          });
+
+
+  }
+
+  terminarpedidoTres()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/3/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaTres=[];
+                          });
+
+  }
+
+  terminarPedidoCuatro()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/4/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaCuatro=[];
+                          });
+
+
+  }
+
+  terminarPedidoCinco()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/5/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaCinco=[];
+                          });
+
+  }
+
+  terminarPedidoSeis()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/6/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaSeis=[];
+                          });
+
+
+  }
+
+  terminarPedidoSiete()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/7/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaSiete=[];
+                          });
+
+
+  }
+
+  terminarPedidoOcho()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/8/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaOcho=[];
+                          });
+
+
+  }
+
+  terminarPedidoNueve()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/9/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaNueve=[];
+                          });
+
+
+  }
+
+  terminarPedidoDiez()
+  {
+
+    var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/10/");
+                        
+                  refTerminarUnoCocinero.once('value', (snap) => 
+                        {
+                            var data = snap.val();
+
+                            for(let k in data)
+                            { 
+
+                              if(k=="cocinero" || k=="bartender")
+                                {
+                                        
+                                    data[k].estado = "asasd";
+                                    refTerminarUnoCocinero.child(k).update(data[k]);
+                                }
+                              }
+
+                              
+
+                          }).then(() => 
+                          {
+                          //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                          this.pedidosPruebaDiez=[];
+                          });
+
   }
 
   

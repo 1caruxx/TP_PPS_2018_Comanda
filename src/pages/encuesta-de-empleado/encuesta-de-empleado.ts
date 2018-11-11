@@ -57,7 +57,7 @@ export class EncuestaDeEmpleadoPage {
   {
      //this.encuesta();
      this.usuario = JSON.parse(localStorage.getItem("desloguear"));
-     //this.encuesta();
+     this.encuesta();
 
 
   }
