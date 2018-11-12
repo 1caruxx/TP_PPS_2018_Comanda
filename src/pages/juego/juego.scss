@@ -1,0 +1,208 @@
+
+
+@-webkit-keyframes shake {
+    from,
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      -webkit-transform: translate3d(-10px, 0, 0);
+      transform: translate3d(-10px, 0, 0);
+    }
+  
+    20%,
+    40%,
+    60%,
+    80% {
+      -webkit-transform: translate3d(10px, 0, 0);
+      transform: translate3d(10px, 0, 0);
+    }
+  }
+  
+  @keyframes shake {
+    from,
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      -webkit-transform: translate3d(-10px, 0, 0);
+      transform: translate3d(-10px, 0, 0);
+    }
+  
+    20%,
+    40%,
+    60%,
+    80% {
+      -webkit-transform: translate3d(10px, 0, 0);
+      transform: translate3d(10px, 0, 0);
+    }
+  }
+  
+
+page-juego {
+    @import url('https://fonts.googleapis.com/css?family=Acme|Spicy+Rice');
+    ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+  
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+    .scroll-content
+    {
+        overflow: hidden;
+    }
+    .tiempo
+    {
+        font-family: 'Spicy Rice', cursive;
+        
+    }
+    .tituloJuego
+{
+   
+    text-align: center;
+    font-family: 'Spicy Rice', cursive;
+    letter-spacing: 1px;
+
+
+}
+    .juego
+{
+    width:100%;
+    height: 100%;
+    display:flex;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: #3488c0;
+    position:relative;
+    justify-content: space-evenly;
+}
+.fila1, .fila2, .fila3, .fila4
+{
+    box-sizing: border-box;
+    width:100%;
+    
+    display: flex;
+    justify-content: space-around;
+    height: 15%;
+}
+.fila1 img
+{
+    box-sizing: border-box;
+   
+    margin-top: 1%;
+    border: 2px solid white;
+    border-radius: 5%;
+    background-color: orangered;
+}
+.fila2 img
+{
+    box-sizing: border-box;
+
+    margin-top: 1%;
+    border: 2px solid white;
+    border-radius: 5%;
+    background-color: orangered;
+}
+.taparJuego
+{
+    position:absolute;
+    z-index: 1000;
+    width:100%;
+    height: 100%;
+    display: none;
+}
+.iniciarJuego
+{
+    position:absolute;
+    z-index: 1000;
+    width:100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(102, 51, 153, 0.47);
+
+
+}
+.iniciarJuegoFalse
+{
+    display:none;
+
+}
+.mensajeInicio
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 70%;
+    text-align: center;
+    border: 1px solid red;
+    padding: 5%;
+    background: #f53d3dc9;
+}
+.p1
+{
+    margin-bottom:0;
+}
+.mensajeInicio p
+{
+    font-family: 'Spicy Rice', cursive;
+    font-size:1.5em;
+ 
+}
+
+.taparJuegoTrue
+{
+display: block;
+}
+.fila3 img
+{
+    box-sizing: border-box;
+  
+    margin-top: 1%;
+    border: 2px solid white;
+    border-radius: 5%;
+    background-color: orangered;
+}
+.fila4 img
+{
+    box-sizing: border-box;
+  
+    margin-top: 1%;
+    border: 2px solid white;
+    border-radius: 5%;
+    background-color: orangered;
+}
+.btnJugar
+{
+    margin-bottom:5%;
+    width: 170px;
+    height: 170px;
+    margin-left:3%;
+    border-radius: 104px;
+    position: relative;
+    box-shadow: 0 2px 17px 0 black;
+}
+.animacion
+{
+    animation:shake 1s 1 ease-in-out;
+}
+}

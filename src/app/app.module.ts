@@ -18,7 +18,7 @@ import { Camera } from '@ionic-native/camera';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
-
+import { JuegoPage } from '../pages/juego/juego';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ChartsModule } from 'ng2-charts';
@@ -35,7 +35,8 @@ import { ComponentsModule } from "../components/components.module";
     AltaPlatosPage,
     QrIngresoLocalPage,
     EncuestaClientePage,
-    PedirPlatosPage
+    PedirPlatosPage,
+    JuegoPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +58,8 @@ import { ComponentsModule } from "../components/components.module";
     AltaPlatosPage,
     QrIngresoLocalPage,
     EncuestaClientePage,
-    PedirPlatosPage
+    PedirPlatosPage,
+    JuegoPage
   ],
   providers: [
     StatusBar,

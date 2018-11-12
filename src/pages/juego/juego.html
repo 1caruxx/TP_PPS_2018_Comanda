@@ -1,0 +1,100 @@
+<!--
+  Generated template for the JuegoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="red">
+
+  
+
+    <!-- <ion-title>{{sala}}</ion-title> -->
+    <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
+
+    <ion-buttons end>
+      <button ion-button>
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+  <ion-menu [content]="content">
+    <ion-header>
+      <ion-toolbar color="red">
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <button ion-item>
+            <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;Convencional
+        </button>
+        <button ion-item>
+          Friends
+        </button>
+        <button ion-item>
+          Events
+        </button>
+        <button ion-item >
+          Close Menu
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-nav #content swipeBackEnabled="false"></ion-nav>
+
+
+
+<ion-content>
+
+<div class="taparJuego" [ngClass]="{'taparJuegoTrue':taparJuego}"></div>
+<div class="iniciarJuego" [ngClass]="{'iniciarJuegoFalse':juegoIniciado}">
+ 
+  <div class="mensajeInicio">
+    <p class="p1">
+        Si logra ganar este juego de la memoria en menos de 1 minuto y medio,se gana un 10% de descuento en bebidas.</p>
+        <p>Intentelo!!!</p>
+    
+    <button ion-button  (click)="Jugar()">Jugar</button>
+</div>
+</div>
+
+  <div class="juego">
+    <h2 class="tituloJuego">¡Juego de la memoria!</h2><h3 class="tiempo">{{tiempo}}</h3>
+
+    <div class="fila1">
+      <img [src]="imgMostrar[0].img" [class.animacion]="animacion[0]"  (click)="cambiarImagen('1')" width="20%" height="90%">
+      <img [src]="imgMostrar[1].img" [class.animacion]="animacion[1]"    (click)="cambiarImagen('2')" width="20%" height="90%">
+      <img [src]="imgMostrar[2].img" [class.animacion]="animacion[2]"  (click)="cambiarImagen('3')" width="20%" height="90%">
+      <img [src]="imgMostrar[3].img" [class.animacion]="animacion[3]"  (click)="cambiarImagen('4')"  width="20%" height="90%">
+    </div>
+    <div class="fila2">
+      <img [src]="imgMostrar[4].img" [class.animacion]="animacion[4]"  (click)="cambiarImagen('5')" width="20%" height="90%">
+      <img [src]="imgMostrar[5].img" [class.animacion]="animacion[5]"  (click)="cambiarImagen('6')" width="20%" height="90%">
+      <img [src]="imgMostrar[6].img" [class.animacion]="animacion[6]"  (click)="cambiarImagen('7')" width="20%" height="90%">
+      <img [src]="imgMostrar[7].img" [class.animacion]="animacion[7]"  (click)="cambiarImagen('8')" width="20%" height="90%">
+      
+    
+    </div>
+    <div class="fila3">
+      <img [src]="imgMostrar[8].img" [class.animacion]="animacion[8]"  (click)="cambiarImagen('9')" width="20%" height="90%">
+      <img [src]="imgMostrar[9].img"  [class.animacion]="animacion[9]"  (click)="cambiarImagen('10')" width="20%" height="90%">
+      <img [src]="imgMostrar[10].img" [class.animacion]="animacion[10]"  (click)="cambiarImagen('11')" width="20%" height="90%">
+      <img [src]="imgMostrar[11].img" [class.animacion]="animacion[11]"  (click)="cambiarImagen('12')" width="20%" height="90%">
+    
+    </div>
+    <div class="fila4">
+      <img [src]="imgMostrar[12].img"  [class.animacion]="animacion[12]" (click)="cambiarImagen('13')"width="20%" height="90%">
+      <img [src]="imgMostrar[13].img" [class.animacion]="animacion[13]"  (click)="cambiarImagen('14')" width="20%" height="90%">
+      <img [src]="imgMostrar[14].img" [class.animacion]="animacion[14]"  (click)="cambiarImagen('15')" width="20%" height="90%">
+      <img [src]="imgMostrar[15].img"  [class.animacion]="animacion[15]"  (click)="cambiarImagen('16')" width="20%" height="90%">
+    
+    </div>
+    </div>
+    
+
+</ion-content>

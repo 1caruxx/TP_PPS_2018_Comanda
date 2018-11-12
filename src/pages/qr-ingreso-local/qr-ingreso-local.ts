@@ -22,7 +22,7 @@ export class QrIngresoLocalPage {
   encuestas:any[]=[];
   mostrarAlert3:boolean=false;
   mensaje:string;
-  desplegarEncuesta:boolean=true;
+  desplegarEncuesta:boolean=false;
   claveActual;
 foto1="";
 foto2;

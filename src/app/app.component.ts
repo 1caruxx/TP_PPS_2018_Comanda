@@ -8,6 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 //import { QrIngresoLocalPage } from '../pages/qr-ingreso-local/qr-ingreso-local';
 //import {  EncuestaClientePage } from '../pages/encuesta-cliente/encuesta-cliente';
 //import { PedirPlatosPage } from '../pages/pedir-platos/pedir-platos';
+import { JuegoPage } from '../pages/juego/juego';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,8 +19,8 @@ export class MyApp {
       
    
 
-rootPage:any =   TabsPage  ;
-//rootPage:any = EncuestaClientePage;
+//rootPage:any =   TabsPage  ;
+rootPage:any = JuegoPage;
  
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
