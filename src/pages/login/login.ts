@@ -51,6 +51,10 @@ export class LoginPage {
     this.navCtrl.setRoot(PrincipalPage);
   }
 
+  Redireccionar() {
+    this.navCtrl.push(AltaEmpleadoPage);
+  }
+
   DesplegarUsuarios() {
     this.botonUsuarios = "ocultar";
     this.agrandar = "agrandar";

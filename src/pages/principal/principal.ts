@@ -196,8 +196,14 @@ export class PrincipalPage {
               || this.usuario.tipo == "metre"
               || this.usuario.tipo == "repartidor") {
 
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+              localStorage.clear();
               this.navCtrl.setRoot(LoginPage);
             } else {
+
               localStorage.clear();
               this.navCtrl.setRoot(LoginPage);
             }
