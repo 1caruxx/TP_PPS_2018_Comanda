@@ -156,7 +156,29 @@ page-juego {
     text-align: center;
     border: 1px solid red;
     padding: 5%;
-    background: #f53d3dc9;
+    background: rgba(245, 61, 61, 0.788235294117647);
+}
+.alert
+{
+    position:absolute;
+    z-index:1000;
+    width: 80%;
+    left:10%;
+    border-radius:5%;
+    background: red;
+text-align: center;
+top:50%;
+display:none;
+// animation:fadeInRight 2s 1 ease-in-out;  
+}
+.mostrarAlert
+{
+    display:block;
+}
+.alert h1
+{
+   font-family: 'Lobster', cursive;
+   color:white;
 }
 .p1
 {

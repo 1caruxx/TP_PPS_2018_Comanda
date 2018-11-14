@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Alert } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+
+import firebase from "firebase";
+
 
 /**
  * Generated class for the JuegoPage page.
@@ -21,15 +25,23 @@ export class JuegoPage {
   coincide:boolean=false;
   claveActual;
   imgMostrar:any[]=[];
+  mostrarAlert:boolean=false;
   contadorJugadas:number=0;
+  mesa;
   valorViejo;
   primerId;
   x:any;
   tiempo="";
+  mensaje="";
+  correo:string;
   juegoIniciado:boolean=false;
   puntos:number;
   gano:boolean=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,   private authInstance: AngularFireAuth,) {
+    this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+    this.correo=localStorage.getItem("usuario");
+    this.correo =(JSON.parse(this.correo)).correo;
+    this.ObtenerMesa();
     for(let i=0;i<16;i++)
       { 
         this.imgMostrar.push({img:"assets/imgs/beta/elLogo.png", ok:true});
@@ -40,17 +52,17 @@ export class JuegoPage {
       this.fotos.push({img:"assets/imgs/beta/pizza.jpg", clave:2, id:2});
       this.fotos.push({img:"assets/imgs/beta/hamburguesa.jpg", clave:3, id:3});
       this.fotos.push({img:"assets/imgs/beta/milanesa.jpg", clave:4, id:4});
-      this.fotos.push({img:"assets/imgs/beta/pizarra.jpg", clave:5, id:5});
-      this.fotos.push({img:"assets/imgs/beta/bebidas.png", clave:6, id:6});
-      this.fotos.push({img:"assets/imgs/beta/comida.png", clave:7, id:7});
+      this.fotos.push({img:"assets/imgs/beta/vino.jpg", clave:5, id:5});
+      this.fotos.push({img:"assets/imgs/beta/jugo.jpg", clave:6, id:6});
+      this.fotos.push({img:"assets/imgs/beta/papas.jpg", clave:7, id:7});
       this.fotos.push({img:"assets/imgs/beta/fondoPedido.jpg", clave:8, id:8});
       this.fotos.push({img:"assets/imgs/beta/empanada.jpg", clave:1, id:9});
       this.fotos.push({img:"assets/imgs/beta/pizza.jpg", clave:2, id:10});
       this.fotos.push({img:"assets/imgs/beta/hamburguesa.jpg", clave:3, id:11});
       this.fotos.push({img:"assets/imgs/beta/milanesa.jpg", clave:4, id:12});
-      this.fotos.push({img:"assets/imgs/beta/pizarra.png", clave:5, id:13});
-      this.fotos.push({img:"assets/imgs/beta/bebidas.png", clave:6, id:14});
-      this.fotos.push({img:"assets/imgs/beta/comida.png", clave:7, id:15});
+      this.fotos.push({img:"assets/imgs/beta/vino.jpg", clave:5, id:13});
+      this.fotos.push({img:"assets/imgs/beta/jugo.jpg", clave:6, id:14});
+      this.fotos.push({img:"assets/imgs/beta/papas.jpg", clave:7, id:15});
       this.fotos.push({img:"assets/imgs/beta/fondoPedido.jpg", clave:8, id:16 });
 
       this. fotos = this.fotos.sort(function() {return Math.random() - 0.5});
@@ -61,7 +73,7 @@ export class JuegoPage {
       this.juegoIniciado=true;
         
   let tope = new Date().getTime();
-  tope=tope +90*1000;
+  tope=tope +60*1000;
   var countDownDate = new Date(tope).getTime();
 
   this.x = setInterval(()=> {
@@ -86,13 +98,22 @@ export class JuegoPage {
 
    this.taparJuego=true;
    this.puntos=0;
-   /*for(let i=0;i<16;i++)
+   for(let i=0;i<16;i++)
     { 
-      this.imgMostrar[i]={img:"../../assets/imgs/cerebro2.png", ok:true};
+      this.imgMostrar[i]={img:"assets/imgs/beta/elLogo.png", ok:true};
       
   
-    }*/
-   alert("Se acabo el tiempo, lo lamento");
+    }
+
+    //Aca muestro el alert de que perdio.
+    this.mensaje="El tiempo se acabó, juego terminado";
+    this.mostrarAlert=true;
+    setTimeout(()=>{
+
+      this.mostrarAlert=false;
+    
+      this.navCtrl.pop();
+    }, 4000);
   }
   });
   }
@@ -188,17 +209,58 @@ export class JuegoPage {
           }
               
           this.taparJuego=false;
-           if(this.gano)
-           {
-             alert("Felicitaciones");
-           }
-          
+       
           
         
         
         }
+        if(this.gano)
+        {
+          this.SubirDescuento();
+          this.mensaje="!!Felicitaciones usted ganó un 10% de descuento!!";
+          this.mostrarAlert=true;
+          setTimeout(()=>{
+      
+            this.mostrarAlert=false;
+          
+            this.navCtrl.pop();
+          }, 4000);
+          clearInterval(this.x);
+          
+          this.tiempo="juego finalizado";
+        }
+       
       }, 1000);
       
     }
   }
+
+  ObtenerMesa()
+  {
+    let usuariosRef = firebase.database().ref("usuarios");
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+      let esValido = true;
+
+      for (let key in data) {
+
+        if (data[key].correo == this.correo) {
+         
+          this.mesa =data[key].mesa;
+        }
+      }
+
+  });
+
+  }
+  SubirDescuento()
+  {
+
+  
+      let desc = firebase.database().ref().child("pedidos/"+this.mesa);
+      desc.update({desc:"10%"});
+
+  }
+ 
 }
