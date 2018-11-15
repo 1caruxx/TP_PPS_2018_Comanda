@@ -23,12 +23,15 @@ import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { Firebase } from '@ionic-native/firebase';
 
 import { Camera } from '@ionic-native/camera';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
 import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-ahora';
+import { FcmProvider } from '../providers/fcm/fcm';
 
 
 
@@ -54,7 +57,8 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     IonicModule.forRoot(MyApp),
     HttpModule,
     ChartsModule,
-    AngularFireModule.initializeApp(firebaseConfig.fire)
+    AngularFireModule.initializeApp(firebaseConfig.fire),
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -78,7 +82,9 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,
     Camera,
-    BarcodeScanner
+    BarcodeScanner,
+    Firebase,
+    FcmProvider
   ]
 })
 export class AppModule {}
