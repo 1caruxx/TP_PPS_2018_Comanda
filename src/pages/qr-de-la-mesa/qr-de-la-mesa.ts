@@ -247,7 +247,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaUno.push(result[k]);
@@ -270,7 +270,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaDos.push(result[k]);
@@ -293,7 +293,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaTres.push(result[k]);
@@ -316,7 +316,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaCuatro.push(result[k]);
@@ -339,7 +339,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaCinco.push(result[k]);
@@ -362,7 +362,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaSeis.push(result[k]);
@@ -385,7 +385,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaSiete.push(result[k]);
@@ -408,7 +408,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaOcho.push(result[k]);
@@ -431,7 +431,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaNueve.push(result[k]);
@@ -455,7 +455,7 @@ public pedidosPruebaDiez : Array<any>;
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "terminado")
+                if (result[k].estado && result[k].estado == "preparacion")
                 {
 
                   this.pedidosPruebaDiez.push(result[k]);
@@ -974,7 +974,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }
@@ -1007,7 +1007,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }
@@ -1038,7 +1038,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }
@@ -1068,7 +1068,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }
@@ -1099,7 +1099,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }
@@ -1129,7 +1129,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }
@@ -1160,7 +1160,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }
@@ -1191,7 +1191,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }
@@ -1222,7 +1222,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }
@@ -1253,7 +1253,7 @@ public pedidosPruebaDiez : Array<any>;
                               if(k=="cocinero" || k=="bartender")
                                 {
                                         
-                                    data[k].estado = "asasd";
+                                    data[k].estado = "terminado";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
                                 }
                               }

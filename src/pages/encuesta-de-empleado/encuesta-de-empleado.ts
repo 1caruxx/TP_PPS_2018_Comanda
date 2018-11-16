@@ -51,13 +51,16 @@ export class EncuestaDeEmpleadoPage {
   public pregCincoPrimeraRespuesta=0;
   public pregCincoSegundaRespuesta=0;
 
+  public desloguaer;
   public usuario;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
   {
      //this.encuesta();
-     this.usuario = JSON.parse(localStorage.getItem("desloguear"));
-     this.encuesta();
+     //this.usuario = JSON.parse(localStorage.getItem("desloguear"));
+     this.desloguaer = JSON.parse(localStorage.getItem("desloguear"));
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    // this.encuesta();
 
 
   }
@@ -331,62 +334,44 @@ export class EncuestaDeEmpleadoPage {
   Logout()
   {
 
-    if(this.usuario==false)
-    {
-      this.navCtrl.pop();
+    if(localStorage.getItem("desloguear")) {
 
-    }
 
-    if(this.usuario==true)
-    {
       let usuariosRef = this.firebase.database().ref("usuarios");
 
-    usuariosRef.once("value", (snap) => {
+      usuariosRef.once("value", (snap) => {
 
-      let data = snap.val();
 
-      for (let item in data) {
 
-        if (data[item].correo == this.usuario.correo) {
+        let data = snap.val();
 
-          usuariosRef.child(item).update({
-            logueado: false
-          }).then(() => {
-            if (this.usuario.tipo == "mozo"
-              || this.usuario.tipo == "cocinero"
-              || this.usuario.tipo == "bartender"
-              || this.usuario.tipo == "metre"
-              || this.usuario.tipo == "repartidor") {
+        for (let item in data) {
 
-              this.navCtrl.setRoot("");
-            } else {
+          if (data[item].correo == this.usuario.correo) {
+
+
+
+            usuariosRef.child(item).update({
+              logueado: false
+            }).then(() => {
+
               localStorage.clear();
               this.navCtrl.setRoot("");
-            }
-          });
+             
+            });
 
-          break;
+            break;
+          }
         }
-      }
-    });
-
-    
+      });
+    } else {
 
 
-
+      this.navCtrl.setRoot("");
     }
-
-
-
-    
-
-
 
 
   }
-
- 
-
 
 
 
