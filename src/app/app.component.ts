@@ -13,6 +13,8 @@ import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-super
 import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
 import { PerfilPage } from "../pages/perfil/perfil";
 import { CuentaPage } from "../pages/cuenta/cuenta";
+import { ReservaPage } from "../pages/reserva/reserva";
+import { ListadoReservasPage } from "../pages/listado-reservas/listado-reservas";
 
 @Component({
   templateUrl: 'app.html'

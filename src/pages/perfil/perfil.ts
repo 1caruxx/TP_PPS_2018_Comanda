@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the PerfilPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
+import firebase from "firebase";
 
 @IonicPage()
 @Component({
@@ -15,23 +12,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PerfilPage {
 
-  public claveOculta: string;
-  public datos: Array<any>;
+  // public claveOculta: string;
+  // public datos: Array<any>;
   public usuario;
+  public tipo;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public firebase = firebase;
 
-    this.claveOculta = this.OcultarClave("12345");
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) {
+
+    // this.claveOculta = this.OcultarClave("12345");
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
-    this.datos = [];
+    this.tipo = this.usuario.tipo;
+    // this.datos = [];
 
-    for (let item in this.usuario) {
+    // for (let item in this.usuario) {
 
-      this.datos.push({ clave: item, valor: this.usuario[item] })
-    }
+    //   this.datos.push({ clave: item, valor: this.usuario[item] })
+    // }
 
-    console.log(this.datos);
+    // console.log(this.datos);
 
   }
 
@@ -39,24 +40,86 @@ export class PerfilPage {
     console.log('ionViewDidLoad PerfilPage');
   }
 
-  MostrarClave() {
-
-    this.claveOculta = "12345";
+  ionViewWillLeave() {
+    localStorage.setItem("refrescarImagen", "true");
   }
 
-  VolverAOcultar() {
-    this.claveOculta = this.OcultarClave("12345");
-  }
+  async SacarFoto() {
 
-  OcultarClave(clave: string) {
+    let date = new Date();
+    let nombreFoto = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}-${date.getMilliseconds()}`;
 
-    let retorno: string = "";
+    try {
 
-    for (let i = 0; i < clave.length; i++) {
+      let options: CameraOptions = {
+        quality: 50,
+        targetHeight: 600,
+        targetWidth: 600,
+        allowEdit: true,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
+      };
 
-      retorno += "*";
+      let result = await this.camera.getPicture(options);
+
+      let foto = `data:image/jpeg;base64,${result}`;
+
+      let pictures = this.firebase.storage().ref(`usuarios/${nombreFoto}`);
+
+      pictures.putString(foto, "data_url").then(() => {
+
+        pictures.getDownloadURL().then((url) => {
+
+          let usuariosRef = this.firebase.database().ref("usuarios");
+
+          usuariosRef.once("value", (snap) => {
+
+            let data = snap.val();
+
+            for (let item in data) {
+      
+              if (data[item].correo == this.usuario.correo) {
+                
+                usuariosRef.child(item).update({
+                  img: url
+                }).then(() => {
+                  this.usuario.img = url;
+                  localStorage.setItem("usuario", this.usuario);
+                  alert("todo bien");
+                });
+
+                break;
+              }
+            }
+          });
+        });
+      });
+
+    } catch (error) {
+
+      // this.presentToast(error);
     }
-
-    return retorno;
   }
+
+  // MostrarClave() {
+
+  //   this.claveOculta = "12345";
+  // }
+
+  // VolverAOcultar() {
+  //   this.claveOculta = this.OcultarClave("12345");
+  // }
+
+  // OcultarClave(clave: string) {
+
+  //   let retorno: string = "";
+
+  //   for (let i = 0; i < clave.length; i++) {
+
+  //     retorno += "*";
+  //   }
+
+  //   return retorno;
+  // }
 }

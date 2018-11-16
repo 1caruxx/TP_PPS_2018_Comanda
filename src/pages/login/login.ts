@@ -133,7 +133,7 @@ export class LoginPage {
                     case "bartender":
                     case "metre":
                     case "repartidor":
-                      this.navCtrl.setRoot(AltaEmpleadoPage);
+                      this.navCtrl.setRoot(PrincipalPage);
                       break;
 
                     case "cliente":

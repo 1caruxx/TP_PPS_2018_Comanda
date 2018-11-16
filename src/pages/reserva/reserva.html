@@ -16,27 +16,32 @@
 
     <div class="vertical-container">
 
-      <img src="../../assets/imgs/alfa/logo.png">
-
       <h1>Reservar</h1>
 
-      <div class="inputs">
-        <input type="number" placeholder="Dia" [value]="dia" min="dia" max="31" style="width: 33%" />
-        <span>/</span>
-        <input type="number" placeholder="Mes" [(ngModel)]="mesSeleccionado" [min]="mesMinimo" max="12" style="width: 33%" />
-        <span>/</span>
-        <input type="number" placeholder="Año" [min]="anio" max="2019" (input)="test()" [(ngModel)]="anioSeleccionado" style="width: 33%" />
-      </div>
+      <ion-item>
+        <ion-label>Fecha</ion-label>
+        <ion-datetime displayFormat="DD/MMM/YYYY" monthShortNames={{nombreDeLosMeses}} min={{minimo}} max={{maximo}}
+          cancelText="Cancelar" doneText="Aceptar" [(ngModel)]="fecha">
+        </ion-datetime>
+      </ion-item>
 
-      <div class="inputs">
-        <input type="number" placeholder="Hora" style="width: 33%" />
-        <span>:</span>
-        <input type="number" placeholder="Minutos" style="width: 33%" />
-      </div>
+      <ion-item style="width: 50px;">
+        <ion-label>Hora</ion-label>
+        <ion-datetime displayFormat="HH:mm" cancelText="Cancelar" doneText="Aceptar" [(ngModel)]="hora"></ion-datetime>
+      </ion-item>
 
-      <button ion-button outline color="light" class="alta" (click)="Loguear()">Reservar</button>
+      <ion-item>
+      <ion-label>Personas</ion-label>
+      <ion-datetime displayFormat="YY" min="2001" max="2008"
+        cancelText="Cancelar" doneText="Aceptar" [(ngModel)]="cantidadPersonas">
+      </ion-datetime>
+      </ion-item>
+
+      <button ion-button outline color="light" class="alta" (click)="Reservar()">Reservar</button>
     </div>
 
   </div>
+
+  <app-spinner [ngClass]="{'ocultar':ocultarSpinner}"></app-spinner>
 
 </ion-content>

@@ -17,6 +17,7 @@ import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-su
 import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../pages/reserva/reserva";
 import { CuentaPage } from "../pages/cuenta/cuenta";
+import { ListadoReservasPage } from "../pages/listado-reservas/listado-reservas";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -48,7 +49,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
     ReservaPage,
-    CuentaPage
+    CuentaPage,
+    ListadoReservasPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
     ReservaPage,
-    CuentaPage
+    CuentaPage,
+    ListadoReservasPage
   ],
   providers: [
     StatusBar,

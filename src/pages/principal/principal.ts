@@ -166,6 +166,16 @@ export class PrincipalPage {
     console.log('ionViewDidLoad PrincipalPage');
   }
 
+  ionViewWillEnter() {
+
+    if(localStorage.getItem("refrescarImagen") == "true") {
+
+      localStorage.setItem("refrescarImagen", "false");
+      this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    }
+
+  }
+
   Redireccionar(ruta) {
 
     this.navCtrl.push(ruta);

@@ -5,6 +5,7 @@ import { AltaEmpleadoPage } from "../../pages/alta-empleado/alta-empleado";
 import { ListadoSupervisorPage } from "../../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../../pages/reserva/reserva";
 import { CuentaPage } from "../../pages/cuenta/cuenta";
+import { ListadoReservasPage } from "../../pages/listado-reservas/listado-reservas";
 
 @Injectable()
 export class VerificarTipoProvider {
@@ -30,6 +31,7 @@ export class VerificarTipoProvider {
 
       case "supervisor":
         acciones = [
+          { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservasPage },
           { accion: "Agregar un dueño o supervisor", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
           { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
           { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: ListadoSupervisorPage }

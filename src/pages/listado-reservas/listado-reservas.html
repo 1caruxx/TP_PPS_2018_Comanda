@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<div class="imagen" [ngClass]="{'ocultar':ocultarImagen,'opacidad':true}">
+
+  <ion-icon name="close" (click)="OcultarImagen()"></ion-icon>
+  <img [src]="image" alt="">
+
+</div>
+
+<ion-content>
+
+  <ng-container *ngIf="ocultarSpinner">
+    <h2 class="titulo">Reservas pendientes de confirmación</h2>
+  </ng-container>
+
+  <ion-list>
+
+    <ion-item *ngFor="let item of reservasPendientes">
+      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">
+        <img src={{item.img}}>
+      </ion-thumbnail>
+
+      <h1>{{item.apellido}}, {{item.nombre}}</h1>
+      <p>Horario • {{item.horario}} Hs.</p>
+      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
+
+      <button ion-button clear item-end (click)="DesplegarMesas(item)">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </button>
+    </ion-item>
+
+  </ion-list>
+
+  <ng-container *ngIf="ocultarSpinner">
+    <h2 class="titulo">Reservas confirmadas</h2>
+  </ng-container>
+
+  <ion-list>
+
+    <ion-item *ngFor="let item of reservasConfirmadas">
+
+      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">
+        <img src={{item.img}} />
+      </ion-thumbnail>
+
+      <h1>{{item.apellido}}, {{item.nombre}}</h1>
+      <p>Horario • {{item.horario}} Hs.</p>
+      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
+      <p>Mesa • {{item.mesa}}</p>
+
+    </ion-item>
+
+  </ion-list>
+
+  <div [ngClass]="{'interfaz-mesas':true,'ocultar':ocultarInterfazMesas}">
+
+    <h1>Selecciona una mesa para la reserva</h1>
+    <div class="mesas">
+      <button ion-button color="red" class="mesa {{item.seleccionado}}" (click)="Seleccionar(item.numero)" *ngFor="let item of mesas">{{item.numero}}</button>
+    </div>
+
+    <div class="botones">
+      <button ion-button color="red" (click)="OcultarInterfaz()">Cancelar</button>
+      <button ion-button color="red" (click)="Confirmar()">Confirmar</button>
+    </div>
+
+  </div>
+
+  <app-spinner [ngClass]="{'ocultar':ocultarSpinner}"></app-spinner>
+
+</ion-content>
