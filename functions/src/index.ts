@@ -204,6 +204,104 @@ exports.pedidoPlatosBebidas = functions.database
 
 });
 
+exports.hacerReserva = functions.database
+    .ref('reservas/{reservasId}')
+    .onCreate(async (snapshot,context) => {
+        
+    // Notification content
+    const payload = {
+      notification: {
+          title: 'Se hizo una reserva',
+          body: `Un cliente hizo una reserva!!!`,
+          icon: 'https://goo.gl/Fz9nrQ'
+      }
+    }
+
+ 
+    const db = admin.firestore()
+  
+    const devicesRef = db.collection('devices')
+
+
+   
+    const devices = await devicesRef.get();
+   
+
+    const tokens = [];
+
+    
+    devices.forEach(result => {
+      const token = result.data().token;
+
+      if(result.data().tipo=="supervisor")
+      {
+        tokens.push( token )
+      }
+
+   
+    })
+
+    //const tokens = [];
+   // tokens.push("eiEhMAhigdY:APA91bH4oVLkLh8fzOsjm1bVhlyTsh4v8tb3WZ7zNmiUQXkEMmPW6aHJ_Rv_Ylx5ZuaChX2zIHMPIjp7mACe6_fP6t-i8r4KhP4B97GxLQlxWB8LYGFRHOJYy4-l5u3Bi-7uy_jTe_zk");
+
+    return admin.messaging().sendToDevice(tokens, payload)
+
+});
+
+
+exports.aceptarReserva = functions.database
+    .ref('reservas/{reservasId}')
+    .onUpdate(async (change, context) => {
+
+        const before = change.before.val()
+        const after = change.after.val()
+
+        if (after.estado != "pendiente") 
+        {
+            console.log("error");
+            return null
+        }
+        
+    // Notification content
+    const payload = {
+      notification: {
+          title: 'Reserva Aceptada',
+          body: `Ya aceptaron su reserva!!!`,
+          icon: 'https://goo.gl/Fz9nrQ'
+      }
+    }
+
+ 
+    const db = admin.firestore()
+  
+    const devicesRef = db.collection('devices')
+
+
+   
+    const devices = await devicesRef.get();
+   
+
+    const tokens = [];
+
+    
+    devices.forEach(result => {
+      const token = result.data().token;
+
+      if(result.data().tipo=="cliente" && result.data().correo==after.correo)
+      {
+        tokens.push( token )
+      }
+
+   
+    })
+
+    //const tokens = [];
+   // tokens.push("eiEhMAhigdY:APA91bH4oVLkLh8fzOsjm1bVhlyTsh4v8tb3WZ7zNmiUQXkEMmPW6aHJ_Rv_Ylx5ZuaChX2zIHMPIjp7mACe6_fP6t-i8r4KhP4B97GxLQlxWB8LYGFRHOJYy4-l5u3Bi-7uy_jTe_zk");
+
+    return admin.messaging().sendToDevice(tokens, payload)
+
+});
+
 
 
 
