@@ -1,10 +1,52 @@
+@-webkit-keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  @keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .pulse {
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+  }
+  
+
 page-qr-ingreso-local {
 
-   
+    @import url('https://fonts.googleapis.com/css?family=Anton');
+
     @import url('https://fonts.googleapis.com/css?family=Kalam|Lobster|Sorts+Mill+Goudy');
     @import url('https://fonts.googleapis.com/css?family=Spicy+Rice');
     @import url('https://fonts.googleapis.com/css?family=Acme|Spicy+Rice');
     @import url('https://fonts.googleapis.com/css?family=Rancho');
+    @import url('https://fonts.googleapis.com/css?family=Fjalla+One');
 
     ion-navbar {
         padding: 20px 10px !important;
@@ -60,12 +102,23 @@ page-qr-ingreso-local {
      z-index:1000;
         width:100%;
       //  height: 100%;
-      background-color: orangered;
+      background-color: black;
         display:none;
-        background: url("../assets/imgs/beta/fondoQr.jpg");
-        background-size:100% 100%;
+     //   background: url("../assets/imgs/beta/fondoQr.jpg");
+       // background-size:100% 100%;
       //  background: url("../assets/imgs/beta/fondoQr.jpg");
        // background-size:100% 100%;
+    }
+    .vacio
+    {
+        position: absolute;
+        z-index:1000;
+           width:100%;
+           height: 100%;
+         //  height: 100%;
+         background-color: white;
+           display:none;
+
     }
     .laEncuesta
     {
@@ -120,24 +173,41 @@ page-qr-ingreso-local {
     .tituloEncuestas
     {
         text-align: center;
-        font-family: 'Spicy Rice', cursive;
+        font-family:  'Anton', sans-serif;
         /* position: absolute; */
         top: 5%;
-        COLOR: #f4f5a7;
+      //  COLOR: #f4f5a7;
         /* width: 90%; */
-        border-bottom: 3px solid white;
+       
         /* left: 5%; */
         font-size: 2.8em;
         padding: 0%;
-        font-family: 'Lobster', cursive;
-        //color:white;
+        font-size: 40px;
+        padding: 5%;
+        line-height: 100%;
+        color: white;
+    }
+    .tituloSinEncuestas
+    {
+        text-align: center;
+        font-family: 'Anton', sans-serif;
+        /* position: absolute; */
+        top: 5%;
+        width: 90%;
+        color: white;
+        /* left: 5%; */
+        background-color: rgba(250, 24, 24, 0.54);
+        font-size: 2.8em;
+        padding: 0%;
+        padding: 2%;
+        border-radius: 3%;
     }
     .encuesta1
     {
      
-        border-bottom: 1px solid orangered;
+        border-bottom: 1px solid ;
         padding:5% 0;
-        border-top: 2px solid orangered;
+        border-top: 2px solid ;
       
     }
     .encuesta1 h2, .encuesta1 p
@@ -150,34 +220,93 @@ page-qr-ingreso-local {
     }
     .encuesta1 p
     {
-        font-size: 2em;
-        font-family: 'Rancho', cursive;
-        background: rgba(255, 255, 255, 0.59);
+        font-size: 23px;
+        font-family: 'Fjalla One', sans-serif;
+      color:white;
         text-align: center;
+        width:20%;
+        align-self: center;
+    }
+    .encuestas img
+    {
+    position: absolute;
+        width: 10%;
+        height: 3%;
+        right: 20px;
+        animation: pulse 2s ease-in-out infinite;
+
+    }
+    .sinEncuestas
+    {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    }
+    .sinEncuestas img
+    {
+        position: absolute;
+        width: 25%;
+        height: 25%;
+        top: 10%;
+        animation: pulse 2s ease-in-out infinite;
     }
      .encuesta1 h3
     {
-        width:90%;
-        margin-left:5%;
+        width:78%;
+        //margin-left:5%;
         text-align: center;
-        font-family: 'Spicy Rice', cursive;
+        font-family: 'Fjalla One', sans-serif;
         letter-spacing: 2px;
-        //color:white;
+        color:white;
+        border-right: 1px solid;
+        padding-right: 2%;
     }
     .encuesta1 h2
     {
-        width:80%;
+        /*width:80%;
         margin-left:10%;
         font-family: 'Spicy Rice', cursive;
         text-align: center;
         margin-bottom:8%;
         color:#db1814;
         border-bottom: 2px solid #db1814;
+        letter-spacing: 1px;*/
+
+        width: 80%;
+        margin-left: 10%;
+        font-family: 'Fjalla One', sans-serif;
+        text-transform: lowercase;      /* text-align: center; */
+        margin-bottom: 8%;
+        color: white;
+        border-bottom: 4px groove #db1814;
         letter-spacing: 1px;
+       
+        padding-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .encuesta1 h2:first-letter
+    {
+        text-transform: uppercase;
     }
     .PreguntaEncuesta1
     {
-        color:white;
+       // color:white;
+    }
+
+    .pregResp
+    {
+        
+        
+        width: 90%;
+        margin-left: 5%;
+        padding: 2%;
+     
+        display: flex;
+        background: rgba(255, 255, 255, 0.22);
+        border-radius: 2%;
+        margin-bottom: 5px;
     }
     @media  screen and(max-width:"340px")
     {
