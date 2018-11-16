@@ -42,6 +42,7 @@ export class FcmProvider {
     const docData = { 
       token,
       userId: 'testUser',
+      tipo: 'cliente'
     }
   
     return devicesRef.doc(token).set(docData)

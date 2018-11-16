@@ -52,7 +52,7 @@ admin.initializeApp();
 
 exports.probandoAxel = functions.database
     .ref('rooms/{roomId}/messages/{messageId}')
-    .onCreate((snapshot,context) => {
+    .onCreate(async (snapshot,context) => {
         
     const data = snapshot.val();
 
@@ -76,7 +76,7 @@ exports.probandoAxel = functions.database
  
     const db = admin.firestore()
   
-   /* const devicesRef = db.collection('devices')
+    const devicesRef = db.collection('devices')
 
 
    
@@ -89,15 +89,122 @@ exports.probandoAxel = functions.database
     devices.forEach(result => {
       const token = result.data().token;
 
-      tokens.push( token )
-    })*/
+      if(result.data().tipo=="cliente")
+      {
+        tokens.push( token )
+      }
 
-    const tokens = [];
-    tokens.push("eiEhMAhigdY:APA91bH4oVLkLh8fzOsjm1bVhlyTsh4v8tb3WZ7zNmiUQXkEMmPW6aHJ_Rv_Ylx5ZuaChX2zIHMPIjp7mACe6_fP6t-i8r4KhP4B97GxLQlxWB8LYGFRHOJYy4-l5u3Bi-7uy_jTe_zk");
+   
+    })
+
+    //const tokens = [];
+   // tokens.push("eiEhMAhigdY:APA91bH4oVLkLh8fzOsjm1bVhlyTsh4v8tb3WZ7zNmiUQXkEMmPW6aHJ_Rv_Ylx5ZuaChX2zIHMPIjp7mACe6_fP6t-i8r4KhP4B97GxLQlxWB8LYGFRHOJYy4-l5u3Bi-7uy_jTe_zk");
 
     return admin.messaging().sendToDevice(tokens, payload)
 
 });
+
+
+exports.pedirMesa = functions.database
+    .ref('usuarios/{usuarioId}')
+    .onUpdate(async (change, context) => {
+        
+        const before = change.before.val()
+        const after = change.after.val()
+
+        if (after.estado != "espera") 
+        {
+            console.log("error");
+            return null
+        }
+    
+
+
+    // Notification content
+    const payload = {
+      notification: {
+          title: 'Nueva mesa pedida',
+          body: `Un cliente escaneo el codigo qr y necesita una mesa!!!`,
+          icon: 'https://goo.gl/Fz9nrQ'
+      }
+    }
+
+ 
+    const db = admin.firestore()
+  
+    const devicesRef = db.collection('devices')
+
+
+   
+    const devices = await devicesRef.get();
+   
+
+    const tokens = [];
+
+    
+    devices.forEach(result => {
+      const token = result.data().token;
+
+      if(result.data().tipo=="mozo" || result.data().tipo=="supervisor")
+      {
+        tokens.push( token )
+      }
+
+   
+    })
+
+    //const tokens = [];
+   // tokens.push("eiEhMAhigdY:APA91bH4oVLkLh8fzOsjm1bVhlyTsh4v8tb3WZ7zNmiUQXkEMmPW6aHJ_Rv_Ylx5ZuaChX2zIHMPIjp7mACe6_fP6t-i8r4KhP4B97GxLQlxWB8LYGFRHOJYy4-l5u3Bi-7uy_jTe_zk");
+
+    return admin.messaging().sendToDevice(tokens, payload)
+
+});
+
+exports.pedidoPlatosBebidas = functions.database
+    .ref('pedidos/{pedidoId}')
+    .onCreate(async (change, context) => {
+        
+    // Notification content
+    const payload = {
+      notification: {
+          title: 'Se hizo un nuevo pedido',
+          body: `Un cliente hizo un pedido!!!`,
+          icon: 'https://goo.gl/Fz9nrQ'
+      }
+    }
+
+ 
+    const db = admin.firestore()
+  
+    const devicesRef = db.collection('devices')
+
+
+   
+    const devices = await devicesRef.get();
+   
+
+    const tokens = [];
+
+    
+    devices.forEach(result => {
+      const token = result.data().token;
+
+      if(result.data().tipo=="cocinero" || result.data().tipo=="bartender")
+      {
+        tokens.push( token )
+      }
+
+   
+    })
+
+    //const tokens = [];
+   // tokens.push("eiEhMAhigdY:APA91bH4oVLkLh8fzOsjm1bVhlyTsh4v8tb3WZ7zNmiUQXkEMmPW6aHJ_Rv_Ylx5ZuaChX2zIHMPIjp7mACe6_fP6t-i8r4KhP4B97GxLQlxWB8LYGFRHOJYy4-l5u3Bi-7uy_jTe_zk");
+
+    return admin.messaging().sendToDevice(tokens, payload)
+
+});
+
+
 
 
 
