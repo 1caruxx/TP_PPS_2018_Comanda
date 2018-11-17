@@ -19,11 +19,12 @@ import { PrincipalPage } from '../principal/principal';
   templateUrl: 'qr-ingreso-local.html',
 })
 export class QrIngresoLocalPage {
-  correo: string;
-  encuestas: any[] = [];
-  mostrarAlert3: boolean = false;
-  mensaje: string;
-  desplegarEncuesta: boolean = false;
+  correo:string;
+  encuestas:any[]=[];
+  noHayEncuestas:boolean=false;
+  mostrarAlert3:boolean=false;
+  mensaje:string;
+  desplegarEncuesta:boolean=false;
   claveActual;
   foto1 = "";
   foto2;
@@ -45,22 +46,33 @@ export class QrIngresoLocalPage {
     this.correo = (JSON.parse(this.correo)).correo;
     // this.correo="lucas@soylucas.com";
     //DESCOMENTAR PARA TRABAJAR A NIVEL LOCAL!!!!!!!
-    // this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+ // this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
 
     this.TraerEncuestas();
   }
-  TraerEncuestas() {
+  TraerEncuestas()
+  {
+    console.log("En traer ecnuesta");
     let mensaje = firebase.database().ref().child("encuestaCliente/");
-    mensaje.once("value", (snap) => {
+ mensaje.once("value",(snap)=>{
+ 
+var data =snap.val();
+console.log("Dentro de observable ecnuesta");
 
-      var data = snap.val();
-
-      this.encuestas = [];
-      for (var key in data) {
-
-        this.encuestas.push(data[key]);
-
-      }
+       this.encuestas=[];
+        for(var key in data)
+        {
+          
+            this.encuestas.push(data[key]);
+          console.log(data);
+        }
+        console.log(this.encuestas);
+        if(this.encuestas.length < 1)
+        {
+          this.noHayEncuestas=true;
+          this.desplegarEncuesta=false;
+          console.log(this.noHayEncuestas);
+        }
     });
   }
 

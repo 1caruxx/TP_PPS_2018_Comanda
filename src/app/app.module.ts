@@ -46,6 +46,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 
+import { JuegoPage } from '../pages/juego/juego';
+
+
 import { ComponentsModule } from "../components/components.module";
 import { Ionic2RatingModule } from 'ionic2-rating';
 
@@ -82,7 +85,8 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     CuentaPage,
     JuegoQuinterosPage,
     TiempoDesdeAhoraPipe,
-    ListadoReservasPage
+    ListadoReservasPage,
+    JuegoPage
   ],
   imports: [
     BrowserModule,
@@ -122,7 +126,8 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     MapaDeRutaPage,
     CuentaPage,
     JuegoQuinterosPage,
-    ListadoReservasPage
+    ListadoReservasPage,
+    JuegoPage
   ],
   providers: [
     StatusBar,
