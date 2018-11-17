@@ -9,11 +9,17 @@ import { AngularFirestore } from 'angularfire2/firestore';
 @Injectable()
 export class FcmProvider {
 
+  usuario;
+
   constructor(
     public firebaseNative: Firebase,
     public afs: AngularFirestore,
     private platform: Platform
-  ) {}
+    
+  ) {
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+  }
 
   // Get permission from the user
   async getToken() {
@@ -42,8 +48,8 @@ export class FcmProvider {
     const docData = { 
       token,
       userId: 'testUser',
-      tipo: 'cliente',
-      correo: "correito"
+      tipo: this.usuario.tipo,
+      correo: this.usuario.correo
     }
   
     return devicesRef.doc(token).set(docData)

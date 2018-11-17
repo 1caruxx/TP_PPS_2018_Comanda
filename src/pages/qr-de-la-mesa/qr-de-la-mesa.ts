@@ -566,7 +566,7 @@ public pedidosPruebaDiez : Array<any>;
 
                                   //if(data[key].cliente!=null)
                                   //CAMBIE ESTA LINEA
-                                  if(data[key].estado=="ocupada")
+                                  if(data[key].estado!="libre")
                                   {
                                     this.estaLibre=false;
                                     //ocup=false;
