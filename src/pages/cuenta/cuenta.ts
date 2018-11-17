@@ -178,11 +178,11 @@ export class CuentaPage {
       this.estadoBoton = true;
       this.ocultarSpinner = false;
 
-      clienteRef.update({
-        estado: "pago"
-      }).then(() => {
+      pedidoRef.remove().then(() => {
 
-        pedidoRef.remove().then(() => {
+        clienteRef.update({
+          estado: "pago"
+        }).then(() => {
 
           mesaRef.once("value", (snap) => {
 

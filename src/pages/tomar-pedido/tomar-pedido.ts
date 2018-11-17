@@ -156,10 +156,10 @@ export class TomarPedidoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
   {
 
-    let localData = http.get('assets/imgs/gamma/information.json').map(res => res.json().items);
-    localData.subscribe(data => {
-      this.information = data;
-    })
+    // let localData = http.get('assets/imgs/gamma/information.json').map(res => res.json().items);
+    // localData.subscribe(data => {
+    //   this.information = data;
+    // })
 
     this.ponerTiempoMesaCocinaUnoIcono=true;
     this.terminarPedidoMesaCocinaUnoIcono=false;
@@ -317,7 +317,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -341,7 +341,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -394,7 +394,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -416,7 +416,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -467,7 +467,7 @@ export class TomarPedidoPage {
          if(k=="cocinero")
            {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -491,7 +491,7 @@ export class TomarPedidoPage {
            if(k=="bartender")
            {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -545,7 +545,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -569,7 +569,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -628,7 +628,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -651,7 +651,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -703,7 +703,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -727,7 +727,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -779,7 +779,7 @@ export class TomarPedidoPage {
          if(k=="cocinero")
            {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -804,7 +804,7 @@ export class TomarPedidoPage {
            if(k=="bartender")
            {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -856,7 +856,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -880,7 +880,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -929,7 +929,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -952,7 +952,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -1000,7 +1000,7 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -1022,7 +1022,7 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "terminado")
+            if(result[k].estado == "preparacion")
             {
               break;
             }
@@ -1681,7 +1681,7 @@ export class TomarPedidoPage {
                                     //{
                                       //this.pedidosCocinaDos.push(data[k][a]);
                                     //}
-                                    data[k].estado = "terminado";
+                                    data[k].estado = "preparacion";
                                     refTerminarUnoCocinero.child(k).update(data[k]);
 
                                     //this.navCtrl.setRoot(this.navCtrl.getActive().component);
@@ -1724,7 +1724,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarUnoBartender.child(k).update(data[k]);
                        
                        
@@ -1765,7 +1765,7 @@ export class TomarPedidoPage {
                                     //{
                                       //this.pedidosCocinaDos.push(data[k][a]);
                                     //}
-                                    data[k].estado = "terminado";
+                                    data[k].estado = "preparacion";
                                     refTerminarDosCocinero.child(k).update(data[k]);
                                      
                                      
@@ -1805,7 +1805,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarDosBartender.child(k).update(data[k]);
                        
                        
@@ -1842,7 +1842,7 @@ export class TomarPedidoPage {
                                     //{
                                       //this.pedidosCocinaDos.push(data[k][a]);
                                     //}
-                                    data[k].estado = "terminado";
+                                    data[k].estado = "preparacion";
                                     refTerminarTresCocinero.child(k).update(data[k]);
                                      
                                      
@@ -1893,7 +1893,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarTresBartender.child(k).update(data[k]);
                        
                        
@@ -1933,7 +1933,7 @@ export class TomarPedidoPage {
                                     //{
                                       //this.pedidosCocinaDos.push(data[k][a]);
                                     //}
-                                    data[k].estado = "terminado";
+                                    data[k].estado = "preparacion";
                                     refTerminarCuatroCocinero.child(k).update(data[k]);
                                      
                                      
@@ -1969,7 +1969,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarCuatroBartender.child(k).update(data[k]);
                        
                        
@@ -2007,7 +2007,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarCincoCocinero.child(k).update(data[k]);
                        
                        
@@ -2043,7 +2043,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarCincoBartender.child(k).update(data[k]);
                        
                        
@@ -2082,7 +2082,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarSeisCocinero.child(k).update(data[k]);
                        
                        
@@ -2118,7 +2118,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarSeisBartender.child(k).update(data[k]);
                        
                        
@@ -2156,7 +2156,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarSieteCocinero.child(k).update(data[k]);
                        
                        
@@ -2192,7 +2192,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarSieteBartender.child(k).update(data[k]);
                        
                        
@@ -2230,7 +2230,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarOchoCocinero.child(k).update(data[k]);
                        
                        
@@ -2266,7 +2266,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarOchoBartender.child(k).update(data[k]);
                        
                        
@@ -2304,7 +2304,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarNueveCocinero.child(k).update(data[k]);
                        
                        
@@ -2340,7 +2340,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarNueveBartender.child(k).update(data[k]);
                        
                        
@@ -2378,7 +2378,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarDiezCocinero.child(k).update(data[k]);
                        
                        
@@ -2414,7 +2414,7 @@ export class TomarPedidoPage {
                       //{
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
-                      data[k].estado = "terminado";
+                      data[k].estado = "preparacion";
                       refTerminarDiezBartender.child(k).update(data[k]);
                        
                        

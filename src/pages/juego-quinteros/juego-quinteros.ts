@@ -81,7 +81,7 @@ export class JuegoQuinterosPage {
 
 
 
-      this.segundos=10;
+      this.segundos=15;
    
         this.operador = Math.floor(Math.random() * (4 - 1)) + 1;
         this.n1 = Math.floor(Math.random() * (50 - 1)) + 1;

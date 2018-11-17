@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Platform } from 'ionic-angular';
 
 import { PrincipalPage } from "../principal/principal";
 import { RegistroClientePage } from "../registro-cliente/registro-cliente";
@@ -33,7 +33,23 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private authInstance: AngularFireAuth,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    public plt: Platform) {
+
+    // fcm.getToken()
+
+  //   // Listen to incoming messages
+  //   fcm.listenToNotifications().pipe(
+  //     tap(msg => {
+  //       // show a toast
+  //       const toast = toastCtrl.create({
+  //         message: msg.body,
+  //         duration: 3000
+  //       });
+  //       toast.present();
+  //     })
+  //   )
+  //     .subscribe()
   }
 
   ionViewDidLoad() {
@@ -55,7 +71,7 @@ export class LoginPage {
   Redireccionar() {
     this.navCtrl.push(RegistroClientePage);
   }
-  
+
   DesplegarUsuarios() {
     this.botonUsuarios = "ocultar";
     this.agrandar = "agrandar";
@@ -134,11 +150,11 @@ export class LoginPage {
                     case "bartender":
                     case "metre":
                     case "repartidor":
-                      this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+                      this.navCtrl.setRoot(PrincipalPage);
                       break;
 
                     case "cliente":
-                      if(estado == "espera")
+                      if (estado == "espera")
                         this.navCtrl.setRoot(QrIngresoLocalPage);
                       else
                         this.navCtrl.setRoot(PrincipalPage);
@@ -147,13 +163,13 @@ export class LoginPage {
                     // redirecciono a qr si no esta dentro del local, pero a principal si, si lo esta.
                     case "anonimo":
 
-                      if(estado == "atendido" || estado == "pidio" || estado == "comiendo")
+                      if (estado == "atendido" || estado == "pidio" || estado == "comiendo")
                         this.navCtrl.setRoot(PrincipalPage);
                       else
                         this.navCtrl.setRoot(QrIngresoLocalPage);
                       break;
 
-                      // siempre a principal (dueño, supervisor, cliente (registrado))
+                    // siempre a principal (dueño, supervisor, cliente (registrado))
                     default:
                       this.navCtrl.setRoot(PrincipalPage);
                       break;

@@ -34,66 +34,37 @@
 
                     
                             
-                                    <span style="padding-left: 30%">Tiempo restante: {{segundos}}</span>
+                                    <span style="font-size:30px;padding-left:40px;">Tiempo restante: {{segundos}}</span>
+
+                                    <span style="font-size:15px;padding-left:40px;">Acierte 3 veces para ganar</span>
+
+                                    <span style="font-size:15px;padding-left:40px;">Puntaje: {{puntajeMaximo}}</span>
 
                   
 
-                                    <p class="question">{{question}}</p>
-                                  <!-- <ion-item>
-          
-                                      <ion-input placeholder="Escribalo aqui"  [(ngModel)]="question"></ion-input>
-                                    </ion-item>-->
-                                  
-                     
+                                    <!--<p class="question">{{question}}</p>-->
+                                    <p style="text-align:center;font-size:70px;background-color:white;">{{question}}</p>
+            
+                        
 
-                      
-
-                        <div class="row">
-
-                                <div class="col-sm-6 col-xs-8" style="
-                                padding-left: 30%;">
-                                    <input type="text" class="form-control" id="answer" placeholder="Responda aca!!!!" [(ngModel)]="userAnswer" x-webkit-speech onwebkitspeechchange="onVoiceAnswer()">
-                                </div>
+                                    <ion-item>
+                                        <ion-input type="text" class="respuestitaa" placeholder="Responda aca!!!!"  [(ngModel)]="userAnswer" ></ion-input>
+                                      </ion-item>
+                                
+                                   
+                               
                               
                                 
-                                <div class="col-sm-2 col-xs-4 col-lg-6 col-xl-6">
-                                    <button class="btn btn-primary center-block full-width" (click)="onSubmitAnswer()" id="submitbutton">Responder</button>
-                                </div>
                                 
-                              <!-- <div class="col-sm-2 col-xs-4 col-lg-6 col-xl-6">
-                                    <button class="btn btn-danger center-block full-width" (click)="skipQuestion()">Skip</button>
-                                </div>-->
+                                    <button  class="botonJuego" (click)="onSubmitAnswer()" id="submitbutton">Responder</button>
+                               
+                         
                                 
-                            </div>
+                          
                 
-                           <!-- <div>
-                                    <button class="btn btn-primary center-block full-width" (click)="Volver()" id="submitbutton">Volver</button>
-                                </div>
-                              
-                                <div>
-                                    <button class="btn btn-primary center-block full-width" (click)="Salir()" id="submitbutton">Salir</button>
-                                </div>-->
+                        
                 
                       </div>
-
-
-
-              <div class="panel panel-default blackboard-outer">
-                  <div class="panel-body blackboard">
-                        
-                    <!-- <p class="question text-center">{{question}}</p>-->
-
-
-                    
-              </div>
-            </div>
-
-
-
-
-
-
-
 
 
 </ion-content>

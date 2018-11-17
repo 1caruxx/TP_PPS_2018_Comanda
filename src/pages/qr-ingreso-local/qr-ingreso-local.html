@@ -1,61 +1,8 @@
-<!--
-  Generated template for the QrIngresoLocalPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <div class="alert3" [ngClass]="{'mostrarAlert3':mostrarAlert3}">
   <h1>{{mensaje}}</h1>
 </div>
-<ion-header>
-  <ion-navbar color="red">
 
-
-    <ion-buttons>
-      <button ion-button menuToggle>
-        <ion-icon name="arrow-round-back"></ion-icon>
-      </button>
-    </ion-buttons>
-
-
-
-    <!-- <ion-title>{{sala}}</ion-title> -->
-    <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
-
-    <ion-buttons end>
-      <button ion-button>
-        <ion-icon name="power"></ion-icon>
-      </button>
-    </ion-buttons>
-
-  </ion-navbar>
-</ion-header>
-
-<ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar color="red">
-      <ion-title>Menú</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <button ion-item>
-        <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;Convencional
-      </button>
-      <button ion-item>
-        Friends
-      </button>
-      <button ion-item>
-        Events
-      </button>
-      <button ion-item>
-        Close Menu
-      </button>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<ion-nav #content swipeBackEnabled="false"></ion-nav>
 
 <ion-content>
   <div class="vacio" [ngClass]="{'sinEncuestas':noHayEncuestas}">
@@ -63,6 +10,8 @@
     <h1 class="tituloSinEncuestas">En breve lo atenderá un mozo, y le dara una mesa.</h1>
 
   </div>
+
+
   <div class="encuestas" [ngClass]="{'desplegar':desplegarEncuesta}">
     <h1 class="tituloEncuestas">Opiniones de nuestros clientes</h1>
 
@@ -93,7 +42,7 @@
       </div>
     </div>
 
-
+</div>
 
     <div class="contenido" *ngIf="mostrar">
       <h1 class="tituloPag">¡Bienvenido!</h1>

@@ -317,7 +317,7 @@ export class EncuestaDeEmpleadoPage {
 
 
 
-    if(localStorage.getItem("desloguear")) {
+    if (localStorage.getItem("desloguear")) {
 
 
       let usuariosRef = this.firebase.database().ref("usuarios");
@@ -327,6 +327,7 @@ export class EncuestaDeEmpleadoPage {
 
 
         let data = snap.val();
+
 
         for (let item in data) {
 
@@ -340,7 +341,7 @@ export class EncuestaDeEmpleadoPage {
 
               localStorage.clear();
               this.navCtrl.setRoot(LoginPage);
-             
+
             });
 
             break;
@@ -353,27 +354,6 @@ export class EncuestaDeEmpleadoPage {
       this.navCtrl.setRoot(PrincipalPage);
     }
 
-
-
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
   }
 
-
-
-
-
-
-
+}

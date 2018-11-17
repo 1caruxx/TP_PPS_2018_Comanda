@@ -69,13 +69,13 @@ export class AltaDeMesaPage {
 
     if(this.numeroMesa < 1 || this.numeroMesa > 10)
     {
-      this.presentToast("Solo tenemos lugar para 10 mesas en el lugar")
+      this.presentToast("Solo tenemos lugar para 10 mesas en el restaurante")
       return;
     }
 
-    if(this.cantidadComensales < 1 || this.cantidadComensales > 4)
+    if(this.cantidadComensales < 1 || this.cantidadComensales > 8)
     {
-      this.presentToast("Los comensales solo pueden ser de 1 a 4")
+      this.presentToast("Los comensales solo pueden ser de 1 a 8")
       return;
     }
 

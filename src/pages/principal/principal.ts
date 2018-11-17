@@ -7,6 +7,12 @@ import { LoginPage } from "../login/login";
 import { PerfilPage } from "../perfil/perfil";
 import { EncuestaDeEmpleadoPage } from "../encuesta-de-empleado/encuesta-de-empleado";
 
+import { FcmProvider } from '../../providers/fcm/fcm';
+import { ToastController } from 'ionic-angular';
+
+import { Subject } from 'rxjs/Subject';
+import { tap } from 'rxjs/operators';
+
 import firebase from "firebase";
 import "firebase/firestore";
 
@@ -23,7 +29,20 @@ export class PrincipalPage {
   public usuarioKey: any;
   public firebase = firebase;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private verificarTipo: VerificarTipoProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private verificarTipo: VerificarTipoProvider, fcm: FcmProvider, toastCtrl: ToastController) {
+
+    // Listen to incoming messages
+    fcm.listenToNotifications().pipe(
+      tap(msg => {
+        // show a toast
+        const toast = toastCtrl.create({
+          message: msg.body,
+          duration: 3000
+        });
+        toast.present();
+      })
+    )
+      .subscribe()
 
     this.acciones = this.verificarTipo.RetornarAcciones();
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -70,6 +89,8 @@ export class PrincipalPage {
             case 'atendido':
               this.acciones[0] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
+              this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
+              this.acciones[3] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[7] : this.accionesRespaldoCliente[5];
               break;
 
             /*
@@ -84,6 +105,8 @@ export class PrincipalPage {
               this.acciones[0] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[2] : this.accionesRespaldoCliente[1];
               // this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
+              this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
+              this.acciones[3] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[7] : this.accionesRespaldoCliente[5];
 
               if (flag) {
                 flag = false;
@@ -142,7 +165,8 @@ export class PrincipalPage {
               //this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[2] : this.accionesRespaldoCliente[1];
               //this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
-
+              this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
+              this.acciones[3] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[7] : this.accionesRespaldoCliente[5];
               break;
 
             /*
@@ -169,7 +193,7 @@ export class PrincipalPage {
 
   ionViewWillEnter() {
 
-    if(localStorage.getItem("refrescarImagen") == "true") {
+    if (localStorage.getItem("refrescarImagen") == "true") {
 
       localStorage.setItem("refrescarImagen", "false");
       this.usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -208,7 +232,7 @@ export class PrincipalPage {
               || this.usuario.tipo == "repartidor") {
 
               localStorage.setItem("desloguear", "true");
-              this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+              this.navCtrl.setRoot(LoginPage);
 
             } else {
 
