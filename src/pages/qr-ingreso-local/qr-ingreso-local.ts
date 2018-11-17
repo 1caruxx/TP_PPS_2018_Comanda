@@ -23,7 +23,7 @@ export class QrIngresoLocalPage {
   noHayEncuestas:boolean=false;
   mostrarAlert3:boolean=false;
   mensaje:string;
-  desplegarEncuesta:boolean=true;
+  desplegarEncuesta:boolean=false;
   claveActual;
 foto1="";
 foto2;
@@ -45,7 +45,7 @@ options : any;
     this.correo =(JSON.parse(this.correo)).correo;
   // this.correo="lucas@soylucas.com";
     //DESCOMENTAR PARA TRABAJAR A NIVEL LOCAL!!!!!!!
-  this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+ // this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
 
     this.TraerEncuestas();
   }

@@ -543,8 +543,7 @@ mostrarChart:boolean=false;
       setTimeout(()=>{
 
         this.mostrarAlert3=false;
-        //this.navCtrl.pop();
-        this.navCtrl.push(QrIngresoLocalPage);
+        this.navCtrl.pop();
       }, 2000);
 
     });

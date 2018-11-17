@@ -38,7 +38,7 @@ export class JuegoPage {
   puntos:number;
   gano:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams,   private authInstance: AngularFireAuth,) {
-    this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+    //this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
     this.correo=localStorage.getItem("usuario");
     this.correo =(JSON.parse(this.correo)).correo;
     this.ObtenerMesa();
