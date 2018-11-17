@@ -35,8 +35,8 @@ page-reserva {
         width: 100%;
         flex-direction: column;
         align-items: center;
-        background-color: rgba(0, 0, 0, 0.3);
-        padding-top: 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        // padding-top: 20px;
     }
 
     img {
@@ -66,8 +66,32 @@ page-reserva {
         }
     }
 
+    ion-item {
+        width: 230px !important;
+        background-color: color($colors, red) !important;
+        margin-bottom: 10px !important;
+    }
+
+    ion-datetime {
+        color: white;
+    }
+
+    ion-label {
+        color: white !important;
+        margin: auto !important;
+        width: 100% !important;
+    }
+
+    .item-inner {
+        border: none !important;
+    }
+
+    .picker-wrapper {
+        background-color: green !important;
+    }
+
     input {
-        width: 75%;
+        width: 230px;
         border: gray solid 2px;
         padding: 10px;
         margin: 20px 0 20px 0;
@@ -85,7 +109,7 @@ page-reserva {
 
     .alta {
         padding: 30px;
-        width: 20ch;
+        width: 230px;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 10px;
@@ -93,4 +117,28 @@ page-reserva {
         text-transform: none;
     }
 
+    .ocultar {
+        display: none !important;
+    }
+
 }
+
+
+.picker-toolbar {
+    background-color: #FCE5C6 !important;
+
+    button {
+        color: color($colors, red) !important;
+        text-transform: capitalize;
+        font-size: 20px;
+    }
+}
+
+.picker-wrapper {
+    background-color: #FCE5C6 !important;
+
+    .picker-opt-selected {
+        color: color($colors, red) !important;
+    }
+}
+

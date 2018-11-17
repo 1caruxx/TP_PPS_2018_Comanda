@@ -17,21 +17,52 @@
     <h2>Tu perfil</h2>
 
     <div style="position: relative;">
-      <button ion-button color="red" class="editar">
+      <button ion-button color="red" class="editar" (click)="SacarFoto()">
         <ion-icon name="create"></ion-icon>
       </button>
-      <img src="https://noticiaslasheras.com.ar/images/noticias/empleado-feliz.gif">
+      <img src={{usuario.img}}>
     </div>
 
     <div class="datos">
 
       <span class="titulo">Datos:</span>
-      <span><span>Nombre:</span> Rosalinda</span>
+
+      <ng-container *ngIf="tipo == 'cliente' || tipo == 'anonimo'; else otros">
+        <ng-container *ngIf="tipo == 'cliente'; else anonimo">
+
+          <span><span>Nombre:</span> {{usuario.nombre}}</span>
+          <span><span>Apellido:</span> {{usuario.apellido}} </span>
+          <span><span>Correo:</span> {{usuario.correo}} </span>
+          <span><span>DNI:</span> {{usuario.dni}} </span>
+
+        </ng-container>
+
+        <ng-template #anonimo>
+
+          <span><span>Nombre:</span> {{usuario.nombre}}</span>
+          <span><span>Correo:</span> {{usuario.correo}} </span>
+
+        </ng-template>
+      </ng-container>
+
+      <ng-template #otros>
+
+        <span><span>Nombre:</span> {{usuario.nombre}}</span>
+        <span><span>Apellido:</span> {{usuario.apellido}} </span>
+        <span><span>Correo:</span> {{usuario.correo}} </span>
+        <span><span>DNI:</span> {{usuario.dni}} </span>
+        <span><span>CUIL:</span> {{usuario.cuil}} </span>
+        <span><span>Tipo:</span> {{usuario.tipo}} </span>
+
+      </ng-template>
+
+
+      <!-- <span><span>Nombre:</span> Rosalinda</span>
       <span><span>Apellido:</span> Petra </span>
       <span><span>Tipo:</span> cliente </span>
       <span><span>DNI:</span> 123456789 </span>
       <span><span>CUIL:</span> ..... </span>
-      <span><span>Clave:</span> {{claveOculta}}  &nbsp;<button ion-button clear (mousedown)="MostrarClave()" (mouseup)="VolverAOcultar()"><ion-icon name="eye"></ion-icon></button></span>
+      <span><span>Clave:</span> {{claveOculta}}  &nbsp;<button ion-button clear (mousedown)="MostrarClave()" (mouseup)="VolverAOcultar()"><ion-icon name="eye"></ion-icon></button></span> -->
 
       <!-- <ng-container *ngFor="let item of datos">
 

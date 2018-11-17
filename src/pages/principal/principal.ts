@@ -167,6 +167,16 @@ export class PrincipalPage {
     console.log('ionViewDidLoad PrincipalPage');
   }
 
+  ionViewWillEnter() {
+
+    if(localStorage.getItem("refrescarImagen") == "true") {
+
+      localStorage.setItem("refrescarImagen", "false");
+      this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    }
+
+  }
+
   Redireccionar(ruta) {
 
     this.navCtrl.push(ruta);
@@ -201,6 +211,7 @@ export class PrincipalPage {
               this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
 
             } else {
+
               localStorage.clear();
               this.navCtrl.setRoot(LoginPage);
             }

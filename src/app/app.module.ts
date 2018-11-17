@@ -17,6 +17,7 @@ import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-su
 import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../pages/reserva/reserva";
 import { CuentaPage } from "../pages/cuenta/cuenta";
+import { ListadoReservasPage } from "../pages/listado-reservas/listado-reservas";
 
 import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente';
 import { AltaPlatosPage } from '../pages/alta-platos/alta-platos';
@@ -80,8 +81,8 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     PedirPlatosPage,
     CuentaPage,
     JuegoQuinterosPage,
-    TiempoDesdeAhoraPipe
-
+    TiempoDesdeAhoraPipe,
+    ListadoReservasPage
   ],
   imports: [
     BrowserModule,
@@ -120,7 +121,8 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     TomarPedidoPage,
     MapaDeRutaPage,
     CuentaPage,
-    JuegoQuinterosPage
+    JuegoQuinterosPage,
+    ListadoReservasPage
   ],
   providers: [
     StatusBar,
