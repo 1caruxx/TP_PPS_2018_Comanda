@@ -20,18 +20,19 @@ Branch del proyecto: [lareu_alfa](https://github.com/1caruxx/TP_PPS_2018_Comanda
 * [x] B- Alta de empleados.
 * [x] H- QR de propina.
 * [x] K- Encuesta de supervisor.
-* [ ] N- Hacer reservas agendadas.
+* [x] N- Hacer reservas agendadas.
 * [ ] Q- Hacer reservas agendadas.
 
 ---
 
 * [x] Vista y funcionalidad de la pagina de inicio de sesion.
 * [x] Vista y funcionalidad de la pagina principal.
-* [x] Vista de la pagina del perfil del usuario.
-* [x] Vista de la pagina para realizar reservas.
+* [x] Vista y funcionalidad de la pagina del perfil del usuario.
+* [x] Responsable del merge.
+* [x] Responsable del README.
 
-**Fecha de inicio:** 03/11/2018<br />
-**Fecha de fin:** 10/11/2018
+**Fecha de inicio:** 10/11/2018<br />
+**Fecha de fin:** 17/11/2018
 
 ---
 
@@ -40,21 +41,16 @@ Branch del proyecto: [vega_beta](https://github.com/1caruxx/TP_PPS_2018_Comanda/
 
 **Objetivos a desarollar:**
 
-* [ ] C- Alta de platos y bebidas.
-* [ ] D- Alta de cliente.
-* [ ] F- QR de ingreso al local.
-* [ ] I- Encuesta de cliente.
+* [x] C- Alta de platos y bebidas.
+* [x] D- Alta de cliente.
+* [x] F- QR de ingreso al local.
+* [x] I- Encuesta de cliente.
 * [ ] L- Pedir platos y bebidas.
 * [ ] P- Pedido de platos y bebidas.
+* [x] T- Juego 10% de descuento.
 
-**Fecha de inicio:03/11/18**<br />
-**Fecha de fin:10/11/18**
-
----
-[x] C- Alta de platos y bebidas.</br>
-[x] C- Alta de cliente.</br>
-[x] C- QR de ingreso al local.</br>
-[x] C- Encuesta de cliente.</br>
+**Fecha de inicio:** 10/11/18<br />
+**Fecha de fin:** 17/11/18
 
 ---
 
@@ -69,6 +65,7 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 * [x] M- Tomar pedido.
 * [ ] O- Pedir mesa.
 * [ ] S- Mapa de ruta hasta el domiciolio de entrega.
+* [x] V- Juego para un postre gratis.
 
 ---
 
@@ -80,8 +77,8 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 * [x] vista de mapa de ruta hasta el domicilio de la entrega listo
 
 
-**Fecha de inicio:** 03/11/2018<br />
-**Fecha de fin:** 10/11/2018
+**Fecha de inicio:** 10/11/2018<br />
+**Fecha de fin:** 17/11/2018
 
 ## Profesores
 
@@ -151,4 +148,3 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 * QR Jugo de naranja
 
 ![klfksdfdsadgl](./src/assets/imgs/gamma/juguitonaranja.jpeg)
-

@@ -31,6 +31,8 @@ export class PrincipalPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private verificarTipo: VerificarTipoProvider, fcm: FcmProvider, toastCtrl: ToastController) {
 
+    fcm.getToken();
+
     // Listen to incoming messages
     fcm.listenToNotifications().pipe(
       tap(msg => {
@@ -232,7 +234,7 @@ export class PrincipalPage {
               || this.usuario.tipo == "repartidor") {
 
               localStorage.setItem("desloguear", "true");
-              this.navCtrl.setRoot(LoginPage);
+              this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
 
             } else {
 

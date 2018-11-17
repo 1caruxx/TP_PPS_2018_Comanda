@@ -85,8 +85,8 @@ export class PerfilPage {
                   img: url
                 }).then(() => {
                   this.usuario.img = url;
-                  localStorage.setItem("usuario", this.usuario);
-                  alert("todo bien");
+                  localStorage.setItem("usuario", JSON.stringify(this.usuario));
+
                 });
 
                 break;

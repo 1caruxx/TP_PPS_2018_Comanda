@@ -5,6 +5,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { LoginPage } from "../login/login";
 import { PrincipalPage } from "../principal/principal";
+import { EncuestaClientePage } from "../encuesta-cliente/encuesta-cliente";
 
 import firebase from "firebase";
 
@@ -180,9 +181,7 @@ export class CuentaPage {
 
       pedidoRef.remove().then(() => {
 
-        clienteRef.update({
-          estado: "pago"
-        }).then(() => {
+        clienteRef.child("estado").remove().then(() => {
 
           mesaRef.once("value", (snap) => {
 
@@ -196,16 +195,22 @@ export class CuentaPage {
                   estado: "libre"
                 }).then(() => {
 
-                  if (true) {
+                  console.log(mesaRef.child(this.mesa).child("cliente"));
+console.log( clienteRef.child("mesa"));
+                  mesaRef.child(this.mesa).child("cliente").remove().then(() => {
+                    clienteRef.child("mesa").remove().then(() => {
+                      if (true) {
 
-                    this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
-                  } /*else {
+                        this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
+                      } /*else {
+  
+                      this.alertMostrarBotonCancelar = false;
+                      this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante!", "Finalizar", this.Logout);
+                    }*/
 
-                    this.alertMostrarBotonCancelar = false;
-                    this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante!", "Finalizar", this.Logout);
-                  }*/
-
-                  this.ocultarSpinner = true;
+                      this.ocultarSpinner = true;
+                    });
+                  })
                 });
 
                 break;
@@ -241,7 +246,7 @@ export class CuentaPage {
   }
 
   Redireccionar() {
-    this.navCtrl.setRoot(PrincipalPage);
+    this.navCtrl.setRoot(EncuestaClientePage);
   }
 
   Logout() {

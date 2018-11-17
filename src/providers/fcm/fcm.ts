@@ -18,7 +18,7 @@ export class FcmProvider {
     
   ) {
 
-    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+   
   }
 
   // Get permission from the user
@@ -40,6 +40,8 @@ export class FcmProvider {
 
   // Save the token to firestore
   private saveTokenToFirestore(token) {
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     if (!token) return;
 
