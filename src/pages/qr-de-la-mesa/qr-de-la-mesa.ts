@@ -549,7 +549,7 @@ public pedidosPruebaDiez : Array<any>;
     this.scanSub.unsubscribe();*/
   }
 
-  Modificar(correo,text)
+  Modificar(correo,text,cantidad)
   {
     var ocup=true;
 
@@ -568,6 +568,7 @@ public pedidosPruebaDiez : Array<any>;
                                   //CAMBIE ESTA LINEA
                                   if(data[key].estado!="libre")
                                   {
+
                                     this.estaLibre=false;
                                     //ocup=false;
                                    // alert("La mesa ya esta ocupada");
@@ -576,6 +577,15 @@ public pedidosPruebaDiez : Array<any>;
                                     //return;
                                     
                                   }
+
+                                  if(data[key].cantidadComensales<cantidad)
+                                  {
+                                    this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales", "Aceptar", this.limpiar);
+                                    break;
+
+                                  }
+
+
 
 
 
@@ -815,17 +825,17 @@ public pedidosPruebaDiez : Array<any>;
        
     });*/
 
-    this.barcode.scan().then(barcodeData => {
+   /* this.barcode.scan().then(barcodeData => {
       this.Modificar(correo,barcodeData.text);
         alert(barcodeData.text);
-    });
+    });*/
 
   }
 
-  ocuparMesaBarcode(correo)
+  ocuparMesaBarcode(correo,cantidad)
   {
     this.barcode.scan().then(barcodeData => {
-      this.Modificar(correo,barcodeData.text);
+      this.Modificar(correo,barcodeData.text,cantidad);
         //alert(barcodeData.text);
     });
 
