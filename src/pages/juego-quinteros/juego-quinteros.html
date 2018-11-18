@@ -45,11 +45,13 @@
                                     <!--<p class="question">{{question}}</p>-->
                                     <p style="text-align:center;font-size:70px;background-color:white;">{{question}}</p>
             
-                        
+                                    <div class="laPregunta5">
 
                                     <ion-item>
                                         <ion-input type="text" class="respuestitaa" placeholder="Responda aca!!!!"  [(ngModel)]="userAnswer" ></ion-input>
                                       </ion-item>
+
+                                    </div>
                                 
                                    
                                
@@ -68,3 +70,17 @@
 
 
 </ion-content>
+
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+    <div class="alert-message animation-target">
+      <h1>{{alertTitulo}}</h1>
+      <p>{{alertMensaje}}</p>
+      <div class="botones">
+  
+        <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+      </div>
+    </div>
+  
+  </div>
+

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Http } from '@angular/http';
+//import { Http } from '@angular/http';
 import 'rxjs/add/operator/map'
 import firebase from "firebase";
 import "firebase/firestore";
@@ -152,14 +152,18 @@ export class TomarPedidoPage {
   public tiempoMinimoNueve;
   public tiempoMinimoDiez;
 
+  public sinPedidos;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth) 
   {
 
-    let localData = http.get('assets/imgs/gamma/information.json').map(res => res.json().items);
+   /* let localData = http.get('assets/imgs/gamma/information.json').map(res => res.json().items);
     localData.subscribe(data => {
       this.information = data;
-    })
+    })*/
+
+    this.sinPedidos=true;
 
     this.ponerTiempoMesaCocinaUnoIcono=true;
     this.terminarPedidoMesaCocinaUnoIcono=false;
@@ -234,9 +238,9 @@ export class TomarPedidoPage {
 
     //this.ocultar=true;
 
-    //this.vistaCocinero=true;
+    this.vistaCocinero=true;
 
-    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    /*this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     if(this.usuario.tipo=="cocinero")
     {
@@ -246,7 +250,7 @@ export class TomarPedidoPage {
     if(this.usuario.tipo=="bartender")
     {
       this.vistaBartender=true;
-    }
+    }*/
 
 
 
@@ -317,12 +321,13 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
-
+              this.sinPedidos=false;
               this.vistaCocinaMesaUno=true;
 
 
@@ -341,12 +346,13 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
-
+            this.sinPedidos=false;
             this.vistaBartenderMesaUno=true;
 
 
@@ -394,11 +400,13 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaDos=true;
 
             for(let a in result[k])
@@ -416,11 +424,13 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaDos=true;
 
 
@@ -467,11 +477,13 @@ export class TomarPedidoPage {
          if(k=="cocinero")
            {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaTres=true;
 
 
@@ -491,11 +503,13 @@ export class TomarPedidoPage {
            if(k=="bartender")
            {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaTres=true;
 
 
@@ -545,11 +559,13 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaCuatro=true;
 
 
@@ -569,12 +585,13 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
-
+            this.sinPedidos=false;
             this.vistaBartenderMesaCuatro=true;
 
 
@@ -628,11 +645,13 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaCinco=true;
 
 
@@ -651,11 +670,13 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaCinco=true;
 
 
@@ -703,11 +724,13 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaSeis=true;
 
 
@@ -727,11 +750,13 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaSeis=true;
 
 
@@ -779,13 +804,14 @@ export class TomarPedidoPage {
          if(k=="cocinero")
            {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
 
-
+            this.sinPedidos=false;
             this.vistaCocinaMesaSiete=true;
 
 
@@ -804,11 +830,13 @@ export class TomarPedidoPage {
            if(k=="bartender")
            {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaSiete=true;
 
 
@@ -856,11 +884,13 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaOcho=true;
 
 
@@ -880,11 +910,13 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaOcho=true;
 
 
@@ -929,11 +961,13 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaNueve=true;
 
 
@@ -952,12 +986,13 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
-
+              this.sinPedidos=false;
               this.vistaBartenderMesaNueve=true;
 
             for(let a in result[k])
@@ -1000,11 +1035,13 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaDiez=true;
 
             for(let a in result[k])
@@ -1022,11 +1059,13 @@ export class TomarPedidoPage {
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaDiez=true;
 
 

@@ -1023,7 +1023,7 @@ public pedidosPruebaDiez : Array<any>;
 
   }
 
-  terminarpedidoTres()
+  terminarPedidoTres()
   {
 
     var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/3/");

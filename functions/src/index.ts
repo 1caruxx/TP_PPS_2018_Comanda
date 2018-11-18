@@ -68,8 +68,10 @@ exports.probandoAxel = functions.database
       notification: {
           title: 'New Subscriber',
           body: `${subscriber} is following your content!`,
+          icon: 'https://goo.gl/Fz9nrQ',
+          sound:'default',
           //body:"Asdasd",
-          icon: 'https://goo.gl/Fz9nrQ'
+          vibrate: "true",
       }
     }
 
@@ -125,7 +127,10 @@ exports.pedirMesa = functions.database
       notification: {
           title: 'Nueva mesa pedida',
           body: `Un cliente escaneo el codigo qr y necesita una mesa!!!`,
-          icon: 'https://goo.gl/Fz9nrQ'
+          icon: 'https://goo.gl/Fz9nrQ',
+          sound:'default',
+          //body:"Asdasd",
+          vibrate: "true",
       }
     }
 
@@ -169,7 +174,10 @@ exports.pedidoPlatosBebidas = functions.database
       notification: {
           title: 'Se hizo un nuevo pedido',
           body: `Un cliente hizo un pedido!!!`,
-          icon: 'https://goo.gl/Fz9nrQ'
+          icon: 'https://goo.gl/Fz9nrQ',
+          sound:'default',
+          //body:"Asdasd",
+          vibrate: "true",
       }
     }
 
@@ -213,7 +221,10 @@ exports.hacerReserva = functions.database
       notification: {
           title: 'Se hizo una reserva',
           body: `Un cliente hizo una reserva!!!`,
-          icon: 'https://goo.gl/Fz9nrQ'
+          icon: 'https://goo.gl/Fz9nrQ',
+          sound:'default',
+          //body:"Asdasd",
+          vibrate: "true",
       }
     }
 
@@ -267,7 +278,10 @@ exports.aceptarReserva = functions.database
       notification: {
           title: 'Reserva Aceptada',
           body: `Ya aceptaron su reserva!!!`,
-          icon: 'https://goo.gl/Fz9nrQ'
+          icon: 'https://goo.gl/Fz9nrQ',
+          sound:'default',
+          //body:"Asdasd",
+          vibrate: "true",
       }
     }
 

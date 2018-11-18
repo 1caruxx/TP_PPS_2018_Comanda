@@ -62,6 +62,16 @@ export class EncuestaDeEmpleadoPage {
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
     // this.encuesta();
 
+    this.uno=3;
+    this.dos="Me Encanta";
+    this.tres="si";
+    this.cuatro="si";
+    this.cinco.item1=true;
+    //this.foto="asdads";
+    //this.foto="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg"
+    //let date = new Date();
+    //this.nombreFoto=`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}-${date.getMilliseconds()}`;
+    this.foto="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg";
 
   }
 
