@@ -41,7 +41,10 @@ export class MyApp {
           // show a toast
           const toast = toastCtrl.create({
             message: msg.body,
-            duration: 3000
+            duration: 8000,
+            position: 'middle',
+            cssClass: 'nombreRaro'
+            
           });
           this.nativeAudio.play('a').catch(() => { });
           toast.present();

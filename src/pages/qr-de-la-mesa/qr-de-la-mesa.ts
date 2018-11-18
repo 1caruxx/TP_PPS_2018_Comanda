@@ -835,10 +835,34 @@ public pedidosPruebaDiez : Array<any>;
   mostrarTiempoBarcode()
   {
     let banderita=0;
+    let comiendo=false;
 
     let usuario = JSON.parse(localStorage.getItem("usuario"));
 
     this.barcode.scan().then(barcodeData => {
+
+
+
+      var refComiendo = this.firebase.database().ref("usuarios");
+      refComiendo.once('value',(snap) =>{
+          var dataDos = snap.val();
+        for (var keyDos in dataDos)
+        {
+          if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo==usuario.correo)
+          {
+            this.MostrarAlert("Terminado y Entregado", "Su pedido ya deberia estar en la mesa,si no es asi comuniquese con su mozo", "Aceptar", this.limpiar);
+            banderita=1;
+            comiendo=true;
+            break;
+          }
+          
+        }
+
+
+
+
+      });
+
 
 
 
@@ -859,8 +883,14 @@ public pedidosPruebaDiez : Array<any>;
                     if(data[key].tiempoMinimo!=null)
                     {
                     //alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
-                    this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
-                    banderita=1;
+                    if(comiendo==false)
+                    {
+                      this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
+                      banderita=1;
+
+                    }
+                    //this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
+                    //banderita=1;
                     break;
 
                     }
