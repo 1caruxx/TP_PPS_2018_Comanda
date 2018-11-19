@@ -1,5 +1,16 @@
 page-mapa-de-ruta {
 
+  ion-navbar {
+    padding: 20px 10px !important;
+    
+
+    ion-icon {
+        color: white;
+    }
+}
+
+ion-navbar ion-icon { font-size: 50px !important; }
+
   .ion-md-chatboxes:before {
     content: "\f2b6";
     font-size: 35px;
@@ -189,13 +200,47 @@ ion-content {
 
 
     .lb{
-      color: black !important;
+      /*color: black !important;
       font-size: 100%;
       margin-bottom: 0px !important;
       margin-top: 2px !important;
       padding-top: 5px !important;
-      text-align: center;
+      text-align: center;*/
       //border-radius: 20px !important;
+      color: black!important;
+        font-size: 200%;
+        margin-bottom: 0px !important;
+        margin-top: 2px !important;
+        padding-top: 5px !important;
+        text-align: center;
+        font-family: 'roboto', cursive;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  }
+
+  .que{
+
+    color: black!important;
+        font-size: 200%;
+        margin-bottom: 0px !important;
+        margin-top: 2px !important;
+        padding-top: 5px !important;
+        text-align: center;
+        font-family: 'roboto', cursive;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+
+  }
+
+  .queDos{
+
+    color: red!important;
+        font-size: 100%;
+        margin-bottom: 0px !important;
+        margin-top: 2px !important;
+        padding-top: 5px !important;
+        text-align: center;
+        font-family: 'roboto', cursive;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+
   }
 
     

@@ -299,6 +299,12 @@ this.qrScanner.prepare()
   }
 
 
+  volver()
+  {
+	this.navCtrl.pop();
+  }
+
+
   
 
 

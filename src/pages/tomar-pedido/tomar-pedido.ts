@@ -238,9 +238,9 @@ export class TomarPedidoPage {
 
     //this.ocultar=true;
 
-    this.vistaCocinero=true;
+    //this.vistaCocinero=true;
 
-    /*this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     if(this.usuario.tipo=="cocinero")
     {
@@ -250,7 +250,7 @@ export class TomarPedidoPage {
     if(this.usuario.tipo=="bartender")
     {
       this.vistaBartender=true;
-    }*/
+    }
 
 
 
@@ -2507,6 +2507,11 @@ export class TomarPedidoPage {
         }
       }
     });
+  }
+
+  volver()
+  {
+    this.navCtrl.pop();
   }
 
 

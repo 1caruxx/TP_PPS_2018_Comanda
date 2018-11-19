@@ -178,6 +178,11 @@ export class JuegoQuinterosPage {
 
   }
 
+  volver()
+  {
+    this.navCtrl.pop();
+  }
+
 
 
 

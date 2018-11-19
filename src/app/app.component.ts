@@ -24,7 +24,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = JuegoQuinterosPage;
+  rootPage:any = MapaDeRutaPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController, fcm: FcmProvider, toastCtrl: ToastController,private nativeAudio: NativeAudio) {
     platform.ready().then(() => {
@@ -42,7 +42,7 @@ export class MyApp {
           const toast = toastCtrl.create({
             message: msg.body,
             duration: 8000,
-            position: 'middle',
+            position: 'top',
             cssClass: 'nombreRaro'
             
           });

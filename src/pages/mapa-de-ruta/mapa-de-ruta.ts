@@ -212,6 +212,11 @@ export class MapaDeRutaPage {
 	});
   }
 
+  volver()
+  {
+	this.navCtrl.pop();
+  }
+
 
 
 }

@@ -1308,6 +1308,11 @@ public pedidosPruebaDiez : Array<any>;
 
   }
 
+  volver()
+  {
+    this.navCtrl.pop();
+  }
+
   
 
 }

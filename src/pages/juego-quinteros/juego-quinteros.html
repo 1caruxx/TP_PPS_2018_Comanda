@@ -11,6 +11,13 @@
       </ion-title>
   
       <ion-buttons end>
+
+          <button ion-button (click)=volver()>
+              <ion-icon name="arrow-back"></ion-icon>
+          </button>
+  
+
+
         <button ion-button (click)="Logout()">
           <ion-icon name="power"></ion-icon>
         </button>
@@ -34,16 +41,18 @@
 
                     
                             
-                                    <span style="font-size:30px;padding-left:40px;">Tiempo restante: {{segundos}}</span>
+                                    <!--<span style="font-size:30px;padding-left:40px;">Tiempo restante: {{segundos}}</span>-->
 
-                                    <span style="font-size:15px;padding-left:40px;">Acierte 3 veces para ganar</span>
+                                    <h2 class="asd">Tiempo restante: {{segundos}}</h2>
 
-                                    <span style="font-size:15px;padding-left:40px;">Puntaje: {{puntajeMaximo}}</span>
+                                    <h4 class="asd" >Acierte 3 veces para ganar</h4>
+
+                                    <h4 class="asd" >Puntaje: {{puntajeMaximo}}</h4>
 
                   
 
                                     <!--<p class="question">{{question}}</p>-->
-                                    <p style="text-align:center;font-size:70px;background-color:white;">{{question}}</p>
+                                    <p style="text-align:center;font-size:70px;background-color:white;border-radius: 70px;">{{question}}</p>
             
                                     <div class="laPregunta5">
 
