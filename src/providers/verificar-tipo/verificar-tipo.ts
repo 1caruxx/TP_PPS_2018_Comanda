@@ -83,7 +83,8 @@ export class VerificarTipoProvider {
           { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
           { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" },
-          { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage }
+          { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage },
+          { accion: "Juegos", img: "juegos.jpg", ruta: "./" }
         ];
         break;
 
@@ -92,7 +93,8 @@ export class VerificarTipoProvider {
           { accion: "Pagar", img: "propina.jpg", ruta: CuentaPage },
           { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
-          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" }
+          { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" },
+          { accion: "Juegos", img: "juegos.jpg", ruta: "./" }
         ];
         break;
     }

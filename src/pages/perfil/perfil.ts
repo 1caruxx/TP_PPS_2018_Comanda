@@ -17,6 +17,8 @@ export class PerfilPage {
   public usuario;
   public tipo;
 
+
+  public ocultarSpinner: boolean = true;
   public firebase = firebase;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) {
@@ -38,10 +40,6 @@ export class PerfilPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PerfilPage');
-  }
-
-  ionViewWillLeave() {
-    localStorage.setItem("refrescarImagen", "true");
   }
 
   async SacarFoto() {
@@ -66,7 +64,7 @@ export class PerfilPage {
       let foto = `data:image/jpeg;base64,${result}`;
 
       let pictures = this.firebase.storage().ref(`usuarios/${nombreFoto}`);
-
+      this.ocultarSpinner = false;
       pictures.putString(foto, "data_url").then(() => {
 
         pictures.getDownloadURL().then((url) => {
@@ -78,15 +76,17 @@ export class PerfilPage {
             let data = snap.val();
 
             for (let item in data) {
-      
+
               if (data[item].correo == this.usuario.correo) {
-                
+
                 usuariosRef.child(item).update({
                   img: url
                 }).then(() => {
+
                   this.usuario.img = url;
-                  localStorage.setItem("usuario", this.usuario);
-                  alert("todo bien");
+                  localStorage.setItem("usuario", JSON.stringify(this.usuario));
+                  localStorage.setItem("refrescarImagen", "true");
+                  this.ocultarSpinner = true;
                 });
 
                 break;

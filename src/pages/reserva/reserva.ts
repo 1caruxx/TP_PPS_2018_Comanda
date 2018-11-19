@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+
+import { MisReservasPage } from "../../pages/mis-reservas/mis-reservas";
+
 import firebase from "firebase";
 import * as moment from 'moment';
 
@@ -17,11 +20,19 @@ export class ReservaPage {
   public fecha;
   public hora;
   public cantidadPersonas;
+  public reservasConfirmadas;
 
   public firebase = firebase;
   public moment = moment;
   public usuario: any;
   public ocultarSpinner: boolean = true;
+
+  public estadoBoton: boolean = false;
+  public ocultarAlert: boolean = true;
+  public alertTitulo;
+  public alertMensaje;
+  public alertMensajeBoton;
+  public alertHandler;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController) {
 
@@ -35,6 +46,8 @@ export class ReservaPage {
 
     this.minimo = `${date.getFullYear()}-${mes}-${dia}`;
     this.maximo = `${date.getFullYear() + 1}`;
+
+
 
   }
 
@@ -64,6 +77,8 @@ export class ReservaPage {
 
     let reservasRef = firebase.database().ref("reservas");
 
+    this.cantidadPersonas = parseInt(this.cantidadPersonas.charAt(3));
+
     reservasRef.once("value", (snap) => {
 
       let data = snap.val();
@@ -77,7 +92,7 @@ export class ReservaPage {
           let diferencia = Math.abs(momentoReserva.diff(moment(data[item].horario, "DD/MM/YYYY HH:mm"), "m"));
 
           if (diferencia < 60) {
-            
+
             this.ocultarSpinner = true;
             this.presentToast("No puede a haber un lapso menor a una hora entre alguna de tus reservas.");
             esValido = false;
@@ -88,19 +103,88 @@ export class ReservaPage {
 
       if (esValido) {
 
-        reservasRef.push({
-          correo: this.usuario.correo,
-          apellido: this.usuario.apellido,
-          nombre: this.usuario.nombre,
-          img: this.usuario.img,
-          cantidadPersonas: this.cantidadPersonas.charAt(3),
-          horario: momentoReserva.format("DD/MM/YYYY HH:mm"),
-          estado: "pendiente"
+        reservasRef.once("value", (snap) => {
+
+          let data = snap.val();
+          let reservas = [];
+          let contador = 0;
+
+          for (let item in data) {
+
+            reservas.push(data[item]);
+            reservas[contador].key = item;
+            contador++;
+          }
+
+          this.reservasConfirmadas = reservas.filter(item => {
+
+            return item.estado == "confirmada";
+          });
+
         }).then(() => {
 
-          this.ocultarSpinner = true;
-          this.presentToast("Se ha registrado tu reserva y te notificaremos cuando el encargado la confirme.")
+          let mesasRef = this.firebase.database().ref("mesas");
+          let puedeReservar = false;
+
+          mesasRef.once("value", (snap) => {
+
+            let data = snap.val();
+            let estaDesocupada: boolean;
+
+            for (let item in data) {
+
+              estaDesocupada = true;
+
+              for (let reserva of this.reservasConfirmadas) {
+
+                if (data[item].numeroMesa == reserva.mesa) {
+
+                  let momentoReservaMesa = moment(reserva.horario, "DD/MM/YYYY HH:mm");
+
+                  if (Math.abs(momentoReserva.diff(momentoReservaMesa, "m")) < 40) {
+
+                    estaDesocupada = false;
+                    break;
+                  }
+                }
+              }
+
+              if (data[item].cantidadComensales >= this.cantidadPersonas && estaDesocupada) {
+
+                console.log(data[item].cantidadComensales >= this.cantidadPersonas);
+                puedeReservar = true;
+                break;
+              }
+            }
+
+            if(puedeReservar) {
+              reservasRef.push({
+                correo: this.usuario.correo,
+                apellido: this.usuario.apellido,
+                nombre: this.usuario.nombre,
+                img: this.usuario.img,
+                cantidadPersonas: this.cantidadPersonas,
+                horario: momentoReserva.format("DD/MM/YYYY HH:mm"),
+                estado: "pendiente"
+              }).then(() => {
+      
+                this.ocultarSpinner = true;
+      
+                this.MostrarAlert("¡Éxito!", "Se registró tu reserva y te notificaremos cuando el encargado la confirme.", "Aceptar", this.Volver);
+      
+              });
+            } else {
+  
+              this.MostrarAlert("Ups...", "No hay mesas disponibles para esa fecha y horario.", "Aceptar", this.Volver);
+            }
+          })
+
+
+
+
         });
+
+
       }
     })
   }
@@ -109,12 +193,28 @@ export class ReservaPage {
 
     let toast = this.toastCtrl.create({
       message: mensaje,
-      duration: 3000,
       position: 'top',
+      duration: 3000,
       cssClass: "infoToast"
     });
 
     toast.present();
+  }
+
+  MostrarAlert(titulo: string, mensaje: string, mensajeBoton: string, handler) {
+    this.ocultarAlert = false;
+    this.alertTitulo = titulo;
+    this.alertMensaje = mensaje;
+    this.alertMensajeBoton = mensajeBoton;
+    this.alertHandler = handler;
+  }
+
+  VerReservas() {
+    this.navCtrl.push(MisReservasPage);
+  }
+
+  Volver() {
+    this.navCtrl.pop();
   }
 
 }

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="sin-elementos" *ngIf="ocultarSpinner  && reservasPendientes.length == 0 && reservasConfirmadas.length == 0">
+    <img src="../../assets/imgs/alfa/empty.png" />
+    <h1>Todavía no has hecho reservas.</h1>
+  </div>
+
+  <ng-container *ngIf="ocultarSpinner  && reservasPendientes.length > 0">
+    <h2 class="titulo">Reservas pendientes de confirmación</h2>
+  </ng-container>
+
+  <ion-list>
+
+    <ion-item *ngFor="let item of reservasPendientes">
+
+      <h1>{{item.horario}} Hs.</h1>
+      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
+
+    </ion-item>
+
+  </ion-list>
+
+  <ng-container *ngIf="ocultarSpinner && reservasConfirmadas.length > 0">
+    <h2 class="titulo">Reservas confirmadas</h2>
+  </ng-container>
+
+  <ion-list>
+
+    <ion-item *ngFor="let item of reservasConfirmadas">
+
+      <h1>{{item.horario}} Hs.</h1>
+      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
+      <p>Mesa • {{item.mesa}}</p>
+
+    </ion-item>
+
+  </ion-list>
+
+  <app-spinner [ngClass]="{'ocultar':ocultarSpinner}"></app-spinner>
+
+</ion-content>

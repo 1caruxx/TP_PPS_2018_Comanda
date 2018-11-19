@@ -16,6 +16,7 @@ import { AltaEmpleadoPage } from "../pages/alta-empleado/alta-empleado";
 import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
 import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../pages/reserva/reserva";
+import { MisReservasPage } from "../pages/mis-reservas/mis-reservas";
 import { CuentaPage } from "../pages/cuenta/cuenta";
 import { ListadoReservasPage } from "../pages/listado-reservas/listado-reservas";
 
@@ -49,6 +50,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
     ReservaPage,
+    MisReservasPage,
     CuentaPage,
     ListadoReservasPage
   ],
@@ -75,6 +77,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
     ReservaPage,
+    MisReservasPage,
     CuentaPage,
     ListadoReservasPage
   ],

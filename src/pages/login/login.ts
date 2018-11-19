@@ -137,7 +137,7 @@ export class LoginPage {
                       break;
 
                     case "cliente":
-                      if(estado == "espera")
+                      if (estado == "espera")
                         this.navCtrl.setRoot(ListadoSupervisorPage);
                       else
                         this.navCtrl.setRoot(PrincipalPage);
@@ -146,13 +146,13 @@ export class LoginPage {
                     // redirecciono a qr si no esta dentro del local, pero a principal si, si lo esta.
                     case "anonimo":
 
-                      if(estado == "atendido" || estado == "pidio" || estado == "comiendo")
+                      if (estado == "atendido" || estado == "pidio" || estado == "comiendo")
                         this.navCtrl.setRoot(PrincipalPage);
                       else
                         this.navCtrl.setRoot(ListadoSupervisorPage);
                       break;
 
-                      // siempre a principal (dueño, supervisor, cliente (registrado))
+                    // siempre a principal (dueño, supervisor, cliente (registrado))
                     default:
                       this.navCtrl.setRoot(PrincipalPage);
                       break;
@@ -233,6 +233,31 @@ export class LoginPage {
             this.textoDelBoton = "Ingresar";
         }
       });
+  }
+
+  IngresarComoAnonimo() {
+
+    this.estadoBoton = true;
+    this.textoDelBoton = "Espera...";
+    this.animation = "ani";
+
+    this.authInstance.auth.signInWithEmailAndPassword("anonimo@gmail.com", "123456").then(() => {
+
+      localStorage.setItem("anonimo", "true");
+
+      this.estadoBoton = false;
+      this.textoDelBoton = "Ingresar";
+      this.animation = "";
+
+      this.navCtrl.setRoot(PrincipalPage);
+    }).catch(() => {
+
+      this.estadoBoton = false;
+      this.textoDelBoton = "Ingresar";
+      this.animation = "";
+      this.presentToast("Ups... Tenemos problemas tecnicos.");
+    });
+
   }
 
   SetearUsuario(email: string, password: string) {

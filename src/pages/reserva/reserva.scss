@@ -121,6 +121,14 @@ page-reserva {
         display: none !important;
     }
 
+    .animation-target {
+        animation-name: jelly;
+        animation-duration: 1000ms;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+    }
+
 }
 
 

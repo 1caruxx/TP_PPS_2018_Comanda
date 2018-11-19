@@ -49,6 +49,7 @@ export class PrincipalPage {
       }).then(() => {
 
         setInterval(() => {
+
           this.acciones = this.acciones;
         }, 500);
 
@@ -63,28 +64,33 @@ export class PrincipalPage {
             /*
              * 
              * Puede hacer un pedido
+             * Jugar
              * Confeccionar encuesta
-             *  
+             * 
              */
             case 'atendido':
               this.acciones[0] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
-              this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
+              this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
+              this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
               break;
 
             /*
              * 
              * Ve el estado del pedido
              * hacer un pedido X
+             * Jugar
              * Confeccionar encuesta
              *  
              */
 
             case 'pidio':
               this.acciones[0] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[2] : this.accionesRespaldoCliente[1];
-              // this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
-              this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
+              this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
+              this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
+              this.acciones[3] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
 
               if (flag) {
+
                 flag = false;
                 let estaComiendo;
                 usuarioRef.child(this.usuarioKey).once("value", (snap) => {
@@ -96,6 +102,7 @@ export class PrincipalPage {
                   pedidoRef.on("value", (snap) => {
 
                     if (estadoCliente != "pago") {
+
                       let data = snap.val();
                       estaComiendo = true;
 
@@ -112,17 +119,11 @@ export class PrincipalPage {
 
                         usuarioRef.child(this.usuarioKey).update({
                           estado: "comiendo"
-                        })
+                        });
                       }
-
-
                     }
-
                   });
-
-                })
-
-
+                });
               }
 
               break;
@@ -132,16 +133,17 @@ export class PrincipalPage {
              * Pagar
              * Ve el estado del pedido X
              * hacer un pedido X
+             * Jugar
              * Confeccionar encuesta
              *  
              */
 
             case 'comiendo':
               this.acciones[0] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[0] : this.accionesRespaldoCliente[0];
-              //this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[2] : this.accionesRespaldoCliente[1];
-              //this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
-              this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
-
+              this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[2] : this.accionesRespaldoCliente[1];
+              this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
+              this.acciones[3] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
+              this.acciones[4] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
               break;
 
             /*
@@ -153,7 +155,8 @@ export class PrincipalPage {
              */
             default:
               this.acciones[0] = this.accionesRespaldoCliente[1];
-              this.acciones[1] = this.accionesRespaldoCliente[5];
+              this.acciones[1] = this.accionesRespaldoCliente[3];
+              this.acciones[2] = this.accionesRespaldoCliente[5];
               break;
           }
         });
@@ -168,12 +171,11 @@ export class PrincipalPage {
 
   ionViewWillEnter() {
 
-    if(localStorage.getItem("refrescarImagen") == "true") {
+    if (localStorage.getItem("refrescarImagen") == "true") {
 
       localStorage.setItem("refrescarImagen", "false");
       this.usuario = JSON.parse(localStorage.getItem("usuario"));
     }
-
   }
 
   Redireccionar(ruta) {
@@ -224,5 +226,4 @@ export class PrincipalPage {
       }
     });
   }
-
 }
