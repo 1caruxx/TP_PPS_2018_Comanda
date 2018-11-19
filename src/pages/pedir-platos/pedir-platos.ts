@@ -23,6 +23,8 @@ export class PedirPlatosPage {
   @ViewChild('cant') cant:any;
   contErrores:number=0;
   mensaje:string;
+  mostrarSpinnerMonto:boolean=true;
+  ocultarMontoPrincipal=true;
   mostrarAlert:boolean=false;
   ocultarPlatos:boolean;
   cantidad:number;
@@ -32,6 +34,7 @@ export class PedirPlatosPage {
   bebidas:any[]=[];
   mostrarSpinner:boolean=false;
   mostrarAlert2:boolean=false;
+  ocultarMonto:boolean=true;
   mostrarAlert3:boolean=false;
   valor:number;
   miValor:number=undefined;
@@ -40,6 +43,7 @@ export class PedirPlatosPage {
   eligio:boolean=false;
   foto3;
   nombre;
+  valorPlatos:number;
   yaPidio:boolean=false;
   desc;
   cantidadNueva=undefined;
@@ -53,8 +57,12 @@ export class PedirPlatosPage {
   pedido:any[]=[];
   ocultarBebidas:boolean;
   for="let plato of platos";
+  monto:number=0;
   mostrarslide:boolean;
   ocultarTitulo:boolean;
+  montoPlatos=0;
+  montoBebidas=0;
+  ocultarElMonto:boolean=false;
   mostrarSpinnerPlatos:boolean=false;
 contador;
   constructor
@@ -241,11 +249,11 @@ mensaje.once("value",(snap)=>{
   } 
   ElegirPlato(nombre, valor, es, tiempo, para, precio, id)
   {
-   this.miValor=undefined;
-     
-    console.log(id);
-    
-    if(valor<=0 )
+   //this.miValor=undefined;
+
+  
+  
+    if(parseInt(valor)<=0 ||valor==undefined ||valor=="")
     {
       if(this.contErrores==3)
       {
@@ -275,10 +283,32 @@ mensaje.once("value",(snap)=>{
 
 
     this.pedido.push({cant:valor, nombre:nombre, es:es, tiempo:tiempo, para:para, precio:precio, id:id});
-    console.log(this.pedido);
+    
     (window.document.querySelector('#'+id) as HTMLElement).classList.add("mostrarElegido");
     console.log(this.pedido);
-    valor=0;
+
+//Si es plato le sumo el monto a plato si es bebida a bebida:
+let total=0;
+if(es=="plato")
+{
+
+  let sumar= parseInt(valor) * parseInt(precio);
+  console.log(sumar);
+  this.montoPlatos=this.montoPlatos+sumar;
+  total=this.montoPlatos;
+}
+else
+{
+  let sumar= parseInt(valor) * parseInt(precio);
+  console.log(sumar);
+
+  this.montoBebidas=this.montoBebidas+sumar;
+  total=this.montoBebidas;
+}
+
+
+this.monto=this.monto +total; 
+
   }
   mostrarSlide(foto1,foto2,foto3,nombre,desc)
   {
@@ -327,6 +357,7 @@ mensaje.once("value",(snap)=>{
   }
   Platos()
   {
+
     this.mostrarSpinnerPlatos=true;
   if((this.platos.length>0))
   {
@@ -337,11 +368,11 @@ mensaje.once("value",(snap)=>{
    
 
   
-    console.log(this.valor);
+    
     this.ocultarPlatos =false;
     this.ocultarTitulo=true;
     this.titulo ="Nuestros platos";
-
+    this.ocultarMonto=false;
   }
   Bebidas()
   {
@@ -355,7 +386,9 @@ mensaje.once("value",(snap)=>{
     this.ocultarPlatos =true;
     this.valor=undefined;
     this.ocultarBebidas =false;
-    this.titulo ="Nuestras bebidas" ;
+    this.ocultarTitulo=true;
+        this.titulo ="Nuestras bebidas" ;
+    this.ocultarMonto=false;
 
   }
   Cerrar()
@@ -363,7 +396,9 @@ mensaje.once("value",(snap)=>{
     this.ocultarPlatos =true;
     this.ocultarTitulo=false;
     this.ocultarBebidas=true;
-   
+
+    this.ocultarMonto=true;
+    this.ocultarMontoPrincipal=false;
 
   }
   cerrarSlide()
@@ -446,23 +481,56 @@ var data =snap.val();
     this.Cerrar();
     
   }
-  CancelarPedido()
+  CancelarPedido(cual)
   {
+    if(cual=="plato")
+    {
+     console.log("Le resto: " +this.montoPlatos );
+     console.log("El monto es de :" + this.monto);
+      this.monto= this.monto-this.montoPlatos;
+      this.valorPlatos=null;       
+      this.montoPlatos=0;
+      
+
+    }
+    else
+    {
+      console.log("Le resto: " +this.montoBebidas );
+      this.monto =this.monto-this.montoBebidas;
+      this.montoBebidas=0;
+      this.valor=null;
+    }
     this.eligio=false;
-   
+  
+  console.log("elementos en array pedidios" +this.pedido.length);
+
     for(let i=0;i<this.pedido.length;i++)
     {
-      (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+
+    
+      
+    
+console.log("Dentro del for");    
+      if(this.pedido[i].es == cual)
+      {
+        console.log("encontro el igual");
+        (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+        this.pedido.splice(i, 1);
+
+      }
     
     }
 
     
-    this.pedido.splice(0, this.pedido.length);
-    console.log(this.pedido);
-    this.valor=undefined;
-    this.Cerrar();
+   // this.pedido.splice(0, this.pedido.length);
    
  
+
+    this.Cerrar();
+
+  
+   
+ console.log(this.pedido);
   }
   PedirFinal()
   {
@@ -588,6 +656,7 @@ var data =snap.val();
       
       
       this.mostrarSpinner=false;
+   
      
       this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
     this.mostrarAlert=true;
@@ -631,6 +700,7 @@ TraerClaveMozo()
 }
   TraerTipoMesa()
   {
+    console.log("Estoy trayendo la mesa");
 /*   if(this.tipo1=="mozo")
     {
       return;
@@ -649,8 +719,27 @@ TraerClaveMozo()
       
           if(this.tipo!="mozo")
           {
+            //Si no tiene mesa la mesa va a ser su correo
+           if(!data[key].mesa)
+           {
+            this.mesa= this.correo;
+          
+            //Le saco el arroba y el punto al string
+            let patron ='@';
+            let nuevo= '';
+            let cadena=this.mesa.replace(patron, nuevo);
+            patron ='.';
+            nuevo= '';
+            cadena=cadena.replace(patron, nuevo);
+            this.mesa=cadena;
+            console.log(cadena);
+            return;
+
+           }
             this.mesa=data[key].mesa;
+            console.log(this.mesa);
             this.claveUsuarioActual=key;
+            this.CalcularMonto();
             return;
           }
 
@@ -665,8 +754,49 @@ TraerClaveMozo()
           break;
         }
       }
-      console.log(this.mesa + this.tipo);
+    
 
+     
   });
+}
+
+CalcularMonto()
+{
+  let montos:any[] = [];
+
+ let montoGuardado=0; //ACA ME FIJO EL MONTO DE LA MESA
+   let usuariosRef2= firebase.database().ref("pedidos").child(this.mesa);
+      
+
+    
+   usuariosRef2.once("value", (snap) => {
+
+     let data = snap.val();
+   
+     if(data ==null)
+     {
+      this.monto=0;
+     }
+     for (let item in data) 
+     {
+       
+        for(let subItem in data[item])
+        {
+          montos.push(data[item][subItem]);
+        }
+
+     }
+     console.log(montos);
+     //SUMO LOS VALORES:
+     for(let i=0;i<montos.length-1;i++)
+     {
+      let suma= parseInt(montos[i].cantidad) *  montos[i].precio;
+      console.log(suma);
+      montoGuardado = montoGuardado + suma;
+     }
+     this.monto=montoGuardado;
+     this.mostrarSpinnerMonto=false;
+     this.ocultarElMonto=true;
+   });
 }
 }

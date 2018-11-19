@@ -28,18 +28,15 @@
   
 <ion-content [ngClass]="{'ocultar-fondo':ocultarContenido}">
 <div class="vertical" [ngClass]="{'ocultar2':ocultarContenido}">
-    
-  <div class="cabecera" [ngClass]="{'ocultar':ocultarCabecera}">
-    <img class="logo" src="assets/imgs/icon.png" >
-    <!--h1 id="cab">Registro Cliente</h1-->
-   
-  </div>
+  <spinner *ngIf="mostrarSpinner"></spinner>
+ 
   <div class="form" *ngIf="formReg">
-    <h2 class="tituloForm">Registro cliente</h2>
-    <button ion-button class="btnCerrar" (click)="cerrarForm()">
-        <ion-icon name="close"></ion-icon>
-
-      </button>
+    <img class="foto" [src]="prueba" *ngIf="prueba!=''">
+  
+    <div class="elTituloForm">
+    <h2 class="tituloForm">Cliente</h2>
+ 
+    </div>
     <input type="text" class="miInput" [(ngModel)]="nombre" placeholder="nombre" name="nombre"><br>
     
     <input type="text" class="miInput" placeholder="apellido" name="pass" [(ngModel)]="apellido"  ><br>
@@ -51,13 +48,14 @@
     <button id="btnRegistrar" ion-button color="dark" outline (click)="Registrar()">Registrar</button>
   </div>
   <div class="form"  *ngIf="formAnon">
-    
-      <h2 class="tituloForm">Registro de an&oacute;nimo</h2>
+      <img class="foto" [src]="prueba" *ngIf="prueba!=''">
+    <div class="elTituloForm">
+      <h2 class="tituloForm">An&oacute;nimo</h2>
       <button ion-button class="btnCerrar" (click)="cerrarForm()" id="btnCerrar">
           <ion-icon name="close"></ion-icon>
 
         </button>
-    
+    </div>
       <input type="text" class="miInput" [(ngModel)]="nombre" placeholder="nombre" name="nombre"><br>
       <input type="text" class="miInput" placeholder="Correo" name="pass" [(ngModel)]="correo"  ><br>
       <input type="password" class="miInput"  placeholder="Contraseña" name="pass" [(ngModel)]="pass"  ><br>

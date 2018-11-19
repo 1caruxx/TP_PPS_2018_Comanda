@@ -19,7 +19,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { firebaseConfig } from '../config';
 import { JuegoPage } from '../pages/juego/juego';
-
+import { ElPipe } from '../pipes/el/el';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ChartsModule } from 'ng2-charts';
 import { ComponentsModule } from "../components/components.module";
@@ -36,7 +36,8 @@ import { ComponentsModule } from "../components/components.module";
     QrIngresoLocalPage,
     EncuestaClientePage,
     PedirPlatosPage,
-    JuegoPage
+    JuegoPage,
+    ElPipe
   ],
   imports: [
     BrowserModule,

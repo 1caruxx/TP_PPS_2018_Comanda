@@ -96,6 +96,115 @@ page-qr-ingreso-local {
         color: black;
         font-family: 'Sorts Mill Goudy', serif;
     }
+    .mostrarAlert2
+    {
+        display:flex!important;
+    }
+    .anonimo 
+    {
+        position: absolute;
+        z-index: 2000;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      // background: rgba(20, 20, 20, 0.44);
+      background: hsla(0, 0%, 0%, 0.58);
+        display:none;
+
+    }
+    .imgAnonimo
+    {
+        position: absolute;
+        width: 40%;
+        /* height: 9%; */
+        top: 5%;
+        left: 30%;
+    }
+    .regAnonimo
+    {
+        height: 50%;
+        border: 3px solid #f53d3d;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        border-radius: 5%;
+        background: #424242;
+        padding-bottom: 4%;
+        justify-content: flex-end;
+        position:relative;
+    }
+    .fotoAnonimo
+    {
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+    .regAnonimo input
+    {
+        width: 80%;
+        margin-left: 10%;
+        /* border: 1px solid red; */
+        border-radius: 5%;
+        padding: 3%;
+    }
+    .mostrarAnonimo
+    {
+        display:flex!important;
+    }
+    .elAlert2
+    {
+       position: absolute;
+       z-index: 1000;
+       width: 100%;
+       height: 100%;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       background: rgba(20, 20, 20, 0.44);
+   display:none;
+    }
+    .alert2
+    {
+     
+       border-radius: 5%;
+       background:      #343434;;
+       align-items: center;
+     
+       width:90%;
+  
+       display:flex;
+       justify-content: center;
+       text-align: center;
+       flex-direction: column;
+       padding:5%;
+       
+    }
+  
+    .alert2 h1
+    {
+       font-family: 'Lobster', cursive;
+       color:white;
+    }
+    .alert2 input
+    {
+       height: 33%;
+   width: 50%;
+   padding-left: 5%;
+   padding: 8%;
+   font-size: 2em;
+    }
+    .alert2 .button
+    {
+       width: 70%;
+    
+       margin-top: 5%;
+   }
+    
     .encuestas
     {
         position: absolute;
@@ -138,7 +247,7 @@ page-qr-ingreso-local {
        padding:10%;
        left: 10%;
        border-radius: 5%;
-       background-color: black!important;
+       background-color: red!important;
        text-align: center;
        top: 36%;
        justify-content: center;
@@ -231,7 +340,7 @@ page-qr-ingreso-local {
     {
     position: absolute;
         width: 10%;
-        height: 10%;
+        height: 3%;
         right: 20px;
         animation: pulse 2s ease-in-out infinite;
 
@@ -250,6 +359,11 @@ page-qr-ingreso-local {
         height: 25%;
         top: 10%;
         animation: pulse 2s ease-in-out infinite;
+    }
+    .preg4
+    {
+        font-size: 20px!important;
+        width: 24%!important;
     }
      .encuesta1 h3
     {

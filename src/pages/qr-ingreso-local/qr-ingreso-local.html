@@ -4,9 +4,31 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<div class="anonimo" [ngClass]="{'mostrarAnonimo':mostrarAnonimo}">
+  <div class="regAnonimo">
+    <img class="imgAnonimo" [src]="imgAnonimo">
+
+    <input type="text" [(ngModel)]="nombreAnonimo" placeholder="Ingrese su nombre">
+    <button ion-button class="fotoAnonimo" (click)="tomarFoto()" color="red">
+       
+        <ion-icon name="camera" style="font-size:2em"></ion-icon>
+  </button>
+  <button ion-button  style="width:50%; margin-left:25%;" (click)="aceptarAnonimo()" color="red">Aceptar</button>
+
+  </div>
+</div>
+<div class="elAlert2" [ngClass]="{'mostrarAlert2':mostrarAlert2}">
+    <div class="alert2" >
+      <h1>Ingrese por favor la cantidad de comensales</h1>
+      <input type="number"[(ngModel)]="comensales">
+      <button ion-button color="red" (click)="AceptarAlert2()">Aceptar</button>
+      <button ion-button color="red" (click)="CancelarAlert2()">Cancelar</button>
+    </div>
+    </div>
 <div class="alert3" [ngClass]="{'mostrarAlert3':mostrarAlert3}">
     <h1>{{mensaje}}</h1>
   </div>
+  
 <ion-header>
   <ion-navbar color="red">
 
@@ -31,33 +53,11 @@
   </ion-navbar>
 </ion-header>
 
-  <ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar color="red">
-        <ion-title>Menú</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <button ion-item>
-            <i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp;Convencional
-        </button>
-        <button ion-item>
-          Friends
-        </button>
-        <button ion-item>
-          Events
-        </button>
-        <button ion-item >
-          Close Menu
-        </button>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
 
-  <ion-nav #content swipeBackEnabled="false"></ion-nav>
+  
 
 <ion-content >
+
   <div class="vacio"  [ngClass]="{'sinEncuestas':noHayEncuestas}">
     <img src="assets/imgs/beta/Reloj.png">
       <h1 class="tituloSinEncuestas">En breve lo atenderá un mozo, y le dara una mesa.</h1>
@@ -80,7 +80,7 @@
           </div>
           <div class="pregResp">
           <h3 class="PreguntaEncuesta1"> ¿Que tan buenos son nuestros platos?</h3>
-          <p class="respEncuesta1">{{encuesta.preg4}}</p>
+          <p class="respEncuesta1 preg4" >{{encuesta.preg4|elPipe}}</p>
           </div>
           <div class="pregResp">
           <h3 class="PreguntaEncuesta1"> ¿Del 1 al 10, qué puntaje le pondrias al restaurante?</h3>
@@ -103,7 +103,7 @@
           <p class="respEncuesta1">10</p>
           <h3 class="PreguntaEncuesta1"> ¿Se sintio c&oacute;modo en nuestro restaurante?</h3>
           <p class="respEncuesta1"> SI</p>
-          <!--div class="fotos">
+          <!div class="fotos">
               <img  *ngIf="encuesta.foto1 !=''" [src]="encuesta.foto1">
               <img *ngIf="encuesta.foto2 !=''" [src]="encuesta.foto2">
               <img *ngIf="encuesta.foto3 !=''" [src]="encuesta.foto3">

@@ -92,7 +92,12 @@ mostrarfoto3:boolean;
 textoRange;
 
 mostrarChart:boolean=false;
-
+//Para mostrar los tildes
+respPreg1:boolean=false;
+respPreg2:boolean=false;
+respPreg3:boolean=false;
+respPreg4:boolean=false;
+respPreg5:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,  private aut:AngularFireAuth) {
     this.ocultar=true;
     this.ocultar2=true;
@@ -364,6 +369,19 @@ mostrarChart:boolean=false;
    console.log(this.resp4);
    console.log(this.resp5);
 
+   //Me fijo si debo poner tilde o no
+   if(this.resp1)
+   {
+     this.respPreg1 =true;
+
+   }
+   if(this.resp2)
+   {
+     this.respPreg2 =true;
+
+   }
+   
+ 
   }
   Aceptar5()
   {
@@ -393,7 +411,11 @@ mostrarChart:boolean=false;
     
     }
     this.ocultar5=true;
-
+    if(this.resp5)
+    {
+      this.respPreg5 =true;
+ 
+    }
   }
 
   Foto1()

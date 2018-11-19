@@ -29,11 +29,52 @@
   .fadeInDown {
     -webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
+ 
   }
-
+  @-webkit-keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  @keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .pulse {
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+  }
+  
 page-pedir-platos {
     @import url('https://fonts.googleapis.com/css?family=Boogaloo');
     @import url('https://fonts.googleapis.com/css?family=Mali|Spicy+Rice');
+    @import url('https://fonts.googleapis.com/css?family=Oswald');
+
     ion-navbar {
         padding: 20px 10px !important;
 
@@ -56,7 +97,79 @@ page-pedir-platos {
         background: orangered;
        
         }
+      .monto
+      {
+        position: absolute;
+        /* background: red; */
+        top: 3%;
+        /* border: 1px solid red; */
+        z-index: 1000;
+        text-align: center;
+        width: 100%;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .ocultarMonto
+      {
+          display:none;
+      }
+      .spinnerMonto
+      {
+          top: -8%;
+        right: 10%;
+        position: absolute !important;
+        width: 13% !important;
+      }
       
+      .montoPrincipal
+      {
+        position: absolute;
+        /* background: red; */
+        top: 20%;
+        /* border: 1px solid red; */
+        z-index: 1000;
+        text-align: center;
+        width: 100%;
+      }
+     /* .montoPrincipal span
+      {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2em;
+        background: white;
+        padding: 2%;
+      
+        border-radius: 6%;
+        border-radius: 5%;
+        background: rgba(238, 227, 227, 0.64);
+      } */
+      .elMonto
+      {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2em;
+        background: white;
+        padding: 2%;
+      
+        border-radius: 6%;
+        border-radius: 5%;
+        background: rgba(238, 227, 227, 0.64);
+  
+      }
+      .elMontoEspera
+      {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2em;
+        background: white;
+        padding: 2%;
+      
+        border-radius: 6%;
+        border-radius: 5%;
+        background: rgba(238, 227, 227, 0.64);
+     
+      }
+      .ocultarMontoPrincipal
+      {
+          display:none;
+      }
         .tituloslide
         {
             text-align: center;
@@ -471,6 +584,10 @@ page-pedir-platos {
            
            .elPlato {
               height:65%;
+           }
+           .monto
+           {
+               display:none;
            }
            .contenido
            {

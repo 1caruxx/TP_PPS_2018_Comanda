@@ -4,6 +4,8 @@ import firebase from "firebase";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { RegistroClientePage } from '../registro-cliente/registro-cliente';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 
 /**
  * Generated class for the QrIngresoLocalPage page.
@@ -18,14 +20,20 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
   templateUrl: 'qr-ingreso-local.html',
 })
 export class QrIngresoLocalPage {
+  nombreAnonimo:string="";
+  mostrarAnonimo:boolean=false;
+  comensales:number;
+  foto:string="";
+  imgAnonimo:string;
   correo:string;
+  mostrarAlert2:boolean=true;
   encuestas:any[]=[];
   noHayEncuestas:boolean=false;
   mostrarAlert3:boolean=false;
   mensaje:string;
   desplegarEncuesta:boolean=false;
   claveActual;
-foto1="";
+foto1;
 foto2;
 foto3;
 options : any;
@@ -33,16 +41,13 @@ options : any;
     public navCtrl: NavController,
      public navParams: NavParams,
      private authInstance: AngularFireAuth,
-     private barcodeScanner: BarcodeScanner
+     private barcodeScanner: BarcodeScanner,
+     private camera: Camera
     ) 
     {
+      this.imgAnonimo ="assets/imgs/beta/anonimo.png";
       //ANTES DE SUBIR A GITHUB  DESCOMENTO STAS LINEAS:
-    this.correo=localStorage.getItem("usuario");
-   /* this.foto1="assets/imgs/beta/comida.png";
-    this.foto2="assets/imgs/beta/comida.png";
-    this.foto3="assets/imgs/beta/comida.png";*/
-
-    this.correo =(JSON.parse(this.correo)).correo;
+  
   // this.correo="lucas@soylucas.com";
     //DESCOMENTAR PARA TRABAJAR A NIVEL LOCAL!!!!!!!
  // this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
@@ -79,7 +84,16 @@ console.log("Dentro de observable ecnuesta");
     console.log('ionViewDidLoad QrIngresoLocalPage');
   }
   leerQr()
-  { 
+  {
+    
+  
+      
+    
+    
+    this.correo=localStorage.getItem("usuario");
+  
+ 
+     this.correo =(JSON.parse(this.correo)).correo;
     this.options = { prompt : "Escaneá el qr de la puerta", formats: 'QR_CODE' }
 
     this.barcodeScanner.scan(this.options).then((barcodeData) => {
@@ -112,6 +126,7 @@ console.log("Dentro de observable ecnuesta");
             
             let usuario= data[key];
             usuario.estado="espera";
+            usuario.comensales=this.comensales;
             console.log(usuario);
            
          
@@ -163,8 +178,182 @@ console.log("Dentro de observable ecnuesta");
    
 
     
+
+  }
+  ValidarNumero(numero: string) {
+
+    let arrayNumero = numero.split("");
+
+    for (let caracter of arrayNumero) {
+
+      if (isNaN(parseInt(caracter))) {
+
+        return false;
+      }
+    }
+
+    return true;
+  }
+  tomarFoto()
+  {
+  
+    try{
+
+      this.camera.getPicture({
+        quality:50,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        targetWidth: 400,
+        targetHeight: 400,
+        encodingType:this.camera.EncodingType.JPEG,
+        mediaType:this.camera.MediaType.PICTURE
+    }).then((imageData) => {
+
+      
+      
+      this.foto= "data:image/jpeg;base64," + imageData;
+     
+      this.imgAnonimo=this.foto;
+      
+    }, (err) => {
+        console.log(err);
+    });
+
+
+    }
+    catch(err)
+    {
+
+    }
+    
+  
+
    
+
+
+
+
+  
+  }
+  AceptarAlert2()
+  {
+    if(this.comensales< 1)
+    {
+      this.mensaje="La cantidad de comensales mínima es de 1";
+      this.mostrarAlert3=true;
+    
+      setTimeout(()=>{
+        
+        this.mostrarAlert3=false;
+        this.comensales=undefined;
+       
+    
+      },2000);
+      return;
+   
+    }
+    if(this.comensales> 8)
+    {
+      this.mensaje="La cantidad de comensales máxima es de 8";
+      this.mostrarAlert3=true;
+    
+      setTimeout(()=>{
+        
+        this.mostrarAlert3=false;
+        this.comensales=undefined;
+       
+    
+      },2000);
+      return;
+    }
+    if(!this.comensales)
+    {
+      this.mensaje="Debe ingresar un número";
+      this.mostrarAlert3=true;
+    
+      setTimeout(()=>{
+        
+        this.mostrarAlert3=false;
+        this.comensales=undefined;
+       
+    
+      },2000);
+      return;
+
+    }
+    this.mostrarAlert2=false;
+
+    console.log(localStorage.getItem("anonimo").toString());
+   
+    if(  localStorage.getItem("anonimo")=="true")
+    {
+    
+      this.mostrarAnonimo=true;
+
+    }
 
   }
 
+  aceptarAnonimo()
+  {
+    if(!this.nombreAnonimo)
+    {
+      this.mensaje="Debe ingresar un nombre";
+      this.mostrarAlert3=true;
+    
+      setTimeout(()=>{
+        
+        this.mostrarAlert3=false;
+        this.comensales=undefined;
+       
+    
+      },2000);
+      return;
+    }
+    if(this.ValidarNumero(this.comensales.toString()))
+    {
+
+this.mensaje="Debe ingresar solo números";
+      this.mostrarAlert3=true;
+    
+      setTimeout(()=>{
+        
+        this.mostrarAlert3=false;
+        this.comensales=undefined;
+       
+    
+      },2000);
+      return;
+    }
+    if(!this.foto)
+    {
+      this.mensaje="Debe tomar una foto";
+      this.mostrarAlert3=true;
+    
+      setTimeout(()=>{
+        
+        this.mostrarAlert3=false;
+        this.comensales=undefined;
+       
+    
+      },2000);
+      return;
+    }
+
+    this.mostrarAnonimo=false;
+
+    //Guardo el anonimo en firebase
+    let usuariosRef = firebase.database().ref("usuarios/");
+  let raiz=  usuariosRef.push({nombre:this.nombreAnonimo, tipo:"anonimo", img:this.foto}).key;
+  let ref2= firebase.database().ref("usuarios/"+raiz);
+  ref2.update({correo:raiz});
+  let unUsuario =
+  {
+    nombre:this.nombreAnonimo,
+    tipo:"anonimo",
+    img:this.foto,
+    correo:raiz
+  }
+  localStorage.setItem("usuario",JSON.stringify(unUsuario));
+
+  }
 }
