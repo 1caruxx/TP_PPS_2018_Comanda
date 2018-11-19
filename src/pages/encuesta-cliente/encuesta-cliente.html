@@ -55,7 +55,10 @@
                                   <button ion-button class="cerrarChart" (click)="cerrarChart()" color="light">
                                           <ion-icon name="close"></ion-icon>
                                       </button>
-                                  <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
+                                  <h2 >¿Se siente c&oacute;modo en el restaurant?</h2><br>
+                                 
+                                
+
                                   <canvas baseChart
                                           [data]="pregunta1Data"
                                           [labels]="pregunta1Labels"
@@ -121,7 +124,7 @@
                                 
                               </ion-item>
                               <ion-item>
-                                      <ion-label >Nuestra atenci&oacute;n</ion-label>
+                                      <ion-label >No tienen</ion-label>
                                     <ion-checkbox  [(ngModel)]="resp3atencion" >No</ion-checkbox>
                                     
                                   </ion-item>

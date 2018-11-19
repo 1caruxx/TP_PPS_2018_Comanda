@@ -14,7 +14,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
  * Ionic pages and navigation.
  */
 
-//FER EN LA LINEA 120 TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL.
+//FER EN LA LINEA 145 TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL.
 @Component({
   selector: 'page-qr-ingreso-local',
   templateUrl: 'qr-ingreso-local.html',
