@@ -2,9 +2,13 @@
 <div class="alert" [ngClass]="{'mostrarAlert':mostrarAlert}">
     <h1>{{mensaje}}</h1>
   </div>
-  <div class="alert3" [ngClass]="{'mostrarAlert2':mostrarAlert3}">
+  <div class="soyAlert3" [ngClass]="{'mostrarAlert2':mostrarAlert3}">
+  <div class="alert3" >
+    
+  
     <h1>{{mensaje}}</h1>
   </div>
+</div>
   <div class="elAlert2" [ngClass]="{'mostrarAlert2':mostrarAlert2}">
   <div class="alert2" >
     <h1>Ingrese por favor el n&uacute;mero de mesa</h1>
@@ -87,13 +91,22 @@
     
  
 
-    
+    <ion-buttons start style="left: 3px;
+    position: absolute;">
+      <button ion-button (click)="Atras()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
 
     <!-- <ion-title>{{sala}}</ion-title> -->
-    <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
+    <!-- <p class="su    <ion-buttons end>
+      <button ion-button>
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>btitle" style="color: white;">{{usuario.mail}}</p> -->
 
     <ion-buttons end>
-      <button ion-button>
+      <button ion-button >
         <ion-icon name="power"></ion-icon>
       </button>
     </ion-buttons>

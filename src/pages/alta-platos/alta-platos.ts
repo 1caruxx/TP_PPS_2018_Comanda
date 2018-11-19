@@ -23,9 +23,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 export class AltaPlatosPage {
   ocultar:boolean;
   mostrar:boolean;
-  foto1:any="";
-  foto2:any="";
-  foto3:any="";
+  foto1:any="sa";
+  foto2:any="sad";
+  foto3:any="dsa";
   error:string;
   cocineroBebida:boolean=false;
   mostrarbtn1:boolean;
@@ -599,15 +599,7 @@ ocultarTiempo:boolean;
         }, 3000);
         return;
       }
-      if (!this.ValidarNumero(this.tiempo)) {
-        this.mensaje="El tiempo ingresado debe ser un numero";
-        this.mostrarAlert3=true;
-        setTimeout(()=>{
 
-          this.mostrarAlert3=false;
-        }, 3000);
-        return;
-      }
       if (!this.ValidarNumero(this.precio)) {
         this.mostrarAlert3=true;
         setTimeout(()=>{

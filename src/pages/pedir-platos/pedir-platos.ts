@@ -29,6 +29,7 @@ export class PedirPlatosPage {
   mostrarAlert:boolean=false;
   ocultarPlatos:boolean;
   cantidad:number;
+  erroresPedidos:number=0;
   titulo:string;
   claveUsuarioActual;
   platos:any[]=[];
@@ -252,7 +253,8 @@ mensaje.once("value",(snap)=>{
   ElegirPlato(nombre, valor, es, tiempo, para, precio, id)
   {
    //this.miValor=undefined;
-
+  
+  
   
   
     if(parseInt(valor)<=0 ||valor==undefined ||valor=="")
@@ -285,7 +287,7 @@ mensaje.once("value",(snap)=>{
 
 
     this.pedido.push({cant:valor, nombre:nombre, es:es, tiempo:tiempo, para:para, precio:precio, id:id});
-    
+    console.log("Elegi" +this.pedido[this.pedido.length-1]);
     (window.document.querySelector('#'+id) as HTMLElement).classList.add("mostrarElegido");
     console.log(this.pedido);
 
@@ -297,7 +299,7 @@ if(es=="plato")
   let sumar= parseInt(valor) * parseInt(precio);
   console.log(sumar);
   this.montoPlatos=this.montoPlatos+sumar;
-  total=this.montoPlatos;
+  total=sumar;
 }
 else
 {
@@ -305,7 +307,7 @@ else
   console.log(sumar);
 
   this.montoBebidas=this.montoBebidas+sumar;
-  total=this.montoBebidas;
+  total=sumar;
 }
 
 
@@ -516,22 +518,30 @@ var data =snap.val();
     this.eligio=false;
   
   console.log("elementos en array pedidios" +this.pedido.length);
-
+    let posicionBorrar:any[]=[];
     for(let i=0;i<this.pedido.length;i++)
     {
 
     
       
     
-console.log("Dentro del for");    
+console.log("Le saco la selecccion a ");    
       if(this.pedido[i].es == cual)
       {
-        console.log("encontro el igual");
+        console.log(this.pedido[i]);
         (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
-        this.pedido.splice(i, 1);
+     //  this.pedido.splice(i, 1);
+     //Guardo las posiciones del array que tengo que borrar
+     posicionBorrar.push(i);
 
       }
     
+    }
+
+    //Borro las posiciones del array guardadas
+    for(let i=0;i<posicionBorrar.length;i++ )
+    {
+        this.pedido.splice(posicionBorrar[i], 1);
     }
 
     
@@ -545,11 +555,27 @@ console.log("Dentro del for");
    
  console.log(this.pedido);
   }
+  Atras()
+  {
+    this.navCtrl.pop();
+
+  }
   PedirFinal()
   {
-    
+    if(this.erroresPedidos==3)
+    {
+      this.erroresPedidos=0;
+      this.mensaje="Para agregar un plato o bebida a su orden, coloque una cantidad del plato que desea y presione sobre el botón elegir del plato.";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+        
+        this.mostrarAlert3=false;
+      }, 7000);
+      return;
+    }
     if(this.pedido.length<=0)
     {
+      this.erroresPedidos++;
       this.mensaje="No agrego ningun pedido a la orden";
       this.mostrarAlert3=true;
       setTimeout(()=>{
@@ -672,10 +698,10 @@ console.log("Dentro del for");
    
      
       this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
-    this.mostrarAlert=true;
+    this.mostrarAlert3=true;
     setTimeout(()=>{
 
-      this.mostrarAlert=false;
+      this.mostrarAlert3=false;
       this.navCtrl.pop();
     }, 4000);
     
@@ -813,9 +839,14 @@ CalcularMonto()
      //SUMO LOS VALORES:
      for(let i=0;i<montos.length-1;i++)
      {
-      let suma= parseInt(montos[i].cantidad) *  montos[i].precio;
-      console.log(suma);
-      montoGuardado = montoGuardado + suma;
+       if(montos[i]!="tomado")
+       {
+        let suma= parseInt(montos[i].cantidad) *  montos[i].precio;
+        console.log(suma);
+        console.log(montos[i]);
+        montoGuardado = montoGuardado + suma;
+       }
+   
      }
      this.monto=montoGuardado;
      this.mostrarSpinnerMonto=false;
