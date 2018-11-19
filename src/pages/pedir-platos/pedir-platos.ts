@@ -22,6 +22,7 @@ import  {SpinnerComponent } from '../../components/spinner/spinner';
 export class PedirPlatosPage {
   @ViewChild('cant') cant:any;
   contErrores:number=0;
+  animacionMonto:boolean=true;
   mensaje:string;
   mostrarSpinnerMonto:boolean=true;
   ocultarMontoPrincipal=true;
@@ -93,7 +94,7 @@ this.foto="";
 if(this.tipo1=="mozo")
 {
   this.mostrarAlert2=true;
-  
+ 
   return
 }
     this.TraerTipoMesa();
@@ -174,6 +175,7 @@ mensaje.once("value",(snap)=>{
      {
        this.mostrarAlert2=false;
        this.TraerClaveMozo();
+       this.CalcularMonto();
 
      }
    
@@ -398,7 +400,18 @@ this.monto=this.monto +total;
     this.ocultarBebidas=true;
 
     this.ocultarMonto=true;
-    this.ocultarMontoPrincipal=false;
+    if(this.monto==0)
+    {
+      console.log("no se tendria  que ver el monto");
+      this.ocultarMontoPrincipal=true;
+
+    }
+    else
+    {
+      console.log("se tendria  que ver el monto");
+      this.ocultarMontoPrincipal=false;
+    }
+  // this.ocultarMontoPrincipal=false;
 
   }
   cerrarSlide()
@@ -525,7 +538,7 @@ console.log("Dentro del for");
    // this.pedido.splice(0, this.pedido.length);
    
  
-
+    
     this.Cerrar();
 
   
@@ -733,21 +746,29 @@ TraerClaveMozo()
             cadena=cadena.replace(patron, nuevo);
             this.mesa=cadena;
             console.log(cadena);
+            this.CalcularMonto();
             return;
 
            }
+           else
+           {
             this.mesa=data[key].mesa;
             console.log(this.mesa);
             this.claveUsuarioActual=key;
             this.CalcularMonto();
             return;
+           }
+       
           }
 
           if(this.tipo1=="mozo")
           {
+            console.log("Soy mozo");
+            this.CalcularMonto();
             if(data[key].mesa==this.mesa)
             {
               this.claveUsuarioActual=key;
+          
             }
 
           }
@@ -762,6 +783,8 @@ TraerClaveMozo()
 
 CalcularMonto()
 {
+  console.log("soy: "+this.correo);
+  console.log("Estoy en sunmar montos");
   let montos:any[] = [];
 
  let montoGuardado=0; //ACA ME FIJO EL MONTO DE LA MESA
@@ -796,6 +819,7 @@ CalcularMonto()
      }
      this.monto=montoGuardado;
      this.mostrarSpinnerMonto=false;
+     this.animacionMonto=false;
      this.ocultarElMonto=true;
    });
 }

@@ -104,7 +104,7 @@
 
 
 <ion-content>
-  <div class="monto" [ngClass]="{'ocultarMonto':ocultarMonto}">
+  <div class="monto" *ngIf="!ocultarMonto" [ngClass]="{'animacion':animacionMonto}">
     <span class="elMonto" *ngIf="ocultarElMonto">MONTO: ${{monto}}</span>
     <span class="elMontoEspera" *ngIf="mostrarSpinnerMonto">Cargando monto...  </span>
  

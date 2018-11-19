@@ -587,6 +587,7 @@ ocultarTiempo:boolean;
     else
     {
       
+      
       //VALIDO TODO LO DEL BARTENDER!!!!!!
       if(!this.nombre|| !this.precio || !this.cantidad  ||!this.descripcion)
       {
