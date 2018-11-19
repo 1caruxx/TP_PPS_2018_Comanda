@@ -155,6 +155,9 @@ export class TomarPedidoPage {
   public sinPedidos;
 
 
+  public pedidosDeliveryCocinero:Array<any>;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth) 
   {
 
@@ -234,13 +237,15 @@ export class TomarPedidoPage {
       
     });*/
 
-
+ 
 
     //this.ocultar=true;
 
-    //this.vistaCocinero=true;
+    //CAMBIAR ESTO PARA PROBAR
 
-    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    this.vistaCocinero=true;
+
+    /*this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     if(this.usuario.tipo=="cocinero")
     {
@@ -250,7 +255,7 @@ export class TomarPedidoPage {
     if(this.usuario.tipo=="bartender")
     {
       this.vistaBartender=true;
-    }
+    }*/
 
 
 
@@ -299,6 +304,35 @@ export class TomarPedidoPage {
 
     this.pedidosCocinaDiez=[];
     this.pedidosBartenderDiez=[];
+
+    this.pedidosDeliveryCocinero=[];
+
+    //PROBANDO DELIVERY COCINERO
+
+
+    let deliveryCocinero = this.firebase.database().ref("pedidos/");
+
+    deliveryCocinero.on("value", (snap)=> {
+
+      let result=snap.val();
+
+      for(let item in result)
+      {
+        if(item == "2") 
+        {
+         console.log("llegue");
+        }
+
+      }
+
+      
+     
+
+      
+
+    });
+
+
 
 
     //PEDIDOS MESA 1

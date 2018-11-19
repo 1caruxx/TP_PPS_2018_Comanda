@@ -24,7 +24,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = MapaDeRutaPage;
+  rootPage:any = TomarPedidoPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController, fcm: FcmProvider, toastCtrl: ToastController,private nativeAudio: NativeAudio) {
     platform.ready().then(() => {
