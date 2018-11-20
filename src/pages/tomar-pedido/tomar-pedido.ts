@@ -156,6 +156,9 @@ export class TomarPedidoPage {
 
 
   public pedidosDeliveryCocinero:Array<any>;
+  public pedidosDeliveryBartender:Array<any>;
+  public vistaDeliveryCocinero:boolean;
+  public vistaDeliveryBartender:boolean;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth) 
@@ -243,9 +246,11 @@ export class TomarPedidoPage {
 
     //CAMBIAR ESTO PARA PROBAR
 
-    this.vistaCocinero=true;
+    //this.vistaCocinero=true;
 
-    /*this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    //this.vistaBartender=true;
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     if(this.usuario.tipo=="cocinero")
     {
@@ -255,7 +260,7 @@ export class TomarPedidoPage {
     if(this.usuario.tipo=="bartender")
     {
       this.vistaBartender=true;
-    }*/
+    }
 
 
 
@@ -306,6 +311,9 @@ export class TomarPedidoPage {
     this.pedidosBartenderDiez=[];
 
     this.pedidosDeliveryCocinero=[];
+    this.pedidosDeliveryBartender=[];
+    this.vistaDeliveryCocinero=false;
+    this.vistaDeliveryBartender=false;
 
     //PROBANDO DELIVERY COCINERO
 
@@ -314,22 +322,115 @@ export class TomarPedidoPage {
 
     deliveryCocinero.on("value", (snap)=> {
 
+      this.pedidosDeliveryCocinero=[];
+      //this.vistaDeliveryCocinero=false;
+
       let result=snap.val();
 
       for(let item in result)
       {
-        if(item == "2") 
-        {
-         console.log("llegue");
-        }
+
+
+
+              if(item=="1"||item=="2"||item=="3"||item=="4"||item=="5"||item=="6"||item=="7"||item=="8"||item=="9"||item=="10") 
+              {
+                continue;
+              }
+
+                      
+                              //this.pedidosDeliveryCocinero.push(item);
+                              //console.log(result[item]);
+                     for(let a in result[item])
+                        {  
+                          if(a=="cocinero")
+                          {
+                            this.vistaDeliveryCocinero=true;
+                            for(let j in result[item][a])
+                            {
+
+                             // console.log(result[item][a][j]);
+    
+                                if(result[item][a][j]=="tomado")
+                                {
+                                  console.log("llegue aca");
+                                  this.pedidosDeliveryCocinero.push(item);
+                                  //console.log(result[item]);
+
+                                }
+                                     
+
+                            }
+                            //this.pedidosBartenderUno.push(result[k][a]);
+                            //this.pedidosDeliveryCocinero.push(result[item][a]);
+                            //console.log(result[item][a]);
+                          }
+                                        
+                        }
+                          
 
       }
 
       
-     
+    
+    });
+
+
+    //PROBANDO DELIVERY BARTENDER
+
+    let deliveryBartender = this.firebase.database().ref("pedidos/");
+
+    deliveryBartender.on("value", (snap)=> {
+
+      this.pedidosDeliveryBartender=[];
+      this.vistaDeliveryBartender=false;
+
+      let result=snap.val();
+
+      for(let item in result)
+      {
+
+
+
+              if(item=="1"||item=="2"||item=="3"||item=="4"||item=="5"||item=="6"||item=="7"||item=="8"||item=="9"||item=="10") 
+              {
+                continue;
+              }
+
+                      
+                              //this.pedidosDeliveryCocinero.push(item);
+                              //console.log(result[item]);
+                     for(let a in result[item])
+                        {  
+                          if(a=="bartender")
+                          {
+                            this.vistaDeliveryBartender=true;
+                            for(let j in result[item][a])
+                            {
+
+                             // console.log(result[item][a][j]);
+    
+                                if(result[item][a][j]=="tomado")
+                                {
+                                  console.log("llegue aca");
+                                  this.pedidosDeliveryBartender.push(item);
+                                  //console.log(result[item]);
+
+                                }
+                                     
+
+                            }
+                            //this.pedidosBartenderUno.push(result[k][a]);
+                            //this.pedidosDeliveryCocinero.push(result[item][a]);
+                            //console.log(result[item][a]);
+                          }
+                                        
+                        }
+                          
+
+      }
 
       
-
+    
     });
 
 
@@ -352,6 +453,10 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
@@ -376,6 +481,11 @@ export class TomarPedidoPage {
             }
        
           }
+
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
 
           if(k=="bartender")
           {
@@ -402,6 +512,8 @@ export class TomarPedidoPage {
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -431,6 +543,10 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
@@ -454,6 +570,11 @@ export class TomarPedidoPage {
             }
        
           }
+
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
 
           if(k=="bartender")
           {
@@ -479,6 +600,8 @@ export class TomarPedidoPage {
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -508,6 +631,14 @@ export class TomarPedidoPage {
  
        for(let k in result)
        { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
+        
+
+
+
          if(k=="cocinero")
            {
 
@@ -516,6 +647,7 @@ export class TomarPedidoPage {
               this.sinPedidos=true;
               break;
             }
+            
 
             this.sinPedidos=false;
             this.vistaCocinaMesaTres=true;
@@ -533,6 +665,13 @@ export class TomarPedidoPage {
              }
         
            }
+
+          }
+
+          if(this.usuario.tipo=="bartender")
+          {
+
+         
  
            if(k=="bartender")
            {
@@ -558,6 +697,8 @@ export class TomarPedidoPage {
  
              
            }
+
+          }
  
            if(k=="tiempo")
            {
@@ -590,6 +731,10 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
@@ -616,6 +761,11 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
@@ -641,6 +791,8 @@ export class TomarPedidoPage {
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -675,6 +827,9 @@ export class TomarPedidoPage {
       { 
         //this.vistaCocinaMesaCinco=true;
 
+        if(this.usuario.tipo=="cocinero")
+        {
+
 
         if(k=="cocinero")
           {
@@ -701,6 +856,11 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
@@ -726,6 +886,8 @@ export class TomarPedidoPage {
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -755,6 +917,10 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
@@ -781,6 +947,11 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
@@ -806,6 +977,8 @@ export class TomarPedidoPage {
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -835,6 +1008,11 @@ export class TomarPedidoPage {
  
        for(let k in result)
        { 
+
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
          if(k=="cocinero")
            {
 
@@ -860,6 +1038,11 @@ export class TomarPedidoPage {
              }
         
            }
+
+          }
+
+          if(this.usuario.tipo=="bartender")
+          {
  
            if(k=="bartender")
            {
@@ -886,6 +1069,8 @@ export class TomarPedidoPage {
  
              
            }
+
+          }
  
            if(k=="tiempo")
            {
@@ -915,6 +1100,10 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
@@ -940,6 +1129,11 @@ export class TomarPedidoPage {
             }
        
           }
+
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
 
           if(k=="bartender")
           {
@@ -967,6 +1161,8 @@ export class TomarPedidoPage {
             
           }
 
+        }
+
           if(k=="tiempo")
           {
             this.tiempoMesaOcho=result[k];
@@ -992,6 +1188,10 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
@@ -1017,6 +1217,11 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
@@ -1040,6 +1245,8 @@ export class TomarPedidoPage {
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -1066,6 +1273,10 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
@@ -1089,6 +1300,11 @@ export class TomarPedidoPage {
             }
        
           }
+
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
 
           if(k=="bartender")
           {
@@ -1114,6 +1330,8 @@ export class TomarPedidoPage {
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -2546,6 +2764,118 @@ export class TomarPedidoPage {
   volver()
   {
     this.navCtrl.pop();
+  }
+
+
+
+  terminarDeliveryCocinero(probando)
+  {
+
+    let deliveryCocinero = this.firebase.database().ref("pedidos/");
+
+    deliveryCocinero.once("value", (snap)=> {
+
+      let result=snap.val();
+
+      for(let item in result)
+      {
+        if(item==probando)
+        {
+
+          for(let a in result[item])
+          {  
+            if(a=="cocinero")
+            {
+              for(let j in result[item][a])
+              {
+              
+                  if(result[item][a][j]=="tomado")
+                  {
+                    console.log("llegue aca");
+                   
+                    console.log(result[item][a].estado);
+                    result[item][a].estado="terminado";
+                    deliveryCocinero.child(item).child(a).update(result[item][a]);
+                    
+                
+                    break;
+                  }
+                       
+
+              }
+              
+            }
+                          
+          }
+
+
+
+
+
+        }
+
+
+      }
+
+    });
+
+
+
+
+  }
+
+  terminarPedidoBartender(probando)
+  {
+
+    let deliveryBartender = this.firebase.database().ref("pedidos/");
+
+    deliveryBartender.once("value", (snap)=> {
+
+      let result=snap.val();
+
+      for(let item in result)
+      {
+        if(item==probando)
+        {
+
+          for(let a in result[item])
+          {  
+            if(a=="bartender")
+            {
+              for(let j in result[item][a])
+              {
+              
+                  if(result[item][a][j]=="tomado")
+                  {
+                    console.log("llegue aca");
+                   
+                    console.log(result[item][a].estado);
+                    result[item][a].estado="terminado";
+                    deliveryBartender.child(item).child(a).update(result[item][a]);
+                    
+                
+                    break;
+                  }
+                       
+
+              }
+              
+            }
+                          
+          }
+
+
+
+
+
+        }
+
+
+      }
+
+    });
+
+
   }
 
 

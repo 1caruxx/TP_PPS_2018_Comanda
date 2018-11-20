@@ -241,16 +241,22 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoUno.on("value", (snap) => {
 
               this.pedidosPruebaDos=[];
+              let vale=0;
 
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado=="preparacion")
                 {
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaUno.push(result[k]);
+                  }
 
-                  this.pedidosPruebaUno.push(result[k]);
+                 
 
                 }
 
@@ -264,17 +270,21 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoDos.on("value", (snap) => {
 
               this.pedidosPruebaDos=[];
+              let vale=0;
 
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaDos.push(result[k]);
-
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }
                 }
 
               }
@@ -288,15 +298,21 @@ public pedidosPruebaDiez : Array<any>;
 
               this.pedidosPruebaTres=[];
 
+              let vale=0;
+
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
-
-                  this.pedidosPruebaTres.push(result[k]);
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }
+                  
 
                 }
 
@@ -310,16 +326,20 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoCuatro.on("value", (snap) => {
 
               this.pedidosPruebaCuatro=[];
-
+              let vale=0;
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaCuatro.push(result[k]);
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }
 
                 }
 
@@ -333,16 +353,21 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoCinco.on("value", (snap) => {
 
               this.pedidosPruebaCinco=[];
+              let vale=0;
 
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaCinco.push(result[k]);
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }
 
                 }
 
@@ -356,16 +381,21 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoSeis.on("value", (snap) => {
 
               this.pedidosPruebaSeis=[];
+              let vale=0;
 
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaSeis.push(result[k]);
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }
 
                 }
 
@@ -379,16 +409,21 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoSiete.on("value", (snap) => {
 
               this.pedidosPruebaSiete=[];
+              let vale=0;
 
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaSiete.push(result[k]);
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }
 
                 }
 
@@ -402,16 +437,21 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoOcho.on("value", (snap) => {
 
               this.pedidosPruebaOcho=[];
+              let vale=0;
 
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaOcho.push(result[k]);
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }
 
                 }
 
@@ -425,16 +465,21 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoNueve.on("value", (snap) => {
 
               this.pedidosPruebaNueve=[];
+              let vale=0;
 
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaNueve.push(result[k]);
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }
 
                 }
 
@@ -449,16 +494,21 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoDiez.on("value", (snap) => {
 
               this.pedidosPruebaDiez=[];
+              let vale=0;
 
 
               let result = snap.val();
 
               for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaDiez.push(result[k]);
+                  vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }
 
                 }
 
