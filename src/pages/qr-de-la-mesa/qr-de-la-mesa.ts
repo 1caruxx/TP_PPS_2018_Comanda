@@ -109,9 +109,9 @@ public pedidosPruebaDiez : Array<any>;
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
     //this.vistaCliente=true;
-    //his.vistaMozo=true;
+    this.vistaMozo=true;
 
-    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+   /* this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
     if(this.usuario.tipo=="mozo")
     {
@@ -121,7 +121,7 @@ public pedidosPruebaDiez : Array<any>;
     if(this.usuario.tipo=="cliente" || this.usuario.tipo=="anonimo")
     {
       this.vistaCliente=true;
-    }
+    }*/
 
     
     setInterval(() => {
@@ -1045,7 +1045,7 @@ public pedidosPruebaDiez : Array<any>;
     this.scanSub.unsubscribe();*/
   }
 
-  Modificar(correo,text,cantidad)
+  Modificar(correo,text,cantidad,mesa)
   {
     var ocup=true;
 
@@ -1057,8 +1057,25 @@ public pedidosPruebaDiez : Array<any>;
                             var data = snap.val();
                             //this.estaLibre=true;
                           // ocup=true;
-                            for(var key in data){
-                                if (text == data[key].numeroMesa) {
+                            for(var key in data)
+                            {
+
+                              if(mesa=="1"||mesa=="2"||mesa=="3"||mesa=="4"||mesa=="5"||mesa=="6"||mesa=="7"||mesa=="8"||mesa=="9"||mesa=="10")
+                              //if(mesa=="1")
+                                  {
+                                    
+                                      if(text!=mesa)
+                                      {
+                                        this.MostrarAlert("Error!!","Este cliente tiene una reserva para otra mesa","aceptar",this.limpiar);
+                                        break;
+                                      }
+
+                                  }
+
+
+
+                                if (text == data[key].numeroMesa) 
+                                {
 
                                   //if(data[key].cliente!=null)
                                   //CAMBIE ESTA LINEA
@@ -1328,10 +1345,10 @@ public pedidosPruebaDiez : Array<any>;
 
   }
 
-  ocuparMesaBarcode(correo,cantidad)
+  ocuparMesaBarcode(correo,cantidad,mesa)
   {
     this.barcode.scan().then(barcodeData => {
-      this.Modificar(correo,barcodeData.text,cantidad);
+      this.Modificar(correo,barcodeData.text,cantidad,mesa);
         //alert(barcodeData.text);
     });
 
