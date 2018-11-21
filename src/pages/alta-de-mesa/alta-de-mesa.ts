@@ -40,6 +40,7 @@ export class AltaDeMesaPage {
 
   public usuario;
   
+  public mesas: Array<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
    {
@@ -47,6 +48,29 @@ export class AltaDeMesaPage {
     this.probandingg=true;
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    this.mesas = [];
+
+    let mesasRef = this.firebase.database().ref("mesas");
+
+    mesasRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for(let a in data)
+      {
+        this.mesas.push(data[a]);
+        //console.log(data[a].numeroMesa);
+      }
+
+      this.mesas = this.mesas.sort((a, b) => {
+        return a.numero - b.numero;
+      });
+
+
+
+
+    });
 
 
   }
@@ -66,13 +90,15 @@ export class AltaDeMesaPage {
       return;
     }
 
-    if(this.numeroMesa < 1 || this.numeroMesa > 10)
+    //if(this.numeroMesa < 1 || this.numeroMesa > 10)
+    if(this.numeroMesa!=1||this.numeroMesa!=2||this.numeroMesa!=3||this.numeroMesa!=4||this.numeroMesa!=5||this.numeroMesa!=6||this.numeroMesa!=7||this.numeroMesa!=8||this.numeroMesa!=9||this.numeroMesa!=10)
     {
       this.presentToast("Solo tenemos lugar para 10 mesas en el restaurante")
       return;
     }
 
-    if(this.cantidadComensales < 1 || this.cantidadComensales > 8)
+    //if(this.cantidadComensales < 1 || this.cantidadComensales > 8)
+    if(this.cantidadComensales!=1 || this.cantidadComensales!=2 || this.cantidadComensales!=3 || this.cantidadComensales!=4 || this.cantidadComensales!=5 || this.cantidadComensales!=6 || this.cantidadComensales!=7 || this.cantidadComensales!=8)
     {
       this.presentToast("Los comensales solo pueden ser de 1 a 8")
       return;

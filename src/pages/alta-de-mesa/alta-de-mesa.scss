@@ -159,16 +159,55 @@ page-alta-de-mesa {
 
     }
 
+    .mesas {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        border-top: solid color($colors, red) 1px;
+        border-bottom: solid color($colors, red) 1px;
+    }
+
+    .mesa {
+        flex-grow: 1;
+        width: 20%;
+        height: 50px;
+        background-color: color($colors, red);
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        color: white;
+        padding: 0;
+    }
+
+    .realizarEncuesta{
+        color: white!important;
+        font-size: 200%;
+        margin-bottom: 0px !important;
+        margin-top: 2px !important;
+        padding-top: 5px !important;
+        text-align: center;
+        font-family: 'Lobster', cursive;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        
+    }
+
+    .titulo{
+        color: white!important;
+        font-size: 300%;
+        margin-bottom: 0px !important;
+        margin-top: 2px !important;
+        padding-top: 5px !important;
+        text-align: center;
+        font-family: 'Roboto', cursive;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+
+    }
     
 
-   
-
-
-
-  
-
-
-
-    
 
 }
