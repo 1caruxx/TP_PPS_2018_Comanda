@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+
+import { LoginPage } from '../login/login';
 
 import firebase from "firebase";
-import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -15,15 +16,22 @@ export class MisReservasPage {
   public reservasPendientes: Array<any>;
   public reservasConfirmadas: Array<any>;
 
-  public image = "";
-  public ocultarImagen = true;
   public ocultarSpinner: boolean = false;
   public ocultarInterfazMesas: boolean;
 
   public firebase = firebase;
   public usuario: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public estadoBoton: boolean = false;
+  public ocultarAlert: boolean = true;
+  public alertTitulo;
+  public alertMensaje;
+  public alertMensajeBoton;
+  public alertHandler;
+
+  public reservaSeleccionada: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController) {
 
     this.reservas = [];
     this.reservasPendientes = [];
@@ -73,13 +81,86 @@ export class MisReservasPage {
     console.log('ionViewDidLoad MisReservasPage');
   }
 
-  MostrarImagen(imagen: string) {
-    this.image = imagen;
-    this.ocultarImagen = false;
+  ConfirmarCancelarReserva(reserva) {
+
+    this.reservaSeleccionada = reserva;
+    this.MostrarAlert("", "¿Seguro que deseas cancelar la reserva?", "Sí", this.CancelarRerserva);
+
   }
 
-  OcultarImagen() {
-    this.ocultarImagen = true;
+  CancelarRerserva() {
+
+    this.OcultarAlert();
+    this.ocultarInterfazMesas = false;
+
+    firebase.database().ref("reservas").child(this.reservaSeleccionada.key).remove().then(() => {
+      this.ocultarSpinner = true;
+      this.presentToast("Se ha cancelado la reserva.");
+    })
+  }
+
+  MostrarAlert(titulo: string, mensaje: string, mensajeBoton: string, handler) {
+    this.ocultarAlert = false;
+    this.alertTitulo = titulo;
+    this.alertMensaje = mensaje;
+    this.alertMensajeBoton = mensajeBoton;
+    this.alertHandler = handler;
+  }
+
+  OcultarAlert() {
+    this.ocultarAlert = true;
+  }
+
+  presentToast(mensaje: string) {
+
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      position: 'top',
+      duration: 3000,
+      cssClass: "infoToast"
+    });
+
+    toast.present();
+  }
+
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 }

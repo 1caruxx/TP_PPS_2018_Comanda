@@ -19,6 +19,7 @@ export class AltaEmpleadoPage {
 
   public firebase = firebase;
   public db = firebase.firestore();
+  public usuario: any;
 
   public correo: string;
   public clave: string;
@@ -45,7 +46,7 @@ export class AltaEmpleadoPage {
     private camera: Camera,
     private barcodeScanner: BarcodeScanner) {
 
-    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
   }
 
   ionViewDidLoad() {
@@ -268,8 +269,42 @@ export class AltaEmpleadoPage {
 
   Logout() {
 
-    localStorage.clear();
-    this.navCtrl.setRoot(LoginPage);
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 }

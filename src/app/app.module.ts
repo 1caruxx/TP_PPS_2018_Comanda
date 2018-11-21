@@ -19,6 +19,7 @@ import { ReservaPage } from "../pages/reserva/reserva";
 import { MisReservasPage } from "../pages/mis-reservas/mis-reservas";
 import { CuentaPage } from "../pages/cuenta/cuenta";
 import { ListadoReservasPage } from "../pages/listado-reservas/listado-reservas";
+import { JuegoFerPage } from "../pages/juego-fer/juego-fer";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -52,7 +53,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     ReservaPage,
     MisReservasPage,
     CuentaPage,
-    ListadoReservasPage
+    ListadoReservasPage,
+    JuegoFerPage
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     ReservaPage,
     MisReservasPage,
     CuentaPage,
-    ListadoReservasPage
+    ListadoReservasPage,
+    JuegoFerPage
   ],
   providers: [
     StatusBar,

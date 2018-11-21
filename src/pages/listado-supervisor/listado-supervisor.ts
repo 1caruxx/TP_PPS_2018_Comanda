@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { EncuestaSupervisorPage } from "../encuesta-supervisor/encuesta-supervisor";
+import { LoginPage } from '../login/login';
 
 import firebase from "firebase";
 import "firebase/firestore";
@@ -22,9 +23,11 @@ export class ListadoSupervisorPage {
   public ocultarSpinner: boolean = false;
 
   public firebase = firebase;
+  public usuario: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController) {
 
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
     this.usuarios = [];
     this.empleados = [];
     this.usuarios = [];
@@ -70,6 +73,46 @@ export class ListadoSupervisorPage {
 
   OcultarImagen() {
     this.ocultarImagen = true;
+  }
+
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 }

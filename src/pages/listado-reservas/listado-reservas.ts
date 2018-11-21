@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
+import { LoginPage } from "../login/login";
+
 import firebase from "firebase";
 import * as moment from 'moment';
 
@@ -23,9 +25,11 @@ export class ListadoReservasPage {
   public ocultarInterfazMesas: boolean;
 
   public firebase = firebase;
+  public usuario: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController) {
 
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
     this.reservas = [];
     this.reservasPendientes = [];
     this.reservasConfirmadas = [];
@@ -91,11 +95,11 @@ export class ListadoReservasPage {
 
         for (let reserva of this.reservasConfirmadas) {
 
-          if(data[item].numeroMesa == reserva.mesa) {
+          if (data[item].numeroMesa == reserva.mesa) {
 
             let momentoReservaMesa = moment(reserva.horario, "DD/MM/YYYY HH:mm");
 
-            if(Math.abs(momentoReservaSeleccionada.diff(momentoReservaMesa, "m")) < 40) {
+            if (Math.abs(momentoReservaSeleccionada.diff(momentoReservaMesa, "m")) < 40) {
 
               estaDesocupada = false;
               break;
@@ -186,6 +190,46 @@ export class ListadoReservasPage {
     });
 
     toast.present();
+  }
+
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 }

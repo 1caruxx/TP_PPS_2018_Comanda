@@ -1,6 +1,8 @@
 <ion-header>
   <ion-navbar color="red">
 
+    <ion-title>{{usuario.tipo}}</ion-title>
+
     <ion-buttons end>
       <button ion-button (click)="VerReservas()">
         <ion-icon name="calendar"></ion-icon>
@@ -52,7 +54,7 @@
         </ion-datetime>
       </ion-item>
 
-      <button ion-button outline color="light" class="alta" (click)="Reservar()">Reservar</button>
+      <button ion-button outline color="light" class="alta" [disabled]="estadoBoton" (click)="Reservar()">Reservar</button>
     </div>
 
   </div>

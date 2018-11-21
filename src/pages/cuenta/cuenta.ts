@@ -46,6 +46,8 @@ export class CuentaPage {
     private barcodeScanner: BarcodeScanner,
     private toastCtrl: ToastController) {
 
+    console.clear();
+
     this.rate = 1;
     this.textoDelBoton = "pagar";
     this.textoRate = "Malo";
@@ -79,6 +81,10 @@ export class CuentaPage {
       pedidoRef.once("value", (snap) => {
 
         let data = snap.val();
+
+        if(data.desc) {
+          console.log("El descuento esta seteado...");
+        }
 
         for (let item in data) {
 
@@ -178,45 +184,43 @@ export class CuentaPage {
       this.estadoBoton = true;
       this.ocultarSpinner = false;
 
-      clienteRef.update({
-        estado: "pago"
-      }).then(() => {
+      pedidoRef.remove().then(() => {
 
-        pedidoRef.remove().then(() => {
+        clienteRef.child("estado").remove().then(() => {
 
-          mesaRef.once("value", (snap) => {
+          clienteRef.child("comensales").remove().then(() => {
 
-            let data = snap.val();
+            clienteRef.child("mesa").remove().then(() => {
 
-            for (let item in data) {
+              mesaRef.once("value", (snap) => {
 
-              if (data[item].numeroMesa == this.mesa) {
+                let data = snap.val();
 
-                mesaRef.child(item).update({
-                  estado: "libre"
-                }).then(() => {
+                for (let item in data) {
 
-                  if (true) {
+                  if (data[item].numeroMesa == this.mesa) {
 
-                    this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
-                  } /*else {
+                    mesaRef.child(item).update({ estado: "libre" }).then(() => {
 
-                    this.alertMostrarBotonCancelar = false;
-                    this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante!", "Finalizar", this.Logout);
-                  }*/
+                      mesaRef.child(item).child("cliente").remove().then(() => {
 
-                  this.ocultarSpinner = true;
-                });
+                        if (true) {
 
-                break;
-              }
-            }
+                          this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
+                        }
+
+                        this.ocultarSpinner = true;
+                      })
+                    });
+
+                    break;
+                  }
+                }
+              }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+            }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
           }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
-
         }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
-
       }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
-
     }
   }
 
@@ -259,9 +263,23 @@ export class CuentaPage {
           usuariosRef.child(item).update({
             logueado: false
           }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
 
-            localStorage.clear();
-            this.navCtrl.setRoot(LoginPage);
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
           });
 
           break;

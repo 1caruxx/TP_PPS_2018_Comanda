@@ -1,11 +1,13 @@
 <ion-header>
   <ion-navbar color="red">
 
-    <ion-buttons>
+    <ion-buttons left>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
+
+    <ion-title>{{usuario.tipo}}</ion-title>
 
     <ion-buttons end>
       <button ion-button (click)="Logout()">

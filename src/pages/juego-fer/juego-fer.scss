@@ -1,0 +1,97 @@
+page-juego-fer {
+
+    ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+
+    ion-content {
+        background-image: url('../../assets/imgs/alfa/juego-bgn.jpg');
+        background-size: cover; 
+        background-position: center; 
+    }
+
+    .puntos {
+        position: absolute;
+        z-index: 10;
+        top: 15px;
+        left: 15px;
+        background-color: color($colors, red);
+        font-size: 20px;
+        color: white;
+        padding: 15px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        transition: .3s;
+      }
+
+    .vertical-container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        h1 {
+            text-align: center;
+            margin-bottom: 50px; 
+            line-height: 1.6;
+            background-color: color($colors, red);
+            color: white;
+            width: 100%;
+        }
+    }
+
+    .interfaz {
+        display: flex;
+        align-items: center;
+        height: 50px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        button {
+            height: 100%;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin: 0;
+            border-radius: 0 !important;
+        }
+    }
+
+    input, select {
+        width: 75%;
+        height: 100%;
+        border: gray solid 2px;
+        //margin: 10px;
+        margin-right: 20px;
+        padding: 5px;
+        margin: 7vh 0 7vh 0;
+        font-size: 25px;
+        transition-duration: .3s;
+        caret-color: color($colors, red);
+    }
+
+    input:focus {
+        border-color: color($colors, red);
+    }
+
+    .ocultar {
+        display: none !important;
+    }
+
+    .animation-target {
+        animation-name: jelly;
+        animation-duration: 1000ms;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+    }
+
+}

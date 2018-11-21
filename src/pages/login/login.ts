@@ -33,6 +33,9 @@ export class LoginPage {
     public navParams: NavParams,
     private authInstance: AngularFireAuth,
     private toastCtrl: ToastController) {
+
+    localStorage.setItem("anonimo", "false");
+
   }
 
   ionViewDidLoad() {
@@ -240,6 +243,7 @@ export class LoginPage {
     this.estadoBoton = true;
     this.textoDelBoton = "Espera...";
     this.animation = "ani";
+    this.NoDesplegarUsuarios();
 
     this.authInstance.auth.signInWithEmailAndPassword("anonimo@gmail.com", "123456").then(() => {
 

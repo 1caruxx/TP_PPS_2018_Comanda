@@ -65,21 +65,18 @@ export class PrincipalPage {
              * 
              * Puede hacer un pedido
              * Jugar
-             * Confeccionar encuesta
              * 
              */
             case 'atendido':
               this.acciones[0] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
-              this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
               break;
 
             /*
              * 
              * Ve el estado del pedido
-             * hacer un pedido X
+             * hacer un pedido 
              * Jugar
-             * Confeccionar encuesta
              *  
              */
 
@@ -87,7 +84,6 @@ export class PrincipalPage {
               this.acciones[0] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[2] : this.accionesRespaldoCliente[1];
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
-              this.acciones[3] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
 
               if (flag) {
 
@@ -131,10 +127,9 @@ export class PrincipalPage {
             /*
              * 
              * Pagar
-             * Ve el estado del pedido X
-             * hacer un pedido X
+             * Ve el estado del pedido
+             * hacer un pedido
              * Jugar
-             * Confeccionar encuesta
              *  
              */
 
@@ -143,7 +138,6 @@ export class PrincipalPage {
               this.acciones[1] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[2] : this.accionesRespaldoCliente[1];
               this.acciones[2] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[3] : this.accionesRespaldoCliente[2];
               this.acciones[3] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[6] : this.accionesRespaldoCliente[4];
-              this.acciones[4] = (this.usuario.tipo == "cliente") ? this.accionesRespaldoCliente[4] : this.accionesRespaldoCliente[3];
               break;
 
             /*

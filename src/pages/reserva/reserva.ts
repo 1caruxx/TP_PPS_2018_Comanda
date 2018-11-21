@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { MisReservasPage } from "../../pages/mis-reservas/mis-reservas";
+import { LoginPage } from '../login/login';
 
 import firebase from "firebase";
 import * as moment from 'moment';
@@ -47,8 +48,6 @@ export class ReservaPage {
     this.minimo = `${date.getFullYear()}-${mes}-${dia}`;
     this.maximo = `${date.getFullYear() + 1}`;
 
-
-
   }
 
   ionViewDidLoad() {
@@ -74,10 +73,11 @@ export class ReservaPage {
     }
 
     this.ocultarSpinner = false;
+    this.estadoBoton = true;
 
     let reservasRef = firebase.database().ref("reservas");
 
-    this.cantidadPersonas = parseInt(this.cantidadPersonas.charAt(3));
+    let personasQueVan = parseInt(this.cantidadPersonas.charAt(3));
 
     reservasRef.once("value", (snap) => {
 
@@ -94,7 +94,8 @@ export class ReservaPage {
           if (diferencia < 60) {
 
             this.ocultarSpinner = true;
-            this.presentToast("No puede a haber un lapso menor a una hora entre alguna de tus reservas.");
+            this.estadoBoton = false;
+            this.presentToast("No puede haber un lapso menor a una hora entre alguna de tus reservas.");
             esValido = false;
             break;
           }
@@ -149,9 +150,9 @@ export class ReservaPage {
                 }
               }
 
-              if (data[item].cantidadComensales >= this.cantidadPersonas && estaDesocupada) {
+              if (data[item].cantidadComensales >= personasQueVan && estaDesocupada) {
 
-                console.log(data[item].cantidadComensales >= this.cantidadPersonas);
+                console.log(data[item].cantidadComensales >= personasQueVan);
                 puedeReservar = true;
                 break;
               }
@@ -163,28 +164,24 @@ export class ReservaPage {
                 apellido: this.usuario.apellido,
                 nombre: this.usuario.nombre,
                 img: this.usuario.img,
-                cantidadPersonas: this.cantidadPersonas,
+                cantidadPersonas: personasQueVan,
                 horario: momentoReserva.format("DD/MM/YYYY HH:mm"),
                 estado: "pendiente"
               }).then(() => {
       
                 this.ocultarSpinner = true;
-      
+                this.estadoBoton = false;
                 this.MostrarAlert("¡Éxito!", "Se registró tu reserva y te notificaremos cuando el encargado la confirme.", "Aceptar", this.Volver);
       
               });
             } else {
   
-              this.MostrarAlert("Ups...", "No hay mesas disponibles para esa fecha y horario.", "Aceptar", this.Volver);
+              this.ocultarSpinner= true;
+              this.estadoBoton = false;
+              this.MostrarAlert("Ups...", "No hay mesas disponibles para esa fecha y horario.", "Aceptar", this.OcultarAlert);
             }
           })
-
-
-
-
         });
-
-
       }
     })
   }
@@ -209,12 +206,56 @@ export class ReservaPage {
     this.alertHandler = handler;
   }
 
+  OcultarAlert() {
+    this.ocultarAlert = true;
+  }
+
   VerReservas() {
     this.navCtrl.push(MisReservasPage);
   }
 
   Volver() {
     this.navCtrl.pop();
+  }
+
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 }
