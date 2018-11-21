@@ -25,16 +25,16 @@ import { JuegoQuinterosPageModule } from '../pages/juego-quinteros/juego-quinter
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = EncuestaDeEmpleadoPage;
+  rootPage:any = QrDeLaMesaPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController, fcm: FcmProvider, toastCtrl: ToastController,private nativeAudio: NativeAudio) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
-      this.nativeAudio.preloadSimple('a', 'assets/imgs/gamma/fortnite.mp3').catch(() => { }); 
+   /*   this.nativeAudio.preloadSimple('a', 'assets/imgs/gamma/fortnite.mp3').catch(() => { }); 
 
-    /*  fcm.getToken()
+      fcm.getToken()
 
       // Listen to incoming messages
       fcm.listenToNotifications().pipe(

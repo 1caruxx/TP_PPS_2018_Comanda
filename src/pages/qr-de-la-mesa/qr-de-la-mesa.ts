@@ -283,7 +283,7 @@ public pedidosPruebaDiez : Array<any>;
                   vale++;
                   if(vale==2)
                   {
-                    this.pedidosPruebaTres.push(result[k]);
+                    this.pedidosPruebaDos.push(result[k]);
                   }
                 }
 
@@ -297,8 +297,10 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoTres.on("value", (snap) => {
 
               this.pedidosPruebaTres=[];
+              //this.pedidosPruebaTres=new Array(0);
 
               let vale=0;
+              let terminado=true;
 
 
               let result = snap.val();
@@ -315,6 +317,15 @@ public pedidosPruebaDiez : Array<any>;
                   
 
                 }
+
+                else
+                {
+                    
+                }
+                
+                //this.pedidosPruebaTres.push(result[k]);
+                //this.pedidosPruebaTres.push(result[k]);
+                //break;
 
               }
               
@@ -338,7 +349,7 @@ public pedidosPruebaDiez : Array<any>;
                   vale++;
                   if(vale==2)
                   {
-                    this.pedidosPruebaTres.push(result[k]);
+                    this.pedidosPruebaCuatro.push(result[k]);
                   }
 
                 }
@@ -366,7 +377,7 @@ public pedidosPruebaDiez : Array<any>;
                   vale++;
                   if(vale==2)
                   {
-                    this.pedidosPruebaTres.push(result[k]);
+                    this.pedidosPruebaCinco.push(result[k]);
                   }
 
                 }
@@ -394,7 +405,7 @@ public pedidosPruebaDiez : Array<any>;
                   vale++;
                   if(vale==2)
                   {
-                    this.pedidosPruebaTres.push(result[k]);
+                    this.pedidosPruebaSeis.push(result[k]);
                   }
 
                 }
@@ -422,7 +433,7 @@ public pedidosPruebaDiez : Array<any>;
                   vale++;
                   if(vale==2)
                   {
-                    this.pedidosPruebaTres.push(result[k]);
+                    this.pedidosPruebaSiete.push(result[k]);
                   }
 
                 }
@@ -450,7 +461,7 @@ public pedidosPruebaDiez : Array<any>;
                   vale++;
                   if(vale==2)
                   {
-                    this.pedidosPruebaTres.push(result[k]);
+                    this.pedidosPruebaOcho.push(result[k]);
                   }
 
                 }
@@ -478,7 +489,7 @@ public pedidosPruebaDiez : Array<any>;
                   vale++;
                   if(vale==2)
                   {
-                    this.pedidosPruebaTres.push(result[k]);
+                    this.pedidosPruebaNueve.push(result[k]);
                   }
 
                 }
@@ -507,7 +518,7 @@ public pedidosPruebaDiez : Array<any>;
                   vale++;
                   if(vale==2)
                   {
-                    this.pedidosPruebaTres.push(result[k]);
+                    this.pedidosPruebaDiez.push(result[k]);
                   }
 
                 }
