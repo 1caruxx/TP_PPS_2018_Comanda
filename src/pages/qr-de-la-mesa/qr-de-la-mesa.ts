@@ -240,22 +240,65 @@ public pedidosPruebaDiez : Array<any>;
 
             pedidosProbandoUno.on("value", (snap) => {
 
-              this.pedidosPruebaDos=[];
+              this.pedidosPruebaUno=[];
               let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
+
+              for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
 
               for(let k in result)
               { 
                 if (result[k].estado=="preparacion")
                 {
                   vale++;
-                  if(vale==2)
+
+                  if(bartender==true && cocinero==true)
                   {
-                    this.pedidosPruebaUno.push(result[k]);
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaUno.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
                   }
 
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaUno.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaUno.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
                  
 
                 }
@@ -272,8 +315,24 @@ public pedidosPruebaDiez : Array<any>;
               this.pedidosPruebaDos=[];
               let vale=0;
 
+              let cocinero=false;
+              let bartender=false;
+
 
               let result = snap.val();
+
+              for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
 
               for(let k in result)
               { 
@@ -281,9 +340,37 @@ public pedidosPruebaDiez : Array<any>;
                 {
 
                   vale++;
-                  if(vale==2)
+
+                  if(bartender==true && cocinero==true)
                   {
-                    this.pedidosPruebaDos.push(result[k]);
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaDos.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaDos.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaDos.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
                   }
                 }
 
@@ -301,31 +388,71 @@ public pedidosPruebaDiez : Array<any>;
 
               let vale=0;
               let terminado=true;
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
+
+              for(let k in result)
               { 
                 if (result[k].estado == "preparacion")
                 {
-                  vale++;
+                  /*vale++;
                   if(vale==2)
                   {
                     this.pedidosPruebaTres.push(result[k]);
+                  }*/
+                  vale++;
+
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaTres.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
                   }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaTres.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaTres.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
+                  
                   
 
                 }
-
-                else
-                {
-                    
-                }
-                
-                //this.pedidosPruebaTres.push(result[k]);
-                //this.pedidosPruebaTres.push(result[k]);
-                //break;
 
               }
               
@@ -339,7 +466,24 @@ public pedidosPruebaDiez : Array<any>;
               this.pedidosPruebaCuatro=[];
               let vale=0;
 
+              let cocinero=false;
+              let bartender=false;
+
+
               let result = snap.val();
+
+              for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
 
               for(let k in result)
               { 
@@ -347,9 +491,37 @@ public pedidosPruebaDiez : Array<any>;
                 {
 
                   vale++;
-                  if(vale==2)
+
+                  if(bartender==true && cocinero==true)
                   {
-                    this.pedidosPruebaCuatro.push(result[k]);
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaCuatro.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaCuatro.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaCuatro.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
                   }
 
                 }
@@ -366,8 +538,24 @@ public pedidosPruebaDiez : Array<any>;
               this.pedidosPruebaCinco=[];
               let vale=0;
 
+              let cocinero=false;
+              let bartender=false;
+
 
               let result = snap.val();
+
+              for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
 
               for(let k in result)
               { 
@@ -375,9 +563,37 @@ public pedidosPruebaDiez : Array<any>;
                 {
 
                   vale++;
-                  if(vale==2)
+
+                  if(bartender==true && cocinero==true)
                   {
-                    this.pedidosPruebaCinco.push(result[k]);
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaCinco.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaCinco.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaCinco.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
                   }
 
                 }
@@ -394,8 +610,24 @@ public pedidosPruebaDiez : Array<any>;
               this.pedidosPruebaSeis=[];
               let vale=0;
 
+              let cocinero=false;
+              let bartender=false;
+
 
               let result = snap.val();
+
+              for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
 
               for(let k in result)
               { 
@@ -403,9 +635,37 @@ public pedidosPruebaDiez : Array<any>;
                 {
 
                   vale++;
-                  if(vale==2)
+
+                  if(bartender==true && cocinero==true)
                   {
-                    this.pedidosPruebaSeis.push(result[k]);
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaSeis.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaSeis.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaSeis.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
                   }
 
                 }
@@ -422,8 +682,24 @@ public pedidosPruebaDiez : Array<any>;
               this.pedidosPruebaSiete=[];
               let vale=0;
 
+              let cocinero=false;
+              let bartender=false;
+
 
               let result = snap.val();
+
+              for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
 
               for(let k in result)
               { 
@@ -431,9 +707,37 @@ public pedidosPruebaDiez : Array<any>;
                 {
 
                   vale++;
-                  if(vale==2)
+
+                  if(bartender==true && cocinero==true)
                   {
-                    this.pedidosPruebaSiete.push(result[k]);
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaSiete.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaSiete.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaSiete.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
                   }
 
                 }
@@ -450,8 +754,24 @@ public pedidosPruebaDiez : Array<any>;
               this.pedidosPruebaOcho=[];
               let vale=0;
 
+              let cocinero=false;
+              let bartender=false;
+
 
               let result = snap.val();
+
+              for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
 
               for(let k in result)
               { 
@@ -459,11 +779,38 @@ public pedidosPruebaDiez : Array<any>;
                 {
 
                   vale++;
-                  if(vale==2)
+
+                  if(bartender==true && cocinero==true)
                   {
-                    this.pedidosPruebaOcho.push(result[k]);
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaOcho.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
                   }
 
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaOcho.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaOcho.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
                 }
 
               }
@@ -478,8 +825,24 @@ public pedidosPruebaDiez : Array<any>;
               this.pedidosPruebaNueve=[];
               let vale=0;
 
+              let cocinero=false;
+              let bartender=false;
+
 
               let result = snap.val();
+
+              for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
 
               for(let k in result)
               { 
@@ -487,9 +850,37 @@ public pedidosPruebaDiez : Array<any>;
                 {
 
                   vale++;
-                  if(vale==2)
+
+                  if(bartender==true && cocinero==true)
                   {
-                    this.pedidosPruebaNueve.push(result[k]);
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaNueve.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaNueve.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaNueve.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
                   }
 
                 }
@@ -507,8 +898,24 @@ public pedidosPruebaDiez : Array<any>;
               this.pedidosPruebaDiez=[];
               let vale=0;
 
+              let cocinero=false;
+              let bartender=false;
+
 
               let result = snap.val();
+
+              for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
 
               for(let k in result)
               { 
@@ -516,9 +923,37 @@ public pedidosPruebaDiez : Array<any>;
                 {
 
                   vale++;
-                  if(vale==2)
+
+                  if(bartender==true && cocinero==true)
                   {
-                    this.pedidosPruebaDiez.push(result[k]);
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaDiez.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaDiez.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaDiez.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
                   }
 
                 }
