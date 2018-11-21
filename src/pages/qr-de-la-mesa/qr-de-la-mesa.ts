@@ -5,6 +5,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import * as moment from 'moment';
 
 //LINEA 698 Y 701
 /**
@@ -68,6 +69,8 @@ public pedidosPruebaSiete : Array<any>;
 public pedidosPruebaOcho : Array<any>;
 public pedidosPruebaNueve : Array<any>;
 public pedidosPruebaDiez : Array<any>;
+
+public moment = moment;
 
 
 
@@ -1048,10 +1051,45 @@ public pedidosPruebaDiez : Array<any>;
   Modificar(correo,text,cantidad,mesa)
   {
     var ocup=true;
+    //let reservadita=false;
+    //let otro=1;
 
     this.estaLibre=true;
+    //this.presentToast(text);
+    //if(this.prueba(text))
+    //{
+      //reservadita=true;
+   // }
+    
 
-          var refDos = this.firebase.database().ref("mesas");
+    let momentoActual = moment(new Date());
+                                  let reservasRef = firebase.database().ref("reservas");
+
+                                  reservasRef.once("value", (snap) => {
+
+                                    let data = snap.val();
+                              
+                                    for (let item in data) {
+                              
+                                      if (data[item].mesa == text) {
+                              
+                                        let diferencia = Math.abs(momentoActual.diff(moment(data[item].horario, "DD/MM/YYYY HH:mm"), "m"));
+                              
+                                        if (diferencia < 40) {
+                              
+                                        
+                                          //this.presentToast("Esa mesa esta reservada.");
+                                          this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
+                                          //reservadita=true;
+                                          //otro=2;
+                                          return;
+                                          
+                                        }
+                                      }
+                                    }
+
+
+                                    var refDos = this.firebase.database().ref("mesas");
                         
                         refDos.once('value', (snap) => {
                             var data = snap.val();
@@ -1076,6 +1114,8 @@ public pedidosPruebaDiez : Array<any>;
 
                                 if (text == data[key].numeroMesa) 
                                 {
+
+                               
 
                                   //if(data[key].cliente!=null)
                                   //CAMBIE ESTA LINEA
@@ -1138,7 +1178,117 @@ public pedidosPruebaDiez : Array<any>;
                                    
                                 };                  
                             }
-                        });
+                        }); 
+
+
+
+
+                              
+                                 });
+
+
+
+
+
+
+
+
+                            
+                              
+
+          /*var refDos = this.firebase.database().ref("mesas");
+                        
+                        refDos.once('value', (snap) => {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if(mesa=="1"||mesa=="2"||mesa=="3"||mesa=="4"||mesa=="5"||mesa=="6"||mesa=="7"||mesa=="8"||mesa=="9"||mesa=="10")
+                              //if(mesa=="1")
+                                  {
+                                    
+                                      if(text!=mesa)
+                                      {
+                                        this.MostrarAlert("Error!!","Este cliente tiene una reserva para otra mesa","aceptar",this.limpiar);
+                                        break;
+                                      }
+
+                                  }
+
+
+
+                                if (text == data[key].numeroMesa) 
+                                {
+
+                               
+
+                                  //if(data[key].cliente!=null)
+                                  //CAMBIE ESTA LINEA
+                                  if(data[key].estado!="libre")
+                                  {
+
+                                    this.estaLibre=false;
+                                    //ocup=false;
+                                   // alert("La mesa ya esta ocupada");
+                                   this.MostrarAlert("Error!", "La mesa ya esta ocupada", "Aceptar", this.limpiar);
+                                    break;
+                                    //return;
+                                    
+                                  }
+
+                                  if(data[key].cantidadComensales<cantidad)
+                                  {
+                                    this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales", "Aceptar", this.limpiar);
+                                    break;
+
+                                  }
+
+
+
+
+
+                                    data[key].cliente = correo;
+                                    data[key].estado = "ocupada";
+                                    refDos.child(key).update(data[key]);
+                                    //alert("bienvenido,se relaciono la mesa tres")
+
+
+
+                                    //var ref = this.firebase.database().ref("usuarios/clientes");
+                                    var ref = this.firebase.database().ref("usuarios");
+             
+                                    ref.once('value', (snap) => {
+                                        var data = snap.val();
+                                        for(var key in data){
+                                            if (correo == data[key].correo) {
+                                                data[key].mesa = text;
+                                                data[key].estado = "atendido";
+                                               
+                                                ref.child(key).update(data[key]);
+                                                //alert("Listo,se relaciono al cliente con la mesa " + text);
+                                                this.MostrarAlert("Exito!", "Listo,se relaciono al cliente con la mesa " + text, "Aceptar", this.limpiar);
+                                                this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                                                
+                                                
+                                                
+                     
+                                            };                  
+                                        }
+                                    });
+
+
+
+
+
+                                   
+                                };                  
+                            }
+                        }); */
+
+
+                      
 
 
 
@@ -1824,6 +1974,38 @@ public pedidosPruebaDiez : Array<any>;
   volver()
   {
     this.navCtrl.pop();
+  }
+
+  prueba(text)
+  {
+    let momentoActual = moment(new Date());
+                                  let reservasRef = firebase.database().ref("reservas");
+
+                                  reservasRef.once("value", (snap) => {
+
+                                    let data = snap.val();
+                              
+                                    for (let item in data) {
+                              
+                                      if (data[item].mesa == text) {
+                              
+                                        let diferencia = Math.abs(momentoActual.diff(moment(data[item].horario, "DD/MM/YYYY HH:mm"), "m"));
+                              
+                                        if (diferencia < 40) {
+                              
+                                        
+                                          //this.presentToast("Esa mesa esta reservada.");
+                                          this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
+                              
+                                          return true;
+                                          
+                                        }
+                                      }
+                                    }
+                                    return false;
+                              
+                                 });
+
   }
 
   
