@@ -128,14 +128,72 @@ export class EncuestaDeEmpleadoPage {
       return;
     }
 
-    if(this.foto=="")
+    if(this.foto=="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg")
     {
-      this.presentToast("Tiene que cargar una foto");
-      return;
+     // this.presentToast("Tiene que cargar una foto");
+     // return;
+     let url="";
+
+     url="../../assets/imgs/gamma/llama.jpeg"
+
+     let mesasRef = this.firebase.database().ref("encuestaDeEmpleado");
+
+        mesasRef.push({
+      uno: this.uno,
+      dos: this.dos,
+      tres: this.tres,
+      cuatro:this.cuatro,
+      cinco:this.cinco,
+      img: url
+      }).then(() => {
+
+        this.presentToast("la encuesta fue cargada con exito");
+        this.encuesta();
+
+
+
+
+      });
+
+
+
+    }
+
+    else
+    {
+      
+
+            let mesasRef = this.firebase.database().ref("encuestaDeEmpleado");
+
+            let pictures = this.firebase.storage().ref(`encuestaDeEmpleado/${this.nombreFoto}`);
+
+            pictures.putString(this.foto, "data_url").then(() => {
+
+              pictures.getDownloadURL().then((url) => {
+
+                mesasRef.push({
+                  uno: this.uno,
+                  dos: this.dos,
+                  tres: this.tres,
+                  cuatro:this.cuatro,
+                  cinco:this.cinco,
+                  img: url
+                });
+              });
+            }).then(() => {
+
+              this.presentToast("la encuesta fue cargada con exito");
+              this.encuesta();
+
+
+
+
+            });
+
     }
 
   
-    let mesasRef = this.firebase.database().ref("encuestaDeEmpleado");
+    /*let mesasRef = this.firebase.database().ref("encuestaDeEmpleado");
 
     let pictures = this.firebase.storage().ref(`encuestaDeEmpleado/${this.nombreFoto}`);
 
@@ -160,7 +218,7 @@ export class EncuestaDeEmpleadoPage {
 
 
 
-    });
+    });*/
 
 
     
