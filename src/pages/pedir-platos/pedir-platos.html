@@ -35,7 +35,7 @@
         <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value,plato.carga.es, plato.carga.tiempo,  plato.carga.para,plato.carga.precio, plato.carga.id)">Elegir</button> <label class="platoCant">Cantidad</label>
      
         <!--input class="inpCantidad" [value]="valorPlatos"  #cant  placeholder="0" ion-input  type="number"-->
-        <input class="inpCantidad"  #cant  [value]="valorPlatos"  placeholder="0" ion-input type="number">
+        <input class="inpCantidad"  #cant  [value]="valorPlatos"   placeholder="0" ion-input type="number">
       </div>
         <div class="slide" [ngClass]="{'mostrarSlide':mostrarslide}">
   
@@ -86,7 +86,7 @@
 </div>
 
  <ion-header>
-  <ion-navbar color="red">
+  <ion-navbar color="red" hideBackButton="true">
 
     
  

@@ -23,9 +23,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 export class AltaPlatosPage {
   ocultar:boolean;
   mostrar:boolean;
-  foto1:any="sa";
-  foto2:any="sad";
-  foto3:any="dsa";
+  foto1:any="";
+  foto2:any="";
+  foto3:any="";
   error:string;
   cocineroBebida:boolean=false;
   mostrarbtn1:boolean;
@@ -33,6 +33,7 @@ export class AltaPlatosPage {
   mostrarbtn3:boolean;
   mostrarfoto1:boolean;
   mostrarfoto2:boolean;
+  bloquearBotones:boolean=false;
   esCocinero:boolean=false;
   esBartender:boolean=false;
   tipo;
@@ -58,7 +59,7 @@ platost:boolean;
 bebidast:boolean;
 cantMostrar;
 ocultarTiempo:boolean;
-
+mostrarSpinner:boolean=false;
 
   constructor(
     public navCtrl: NavController, 
@@ -82,11 +83,11 @@ ocultarTiempo:boolean;
     //Descomentar esta linea antes de hacer el push
    this.tipo = localStorage.getItem("usuario");
    this.tipo =JSON.parse(this.tipo).tipo;
- // this.tipo="cocinero";
-   this.cantMostrar="grs";
- //this.tipo =
- 
 
+   this.cantMostrar="grs";
+ //this.tipo ="cocinero";
+ 
+  
     if(this.tipo=="cocinero")
     {
       this.esCocinero=true;
@@ -146,6 +147,12 @@ ocultarTiempo:boolean;
       this.nombre="";
       this.descripcion="";
       this.ocultarQr=true;
+      this.mostrarbtn1=true;
+      this.mostrarfoto1=false;
+      this.mostrarbtn2=true;
+      this.mostrarfoto2=false;
+      this.mostrarbtn3=true;
+      this.mostrarfoto3=false;
     }
     if(this.carga=="bebidas")
     {
@@ -158,6 +165,12 @@ ocultarTiempo:boolean;
       this.nombre="";
       this.descripcion="";
       this.ocultarQr=false;
+      this.mostrarbtn1=true;
+      this.mostrarfoto1=false;
+      this.mostrarbtn2=true;
+      this.mostrarfoto2=false;
+      this.mostrarbtn3=true;
+      this.mostrarfoto3=false;
 
     }
    
@@ -169,6 +182,10 @@ ocultarTiempo:boolean;
     this.mostrar=true;
 
   }
+  Atras()
+  {
+    this.navCtrl.pop();
+  }
   LeerQr()
   {
     this.options = { prompt : "Escaneá el qr del producto", formats: 'QR_CODE' }
@@ -178,7 +195,7 @@ ocultarTiempo:boolean;
     this.barcodeScanner.scan(this.options).then((barcodeData) => {
 
       let texto = (barcodeData.text);
-      alert(texto);
+   
       let miScan= (texto).split('@');
 
       if(miScan[5]==undefined)
@@ -216,11 +233,10 @@ ocultarTiempo:boolean;
   
       this.cantidad=miScan[3];
       this.precio=miScan[4];
-      this.tipoBebida=miScan[6];
+    //  this.tipoBebida=miScan[6];
 
     });
-        
-  //  let cadena ="vino@vino tinto@0@750@200@true@gaseosa";
+  
      
 
   
@@ -228,6 +244,10 @@ ocultarTiempo:boolean;
   }
   Cancelar()
   {
+    if(this.bloquearBotones)
+    {
+      return;
+    }
     this.ocultar=false;
     this.mostrar=false;
     this.mostrarbtn1=true;
@@ -236,13 +256,17 @@ ocultarTiempo:boolean;
     this.mostrarfoto2=false;
     this.mostrarbtn3=true;
     this.mostrarfoto3=false;
-    console.log(this.tipo);
-
+  
+ 
  
   
   }
   async tomarFoto1()
   {
+     if(this.bloquearBotones)
+    {
+      return;
+    }
   
     try{
 
@@ -279,10 +303,17 @@ ocultarTiempo:boolean;
    
 
 
+
+
+
   
   }
   tomarFoto2()
   {
+    if(this.bloquearBotones)
+    {
+      return;
+    }
     
     
    try{
@@ -314,10 +345,14 @@ ocultarTiempo:boolean;
     {
 
     }
+
   }
   tomarFoto3()
-  {
-
+  { 
+    if(this.bloquearBotones)
+    {
+      return;
+    }
     
     try{
 
@@ -348,9 +383,16 @@ ocultarTiempo:boolean;
     {
 
     }
+ 
+    
   }
   Cargar()
   {
+    if(this.bloquearBotones)
+    {
+      return;
+    }
+    this.bloquearBotones=true;
     let carga:any;
 
   
@@ -371,10 +413,12 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
           }, 3000);
           return;
         }
-        if(this.tipoBebida=="")
+
+    /*    if(this.tipoBebida=="")
         {
           this.mensaje="Debe indicar que tipo de bebida cargara";
           this.mostrarAlert3=true;
@@ -383,7 +427,7 @@ ocultarTiempo:boolean;
             this.mostrarAlert3=false;
           }, 3000);
           return;
-        }
+        }*/
         if (!this.ValidarNumero(this.cantidad)) {
 
           
@@ -392,6 +436,21 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
+          }, 3000);
+          return;
+        }
+        if(parseInt(this.cantidad)>5000)
+        {
+          this.mensaje="La cantidad ingresada es demasiado alta";
+          this.cantidad=undefined;
+          this.mostrarAlert3=true;
+          setTimeout(()=>{
+
+            this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
           return;
         }
@@ -402,6 +461,22 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
+          }, 3000);
+    
+          return;
+        }
+        if (parseInt(this.precio)>5000) {
+       
+          this.mensaje="El precio ingresado es demasiado alto";
+          this.precio=undefined;
+          this.mostrarAlert3=true;
+          setTimeout(()=>{
+
+            this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
     
           return;
@@ -413,6 +488,8 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
           return;
 
@@ -429,6 +506,8 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
           return;
         }
@@ -438,6 +517,8 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
           return;
         }
@@ -447,6 +528,8 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
           return;
         }
@@ -456,7 +539,50 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
+          return;
+        }
+        if(parseInt(this.cantidad)>5000)
+        {
+          this.mensaje="La cantidad ingresada es demasiado alta";
+          this.cantidad=undefined;
+          this.mostrarAlert3=true;
+          setTimeout(()=>{
+
+            this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
+          }, 3000);
+          return;
+        }
+        if (parseInt(this.precio)>5000) {
+       
+          this.mensaje="El precio ingresado es demasiado alto";
+          this.precio=undefined;
+          this.mostrarAlert3=true;
+          setTimeout(()=>{
+
+            this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
+          }, 3000);
+    
+          return;
+        }
+        if (parseInt(this.tiempo)>150) {
+       
+          this.mensaje="El tiempo ingresado es demasiado alto";
+          this.tiempo=undefined;
+          this.mostrarAlert3=true;
+          setTimeout(()=>{
+
+            this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
+          }, 3000);
+    
           return;
         }
         if(this.foto1===""||this.foto2==""||this.foto3=="")
@@ -466,24 +592,16 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
           return;
 
         }
-        if(this.foto1===""||this.foto2==""||this.foto3=="")
-        {
-          this.mensaje="Las fotos son obligatorias";
-          this.mostrarAlert3=true;
-          setTimeout(()=>{
-
-            this.mostrarAlert3=false;
-          }, 3000);
-          return;
-
-        }
+    
 
     }
-
+      this.mostrarSpinner=true;
 
       let pedidoRef = firebase.database().ref("platos");
       pedidoRef.once("value", (snap) => {
@@ -493,19 +611,50 @@ ocultarTiempo:boolean;
   
         for (let item in data) {
   
-          if (data[item].carga.nombre == this.nombre) {
-  
- 
-            this.mensaje="El nombre del plato ya existe  utilize otro por favor.";
-            this.mostrarAlert3=true;
-            setTimeout(()=>{
-  
-              this.mostrarAlert3=false;
-            }, 3000);
-            esValido = false;
-         
-            break;
+          if(this.carga=="bebidas")
+          { 
+            if (data[item].carga.nombre == this.nombre)
+            {
+          
+              
+                this.mostrarSpinner=false;
+                this.mensaje="La bebida que intenta cargar ya esta existe intente con otro nombre.";
+                this.mostrarAlert3=true;
+                setTimeout(()=>{
+      
+                  this.mostrarAlert3=false;
+                  this.bloquearBotones=false;
+
+                }, 3000);
+                esValido = false;
+
+              
+             
+           
+              
+
+            }
           }
+          else
+          {
+            if (data[item].carga.nombre == this.nombre) {
+  
+              this.mostrarSpinner=false;
+              this.mensaje="El nombre del plato   que intenta cargar ya existe  intente con otro nombre.";
+              this.mostrarAlert3=true;
+              setTimeout(()=>{
+    
+                this.mostrarAlert3=false;
+                this.bloquearBotones=false;
+
+              }, 3000);
+              esValido = false;
+           
+              break;
+            }
+
+          }
+   
         }
         if(esValido)
         {
@@ -526,8 +675,8 @@ ocultarTiempo:boolean;
                   }; 
                   let mensaje = firebase.database().ref().child("platos");
                   mensaje.push({carga}).then(()=>{
-                    
-                    this.mensaje="La bebida se cargo exitosamente";
+                    this.mostrarSpinner=false;
+                    this.mensaje="La bebida se cargo exitósamente";
                     this.mostrarAlert3=true;
                     setTimeout(()=>{
                       this.tiempo="";
@@ -536,7 +685,15 @@ ocultarTiempo:boolean;
                       this.nombre="";
                       this.descripcion="";
                       this.tipoBebida="";
+                      this.mostrarbtn1=true;
+                      this.mostrarfoto1=false;
+                      this.mostrarbtn2=true;
+                      this.mostrarfoto2=false;
+                      this.mostrarbtn3=true;
+                      this.mostrarfoto3=false;
                       this.mostrarAlert3=false;
+                      this.bloquearBotones=false;
+
                     }, 3000);
                   
                   });
@@ -560,8 +717,8 @@ ocultarTiempo:boolean;
         let mensaje = firebase.database().ref().child("platos");
         mensaje.push({carga}).then(()=>{
           
-          
-          this.mensaje="El plato se cargo exitosamente";
+          this.mostrarSpinner=false;
+          this.mensaje="El plato se cargo exitósamente";
           this.mostrarAlert3=true;
           setTimeout(()=>{
             this.tiempo="";
@@ -570,7 +727,15 @@ ocultarTiempo:boolean;
             this.nombre="";
             this.descripcion="";
             this.tipoBebida="";
+            this.mostrarbtn1=true;
+            this.mostrarfoto1=false;
+            this.mostrarbtn2=true;
+            this.mostrarfoto2=false;
+            this.mostrarbtn3=true;
+            this.mostrarfoto3=false;
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
       
       
@@ -596,6 +761,8 @@ ocultarTiempo:boolean;
         setTimeout(()=>{
 
           this.mostrarAlert3=false;
+          this.bloquearBotones=false;
+
         }, 3000);
         return;
       }
@@ -605,16 +772,48 @@ ocultarTiempo:boolean;
         setTimeout(()=>{
 
           this.mostrarAlert3=false;
+          this.bloquearBotones=false;
+
         }, 3000);
         return;
       }
-      if (!this.ValidarNumero(this.cantidad)) {
-        this.mensaje="El cantidad ingresado debe ser un numero";
+      if (parseInt(this.precio)>5000) {
+       
+        this.mensaje="El precio ingresado es demasiado alto";
+        this.precio=undefined;
         this.mostrarAlert3=true;
         setTimeout(()=>{
 
           this.mostrarAlert3=false;
+          this.bloquearBotones=false;
+
         }, 3000);
+  
+        return;
+      }
+      if (!this.ValidarNumero(this.cantidad)) {
+        this.mensaje="La cántidad ingresado debe ser un número";
+        this.mostrarAlert3=true;
+        setTimeout(()=>{
+
+          this.mostrarAlert3=false;
+          this.bloquearBotones=false;
+
+        }, 3000);
+        return;
+      }
+      if (parseInt(this.cantidad)>3000) {
+       
+        this.mensaje="Los centímetros cúbicos  ingresados son demasiados";
+        this.cantidad=undefined;
+        this.mostrarAlert3=true;
+        setTimeout(()=>{
+
+          this.mostrarAlert3=false;
+          this.bloquearBotones=false;
+
+        }, 3000);
+  
         return;
       }
       if(this.foto1===""||this.foto2==""||this.foto3=="")
@@ -624,11 +823,14 @@ ocultarTiempo:boolean;
           setTimeout(()=>{
 
             this.mostrarAlert3=false;
+            this.bloquearBotones=false;
+
           }, 3000);
           return;
 
         }
       //VALIDO EL NOMBRE EN LA BASE DE DATOS
+      this.mostrarSpinner=true;
       let pedidoRef = firebase.database().ref("platos");
       pedidoRef.once("value", (snap) => {
   
@@ -639,12 +841,15 @@ ocultarTiempo:boolean;
   
           if (data[item].carga.nombre == this.nombre) {
   
- 
-            this.mensaje="El nombre de la bebida/trago  ya existe  utilize otro por favor.";
+            this.mostrarSpinner=false;
+            this.mensaje="El nombre de la bebida o trago que intenta cargar ya existe  utilize otro por favor.";
+            
             this.mostrarAlert3=true;
             setTimeout(()=>{
   
               this.mostrarAlert3=false;
+              this.bloquearBotones=false;
+
             }, 3000);
             esValido = false;
          
@@ -668,8 +873,8 @@ ocultarTiempo:boolean;
                   }; 
                   let mensaje = firebase.database().ref().child("platos");
                   mensaje.push({carga}).then(()=>{
-                    
-                    this.mensaje="La bebida se cargo exitosamente";
+                    this.mostrarSpinner=false;
+                    this.mensaje="La bebida se cargo exitósamente";
                     this.mostrarAlert3=true;
                     setTimeout(()=>{
                       this.tiempo="";
@@ -677,8 +882,16 @@ ocultarTiempo:boolean;
                       this.cantidad="";
                       this.nombre="";
                       this.descripcion="";
+                      this.mostrarbtn1=true;
+                      this.mostrarfoto1=false;
+                      this.mostrarbtn2=true;
+                      this.mostrarfoto2=false;
+                      this.mostrarbtn3=true;
+                      this.mostrarfoto3=false;
                       this.tipoBebida="";
                       this.mostrarAlert3=false;
+                      this.bloquearBotones=false;
+
                     }, 3000);
                   
                   });

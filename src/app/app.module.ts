@@ -2,6 +2,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { NativeAudio } from '@ionic-native/native-audio';
+
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -66,6 +68,7 @@ import { ComponentsModule } from "../components/components.module";
     StatusBar,
     SplashScreen,
     Camera,
+    NativeAudio,
     BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireAuth,

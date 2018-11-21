@@ -276,6 +276,20 @@ mensaje.once("value",(snap)=>{
       return;
     }
 
+  if(parseInt(valor)>20)
+  {   
+    this.mensaje="La cantidad del elemento del menú no puede ser mayor a 20.";
+  this.mostrarAlert3=true;
+  this.valorPlatos=0;
+  this.valor=null;
+  setTimeout(()=>{
+
+    this.mostrarAlert3=false;
+    this.mensaje="Su pedido ha sido enviado en bréve se lo llevaremos...";
+  }, 3000);
+  return;
+
+  }
 
     if(tiempo=="cero")
     {
@@ -359,6 +373,8 @@ this.monto=this.monto +total;
     });
     alert.present();
   }
+
+
   Platos()
   {
 
@@ -500,12 +516,14 @@ var data =snap.val();
   {
     if(cual=="plato")
     {
+      console.log("pongo undefined a platos");
      console.log("Le resto: " +this.montoPlatos );
      console.log("El monto es de :" + this.monto);
       this.monto= this.monto-this.montoPlatos;
-      this.valorPlatos=null;       
+   
+    
       this.montoPlatos=0;
-      
+      this.valorPlatos=null;  
 
     }
     else
@@ -528,22 +546,31 @@ var data =snap.val();
 console.log("Le saco la selecccion a ");    
       if(this.pedido[i].es == cual)
       {
-        console.log(this.pedido[i]);
+        
         (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
      //  this.pedido.splice(i, 1);
      //Guardo las posiciones del array que tengo que borrar
      posicionBorrar.push(i);
+     this.pedido[i]=null;
+     //console.log("Deberia borrar este pedido:" + this.pedido[i]);
+     //console.log("Esta es la posicion : " + i);
 
       }
     
     }
-
-    //Borro las posiciones del array guardadas
-    for(let i=0;i<posicionBorrar.length;i++ )
+//Aca cargo el array de pedidos con elementos del pedido que no hallan sido borrados
+  let pedidoSec:any[]=[];
+  
+    for(let i=0;i<this.pedido.length;i++ )
     {
-        this.pedido.splice(posicionBorrar[i], 1);
+      if(this.pedido[i]!=null)
+      {
+        pedidoSec.push(this.pedido[i]);
+      }
+        
+      //  this.pedido.splice(posicionBorrar[i], 1);
     }
-
+    this.pedido=pedidoSec;
     
    // this.pedido.splice(0, this.pedido.length);
    
@@ -576,7 +603,7 @@ console.log("Le saco la selecccion a ");
     if(this.pedido.length<=0)
     {
       this.erroresPedidos++;
-      this.mensaje="No agrego ningun pedido a la orden";
+      this.mensaje="No agrego ningun pedido a la orden.";
       this.mostrarAlert3=true;
       setTimeout(()=>{
         
@@ -771,7 +798,17 @@ TraerClaveMozo()
             nuevo= '';
             cadena=cadena.replace(patron, nuevo);
             this.mesa=cadena;
-            console.log(cadena);
+            //Le pongo estado al cliente como delivery
+            let usuario= data[key];
+            usuario.estado="delivery";
+          
+            console.log(usuario);
+           
+         
+            let usuariosRef = firebase.database().ref("usuarios/"+key);
+         
+            usuariosRef.set(usuario);
+           
             this.CalcularMonto();
             return;
 
@@ -839,7 +876,8 @@ CalcularMonto()
      //SUMO LOS VALORES:
      for(let i=0;i<montos.length-1;i++)
      {
-       if(montos[i]!="tomado")
+       //Fijarme Si esto se soluciona.
+       if(montos[i]!="tomado" && montos[i]!="preparacion" && montos[i]!="terminado" )
        {
         let suma= parseInt(montos[i].cantidad) *  montos[i].precio;
         console.log(suma);

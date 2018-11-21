@@ -116,15 +116,18 @@ page-qr-ingreso-local {
     }
     .imgAnonimo
     {
-        position: absolute;
-        width: 40%;
-        /* height: 9%; */
-        top: 5%;
-        left: 30%;
+           /* position: absolute; */
+    width: 40%;
+    /* height: 9%; */
+    /* top: 5%; */
+    left: 30%;
+    margin-left: 30%;
+    margin-bottom: 5%;
+    margin-top: 2%;
     }
     .regAnonimo
     {
-        height: 50%;
+       
         border: 3px solid #f53d3d;
         width: 90%;
         display: flex;
@@ -256,6 +259,23 @@ page-qr-ingreso-local {
    display:none;
 
     }
+    .miSpinner
+    {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 5000;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.349);
+    }
+    .miSpinner img
+    {
+        width: 80%
+    }
+ 
     .mostrarAlert3
     {
         display:flex!important;
@@ -267,6 +287,25 @@ page-qr-ingreso-local {
     }
     .fotos
     {
+      
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        /* background: rgba(255, 255, 255, 0.22); */
+        width: 90%;
+        margin-left: 5%;
+  
+    }
+    .fotos h1
+    {
+        color: white;
+        width: 100%;
+        font-size: 1.7em;
+        text-align: center;
+    }
+    .subFotos
+    {
+        width: 100%;
         display: flex;
         justify-content: space-around;
     }
@@ -336,11 +375,11 @@ page-qr-ingreso-local {
         width:20%;
         align-self: center;
     }
-    .encuestas img
+    .encuestaImg
     {
     position: absolute;
         width: 10%;
-        height: 3%;
+        height: 1%;
         right: 20px;
         animation: pulse 2s ease-in-out infinite;
 
@@ -431,4 +470,5 @@ page-qr-ingreso-local {
         
         
     }
+
 }

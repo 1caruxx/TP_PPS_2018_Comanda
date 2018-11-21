@@ -4,6 +4,10 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
+<div class="miSpinner" *ngIf="mostrarMiSpinner">
+  <img src="assets/imgs/beta/elLogo.png" class="pulse">
+  </div>
 <div class="anonimo" [ngClass]="{'mostrarAnonimo':mostrarAnonimo}">
   <div class="regAnonimo">
     <img class="imgAnonimo" [src]="imgAnonimo">
@@ -22,36 +26,14 @@
       <h1>Ingrese por favor la cantidad de comensales</h1>
       <input type="number"[(ngModel)]="comensales">
       <button ion-button color="red" (click)="AceptarAlert2()">Aceptar</button>
-      <button ion-button color="red" (click)="CancelarAlert2()">Cancelar</button>
+     
     </div>
     </div>
 <div class="alert3" [ngClass]="{'mostrarAlert3':mostrarAlert3}">
     <h1>{{mensaje}}</h1>
   </div>
   
-<ion-header>
-  <ion-navbar color="red">
 
-    
-    <ion-buttons>
-      <button ion-button menuToggle>
-        <ion-icon name="arrow-round-back"></ion-icon>
-      </button>
-    </ion-buttons>
-
-    
-
-    <!-- <ion-title>{{sala}}</ion-title> -->
-    <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
-
-    <ion-buttons end>
-      <button ion-button>
-        <ion-icon name="power"></ion-icon>
-      </button>
-    </ion-buttons>
-
-  </ion-navbar>
-</ion-header>
 
 
   
@@ -66,7 +48,7 @@
     <div class="encuestas"  [ngClass]="{'desplegar':desplegarEncuesta}" >
       <h1 class="tituloEncuestas">Opiniones de nuestros clientes</h1>
   
-      <img *ngIf="desplegarEncuesta"  src="assets/imgs/beta/Reloj.png">
+      <img *ngIf="desplegarEncuesta" class="encuestaImg" src="assets/imgs/beta/Reloj.png">
           <div class="encuesta1" *ngFor="let encuesta of encuestas">
           <h2 class="tituloEncuesta1">{{encuesta.cliente}}</h2>
 
@@ -75,21 +57,24 @@
           <p class="respEncuesta1">{{encuesta.preg1}}</p>
           </div>
           <div class="pregResp">
-          <h3 class="PreguntaEncuesta1"> ¿Como calificar&iacute;a la atenci&oacute;n?</h3>
-          <p class="respEncuesta1">{{encuesta.preg2}}</p>
+          <h3 class="PreguntaEncuesta1"> ¿Cómo calificar&iacute;a la atenci&oacute;n?</h3>
+          <p class="respEncuesta1 preg4">{{encuesta.preg2}}</p>
           </div>
           <div class="pregResp">
-          <h3 class="PreguntaEncuesta1"> ¿Que tan buenos son nuestros platos?</h3>
+          <h3 class="PreguntaEncuesta1"> ¿Qué tan buenos son nuestros platos?</h3>
           <p class="respEncuesta1 preg4" >{{encuesta.preg4|elPipe}}</p>
           </div>
           <div class="pregResp">
-          <h3 class="PreguntaEncuesta1"> ¿Del 1 al 10, qué puntaje le pondrias al restaurante?</h3>
+          <h3 class="PreguntaEncuesta1"> ¿Del 1 al 10, qué puntaje le pondría al restaurante?</h3>
           <p class="respEncuesta1"> {{encuesta.preg5}}</p>
           </div>
           <div class="fotos" >
+            <h1 *ngIf="encuesta.foto1 !=''||encuesta.foto2 !=''||encuesta.foto3 !=''">Fotos de  las encuesta:</h1>
+            <div class="subFotos">
               <img  *ngIf="encuesta.foto1 !=''" [src]="encuesta.foto1">
               <img *ngIf="encuesta.foto2 !=''" [src]="encuesta.foto2">
               <img *ngIf="encuesta.foto3 !=''" [src]="encuesta.foto3">
+              </div>
               </div>
           </div>
     

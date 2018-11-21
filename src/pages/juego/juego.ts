@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Alert } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { NativeAudio } from '@ionic-native/native-audio';
+
 
 import firebase from "firebase";
 
@@ -19,6 +21,7 @@ import firebase from "firebase";
 })
 export class JuegoPage {
 
+  yaJugo:boolean;
   taparJuego:boolean=false;
   animacion:any[]=[];
   fotos:any[]=[];
@@ -37,10 +40,16 @@ export class JuegoPage {
   juegoIniciado:boolean=false;
   puntos:number;
   gano:boolean=false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,   private authInstance: AngularFireAuth,) {
-    //this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+  constructor(public navCtrl: NavController, public navParams: NavParams,   private authInstance: AngularFireAuth,private nativeAudio: NativeAudio) {
+    this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
     this.correo=localStorage.getItem("usuario");
     this.correo =(JSON.parse(this.correo)).correo;
+ 
+    this.nativeAudio.preloadSimple('simple', 'assets/audio/beta/simple.mp3').catch(()=>{});
+    this.nativeAudio.preloadSimple('coincide', 'assets/audio/beta/coincide.mp3').catch(()=>{});
+
+
+    //Ademas de obtener la mesa tambien me fijo si el usuario ya jugo este juego
     this.ObtenerMesa();
     for(let i=0;i<16;i++)
       { 
@@ -106,7 +115,7 @@ export class JuegoPage {
     }
 
     //Aca muestro el alert de que perdio.
-    this.mensaje="El tiempo se acabó, juego terminado";
+    this.mensaje="El tiempo se acabó, juego terminado, ustéd pierde";
     this.mostrarAlert=true;
     setTimeout(()=>{
 
@@ -148,6 +157,8 @@ export class JuegoPage {
    //this.contadorJugadas = this.contadorJugadas +1;
     if(this.contadorJugadas==1)
     {
+      this.nativeAudio.play('simple').catch(()=>{});
+
       //Aca permito que se de vuelta la imagen
       this.valorViejo=valor;
       this.primerId = this.fotos[valor].id;
@@ -177,6 +188,8 @@ export class JuegoPage {
           this.imgMostrar[valor].ok=false;
           this.animacion[valor]=true;
           this.animacion[this.valorViejo]=true;
+          this.nativeAudio.play('coincide').catch(()=>{});
+
           this.puntos = this.puntos+10;
           if(this.puntos==80)
           {
@@ -186,11 +199,13 @@ export class JuegoPage {
            // );
            // this.IniciarJuego();
               this.gano=true;
+    
           }
         }
         else
         {
-         
+          this.nativeAudio.play('simple').catch(()=>{});
+
           this.claveActual="";
         }
       this.contadorJugadas=0;
@@ -216,21 +231,41 @@ export class JuegoPage {
         }
         if(this.gano)
         {
-          this.SubirDescuento();
-          this.mensaje="!!Felicitaciones usted ganó un 10% de descuento!!";
-          this.mostrarAlert=true;
-          setTimeout(()=>{
-      
-            this.mostrarAlert=false;
-          
-            this.navCtrl.pop();
-          }, 4000);
-          clearInterval(this.x);
-          
-          this.tiempo="juego finalizado";
+          if(!this.yaJugo)
+          {
+            this.SubirDescuento();
+            this.mensaje="!!Felicitaciones usted ganó un 10% de descuento!!";
+            this.mostrarAlert=true;
+            setTimeout(()=>{
+        
+              this.mostrarAlert=false;
+            
+              this.navCtrl.pop();
+            }, 4000);
+            clearInterval(this.x);
+            
+            this.tiempo="juego finalizado";
+
+          }
+          else
+          {
+            this.mensaje="!!Felicitaciones ganó el juego!!";
+            this.mostrarAlert=true;
+            setTimeout(()=>{
+        
+              this.mostrarAlert=false;
+            
+              this.navCtrl.pop();
+            }, 4000);
+            clearInterval(this.x);
+            
+           this.tiempo="juego finalizado";
+          }
+         
+        
         }
        
-      }, 1000);
+      }, 500);
       
     }
   }
@@ -246,9 +281,34 @@ export class JuegoPage {
       for (let key in data) {
 
         if (data[key].correo == this.correo) {
+
+          
+          //Si noo jugo pongo mi variable a false y subo que ya jugo a firebase
+        
+          if(data[key].juegoFacu==undefined)
+          {
+            this.yaJugo=false;
+
+            let usuario= data[key];
+            usuario.juegoFacu="si";
          
-          this.mesa =data[key].mesa;
+           
+         
+            let usuariosRef = firebase.database().ref("usuarios/"+key);
+            this.claveActual=key;
+            usuariosRef.set(usuario)
+          }//Si jugo simplemente le aviso a mi variable local.
+          else
+          {
+            this.yaJugo=true;
+          }
+         
+          //Siempre va a tener mesa sino sera su correo pero el campo mesa siempre estara seteado asi que tranqui
+         
+            this.mesa =data[key].mesa;
+
         }
+        
       }
 
   });
