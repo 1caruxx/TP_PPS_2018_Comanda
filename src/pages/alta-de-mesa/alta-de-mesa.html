@@ -146,18 +146,23 @@
       <ion-nav #content swipeBackEnabled="false"></ion-nav>-->
 
       <ion-header>
-        <ion-navbar color="red">
+        <ion-navbar color="red" hideBackButton="true">
           <ion-title>
-            Alta de mesa
+           
           </ion-title>
+
+          <ion-buttons start style="left: 3px;
+          position: absolute;">
+          <button ion-button (click)="volver()">
+        <ion-icon name="arrow-back"></ion-icon>
+         </button>
+        </ion-buttons>
+
+          
       
           <ion-buttons end>
 
-              <button ion-button (click)=volver()>
-                  <ion-icon name="arrow-back"></ion-icon>
-              </button>
-
-
+           
             <button ion-button (click)="Logout()">
               <ion-icon name="power"></ion-icon>
             </button>

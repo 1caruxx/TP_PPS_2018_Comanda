@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import firebase from "firebase";
 /**
  * Generated class for the JuegoQuinterosPage page.
  *
@@ -36,8 +37,39 @@ export class JuegoQuinterosPage {
   public alertMensajeBoton;
   public alertHandler;
 
+  public firebase = firebase;
+  public usuario: any;
+  public usuarioKey;
+  public usuarioMesa;
+  public puedeGanarBebida: boolean;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) 
   {
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
+
+    let usuariosRef = firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          this.usuarioKey = item;
+          this.usuarioMesa = data[item].mesa;
+
+          if (data[item].juegoAxel) {
+            this.puedeGanarBebida = false;
+          }
+        }
+      }
+    })
+
+
+
     this.getNewQuestion();
 
   }
@@ -146,11 +178,46 @@ export class JuegoQuinterosPage {
           if(this.puntajeMaximo==this.meta)
           {
             //alert("Enhorabuena,usted gano el juego");
-            this.MostrarAlert("Gano!!", "Se gano su bebida gratis", "Aceptar", this.limpiar);
+            //this.MostrarAlert("Gano!!", "Se gano su bebida gratis", "Aceptar", this.limpiar);
             this.question=="";
             this.segundos==0;
-            clearInterval(this.asd);          }
-      } 
+            clearInterval(this.asd);      
+            
+            if (this.puedeGanarBebida) 
+            {
+
+
+            
+
+              this.estadoBoton = true;
+              //this.ocultarSpinner = false;
+              this.MostrarAlert("Ganaste!", "Tu bebida gratis aguarda!", "Volver", this.limpiar);
+      
+              firebase.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true }).then(() => {
+      
+                firebase.database().ref("pedidos").child(this.usuarioMesa).child("cocinero").push({
+                  cantidad: 1,
+                  nombre: "bebida gratuita",
+                  precio: 0
+                }).then(() => {
+                  firebase.database().ref("pedidos").child(this.usuarioMesa).child("cocinero").update({ estado: "tomado" }).then(() => {
+                    this.estadoBoton = false;
+                   // this.ocultarSpinner = true;
+                  })
+                })
+              });
+            } 
+
+            else {
+
+              this.MostrarAlert("Ganaste!", "", "Volver", this.limpiar);
+            }
+          }
+
+        }
+
+        
+      
       else 
       {
         //alert("respuesta incorrecta");

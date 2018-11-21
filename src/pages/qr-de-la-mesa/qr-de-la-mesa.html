@@ -18,16 +18,19 @@
 </ion-content>-->
 
 <ion-header>
-  <ion-navbar color="red">
+  <ion-navbar color="red" hideBackButton="true">
     <ion-title>
-      qrDeLaMesa
+      
     </ion-title>
 
-    <ion-buttons end>
+    <ion-buttons start style="left: 3px;
+          position: absolute;">
+          <button ion-button (click)="volver()">
+        <ion-icon name="arrow-back"></ion-icon>
+         </button>
+        </ion-buttons>
 
-        <button ion-button (click)=volver()>
-            <ion-icon name="arrow-back"></ion-icon>
-        </button>
+    <ion-buttons end>
 
 
       <button ion-button (click)="Logout()">

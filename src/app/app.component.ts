@@ -19,12 +19,13 @@ import { Subject } from 'rxjs/Subject';
 import { tap } from 'rxjs/operators';
 
 import { NativeAudio } from '@ionic-native/native-audio';
+import { JuegoQuinterosPageModule } from '../pages/juego-quinteros/juego-quinteros.module';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = QrDeLaMesaPage;
+  rootPage:any = JuegoQuinterosPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController, fcm: FcmProvider, toastCtrl: ToastController,private nativeAudio: NativeAudio) {
     platform.ready().then(() => {
