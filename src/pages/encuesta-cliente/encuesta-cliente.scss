@@ -11,6 +11,9 @@ page-encuesta-cliente {
         background: url(../assets/imgs/beta/fondoQr.jpg);
     background-size: 100% 100%;
     }
+    scroll-content {
+        overflow-y: hidden;
+    }
 
     ion-navbar ion-icon { font-size: 50px !important; }
     .alert3
@@ -68,6 +71,14 @@ page-encuesta-cliente {
         outline: none;
         box-shadow: none;
     }
+    .altoCanvas
+    {
+        height: 75% !important;
+        width: 180% !important;
+      
+        margin-left: -40% !important;
+
+    }
     .cerrarChart ion-icon
     {
         color:black;
@@ -113,6 +124,7 @@ page-encuesta-cliente {
         background: url("../assets/imgs/beta/fondoQr.jpg");
         background-size:100% 100%;
         position:relative;
+        justify-content: center;
     }
     .tituloPag
     {
@@ -278,7 +290,10 @@ margin-top:0;
 
       }  
       
-
+      .scroll-content
+      {
+          overflow: hidden;
+      }
     @media  screen and(max-height:"480px")
     {
         .laPregunta5 {

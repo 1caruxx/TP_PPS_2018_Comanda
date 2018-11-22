@@ -8,25 +8,7 @@
     <h1>{{mensaje}}</h1>
   </div>
 
-<ion-header>
-    <ion-navbar color="red">
-  
-      
-      
-  
-      
-  
-      <!-- <ion-title>{{sala}}</ion-title> -->
-      <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
-  
-      <ion-buttons end>
-        <button ion-button (click)="irA()">
-          <ion-icon name="power"></ion-icon>
-        </button>
-      </ion-buttons>
-  
-    </ion-navbar>
-  </ion-header>
+
 
 
 <ion-content >
@@ -59,7 +41,7 @@
                                  
                                 
 
-                                  <canvas baseChart
+                                  <canvas class="altoCanvas" baseChart
                                           [data]="pregunta1Data"
                                           [labels]="pregunta1Labels"
                                           [chartType]="doughnutChartType"
@@ -93,7 +75,7 @@
                                   <ion-icon name="close"></ion-icon>
                               </button>
                                   <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
-                                  <canvas baseChart
+                                  <canvas class="altoCanvas" baseChart
                                           [data]="pregunta2Data"
                                           [labels]="pregunta2Labels"
                                           [chartType]="doughnutChartType"
@@ -137,7 +119,7 @@
                                               <ion-icon name="close"></ion-icon>
                                           </button>
                                           <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
-                                      <canvas baseChart
+                                      <canvas baseChart class="altoCanvas"
                                               [data]="pregunta3Data"
                                               [labels]="pregunta3Labels"
                                               [chartType]="doughnutChartType"
@@ -172,7 +154,7 @@
                                               <ion-icon name="close"></ion-icon>
                                           </button>
                                           <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
-                                      <canvas baseChart
+                                      <canvas baseChart class="altoCanvas"
                                               [data]="pregunta4Data"
                                               [labels]="pregunta4Labels"
                                               [chartType]="doughnutChartType"
@@ -200,7 +182,7 @@
                                                   <ion-icon name="close"></ion-icon>
                                               </button>
                                               <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
-                                          <canvas baseChart
+                                          <canvas baseChart class="altoCanvas"
                                                   [data]="pregunta5Data"
                                                   [labels]="pregunta5Labels"
                                                   [chartType]="doughnutChartType"

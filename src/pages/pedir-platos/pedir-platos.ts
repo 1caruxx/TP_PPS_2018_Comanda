@@ -377,19 +377,21 @@ this.monto=this.monto +total;
 
   Platos()
   {
+    
 
     this.mostrarSpinnerPlatos=true;
   if((this.platos.length>0))
   {
     this.mostrarSpinnerPlatos=false;
   }
-      this.miValor=undefined;
      
    
 
   
     
     this.ocultarPlatos =false;
+ 
+
     this.ocultarTitulo=true;
     this.titulo ="Nuestros platos";
     this.ocultarMonto=false;
@@ -413,6 +415,7 @@ this.monto=this.monto +total;
   }
   Cerrar()
   {
+ 
     this.ocultarPlatos =true;
     this.ocultarTitulo=false;
     this.ocultarBebidas=true;
@@ -869,6 +872,7 @@ CalcularMonto()
         for(let subItem in data[item])
         {
           montos.push(data[item][subItem]);
+          console.log("esto estoy pusheando a montos" +data[item][subItem]);
         }
 
      }
@@ -876,12 +880,22 @@ CalcularMonto()
      //SUMO LOS VALORES:
      for(let i=0;i<montos.length-1;i++)
      {
+      console.log(montos[i]);
+      console.log("cantidad " +montos[i].cantidad);
+      console.log("precio " +montos[i].precio);
+
        //Fijarme Si esto se soluciona.
-       if(montos[i]!="tomado" && montos[i]!="preparacion" && montos[i]!="terminado" )
+       if(montos[i]!="tomado" && montos[i]!="preparacion" && montos[i]!="terminado" && montos[i]!="1" && montos[i]!="0" && montos[i]!="%")
        {
+         console.log("cantidad " +montos[i].cantidad);
+         console.log("precio " +montos[i].precio);
+
         let suma= parseInt(montos[i].cantidad) *  montos[i].precio;
         console.log(suma);
         console.log(montos[i]);
+        console.log("cantidad " +montos[i].cantidad);
+         console.log("precio " +montos[i].precio);
+
         montoGuardado = montoGuardado + suma;
        }
    

@@ -40,7 +40,7 @@ export class QrIngresoLocalPage {
   mostrarAlert3:boolean=false;
   mensaje:string;
   mostrarMiSpinner:boolean=true;
-  desplegarEncuesta:boolean=true;
+  desplegarEncuesta:boolean=false;
 
   claveActual;
 foto1;

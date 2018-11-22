@@ -127,6 +127,7 @@ export class RegistroClientePage {
                 setTimeout(()=>{
             
                   this.mostrarAlert=false;
+                  this.navCtrl.pop();
                   this.LimpiarCampos();
                //   this.navCtrl.pop();
                 }, 4000);
@@ -134,10 +135,43 @@ export class RegistroClientePage {
          
               });
            
-                  });
+                  //});
+            })  .catch(error => {
+
+              let mensaje: string;
+  
+              console.log(error.code);
+  
+              switch (error.code) {
+                case "auth/invalid-email":
+                  mensaje = "El correo ingresado no es válido.";
+                  this.correo="";
+
+                  break;
+  
+                case "auth/email-already-in-use":
+                  mensaje = "Este usuario ya fue registrado previamente.";
+                  this.correo="";
+                  break;
+  
+                case "auth/weak-password":
+                  mensaje = "La contraseña debe tener 6 o más caracteres.";
+                  this.pass="";
+                  
+                  break;
+  
+                default:
+                  mensaje = "Ups... Tenemos problemas técnicos.";
+                
+                  break;
+              }
+              this.mostrarSpinner=false;
+              this.presentToast(mensaje);
+            });
+                  
                 }
                 })
-              .catch(error => {
+             .catch(error => {
 
             let mensaje: string;
 
@@ -377,9 +411,8 @@ export class RegistroClientePage {
         
       
          
-      
+    
 
-   
         
         }
         scanear()
