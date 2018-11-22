@@ -14,13 +14,15 @@ page-encuesta-de-empleado {
     
     ion-item {
         //background: transparent!important;
-        text-align: center !important;
+       text-align: center !important;
         border-radius: 20px ;
         background-color: "red";
         margin-top: 3px !important;
         max-width: 80% !important;
         margin-left: auto;
         margin-right: auto;
+        
+        
         
 
         
@@ -29,23 +31,33 @@ page-encuesta-de-empleado {
         
     }
 
+    
+
     .cds{
-        background-color: #ffffff !important;
+       // background-color: #ffffff !important;
+       
        // background: url("../../assets/imgs/gamma/beigeqrmesa.jpg");
         //background:cover;
         
       //  background-color: #f0f0f0 !important;
+      background-image: url('../../assets/imgs/gamma/encuestafinal.jpg');
+       
+        background-size: cover; 
+        background-position: center; 
 
         
     }
 
     .lb{
         color: black !important;
-        font-size: 200%;
+        font-size: 190%;
         margin-bottom: 0px !important;
         margin-top: 2px !important;
         padding-top: 5px !important;
         text-align: center;
+        font-family: 'roboto', cursive;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+       
         //border-radius: 20px !important;
     }
 
@@ -62,6 +74,7 @@ page-encuesta-de-empleado {
     .item-block {
         margin:0 auto;
         
+        
 
         
     }
@@ -69,6 +82,7 @@ page-encuesta-de-empleado {
     .ion-button
     {
         //align-items: center;
+        
     }
 
     .button-md {
@@ -80,10 +94,10 @@ page-encuesta-de-empleado {
     }
 
     .scroll-content {
-        background-image: url('../../assets/imgs/gamma/encuestafinal.jpg');
-       // background-color: #000000 !important;
-        background-size: cover; 
-        background-position: center; 
+       //background-image: url('../../assets/imgs/gamma/encuestafinal.jpg');
+       
+        //background-size: cover; 
+        //background-position: center; 
     }
 
 
@@ -102,7 +116,73 @@ page-encuesta-de-empleado {
     
     
     
+        .h2
+        {
+            font-family: 'Lobster', cursive;
+        }
 
-    
+        .canvas {
+            width: 170%;
+            height: 80%;
+            //display: inline-block;
+            //position: relative;
+            //display:none;
+            //position: absolute;
+           // z-index: 10000;
+            //background: white;
+            
+           // padding-top: 5%;
+           // padding-bottom: 5%;
+           padding-right:50%;
+        }
+
+        .asd{
+            color: black!important;
+            font-size: 200%;
+            margin-bottom: 0px !important;
+            margin-top: 2px !important;
+            padding-top: 5px !important;
+            text-align: center;
+            font-family: 'roboto', cursive;
+            text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+            
+
+        }
+
+
+        .range-md.range-has-pin {
+             padding-top: 0px; 
+        }
+
+
+        .realizarEncuesta{
+            color: white!important;
+            font-size: 200%;
+            margin-bottom: 0px !important;
+            margin-top: 2px !important;
+            padding-top: 5px !important;
+            text-align: center;
+            font-family: 'Lobster', cursive;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            
+        }
+
+        .resultadoEncuesta
+        {
+            color: white!important;
+            font-size: 300%;
+            margin-bottom: 0px !important;
+            margin-top: 2px !important;
+            padding-top: 5px !important;
+            text-align: center;
+            font-family: 'Lobster', cursive;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+        }
+
+
+        
+        
+        
 
 }

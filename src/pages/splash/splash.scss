@@ -1,5 +1,11 @@
 page-splash {
 
+    ion-content {
+        background-image: url('../../assets/imgs/gamma/dssda.jpg');
+        background-size: cover; 
+        background-position: center;
+      }
+
 
     .parent {
         background-color: #CF4946;
@@ -16,8 +22,8 @@ page-splash {
         position: absolute;
        // top: 0px;
         //left: 0px;
-        width:1000;
-        height:600;
+        width:1300;
+        height:2732;
     }
     .progress-outer {
         width: 96%;

@@ -18,12 +18,26 @@
 </ion-content>-->
 
 <ion-header>
-  <ion-navbar color="red">
+  <ion-navbar color="red" hideBackButton="true">
+    <ion-title class="titulo2">
+      {{usuario.tipo}}
+    </ion-title>
+
+    <ion-buttons start style="left: 3px;
+          position: absolute;">
+          <button ion-button (click)="volver()">
+        <ion-icon name="arrow-back"></ion-icon>
+         </button>
+        </ion-buttons>
 
     <ion-buttons end>
+
+
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
       </button>
+
+     
     </ion-buttons>
 
   </ion-navbar>
@@ -73,12 +87,14 @@
           <p>Empleado • {{item.tipo}}</p>
           <p>CUIL • {{item.cuil}}</p>-->
 
-          <h1 style="color:black;">{{item.correo}}, {{item.nombre}}</h1>
+          <h1 style="color:black;">{{item.nombre}}</h1>
           <p style="color:black;">Tipo : • {{item.tipo}}</p>
+          <p style="color:black;">Cantidad De Personas • {{item.comensales}} </p>
+          <p style="color:black;"> • {{item.mesa}} </p>
          
     
           <!--<button ion-button clear item-end (click)="MostrarQr(item.correo)">-->
-              <button ion-button clear item-end (click)="ocuparMesaBarcode(item.correo)">
+              <button ion-button clear item-end (click)="ocuparMesaBarcode(item.correo,item.comensales,item.mesa)">
             <ion-icon name="expand"></ion-icon>
           </button>
         </ion-item>
@@ -99,7 +115,7 @@
           <p>Empleado • {{item.tipo}}</p>
           <p>CUIL • {{item.cuil}}</p>-->
 
-          <h1 style="color:black;"> {{item.correo}}, {{item.nombre}}</h1>
+          <h1 style="color:black;"> {{item.nombre}}</h1>
           <p  style="color:black;">Tipo : • {{item.tipo}}</p>
     
          <!-- <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">-->

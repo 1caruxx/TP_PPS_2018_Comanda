@@ -18,7 +18,7 @@
     
                     <div class="laPregunta1" radio-group [(ngModel)]="resp1">
                         
-                        <h2>¿Se siente c&oacute;modo en el restaurant?</h2>
+                        <h2 class="tituloPreg">¿Se siente c&oacute;modo en el restaurant?</h2>
                        
                         <ion-item>
                             <ion-label>Si</ion-label>
@@ -29,15 +29,15 @@
                             <ion-label>No</ion-label>
                             <ion-radio value="No"></ion-radio>
                           </ion-item>
-                          <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
-                          <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                          <button class="aceptar" (click)="Aceptar()" ion-button color="dark">Aceptar</button>
+                          <button ion-button class="btnChart" color="dark" (click)="mostrarelChart()">
                                   <ion-icon class="iconoChart" name="stats"></ion-icon>
                                   </button>
                           <div id="divCanvas" class="canvas" [ngClass]="{'mostrarChart':mostrarChart}">
                                   <button ion-button class="cerrarChart" (click)="cerrarChart()" color="light">
                                           <ion-icon name="close"></ion-icon>
                                       </button>
-                                  <h2 >¿Se siente c&oacute;modo en el restaurant?</h2><br>
+                                  <h2 >Gr&aacute;fico de todas las respuestas a esta pregunta</h2><br>
                                  
                                 
 
@@ -54,7 +54,7 @@
                   <div class="pregunta2"  [ngClass]="{'noMostrar':ocultar2}">
                       <div class="laPregunta2">
                             
-                          <h2>¿Como calificar&iacute;a la atenci&oacute;n?</h2>
+                          <h2  class="tituloPreg">¿Como calificar&iacute;a la atenci&oacute;n?</h2>
                          
                           <ion-item>
                               <ion-label>Elija su opci&oacute;n</ion-label>
@@ -66,8 +66,8 @@
                                   <ion-option value="muy buena">Muy Buena</ion-option>
                                 </ion-select>
                             </ion-item>
-                            <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
-                            <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                            <button class="aceptar" (click)="Aceptar()" ion-button color="dark">Aceptar</button>
+                            <button ion-button class="btnChart" color="dark" (click)="mostrarelChart()">
                                   <ion-icon class="iconoChart" name="stats"></ion-icon>
                                   </button>
                             <div id="divCanvas" class="canvas" [ngClass]="{'mostrarChart':mostrarChart}" >
@@ -87,7 +87,7 @@
                     <div class="pregunta3"  [ngClass]="{'noMostrar':ocultar3}">
                         <div class="laPregunta3">
                              
-                            <h2>¿Cu&aacute;les considera nuestros puntos fuertes?</h2>
+                            <h2 class="tituloPreg" >¿Cu&aacute;les considera nuestros puntos fuertes?</h2>
                            
                             <ion-item>
                                 <ion-label >La comodidad del sal&oacute;n</ion-label>
@@ -110,8 +110,8 @@
                                     <ion-checkbox  [(ngModel)]="resp3atencion" >No</ion-checkbox>
                                     
                                   </ion-item>
-                              <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
-                              <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                              <button class="aceptar" (click)="Aceptar()" ion-button color="dark">Aceptar</button>
+                              <button ion-button class="btnChart" color="dark" (click)="mostrarelChart()">
                                       <ion-icon class="iconoChart" name="stats"></ion-icon>
                                       </button>
                               <div id="divCanvas" class="canvas" [ngClass]="{'mostrarChart':mostrarChart}">
@@ -132,7 +132,7 @@
                           <div class="laPregunta4">
                                   
                             
-                              <h2>¿Que tan buenos son nuestros platos?</h2>
+                              <h2 class="tituloPreg">¿Que tan buenos son nuestros platos?</h2>
                              
                               <ion-item>
                           
@@ -145,8 +145,8 @@
                                   
                                 </ion-item>
                                 <span>{{textoRange}}</span>
-                                <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
-                                <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                                <button class="aceptar" (click)="Aceptar()" ion-button color="dark">Aceptar</button>
+                                <button ion-button class="btnChart" color="dark" (click)="mostrarelChart()">
                                       <ion-icon class="iconoChart" name="stats"></ion-icon>
                                       </button>
                                 <div id="divCanvas" class="canvas"  [ngClass]="{'mostrarChart':mostrarChart}" >
@@ -166,14 +166,14 @@
                         <div class="pregunta5"  [ngClass]="{'noMostrar':ocultar5}">
                             <div class="laPregunta5">
                                  
-                              <h2>¿Del 1 al 10, qué puntaje le pondrias a nuestro restaurante?</h2>
+                              <h2 class="tituloPreg">¿Del 1 al 10, qué puntaje le pondrias a nuestro restaurante?</h2>
                                
                                 <ion-item>
                             
-                                    <input type="text" class="miInput" placeholder="Escribalo aqui" [(ngModel)]="resp5">
+                                    <input type="text" class="miInput" placeholder="Escríbalo aqui" [(ngModel)]="resp5">
                                   </ion-item>
-                                  <button class="aceptar" (click)="Aceptar5()"  ion-button color="red">Aceptar</button>
-                                  <button ion-button class="btnChart" color="red" (click)="mostrarelChart()">
+                                  <button class="aceptar" (click)="Aceptar5()"  ion-button color="dark">Aceptar</button>
+                                  <button ion-button class="btnChart" color="dark" (click)="mostrarelChart()">
                                           <ion-icon class="iconoChart" name="stats"></ion-icon>
                                           </button>
                   
@@ -193,7 +193,7 @@
                           </div>
                           <div class="pregunta6"  [ngClass]="{'noMostrar':ocultar6}">
                               <div class="laPregunta6">
-                                  <h2>Tome algunas fotos(m&aacute;ximo 3) relacionadas a sus respuestas</h2>
+                                  <h2 class="tituloPreg">Tome algunas fotos(m&aacute;ximo 3) relacionadas a sus respuestas</h2>
                                  
                                 
                               
@@ -203,7 +203,7 @@
                                       <img class="laFoto2" [src]="foto2" [ngClass]="{'mostrarLaFoto':mostrarfoto2}" >
                                       <button ion-button color="dark"  (click)="Foto3()" class="Foto" [ngClass]="{'ocultarBoton':ocultarBoton3}">  <ion-icon class="camaraIcon" ios="ios-camera" md="md-camera"></ion-icon> </button>
                                       <img class="laFoto3" [src]="foto3" [ngClass]="{'mostrarLaFoto':mostrarfoto3}" >
-                                      <button class="aceptar" (click)="Aceptar()" ion-button color="red">Aceptar</button>
+                                      <button class="aceptar" (click)="Aceptar()" ion-button color="dark">Aceptar</button>
                                 </div>
                             </div>
         <h1 class="tituloPag">¿Qu&eacute; piensa de nosotros?</h1>

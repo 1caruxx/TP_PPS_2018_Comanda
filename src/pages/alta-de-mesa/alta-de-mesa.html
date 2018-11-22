@@ -146,12 +146,23 @@
       <ion-nav #content swipeBackEnabled="false"></ion-nav>-->
 
       <ion-header>
-        <ion-navbar color="red">
-          <ion-title>
-            Alta de mesa
+        <ion-navbar color="red" hideBackButton="true">
+          <ion-title class="titulo">
+            {{usuario.tipo}}
           </ion-title>
+
+          <ion-buttons start style="left: 3px;
+          position: absolute;">
+          <button ion-button (click)="volver()">
+        <ion-icon name="arrow-back"></ion-icon>
+         </button>
+        </ion-buttons>
+
+          
       
           <ion-buttons end>
+
+           
             <button ion-button (click)="Logout()">
               <ion-icon name="power"></ion-icon>
             </button>
@@ -165,7 +176,19 @@
          
             <ion-col>
               
-              <img src="assets/imgs/gamma/mesas.jpg"/>
+            <!--  <img src="assets/imgs/gamma/mesas.jpg"/>-->
+
+              <!--<h1>Listado de mesas en restaurante</h1>-->
+
+              <ion-list-header style="background-color:#CF4946">
+                <div class="realizarEncuesta">Mesas En El Restaurante</div>
+              </ion-list-header>
+
+            <div class="mesas">
+              <button ion-button color="red" class="mesa" *ngFor="let item of mesas">{{item.numeroMesa}}</button>
+            </div>
+          
+              
             </ion-col>
           
           </ion-row>
@@ -235,6 +258,11 @@
          <!-- <button ion-button color="red" class="close" (click)="OcultarLectorQR()">
             <ion-icon name="close"></ion-icon>
           </button>-->
+
+          
+
+
+
           
 
         </ion-content>
@@ -266,6 +294,9 @@
                 </button>
               </ion-toolbar>
             </ion-footer>
+
+
+            
 
 
 

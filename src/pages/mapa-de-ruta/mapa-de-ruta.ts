@@ -56,7 +56,7 @@ export class MapaDeRutaPage {
 	this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
 
- 	let genteRef = firebase.database().ref("usuarios");
+ /*	let genteRef = firebase.database().ref("usuarios");
 
     genteRef.on("value", (snap) => {
 
@@ -80,7 +80,223 @@ export class MapaDeRutaPage {
       console.log(this.usuarios);
 
 
-    });
+	});*/
+	
+	let genteRef = firebase.database().ref("usuarios");
+
+	genteRef.on("value", (snap) => {
+
+		this.clientesConPedidos=[];
+
+		let data = snap.val();
+
+		for (let item in data)
+		 {
+			 //console.log(item);
+			if(data[item].estado=="delivery")
+			{
+				//console.log(data[item]);
+				//this.clientesConPedidos.push(data[item]);
+
+				let probandoRef=firebase.database().ref("pedidos");
+				probandoRef.once("value", (snap)=>{
+
+					//this.clientesConPedidos=[];
+					
+					let dataDos = snap.val();
+
+					for(let a in dataDos)
+					{
+						//console.log(a);
+						let pruebita=data[item].correo;
+
+						let patron ='@';
+						let nuevo= '';
+						let cadena=pruebita.replace(patron, nuevo);
+						patron ='.';
+						nuevo= '';
+						cadena=cadena.replace(patron, nuevo);
+						pruebita=cadena;
+
+						//console.log(pruebita);
+						if(a==pruebita)
+						{
+							let vale=0;
+							let cocinero=false;
+              				let bartender=false;
+
+
+							for(let dios in dataDos[a])
+							{
+								//console.log(dios);
+								
+								  if(dios=="cocinero")
+								  {
+									cocinero=true;
+									//console.log("asd");
+								  }
+								  if(dios=="bartender")
+								  {
+									bartender=true;
+									//console.log("Asd");
+								  }
+				  
+		
+							}
+
+							for(let dios in dataDos[a])
+							{
+									//console.log(dataDos[a]);
+									if(dios!="tiempo")
+									{
+
+									/*	if(dataDos[a][dios].estado=="terminado")
+										{
+		
+												if(bartender==true && cocinero==true)
+												{
+												
+													this.clientesConPedidos.push(data[item]);
+													console.log("los dos")
+													break;
+												
+												}
+
+												//this.clientesConPedidos.push(data[item]);
+		
+										}*/
+
+										if(dataDos[a][dios].estado=="terminado")
+										{
+		
+											vale++;
+
+											if(bartender==true && cocinero==true)
+											{
+												if(vale==2)
+												{
+													this.clientesConPedidos.push(data[item]);
+													console.log("los 2")
+													break;
+												}
+
+											}
+
+											if(bartender==true && cocinero==false)
+											{
+												if(vale==1)
+												{
+													this.clientesConPedidos.push(data[item]);
+													console.log("barteneder")
+													break;
+												}
+
+											}
+											if(cocinero==true && bartender == false)
+											{
+												if(vale==1)
+												{
+													this.clientesConPedidos.push(data[item]);
+													console.log("cocinero")
+													break;
+												}
+
+											}
+
+
+
+										}
+										
+
+
+
+
+
+										//console.log(dataDos[a][dios].estado);
+									}
+									//console.log(dataDos[a][dios].estado);
+							/*	if(dataDos[a][dios].estado=="terminado")
+								{
+
+										if(bartender==true && cocinero==true)
+										{
+										
+											this.clientesConPedidos.push(data[item]);
+											console.log("los dos")
+											break;
+										
+										}
+
+								}*/
+
+							}
+
+							/*for(let dios in dataDos[a])
+							{ 
+								if (data[a][dios].estado=="terminado")
+								{
+								vale++;
+
+								if(bartender==true && cocinero==true)
+								{
+									if(vale==2)
+									{
+										this.clientesConPedidos.push(data[item]);
+										console.log("los 2")
+										break;
+									}
+
+								}
+
+								if(bartender==true && cocinero==false)
+								{
+									if(vale==1)
+									{
+										this.clientesConPedidos.push(data[item]);
+									console.log("barteneder")
+									break;
+									}
+
+								}
+								if(cocinero==true && bartender == false)
+								{
+									if(vale==1)
+									{
+										this.clientesConPedidos.push(data[item]);
+									console.log("cocinero")
+									break;
+									}
+
+								}
+								
+
+								}
+
+							//console.log("llegue papu");
+						}*/
+
+
+
+
+
+					}
+
+				}
+
+
+				});
+
+
+
+			}
+
+
+			//this.usuarios.push(data[item]);
+		  }
+
+
+
+	});
 
 	
 
@@ -210,6 +426,11 @@ export class MapaDeRutaPage {
 
 		
 	});
+  }
+
+  volver()
+  {
+	this.navCtrl.pop();
   }
 
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Http } from '@angular/http';
+//import { Http } from '@angular/http';
 import 'rxjs/add/operator/map'
 import firebase from "firebase";
 import "firebase/firestore";
@@ -152,14 +152,24 @@ export class TomarPedidoPage {
   public tiempoMinimoNueve;
   public tiempoMinimoDiez;
 
+  public sinPedidos;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http,private authInstance: AngularFireAuth) 
+
+  public pedidosDeliveryCocinero:Array<any>;
+  public pedidosDeliveryBartender:Array<any>;
+  public vistaDeliveryCocinero:boolean;
+  public vistaDeliveryBartender:boolean;
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth) 
   {
 
-    // let localData = http.get('assets/imgs/gamma/information.json').map(res => res.json().items);
-    // localData.subscribe(data => {
-    //   this.information = data;
-    // })
+   /* let localData = http.get('assets/imgs/gamma/information.json').map(res => res.json().items);
+    localData.subscribe(data => {
+      this.information = data;
+    })*/
+
+    this.sinPedidos=true;
 
     this.ponerTiempoMesaCocinaUnoIcono=true;
     this.terminarPedidoMesaCocinaUnoIcono=false;
@@ -230,11 +240,15 @@ export class TomarPedidoPage {
       
     });*/
 
-
+ 
 
     //this.ocultar=true;
 
+    //CAMBIAR ESTO PARA PROBAR
+
     //this.vistaCocinero=true;
+
+    //this.vistaBartender=true;
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -296,6 +310,131 @@ export class TomarPedidoPage {
     this.pedidosCocinaDiez=[];
     this.pedidosBartenderDiez=[];
 
+    this.pedidosDeliveryCocinero=[];
+    this.pedidosDeliveryBartender=[];
+    this.vistaDeliveryCocinero=false;
+    this.vistaDeliveryBartender=false;
+
+    //PROBANDO DELIVERY COCINERO
+
+
+    let deliveryCocinero = this.firebase.database().ref("pedidos/");
+
+    deliveryCocinero.on("value", (snap)=> {
+
+      this.pedidosDeliveryCocinero=[];
+      //this.vistaDeliveryCocinero=false;
+
+      let result=snap.val();
+
+      for(let item in result)
+      {
+
+
+
+              if(item=="1"||item=="2"||item=="3"||item=="4"||item=="5"||item=="6"||item=="7"||item=="8"||item=="9"||item=="10") 
+              {
+                continue;
+              }
+
+                      
+                              //this.pedidosDeliveryCocinero.push(item);
+                              //console.log(result[item]);
+                     for(let a in result[item])
+                        {  
+                          if(a=="cocinero")
+                          {
+                            this.vistaDeliveryCocinero=true;
+                            for(let j in result[item][a])
+                            {
+
+                             // console.log(result[item][a][j]);
+    
+                                if(result[item][a][j]=="tomado")
+                                {
+                                  console.log("llegue aca");
+                                  this.pedidosDeliveryCocinero.push(item);
+                                  //console.log(result[item]);
+
+                                }
+                                     
+
+                            }
+                            //this.pedidosBartenderUno.push(result[k][a]);
+                            //this.pedidosDeliveryCocinero.push(result[item][a]);
+                            //console.log(result[item][a]);
+                          }
+                                        
+                        }
+                          
+
+      }
+
+      
+    
+    });
+
+
+    //PROBANDO DELIVERY BARTENDER
+
+    let deliveryBartender = this.firebase.database().ref("pedidos/");
+
+    deliveryBartender.on("value", (snap)=> {
+
+      this.pedidosDeliveryBartender=[];
+      this.vistaDeliveryBartender=false;
+
+      let result=snap.val();
+
+      for(let item in result)
+      {
+
+
+
+              if(item=="1"||item=="2"||item=="3"||item=="4"||item=="5"||item=="6"||item=="7"||item=="8"||item=="9"||item=="10") 
+              {
+                continue;
+              }
+
+                      
+                              //this.pedidosDeliveryCocinero.push(item);
+                              //console.log(result[item]);
+                     for(let a in result[item])
+                        {  
+                          if(a=="bartender")
+                          {
+                            this.vistaDeliveryBartender=true;
+                            for(let j in result[item][a])
+                            {
+
+                             // console.log(result[item][a][j]);
+    
+                                if(result[item][a][j]=="tomado")
+                                {
+                                  console.log("llegue aca");
+                                  this.pedidosDeliveryBartender.push(item);
+                                  //console.log(result[item]);
+
+                                }
+                                     
+
+                            }
+                            //this.pedidosBartenderUno.push(result[k][a]);
+                            //this.pedidosDeliveryCocinero.push(result[item][a]);
+                            //console.log(result[item][a]);
+                          }
+                                        
+                        }
+                          
+
+      }
+
+      
+    
+    });
+
+
+
 
     //PEDIDOS MESA 1
 
@@ -314,15 +453,20 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
-
+              this.sinPedidos=false;
               this.vistaCocinaMesaUno=true;
 
 
@@ -330,7 +474,10 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosCocinaUno.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosCocinaUno.push(result[k][a]);
+                }
               }
                
                
@@ -338,15 +485,21 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
-
+            this.sinPedidos=false;
             this.vistaBartenderMesaUno=true;
 
 
@@ -355,13 +508,18 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosBartenderUno.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosBartenderUno.push(result[k][a]);
+                }
               }
                             
             }
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -391,21 +549,30 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaDos=true;
 
             for(let a in result[k])
             {  
               if(a!="estado")
               {
-                this.pedidosCocinaDos.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosCocinaDos.push(result[k][a]);
+                }
               }
                
                
@@ -413,14 +580,21 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaDos=true;
 
 
@@ -428,13 +602,18 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosBartenderDos.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosBartenderDos.push(result[k][a]);
+                }
               }
                             
             }
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -464,14 +643,25 @@ export class TomarPedidoPage {
  
        for(let k in result)
        { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
+        
+
+
+
          if(k=="cocinero")
            {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
+            
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaTres=true;
 
 
@@ -480,22 +670,35 @@ export class TomarPedidoPage {
              {  
                if(a!="estado")
                {
-                 this.pedidosCocinaTres.push(result[k][a]);
+                 if(result[k][a].terminado!="si")
+                 {
+                  this.pedidosCocinaTres.push(result[k][a]);
+                 }
+                 
                }
                 
                 
              }
         
            }
+
+          }
+
+          if(this.usuario.tipo=="bartender")
+          {
+
+         
  
            if(k=="bartender")
            {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaTres=true;
 
 
@@ -503,13 +706,18 @@ export class TomarPedidoPage {
              {  
                if(a!="estado")
                {
+                if(result[k][a].terminado!="si")
+                {
                  this.pedidosBartenderTres.push(result[k][a]);
+                }
                }
                              
              }
  
              
            }
+
+          }
  
            if(k=="tiempo")
            {
@@ -542,14 +750,20 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaCuatro=true;
 
 
@@ -558,7 +772,10 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosCocinaCuatro.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                 {
+                  this.pedidosCocinaCuatro.push(result[k][a]);
+                 }
               }
                
                
@@ -566,15 +783,21 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
-
+            this.sinPedidos=false;
             this.vistaBartenderMesaCuatro=true;
 
 
@@ -583,13 +806,18 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosBartenderCuatro.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosBartenderCuatro.push(result[k][a]);
+                }
               }
                             
             }
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -624,15 +852,20 @@ export class TomarPedidoPage {
       { 
         //this.vistaCocinaMesaCinco=true;
 
+        if(this.usuario.tipo=="cocinero")
+        {
+
 
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaCinco=true;
 
 
@@ -640,7 +873,10 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosCocinaCinco.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosCocinaCinco.push(result[k][a]);
+                }
               }
                
                
@@ -648,14 +884,21 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaCinco=true;
 
 
@@ -664,13 +907,18 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosBartenderCinco.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosBartenderCinco.push(result[k][a]);
+                }
               }
                             
             }
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -700,14 +948,20 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaSeis=true;
 
 
@@ -716,7 +970,10 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosCocinaSeis.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                 {
+                  this.pedidosCocinaSeis.push(result[k][a]);
+                 }
               }
                
                
@@ -724,14 +981,21 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaSeis=true;
 
 
@@ -740,13 +1004,18 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosBartenderSeis.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosBartenderSeis.push(result[k][a]);
+                }
               }
                             
             }
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -776,16 +1045,22 @@ export class TomarPedidoPage {
  
        for(let k in result)
        { 
+
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
          if(k=="cocinero")
            {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
 
-
+            this.sinPedidos=false;
             this.vistaCocinaMesaSiete=true;
 
 
@@ -793,22 +1068,32 @@ export class TomarPedidoPage {
              {  
                if(a!="estado")
                {
+                if(result[k][a].terminado!="si")
+                {
                  this.pedidosCocinaSiete.push(result[k][a]);
+                }
                }
                 
                 
              }
         
            }
+
+          }
+
+          if(this.usuario.tipo=="bartender")
+          {
  
            if(k=="bartender")
            {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaSiete=true;
 
 
@@ -817,13 +1102,18 @@ export class TomarPedidoPage {
              {  
                if(a!="estado")
                {
+                if(result[k][a].terminado!="si")
+                {
                  this.pedidosBartenderSiete.push(result[k][a]);
+                }
                }
                              
              }
  
              
            }
+
+          }
  
            if(k=="tiempo")
            {
@@ -853,14 +1143,20 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaOcho=true;
 
 
@@ -869,7 +1165,10 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosCocinaOcho.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosCocinaOcho.push(result[k][a]);
+                }
               }
                
                
@@ -877,14 +1176,21 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaOcho=true;
 
 
@@ -893,13 +1199,18 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosBartenderOcho.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosBartenderOcho.push(result[k][a]);
+                }
               }
                             
             }
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -926,14 +1237,20 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaNueve=true;
 
 
@@ -941,7 +1258,10 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosCocinaNueve.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosCocinaNueve.push(result[k][a]);
+                }
               }
                
                
@@ -949,28 +1269,39 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
-
+              this.sinPedidos=false;
               this.vistaBartenderMesaNueve=true;
 
             for(let a in result[k])
             {  
               if(a!="estado")
               {
-                this.pedidosBartenderNueve.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosBartenderNueve.push(result[k][a]);
+                }
               }
                             
             }
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -997,21 +1328,30 @@ export class TomarPedidoPage {
 
       for(let k in result)
       { 
+
+        if(this.usuario.tipo=="cocinero")
+        {
+
         if(k=="cocinero")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaCocinaMesaDiez=true;
 
             for(let a in result[k])
             {  
               if(a!="estado")
               {
-                this.pedidosCocinaDiez.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                 {
+                  this.pedidosCocinaDiez.push(result[k][a]);
+                 }
               }
                
                
@@ -1019,14 +1359,21 @@ export class TomarPedidoPage {
        
           }
 
+        }
+
+        if(this.usuario.tipo=="bartender")
+        {
+
           if(k=="bartender")
           {
 
-            if(result[k].estado == "preparacion")
+            if(result[k].estado != "tomado")
             {
+              this.sinPedidos=true;
               break;
             }
 
+            this.sinPedidos=false;
             this.vistaBartenderMesaDiez=true;
 
 
@@ -1034,13 +1381,18 @@ export class TomarPedidoPage {
             {  
               if(a!="estado")
               {
-                this.pedidosBartenderDiez.push(result[k][a]);
+                if(result[k][a].terminado!="si")
+                {
+                 this.pedidosBartenderDiez.push(result[k][a]);
+                }
               }
                             
             }
 
             
           }
+
+        }
 
           if(k=="tiempo")
           {
@@ -1682,7 +2034,15 @@ export class TomarPedidoPage {
                                       //this.pedidosCocinaDos.push(data[k][a]);
                                     //}
                                     data[k].estado = "preparacion";
+                                    
                                     refTerminarUnoCocinero.child(k).update(data[k]);
+                                    
+                                    if(a!="estado")
+                                    {
+                                      data[k][a].terminado="si";
+                                    refTerminarUnoCocinero.child(k).child(a).update(data[k][a]);
+
+                                    }
 
                                     //this.navCtrl.setRoot(this.navCtrl.getActive().component);
                                      
@@ -1725,7 +2085,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarUnoBartender.child(k).update(data[k]);
+                      
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarUnoBartender.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -1766,7 +2134,15 @@ export class TomarPedidoPage {
                                       //this.pedidosCocinaDos.push(data[k][a]);
                                     //}
                                     data[k].estado = "preparacion";
+                                    
                                     refTerminarDosCocinero.child(k).update(data[k]);
+                      
+                                    if(a!="estado")
+                                    {
+                                      data[k][a].terminado="si";
+                                      refTerminarDosCocinero.child(k).child(a).update(data[k][a]);
+
+                                    }
                                      
                                      
                                   }
@@ -1806,7 +2182,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarDosBartender.child(k).update(data[k]);
+                      
+                                    if(a!="estado")
+                                    {
+                                      data[k][a].terminado="si";
+                                      refTerminarDosBartender.child(k).child(a).update(data[k][a]);
+
+                                    }
                        
                        
                     }
@@ -1842,11 +2226,23 @@ export class TomarPedidoPage {
                                     //{
                                       //this.pedidosCocinaDos.push(data[k][a]);
                                     //}
+
                                     data[k].estado = "preparacion";
+                                    
                                     refTerminarTresCocinero.child(k).update(data[k]);
+                                    
+                                    if(a!="estado")
+                                    {
+                                      data[k][a].terminado="si";
+                                    refTerminarTresCocinero.child(k).child(a).update(data[k][a]);
+
+                                    }
+                                    
+                                    
                                      
                                      
                                   }
+                                  
 
                                 }
 
@@ -1894,7 +2290,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarTresBartender.child(k).update(data[k]);
+                      
+                                    if(a!="estado")
+                                    {
+                                      data[k][a].terminado="si";
+                                      refTerminarTresBartender.child(k).child(a).update(data[k][a]);
+
+                                    }
                        
                        
                     }
@@ -1934,7 +2338,15 @@ export class TomarPedidoPage {
                                       //this.pedidosCocinaDos.push(data[k][a]);
                                     //}
                                     data[k].estado = "preparacion";
+                                    
                                     refTerminarCuatroCocinero.child(k).update(data[k]);
+                      
+                                    if(a!="estado")
+                                    {
+                                      data[k][a].terminado="si";
+                                      refTerminarCuatroCocinero.child(k).child(a).update(data[k][a]);
+
+                                    }
                                      
                                      
                                   }
@@ -1970,7 +2382,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarCuatroBartender.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarCuatroBartender.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2008,8 +2428,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarCincoCocinero.child(k).update(data[k]);
-                       
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarCincoCocinero.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                     }
 
@@ -2044,7 +2471,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarCincoBartender.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarCincoBartender.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2083,7 +2518,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarSeisCocinero.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarSeisCocinero.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2119,7 +2562,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarSeisBartender.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarSeisBartender.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2157,7 +2608,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarSieteCocinero.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarSieteCocinero.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2193,7 +2652,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarSieteBartender.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarSieteBartender.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2231,7 +2698,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarOchoCocinero.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarOchoCocinero.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2267,7 +2742,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarOchoBartender.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarOchoBartender.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2305,7 +2788,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarNueveCocinero.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarNueveCocinero.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2341,7 +2832,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarNueveBartender.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarNueveBartender.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2379,7 +2878,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarDiezCocinero.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarDiezCocinero.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2415,7 +2922,15 @@ export class TomarPedidoPage {
                         //this.pedidosCocinaDos.push(data[k][a]);
                       //}
                       data[k].estado = "preparacion";
+                                    
                       refTerminarDiezBartender.child(k).update(data[k]);
+        
+                      if(a!="estado")
+                      {
+                        data[k][a].terminado="si";
+                        refTerminarDiezBartender.child(k).child(a).update(data[k][a]);
+
+                      }
                        
                        
                     }
@@ -2468,6 +2983,123 @@ export class TomarPedidoPage {
         }
       }
     });
+  }
+
+  volver()
+  {
+    this.navCtrl.pop();
+  }
+
+
+
+  terminarDeliveryCocinero(probando)
+  {
+
+    let deliveryCocinero = this.firebase.database().ref("pedidos/");
+
+    deliveryCocinero.once("value", (snap)=> {
+
+      let result=snap.val();
+
+      for(let item in result)
+      {
+        if(item==probando)
+        {
+
+          for(let a in result[item])
+          {  
+            if(a=="cocinero")
+            {
+              for(let j in result[item][a])
+              {
+              
+                  if(result[item][a][j]=="tomado")
+                  {
+                    console.log("llegue aca");
+                   
+                    console.log(result[item][a].estado);
+                    result[item][a].estado="terminado";
+                    deliveryCocinero.child(item).child(a).update(result[item][a]);
+                    
+                
+                    break;
+                  }
+                       
+
+              }
+              
+            }
+                          
+          }
+
+
+
+
+
+        }
+
+
+      }
+
+    });
+
+
+
+
+  }
+
+  terminarPedidoBartender(probando)
+  {
+
+    let deliveryBartender = this.firebase.database().ref("pedidos/");
+
+    deliveryBartender.once("value", (snap)=> {
+
+      let result=snap.val();
+
+      for(let item in result)
+      {
+        if(item==probando)
+        {
+
+          for(let a in result[item])
+          {  
+            if(a=="bartender")
+            {
+              for(let j in result[item][a])
+              {
+              
+                  if(result[item][a][j]=="tomado")
+                  {
+                    console.log("llegue aca");
+                   
+                    console.log(result[item][a].estado);
+                    result[item][a].estado="terminado";
+                    deliveryBartender.child(item).child(a).update(result[item][a]);
+                    
+                
+                    break;
+                  }
+                       
+
+              }
+              
+            }
+                          
+          }
+
+
+
+
+
+        }
+
+
+      }
+
+    });
+
+
   }
 
 

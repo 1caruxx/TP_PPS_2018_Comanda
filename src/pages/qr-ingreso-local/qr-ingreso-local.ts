@@ -6,6 +6,7 @@ import { RegistroClientePage } from '../registro-cliente/registro-cliente';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import * as moment from 'moment';
+import { PrincipalPage } from '../principal/principal';
 
 
 /**
@@ -172,7 +173,7 @@ console.log("Dentro de observable ecnuesta");
             if(data.estado!="espera")
             {
               //FER EN ESTA LINEA TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL
-              this.navCtrl.setRoot(RegistroClientePage);
+              this.navCtrl.setRoot(PrincipalPage);
             }
          
           });
@@ -263,7 +264,7 @@ console.log("Dentro de observable ecnuesta");
             if(data.estado!="espera")
             {
               //FER EN ESTA LINEA TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL
-              this.navCtrl.setRoot(RegistroClientePage);
+              this.navCtrl.setRoot(PrincipalPage);
             }
          
           });

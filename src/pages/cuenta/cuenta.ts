@@ -7,6 +7,7 @@ import { LoginPage } from "../login/login";
 import { PrincipalPage } from "../principal/principal";
 
 import firebase from "firebase";
+import { EncuestaClientePage } from '../encuesta-cliente/encuesta-cliente';
 
 @IonicPage()
 @Component({
@@ -245,7 +246,7 @@ export class CuentaPage {
   }
 
   Redireccionar() {
-    this.navCtrl.setRoot(PrincipalPage);
+    this.navCtrl.setRoot(EncuestaClientePage);
   }
 
   Logout() {

@@ -5,12 +5,24 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar color="red">
-      <ion-title>
-        JuegoQuinteros
+    <ion-navbar color="red" hideBackButton="true">
+      <ion-title class="titulo2">
+        {{usuario.tipo}}
       </ion-title>
+
+      <ion-buttons start style="left: 3px;
+          position: absolute;">
+          <button ion-button (click)="volver()">
+        <ion-icon name="arrow-back"></ion-icon>
+         </button>
+        </ion-buttons>
+
+
+
   
       <ion-buttons end>
+
+       
         <button ion-button (click)="Logout()">
           <ion-icon name="power"></ion-icon>
         </button>
@@ -34,22 +46,26 @@
 
                     
                             
-                                    <span style="font-size:30px;padding-left:40px;">Tiempo restante: {{segundos}}</span>
+                                    <!--<span style="font-size:30px;padding-left:40px;">Tiempo restante: {{segundos}}</span>-->
 
-                                    <span style="font-size:15px;padding-left:40px;">Acierte 3 veces para ganar</span>
+                                    <h2 class="asd">Tiempo restante: {{segundos}}</h2>
 
-                                    <span style="font-size:15px;padding-left:40px;">Puntaje: {{puntajeMaximo}}</span>
+                                    <h4 class="asd" >Acierte 3 veces para ganar</h4>
+
+                                    <h4 class="asd" >Puntaje: {{puntajeMaximo}}</h4>
 
                   
 
                                     <!--<p class="question">{{question}}</p>-->
-                                    <p style="text-align:center;font-size:70px;background-color:white;">{{question}}</p>
+                                    <p style="text-align:center;font-size:70px;background-color:white;border-radius: 70px;">{{question}}</p>
             
-                        
+                                    <div class="laPregunta5">
 
                                     <ion-item>
                                         <ion-input type="text" class="respuestitaa" placeholder="Responda aca!!!!"  [(ngModel)]="userAnswer" ></ion-input>
                                       </ion-item>
+
+                                    </div>
                                 
                                    
                                
@@ -68,3 +84,17 @@
 
 
 </ion-content>
+
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+    <div class="alert-message animation-target">
+      <h1>{{alertTitulo}}</h1>
+      <p>{{alertMensaje}}</p>
+      <div class="botones">
+  
+        <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+      </div>
+    </div>
+  
+  </div>
+

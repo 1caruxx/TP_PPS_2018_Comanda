@@ -16,39 +16,22 @@ import { ToastController } from 'ionic-angular';
 import { Subject } from 'rxjs/Subject';
 import { tap } from 'rxjs/operators';
 
+import { NativeAudio } from '@ionic-native/native-audio';
+import { JuegoQuinterosPageModule } from '../pages/juego-quinteros/juego-quinteros.module';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any = LoginPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController, fcm: FcmProvider, toastCtrl: ToastController) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController, fcm: FcmProvider, toastCtrl: ToastController,private nativeAudio: NativeAudio) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
-      // fcm.getToken()
-
-      // // Listen to incoming messages
-      // fcm.listenToNotifications().pipe(
-      //   tap(msg => {
-      //     // show a toast
-      //     const toast = toastCtrl.create({
-      //       message: msg.body,
-      //       duration: 3000
-      //     });
-      //     toast.present();
-      //   })
-      // )
-      // .subscribe()
-
-
-
-
-
-
       statusBar.styleDefault();
-      splashScreen.hide();
+      //splashScreen.hide();
 
       if(localStorage.getItem("usuario")) {
         this.rootPage = PrincipalPage;

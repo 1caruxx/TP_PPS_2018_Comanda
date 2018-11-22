@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import firebase from "firebase";
 /**
  * Generated class for the JuegoQuinterosPage page.
  *
@@ -29,8 +30,46 @@ export class JuegoQuinterosPage {
   asd;
   public meta=3;
 
+  public estadoBoton: boolean = false;
+  public ocultarAlert: boolean = true;
+  public alertTitulo;
+  public alertMensaje;
+  public alertMensajeBoton;
+  public alertHandler;
+
+  public firebase = firebase;
+  public usuario: any;
+  public usuarioKey;
+  public usuarioMesa;
+  public puedeGanarBebida: boolean;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) 
   {
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
+
+    let usuariosRef = firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          this.usuarioKey = item;
+          this.usuarioMesa = data[item].mesa;
+
+          if (data[item].juegoAxel) {
+            this.puedeGanarBebida = false;
+          }
+        }
+      }
+    })
+
+
+
     this.getNewQuestion();
 
   }
@@ -50,7 +89,8 @@ export class JuegoQuinterosPage {
 
       if (this.segundos == 0) {
       
-        alert("Se acabo el tiempo");
+        this.MostrarAlert("Perdio!", "Se le acabo el tiempo para responder", "Aceptar", this.limpiar);
+        //alert("Se acabo el tiempo");
         clearInterval(this.asd);
         
         
@@ -120,7 +160,8 @@ export class JuegoQuinterosPage {
 
       if(!this.userAnswer)
       {
-          alert("No escribio ninguna respuesta");
+          //alert("No escribio ninguna respuesta");
+          this.MostrarAlert("Error!", "No Escribio ninguna respuesta", "Aceptar", this.limpiar);
           return;
       }
 
@@ -128,26 +169,86 @@ export class JuegoQuinterosPage {
 
       if (parseInt(this.userAnswer) == this.answer) 
       {
-          alert("respuesta correcta");
+          //alert("respuesta correcta");
+          this.MostrarAlert("Respuesta correcta!!", "tiene que acertar 3 veces", "Aceptar", this.limpiar);
           this.userAnswer="";
           this.puntajeMaximo++;
           this.primeraVezJugando++;
           this.getNewQuestion();
           if(this.puntajeMaximo==this.meta)
           {
-            alert("Enhorabuena,usted gano el juego");
+            //alert("Enhorabuena,usted gano el juego");
+            //this.MostrarAlert("Gano!!", "Se gano su bebida gratis", "Aceptar", this.limpiar);
             this.question=="";
             this.segundos==0;
-            clearInterval(this.asd);          }
-      } 
+            clearInterval(this.asd);      
+            
+            if (this.puedeGanarBebida) 
+            {
+
+
+            
+
+              this.estadoBoton = true;
+              //this.ocultarSpinner = false;
+              this.MostrarAlert("Ganaste!", "Tu bebida gratis aguarda!", "Volver", this.limpiar);
+      
+              firebase.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true }).then(() => {
+      
+                firebase.database().ref("pedidos").child(this.usuarioMesa).child("cocinero").push({
+                  cantidad: 1,
+                  nombre: "bebida gratuita",
+                  precio: 0
+                }).then(() => {
+                  firebase.database().ref("pedidos").child(this.usuarioMesa).child("cocinero").update({ estado: "tomado" }).then(() => {
+                    this.estadoBoton = false;
+                   // this.ocultarSpinner = true;
+                  })
+                })
+              });
+            } 
+
+            else {
+
+              this.MostrarAlert("Ganaste!", "", "Volver", this.limpiar);
+            }
+          }
+
+        }
+
+        
+      
       else 
       {
-        alert("respuesta incorrecta");
+        //alert("respuesta incorrecta");
+        this.MostrarAlert("Perdio!", "Escribio un numero incorrecto", "Aceptar", this.limpiar);
         clearInterval(this.asd);
 
       
       }
    }
+
+   MostrarAlert(titulo: string, mensaje: string, mensajeBoton: string, handler) 
+  {
+    this.ocultarAlert = false;
+    this.alertTitulo = titulo;
+    this.alertMensaje = mensaje;
+    this.alertMensajeBoton = mensajeBoton;
+    this.alertHandler = handler;
+
+   
+  }
+
+  limpiar()
+  {
+    this.ocultarAlert=true;
+
+  }
+
+  volver()
+  {
+    this.navCtrl.pop();
+  }
 
 
 

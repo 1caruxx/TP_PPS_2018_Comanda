@@ -4,7 +4,6 @@ import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { LoginPage } from "../login/login";
 //import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 //NANANANAN MUY CLAVE ESTE COMENTARIOOOOOOOOOOOOOO
@@ -41,6 +40,7 @@ export class AltaDeMesaPage {
 
   public usuario;
   
+  public mesas: Array<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
    {
@@ -48,6 +48,29 @@ export class AltaDeMesaPage {
     this.probandingg=true;
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    this.mesas = [];
+
+    let mesasRef = this.firebase.database().ref("mesas");
+
+    mesasRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for(let a in data)
+      {
+        this.mesas.push(data[a]);
+        //console.log(data[a].numeroMesa);
+      }
+
+      this.mesas = this.mesas.sort((a, b) => {
+        return a.numero - b.numero;
+      });
+
+
+
+
+    });
 
 
   }
@@ -68,12 +91,14 @@ export class AltaDeMesaPage {
     }
 
     if(this.numeroMesa < 1 || this.numeroMesa > 10)
+    //if(this.numeroMesa!=1||this.numeroMesa!=2||this.numeroMesa!=3||this.numeroMesa!=4||this.numeroMesa!=5||this.numeroMesa!=6||this.numeroMesa!=7||this.numeroMesa!=8||this.numeroMesa!=9||this.numeroMesa!=10)
     {
       this.presentToast("Solo tenemos lugar para 10 mesas en el restaurante")
       return;
     }
 
     if(this.cantidadComensales < 1 || this.cantidadComensales > 8)
+    //if(this.cantidadComensales!=1 || this.cantidadComensales!=2 || this.cantidadComensales!=3 || this.cantidadComensales!=4 || this.cantidadComensales!=5 || this.cantidadComensales!=6 || this.cantidadComensales!=7 || this.cantidadComensales!=8)
     {
       this.presentToast("Los comensales solo pueden ser de 1 a 8")
       return;
@@ -280,16 +305,29 @@ this.qrScanner.prepare()
           usuariosRef.child(item).update({
             logueado: false
           }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
 
-            localStorage.clear();
-            this.navCtrl.setRoot(LoginPage);
-
+              this.navCtrl.setRoot("");
+            } else {
+              localStorage.clear();
+              this.navCtrl.setRoot("");
+            }
           });
 
           break;
         }
       }
     });
+  }
+
+
+  volver()
+  {
+	this.navCtrl.pop();
   }
 
 

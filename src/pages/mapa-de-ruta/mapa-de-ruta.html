@@ -18,12 +18,31 @@
 </ion-content>-->
 
 <ion-header>
-  <ion-navbar color="red">
-    <ion-title>
-      Mapa de ruta
+
+
+  <ion-navbar color="red" hideBackButton="true">
+
+      
+
+    
+    <ion-title class="titulo2">
+      {{usuario.tipo}}
     </ion-title>
 
+    <ion-buttons start style="left: 3px;
+    position: absolute;">
+    <button ion-button (click)="volver()">
+  <ion-icon name="arrow-back"></ion-icon>
+   </button>
+  </ion-buttons>
+
+    
+
     <ion-buttons end>
+
+       
+
+       
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
       </button>
@@ -107,7 +126,11 @@
 
     <ion-list>
 
-        <h2 class="titulo">Lista de empleados con pedidos realizados</h2>
+        <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->
+
+        <ion-list-header style="background-color:#99bbff">
+          <div class="realizarEncuesta">Pedidos A Entregar</div>
+        </ion-list-header>
     
        
     
@@ -119,8 +142,8 @@
     
       <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
         <p>Cliente • {{item.tipo}}</p>-->
-        <h1>{{item.nombre}}</h1>
-        <p>{{item.correo}}</p>
+        <h1 class="que">{{item.nombre}}</h1>
+        <p class="queDos">{{item.correo}}</p>
 
         <button ion-button clear item-end (click)="chatear(item)">
             <ion-icon name="chatboxes"></ion-icon>

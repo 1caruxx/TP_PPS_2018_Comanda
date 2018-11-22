@@ -50,6 +50,7 @@ export class FcmProvider {
     const docData = { 
       token,
       userId: 'testUser',
+      //tipo: 'cliente'
       tipo: this.usuario.tipo,
       correo: this.usuario.correo
     }

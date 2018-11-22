@@ -4,9 +4,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
-
-import { LoginPage } from "../login/login";
-import { PrincipalPage } from "../principal/principal";
+import { LoginPage } from '../login/login';
+import { PrincipalPage } from '../principal/principal';
 
 
 //LINEA 336    361 Y 364 LAJSDKLASDLKASJDLKAJDKLJDLK
@@ -24,10 +23,10 @@ import { PrincipalPage } from "../principal/principal";
 })
 export class EncuestaDeEmpleadoPage {
 
-  encuestita = true;
-  probabilidad = false;
+  encuestita=true;
+  probabilidad=false;
 
-
+  
 
 
   public firebase = firebase;
@@ -39,87 +38,164 @@ export class EncuestaDeEmpleadoPage {
   public tres;
   public cuatro;
   //public cinco;
-  public cinco = { item1: false, item2: false };
+  public cinco = {item1: false, item2: false};
 
-  public pregUnoPrimeraRespuesta = 0;
-  public pregUnoSegundaRespuesta = 0;
-  public pregUnoTerceraRespuesta = 0;
+  public pregUnoPrimeraRespuesta=0;
+  public pregUnoSegundaRespuesta=0;
+  public pregUnoTerceraRespuesta=0;
 
-  public pregTresPrimeraRespuesta = 0;
-  public pregTresSegundaRespuesta = 0;
+  public pregTresPrimeraRespuesta=0;
+  public pregTresSegundaRespuesta=0;
 
-  public pregCuatroPrimeraRespuesta = 0;
-  public pregCuatroSegundaRespuesta = 0;
+  public pregCuatroPrimeraRespuesta=0;
+  public pregCuatroSegundaRespuesta=0;
 
-  public pregCincoPrimeraRespuesta = 0;
-  public pregCincoSegundaRespuesta = 0;
+  public pregCincoPrimeraRespuesta=0;
+  public pregCincoSegundaRespuesta=0;
 
   public desloguaer;
   public usuario;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authInstance: AngularFireAuth, private toastCtrl: ToastController, private camera: Camera) {
-    //this.encuesta();
-    this.desloguaer = JSON.parse(localStorage.getItem("desloguear"));
+  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
+  {
+     //this.encuesta();
+     //this.usuario = JSON.parse(localStorage.getItem("desloguear"));
+     this.desloguaer = JSON.parse(localStorage.getItem("desloguear"));
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
-    //this.encuesta();
+    // this.encuesta();
+
+    this.uno=3;
+    this.dos="Me Encanta";
+    this.tres="si";
+    this.cuatro="si";
+    this.cinco.item1=true;
+    //this.foto="asdads";
+    //this.foto="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg"
+    //let date = new Date();
+    //this.nombreFoto=`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}-${date.getMilliseconds()}`;
+    this.foto="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg";
+
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad() 
+  {
     console.log('ionViewDidLoad EncuestaDeEmpleadoPage');
   }
 
-  Volver() {
+  Volver()
+  {
     //this.navCtrl.setRoot(SuperControlPanelPage);
   }
 
-
-  public pieChartType: string = 'pie';
-
+  
+  public pieChartType:string = 'pie';
+ 
   // Pie
   //public pieChartLabels:string[] = ['Bueno', 'Malo'];
   //public pieChartData:number[] = [300, 500];
 
-  public pieChartLabelsUno: string[];
-  public pieChartDataUno: number[];
+  public pieChartLabelsUno:string[];
+  public pieChartDataUno:number[];
 
-  public pieChartLabels: string[];
-  public pieChartData: number[];
+  public pieChartLabels:string[];
+  public pieChartData:number[];
 
-  public pieChartLabelsDos: string[];
-  public pieChartDataDos: number[];
+  public pieChartLabelsDos:string[];
+  public pieChartDataDos:number[];
 
-  public pieChartLabelsCinco: string[];
-  public pieChartDataCinco: number[];
-
-  public randomizeType(): void {
-
+  public pieChartLabelsCinco:string[];
+  public pieChartDataCinco:number[];
+ 
+  public randomizeType():void {
+    
     this.pieChartType = this.pieChartType === 'doughnut' ? 'pie' : 'doughnut';
   }
-
-  public chartClicked(e: any): void {
+ 
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
+ 
+  public chartHovered(e:any):void {
     console.log(e);
   }
 
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
-  enviarEncuesta() {
+  enviarEncuesta()
+  {
     //this.encuestita=false;
-    // this.probabilidad=true;
+   // this.probabilidad=true;
 
-    if (!this.uno || !this.dos || !this.tres || !this.cuatro || !this.cinco) {
+   if (!this.uno || !this.dos || !this.tres || !this.cuatro || !this.cinco)
+    {
       this.presentToast("Todos los campos deben ser completados.");
       return;
     }
 
-    if (this.foto == "") {
-      this.presentToast("Tiene que cargar una foto");
-      return;
+    if(this.foto=="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg")
+    {
+     // this.presentToast("Tiene que cargar una foto");
+     // return;
+     let url="";
+
+     url="../../assets/imgs/gamma/llama.jpeg"
+
+     let mesasRef = this.firebase.database().ref("encuestaDeEmpleado");
+
+        mesasRef.push({
+      uno: this.uno,
+      dos: this.dos,
+      tres: this.tres,
+      cuatro:this.cuatro,
+      cinco:this.cinco,
+      img: url
+      }).then(() => {
+
+        this.presentToast("la encuesta fue cargada con exito");
+        this.encuesta();
+
+
+
+
+      });
+
+
+
     }
 
+    else
+    {
+      
 
-    let mesasRef = this.firebase.database().ref("encuestaDeEmpleado");
+            let mesasRef = this.firebase.database().ref("encuestaDeEmpleado");
+
+            let pictures = this.firebase.storage().ref(`encuestaDeEmpleado/${this.nombreFoto}`);
+
+            pictures.putString(this.foto, "data_url").then(() => {
+
+              pictures.getDownloadURL().then((url) => {
+
+                mesasRef.push({
+                  uno: this.uno,
+                  dos: this.dos,
+                  tres: this.tres,
+                  cuatro:this.cuatro,
+                  cinco:this.cinco,
+                  img: url
+                });
+              });
+            }).then(() => {
+
+              this.presentToast("la encuesta fue cargada con exito");
+              this.encuesta();
+
+
+
+
+            });
+
+    }
+
+  
+    /*let mesasRef = this.firebase.database().ref("encuestaDeEmpleado");
 
     let pictures = this.firebase.storage().ref(`encuestaDeEmpleado/${this.nombreFoto}`);
 
@@ -131,8 +207,8 @@ export class EncuestaDeEmpleadoPage {
           uno: this.uno,
           dos: this.dos,
           tres: this.tres,
-          cuatro: this.cuatro,
-          cinco: this.cinco,
+          cuatro:this.cuatro,
+          cinco:this.cinco,
           img: url
         });
       });
@@ -144,13 +220,13 @@ export class EncuestaDeEmpleadoPage {
 
 
 
-    });
+    });*/
 
 
+    
+    
 
-
-
-
+  
 
 
     //this.navCtrl
@@ -198,7 +274,8 @@ export class EncuestaDeEmpleadoPage {
     toast.present();
   }
 
-  encuesta() {
+  encuesta()
+  {
 
     let probRef = this.firebase.database().ref("encuestaDeEmpleado");
 
@@ -206,71 +283,81 @@ export class EncuestaDeEmpleadoPage {
 
       let data = snap.val();
       //this.esValido = true;
+     
 
+      for (let item in data) 
+      {
 
-      for (let item in data) {
-
-        if (data[item].uno == 1) {
+        if (data[item].uno == 1) 
+        {
 
           this.pregUnoPrimeraRespuesta++;
-
-
+        
+          
         }
-        if (data[item].uno == 2) {
+        if (data[item].uno == 2) 
+        {
 
-          this.pregUnoSegundaRespuesta++;
-
-
+         this.pregUnoSegundaRespuesta++;
+        
+          
         }
 
-        if (data[item].uno == 3) {
+        if (data[item].uno == 3) 
+        {
 
           this.pregUnoTerceraRespuesta++;
-
-
+        
+          
         }
 
-        if (data[item].tres == "si") {
+        if (data[item].tres == "si") 
+        {
 
           this.pregTresPrimeraRespuesta++
-          // alert("entre");
-
-
+         // alert("entre");
+        
+          
         }
 
-        if (data[item].tres == "no") {
+        if (data[item].tres == "no") 
+        {
 
           this.pregTresSegundaRespuesta++;
-
-
+        
+          
         }
 
-        if (data[item].cuatro == "si") {
+        if (data[item].cuatro == "si") 
+        {
 
           this.pregCuatroPrimeraRespuesta++;
-
-
+        
+          
         }
 
-        if (data[item].cuatro == "no") {
+        if (data[item].cuatro == "no") 
+        {
 
           this.pregCuatroSegundaRespuesta++;
-
-
+        
+          
         }
 
-        if (data[item].cinco.item1 == true) {
+        if (data[item].cinco.item1 == true) 
+        {
 
           this.pregCincoPrimeraRespuesta++;
-
-
+        
+          
         }
 
-        if (data[item].cinco.item2 == true) {
+        if (data[item].cinco.item2 == true) 
+        {
 
           this.pregCincoSegundaRespuesta++;
-
-
+        
+          
         }
 
 
@@ -278,46 +365,46 @@ export class EncuestaDeEmpleadoPage {
 
 
       }
-
-
-    }).then(() => {
+      
+      
+    }).then(() => 
+    {
       this.pieChartLabels = ['si', 'no'];
-      //this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
-      this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
+    //this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
+    this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
 
-      this.pieChartLabelsDos = ['si', 'no'];
-      this.pieChartDataDos = [this.pregCuatroPrimeraRespuesta, this.pregCuatroPrimeraRespuesta];
+    this.pieChartLabelsDos = ['si', 'no'];
+    this.pieChartDataDos = [this.pregCuatroPrimeraRespuesta, this.pregCuatroPrimeraRespuesta];
 
-      this.pieChartLabelsCinco = ['si', 'no'];
-      this.pieChartDataCinco = [this.pregCincoPrimeraRespuesta, this.pregCincoSegundaRespuesta];
+    this.pieChartLabelsCinco = ['si', 'no'];
+    this.pieChartDataCinco = [this.pregCincoPrimeraRespuesta, this.pregCincoSegundaRespuesta];
 
-      this.pieChartLabelsUno = ["bien", "masomenos", "mal"];
-      this.pieChartDataUno = [this.pregUnoPrimeraRespuesta, this.pregUnoSegundaRespuesta, this.pregUnoTerceraRespuesta];
-
-
+    this.pieChartLabelsUno = ["bien","masomenos","mal"];
+    this.pieChartDataUno = [this.pregUnoPrimeraRespuesta,this.pregUnoSegundaRespuesta,this.pregUnoTerceraRespuesta];
 
 
-      this.encuestita = false;
-      this.probabilidad = true;
+    
+
+    this.encuestita=false;
+    this.probabilidad=true;
 
 
 
 
     });
+      
 
 
-
-
+    
 
 
   }
 
 
-  Logout() {
+  Logout()
+  {
 
-
-
-    if (localStorage.getItem("desloguear")) {
+    if(localStorage.getItem("desloguear")) {
 
 
       let usuariosRef = this.firebase.database().ref("usuarios");
@@ -327,7 +414,6 @@ export class EncuestaDeEmpleadoPage {
 
 
         let data = snap.val();
-
 
         for (let item in data) {
 
@@ -341,7 +427,7 @@ export class EncuestaDeEmpleadoPage {
 
               localStorage.clear();
               this.navCtrl.setRoot(LoginPage);
-
+             
             });
 
             break;
@@ -354,6 +440,9 @@ export class EncuestaDeEmpleadoPage {
       this.navCtrl.setRoot(PrincipalPage);
     }
 
+
   }
+
+
 
 }

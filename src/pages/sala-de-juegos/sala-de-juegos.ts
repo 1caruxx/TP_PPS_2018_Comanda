@@ -2,9 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { JuegoFerPage } from "../juego-fer/juego-fer";
 
+
 import { LoginPage } from "../login/login";
 
 import firebase from "firebase";
+import { JuegoPage } from '../juego/juego';
+import { JuegoQuinterosPage } from '../juego-quinteros/juego-quinteros';
 
 @IonicPage()
 @Component({
@@ -24,8 +27,8 @@ export class SalaDeJuegosPage {
 
     this.juegos = [
       { accion: "Preguntas y respuestas", img: "preguntas-respuestas.jpg", ruta: JuegoFerPage },
-      { accion: "Juego de la memoria", img: "memoria.jpg", ruta: "./" },
-      { accion: "Agilidad aritmética", img: "agilidad-aritmetica.jpg", ruta: "./" }
+      { accion: "Juego de la memoria", img: "memoria.jpg", ruta: JuegoPage },
+      { accion: "Agilidad aritmética", img: "agilidad-aritmetica.jpg", ruta: JuegoQuinterosPage}
     ]
 
   }

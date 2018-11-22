@@ -73,12 +73,22 @@
       </ion-header>-->
 
       <ion-header>
-        <ion-navbar color="red">
-          <ion-title>
-            Tomar Pedidos
+        <ion-navbar color="red" hideBackButton="true">
+          <ion-title class="titulo2">
+            {{usuario.tipo}}
           </ion-title>
-      
+
+          <ion-buttons start style="left: 3px;
+          position: absolute;">
+          <button ion-button (click)="volver()">
+        <ion-icon name="arrow-back"></ion-icon>
+         </button>
+        </ion-buttons>
+
+          
           <ion-buttons end>
+
+      
             <button ion-button (click)="Logout()">
               <ion-icon name="power"></ion-icon>
             </button>
@@ -160,6 +170,10 @@
     
 
     <ion-content>
+
+      <div class="asdasd" *ngIf="sinPedidos">
+        NO HAY PEDIDOS
+      </div>
 
         <ion-list *ngIf="vistaCocinero">
 
@@ -972,6 +986,89 @@
 
 
 </ion-list>
+
+
+  <ion-list *ngIf="vistaCocinero">
+
+    <div *ngIf="vistaDeliveryCocinero">
+      <div>
+
+        <h2 class="titulo">PedidosDelivery</h2>
+
+        
+
+        <ion-item *ngFor="let item of pedidosDeliveryCocinero">
+
+            
+
+            <!--<ion-thumbnail item-start>
+                
+                <ion-icon name="bycicle"></ion-icon>
+              </ion-thumbnail>-->
+          
+            <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+              <p>Cliente • {{item.tipo}}</p>-->
+              <h3>{{item}}</h3>
+
+              <button ion-button clear item-end (click)="terminarDeliveryCocinero(item)">
+        
+                  <ion-icon name="checkmark-circle"></ion-icon>
+                </button>
+              
+            
+     
+        </ion-item>
+
+      </div>
+
+    </div>
+
+  </ion-list>
+
+  <ion-list *ngIf="vistaBartender">
+
+
+    <div *ngIf="vistaDeliveryBartender">
+        <div>
+  
+          <h2 class="titulo">PedidosDelivery</h2>
+  
+          
+  
+          <ion-item *ngFor="let item of pedidosDeliveryBartender">
+  
+              
+  
+              <ion-thumbnail item-start>
+                  <!--<img src={{item.img}}>-->
+                  <ion-icon name="restaurant"></ion-icon>
+                </ion-thumbnail>
+            
+              <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
+                <p>Cliente • {{item.tipo}}</p>-->
+                <h1>{{item}}</h1>
+  
+                <button ion-button clear item-end (click)="terminarDeliveryBartender(item)">
+          
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                  </button>
+                
+              
+       
+          </ion-item>
+  
+        </div>
+          
+      </div>
+
+
+   
+
+
+
+
+
+  </ion-list>
   
   
 

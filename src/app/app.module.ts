@@ -38,13 +38,11 @@ import { EncuestaDeEmpleadoPage } from '../pages/encuesta-de-empleado/encuesta-d
 import { QrDeLaMesaPage } from '../pages/qr-de-la-mesa/qr-de-la-mesa';
 import { TomarPedidoPage } from '../pages/tomar-pedido/tomar-pedido';
 import { HttpModule } from '@angular/http';
-import { NativeAudio } from '@ionic-native/native-audio';
 import { ChartsModule } from 'ng2-charts';
 import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 
 import { Camera } from '@ionic-native/camera';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { NativeAudio } from '@ionic-native/native-audio';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
 
@@ -65,6 +63,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 
 import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
 import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-ahora';
+import { RuteoProvider } from '../providers/ruteo/ruteo';
 
 @NgModule({
   declarations: [
@@ -156,7 +155,8 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     AngularFireAuth,
     Camera,
     Firebase,
-    FcmProvider
+    FcmProvider,
+    RuteoProvider
   ]
 })
 export class AppModule {}

@@ -1,4 +1,15 @@
 page-tomar-pedido {
+
+    ion-navbar {
+        padding: 20px 10px !important;
+  
+        ion-icon {
+            color: white;
+            
+        }
+    }
+  
+    ion-navbar ion-icon { font-size: 50px !important; }
     
     .accordion-list {
         //background: color($colors, light);
@@ -86,6 +97,39 @@ page-tomar-pedido {
         content: "\f36c";
         font-size: 70px;
     }
+
+    .asdasd{
+        color: black!important;
+        font-size: 200%;
+        margin-bottom: 0px !important;
+        margin-top: 220px !important;
+        padding-top: 5px !important;
+        //text-align: center;
+        font-family: 'roboto';
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+        background-color:#CF4946;
+        height:100px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 100px; 
+        
+        
+
+    }
+
+    .titulo2{
+        color: white!important;
+        font-size: 300%;
+        margin-bottom: 0px !important;
+        margin-top: 2px !important;
+        padding-top: 5px !important;
+        text-align: center;
+        font-family: 'Roboto', cursive;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      
+      
+      }
+
 
 
     

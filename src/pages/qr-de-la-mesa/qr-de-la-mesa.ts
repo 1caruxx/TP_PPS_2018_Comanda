@@ -5,6 +5,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import * as moment from 'moment';
 
 //LINEA 698 Y 701
 /**
@@ -69,6 +70,8 @@ public pedidosPruebaOcho : Array<any>;
 public pedidosPruebaNueve : Array<any>;
 public pedidosPruebaDiez : Array<any>;
 
+public moment = moment;
+
 
 
 
@@ -109,7 +112,7 @@ public pedidosPruebaDiez : Array<any>;
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
     //this.vistaCliente=true;
-    //his.vistaMozo=true;
+    //this.vistaMozo=true;
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
@@ -240,17 +243,66 @@ public pedidosPruebaDiez : Array<any>;
 
             pedidosProbandoUno.on("value", (snap) => {
 
-              this.pedidosPruebaDos=[];
+              this.pedidosPruebaUno=[];
+              let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
-              { 
-                if (result[k].estado && result[k].estado == "preparacion")
+              {
+                if(k=="cocinero")
                 {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
 
-                  this.pedidosPruebaUno.push(result[k]);
+              }
+
+              for(let k in result)
+              { 
+                if (result[k].estado=="preparacion")
+                {
+                  vale++;
+
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaUno.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaUno.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaUno.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
+                 
 
                 }
 
@@ -264,17 +316,65 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoDos.on("value", (snap) => {
 
               this.pedidosPruebaDos=[];
+              let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
+
+              for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaDos.push(result[k]);
+                  vale++;
 
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaDos.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaDos.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaDos.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
                 }
 
               }
@@ -287,16 +387,73 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoTres.on("value", (snap) => {
 
               this.pedidosPruebaTres=[];
+              //this.pedidosPruebaTres=new Array(0);
+
+              let vale=0;
+              let terminado=true;
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
-              { 
-                if (result[k].estado && result[k].estado == "preparacion")
+              {
+                if(k=="cocinero")
                 {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
 
-                  this.pedidosPruebaTres.push(result[k]);
+              }
+
+              for(let k in result)
+              { 
+                if (result[k].estado == "preparacion")
+                {
+                  /*vale++;
+                  if(vale==2)
+                  {
+                    this.pedidosPruebaTres.push(result[k]);
+                  }*/
+                  vale++;
+
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaTres.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaTres.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaTres.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
+                  
+                  
 
                 }
 
@@ -310,16 +467,65 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoCuatro.on("value", (snap) => {
 
               this.pedidosPruebaCuatro=[];
+              let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
+
+              for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaCuatro.push(result[k]);
+                  vale++;
+
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaCuatro.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaCuatro.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaCuatro.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
 
                 }
 
@@ -333,16 +539,65 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoCinco.on("value", (snap) => {
 
               this.pedidosPruebaCinco=[];
+              let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
+
+              for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaCinco.push(result[k]);
+                  vale++;
+
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaCinco.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaCinco.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaCinco.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
 
                 }
 
@@ -356,16 +611,65 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoSeis.on("value", (snap) => {
 
               this.pedidosPruebaSeis=[];
+              let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
+
+              for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaSeis.push(result[k]);
+                  vale++;
+
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaSeis.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaSeis.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaSeis.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
 
                 }
 
@@ -379,16 +683,65 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoSiete.on("value", (snap) => {
 
               this.pedidosPruebaSiete=[];
+              let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
+
+              for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaSiete.push(result[k]);
+                  vale++;
+
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaSiete.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaSiete.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaSiete.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
 
                 }
 
@@ -402,17 +755,65 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoOcho.on("value", (snap) => {
 
               this.pedidosPruebaOcho=[];
+              let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
+
+              for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaOcho.push(result[k]);
+                  vale++;
 
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaOcho.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaOcho.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaOcho.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
                 }
 
               }
@@ -425,16 +826,65 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoNueve.on("value", (snap) => {
 
               this.pedidosPruebaNueve=[];
+              let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
+
+              for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaNueve.push(result[k]);
+                  vale++;
+
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaNueve.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaNueve.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaNueve.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
 
                 }
 
@@ -449,16 +899,65 @@ public pedidosPruebaDiez : Array<any>;
             pedidosProbandoDiez.on("value", (snap) => {
 
               this.pedidosPruebaDiez=[];
+              let vale=0;
+
+              let cocinero=false;
+              let bartender=false;
 
 
               let result = snap.val();
 
               for(let k in result)
+              {
+                if(k=="cocinero")
+                {
+                  cocinero=true;
+                }
+                if(k=="bartender")
+                {
+                  bartender=true;
+                }
+
+              }
+
+              for(let k in result)
               { 
-                if (result[k].estado && result[k].estado == "preparacion")
+                if (result[k].estado == "preparacion")
                 {
 
-                  this.pedidosPruebaDiez.push(result[k]);
+                  vale++;
+
+                  if(bartender==true && cocinero==true)
+                  {
+                    if(vale==2)
+                      {
+                        this.pedidosPruebaDiez.push(result[k]);
+                        console.log("los 2")
+                        break;
+                      }
+
+                  }
+
+                  if(bartender==true && cocinero==false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaDiez.push(result[k]);
+                      console.log("barteneder")
+                      break;
+                    }
+
+                  }
+                  if(cocinero==true && bartender == false)
+                  {
+                    if(vale==1)
+                    {
+                      this.pedidosPruebaDiez.push(result[k]);
+                      console.log("cocinero")
+                      break;
+                    }
+
+                  }
 
                 }
 
@@ -549,25 +1048,118 @@ public pedidosPruebaDiez : Array<any>;
     this.scanSub.unsubscribe();*/
   }
 
-  Modificar(correo,text)
+  Modificar(correo,text,cantidad,mesa)
   {
     var ocup=true;
+    //let reservadita=false;
+    //let otro=1;
 
     this.estaLibre=true;
+    //this.presentToast(text);
+    //if(this.prueba(text))
+    //{
+      //reservadita=true;
+   // }
+    
 
-          var refDos = this.firebase.database().ref("mesas");
+    let momentoActual = moment(new Date());
+                                  let reservasRef = firebase.database().ref("reservas");
+
+                                  reservasRef.once("value", (snap) => {
+
+                                    let data = snap.val();
+                              
+                                    for (let item in data) {
+                              
+                                      if (data[item].mesa == text) {
+                              
+                                        let diferencia = Math.abs(momentoActual.diff(moment(data[item].horario, "DD/MM/YYYY HH:mm"), "m"));
+                              
+                                        if (diferencia < 40) {
+                              
+                                          if(data[item].correo == correo) {
+
+                                            firebase.database().ref("usuarios").once("value", (snapUsuario) => {
+
+                                              let dataUsuario = snapUsuario.val();
+
+                                              for (let itemUsuario in dataUsuario) {
+
+                                                if (dataUsuario[itemUsuario].correo == correo) {
+
+                                                  firebase.database().ref("usuarios").child(itemUsuario).update({estado: "atendido"}).then(() => {
+
+                                                    firebase.database().ref("mesas").once("value", (snapMesa) => {
+
+                                                      let dataMesa = snapMesa.val();
+
+                                                      for (let itemMesa in dataMesa) {
+
+                                                        if(dataMesa[itemMesa].numeroMesa == mesa) {
+
+                                                          firebase.database().ref("mesas").child(itemMesa).update({estado: "ocupada"}).then(() => {
+
+                                                            firebase.database().ref("mesas").child(itemMesa).update({cliente: correo}).then(() => {
+
+                                                              this.MostrarAlert("bienn", "se setoe la mesa!!", "ok", this.ocultarAlert);
+                                                            })
+
+                                                          })
+
+                                                        }
+                                                      }
+                                                    })
+                                                  })
+                                                }
+                                              }
+                                            })
+                                          } else {
+                                            //this.presentToast("Esa mesa esta reservada.");
+                                            this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
+                                            //reservadita=true;
+                                            //otro=2;
+                                            return;
+                                          }
+
+                                          
+                                        }
+                                      }
+                                    }
+
+
+                                    var refDos = this.firebase.database().ref("mesas");
                         
                         refDos.once('value', (snap) => {
                             var data = snap.val();
                             //this.estaLibre=true;
                           // ocup=true;
-                            for(var key in data){
-                                if (text == data[key].numeroMesa) {
+                            for(var key in data)
+                            {
+
+                              if(mesa=="1"||mesa=="2"||mesa=="3"||mesa=="4"||mesa=="5"||mesa=="6"||mesa=="7"||mesa=="8"||mesa=="9"||mesa=="10")
+                              //if(mesa=="1")
+                                  {
+                                    
+                                      if(text!=mesa)
+                                      {
+                                        this.MostrarAlert("Error!!","Este cliente tiene una reserva para otra mesa","aceptar",this.limpiar);
+                                        break;
+                                      }
+
+                                  }
+
+
+
+                                if (text == data[key].numeroMesa) 
+                                {
+
+                               
 
                                   //if(data[key].cliente!=null)
                                   //CAMBIE ESTA LINEA
                                   if(data[key].estado!="libre")
                                   {
+
                                     this.estaLibre=false;
                                     //ocup=false;
                                    // alert("La mesa ya esta ocupada");
@@ -576,6 +1168,154 @@ public pedidosPruebaDiez : Array<any>;
                                     //return;
                                     
                                   }
+
+                                  if(data[key].cantidadComensales<cantidad)
+                                  {
+                                    this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales", "Aceptar", this.limpiar);
+                                    break;
+
+                                  }
+
+
+
+
+
+                                    data[key].cliente = correo;
+                                    data[key].estado = "ocupada";
+                                    refDos.child(key).update(data[key]);
+                                    //alert("bienvenido,se relaciono la mesa tres")
+
+                                    if(text==mesa)
+                                    {
+
+
+                                      let reservasRef = firebase.database().ref("reservas");
+
+                                      reservasRef.once("value", (snap) => {
+
+                                        let data = snap.val();
+                                    
+                                          for (let item in data) 
+                                          {
+                                    
+                                            if (data[item].correo == correo) 
+                                            {
+                                              reservasRef.child(item).remove();
+                                              break;
+
+                                            }
+
+                                          }
+                              
+
+
+                                      });
+
+
+
+                                    }
+
+
+
+                                    //var ref = this.firebase.database().ref("usuarios/clientes");
+                                    var ref = this.firebase.database().ref("usuarios");
+             
+                                    ref.once('value', (snap) => {
+                                        var data = snap.val();
+                                        for(var key in data){
+                                            if (correo == data[key].correo) {
+                                                data[key].mesa = text;
+                                                data[key].estado = "atendido";
+                                               
+                                                ref.child(key).update(data[key]);
+                                                //alert("Listo,se relaciono al cliente con la mesa " + text);
+                                                this.MostrarAlert("Exito!", "Listo,se relaciono al cliente con la mesa " + text, "Aceptar", this.limpiar);
+                                                //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                                                //COMENTE ESTO
+                                                return;
+                                                
+                                                
+                                                
+                     
+                                            };                  
+                                        }
+                                    });
+
+
+
+
+
+                                   
+                                };                  
+                            }
+                        }); 
+
+
+
+
+                              
+                                 });
+
+
+
+
+
+
+
+
+                            
+                              
+
+          /*var refDos = this.firebase.database().ref("mesas");
+                        
+                        refDos.once('value', (snap) => {
+                            var data = snap.val();
+                            //this.estaLibre=true;
+                          // ocup=true;
+                            for(var key in data)
+                            {
+
+                              if(mesa=="1"||mesa=="2"||mesa=="3"||mesa=="4"||mesa=="5"||mesa=="6"||mesa=="7"||mesa=="8"||mesa=="9"||mesa=="10")
+                              //if(mesa=="1")
+                                  {
+                                    
+                                      if(text!=mesa)
+                                      {
+                                        this.MostrarAlert("Error!!","Este cliente tiene una reserva para otra mesa","aceptar",this.limpiar);
+                                        break;
+                                      }
+
+                                  }
+
+
+
+                                if (text == data[key].numeroMesa) 
+                                {
+
+                               
+
+                                  //if(data[key].cliente!=null)
+                                  //CAMBIE ESTA LINEA
+                                  if(data[key].estado!="libre")
+                                  {
+
+                                    this.estaLibre=false;
+                                    //ocup=false;
+                                   // alert("La mesa ya esta ocupada");
+                                   this.MostrarAlert("Error!", "La mesa ya esta ocupada", "Aceptar", this.limpiar);
+                                    break;
+                                    //return;
+                                    
+                                  }
+
+                                  if(data[key].cantidadComensales<cantidad)
+                                  {
+                                    this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales", "Aceptar", this.limpiar);
+                                    break;
+
+                                  }
+
+
 
 
 
@@ -615,7 +1355,10 @@ public pedidosPruebaDiez : Array<any>;
                                    
                                 };                  
                             }
-                        });
+                        }); */
+
+
+                      
 
 
 
@@ -815,17 +1558,17 @@ public pedidosPruebaDiez : Array<any>;
        
     });*/
 
-    this.barcode.scan().then(barcodeData => {
+   /* this.barcode.scan().then(barcodeData => {
       this.Modificar(correo,barcodeData.text);
         alert(barcodeData.text);
-    });
+    });*/
 
   }
 
-  ocuparMesaBarcode(correo)
+  ocuparMesaBarcode(correo,cantidad,mesa)
   {
     this.barcode.scan().then(barcodeData => {
-      this.Modificar(correo,barcodeData.text);
+      this.Modificar(correo,barcodeData.text,cantidad,mesa);
         //alert(barcodeData.text);
     });
 
@@ -835,10 +1578,34 @@ public pedidosPruebaDiez : Array<any>;
   mostrarTiempoBarcode()
   {
     let banderita=0;
+    let comiendo=false;
 
     let usuario = JSON.parse(localStorage.getItem("usuario"));
 
     this.barcode.scan().then(barcodeData => {
+
+
+
+      var refComiendo = this.firebase.database().ref("usuarios");
+      refComiendo.once('value',(snap) =>{
+          var dataDos = snap.val();
+        for (var keyDos in dataDos)
+        {
+          if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo==usuario.correo)
+          {
+            this.MostrarAlert("Terminado y Entregado", "Su pedido ya deberia estar en la mesa,si no es asi comuniquese con su mozo", "Aceptar", this.limpiar);
+            banderita=1;
+            comiendo=true;
+            break;
+          }
+          
+        }
+
+
+
+
+      });
+
 
 
 
@@ -859,8 +1626,14 @@ public pedidosPruebaDiez : Array<any>;
                     if(data[key].tiempoMinimo!=null)
                     {
                     //alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
-                    this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
-                    banderita=1;
+                    if(comiendo==false)
+                    {
+                      this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
+                      banderita=1;
+
+                    }
+                    //this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
+                    //banderita=1;
                     break;
 
                     }
@@ -1023,7 +1796,7 @@ public pedidosPruebaDiez : Array<any>;
 
   }
 
-  terminarpedidoTres()
+  terminarPedidoTres()
   {
 
     var refTerminarUnoCocinero = this.firebase.database().ref("pedidos/3/");
@@ -1265,6 +2038,43 @@ public pedidosPruebaDiez : Array<any>;
                           //  this.navCtrl.setRoot(this.navCtrl.getActive().component);
                           this.pedidosPruebaDiez=[];
                           });
+
+  }
+
+  volver()
+  {
+    this.navCtrl.pop();
+  }
+
+  prueba(text)
+  {
+    let momentoActual = moment(new Date());
+                                  let reservasRef = firebase.database().ref("reservas");
+
+                                  reservasRef.once("value", (snap) => {
+
+                                    let data = snap.val();
+                              
+                                    for (let item in data) {
+                              
+                                      if (data[item].mesa == text) {
+                              
+                                        let diferencia = Math.abs(momentoActual.diff(moment(data[item].horario, "DD/MM/YYYY HH:mm"), "m"));
+                              
+                                        if (diferencia < 40) {
+                              
+                                        
+                                          //this.presentToast("Esa mesa esta reservada.");
+                                          this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
+                              
+                                          return true;
+                                          
+                                        }
+                                      }
+                                    }
+                                    return false;
+                              
+                                 });
 
   }
 

@@ -6,8 +6,17 @@ import { VerificarTipoProvider } from "../../providers/verificar-tipo/verificar-
 import { LoginPage } from "../login/login";
 import { PerfilPage } from "../perfil/perfil";
 
+import { FcmProvider } from '../../providers/fcm/fcm';
+
+import { ToastController } from 'ionic-angular';
+import { Subject } from 'rxjs/Subject';
+import { tap } from 'rxjs/operators';
+
+import { NativeAudio } from '@ionic-native/native-audio';
+
 import firebase from "firebase";
 import "firebase/firestore";
+import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 
 @IonicPage()
 @Component({
@@ -22,7 +31,34 @@ export class PrincipalPage {
   public usuarioKey: any;
   public firebase = firebase;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private verificarTipo: VerificarTipoProvider) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private verificarTipo: VerificarTipoProvider,
+    private fcm: FcmProvider,
+    private nativeAudio: NativeAudio,
+    private toastCtrl: ToastController) {
+
+    this.nativeAudio.preloadSimple('a', 'assets/imgs/gamma/fortnite.mp3').catch(() => { });
+
+    fcm.getToken()
+
+    // Listen to incoming messages
+    fcm.listenToNotifications().pipe(
+      tap(msg => {
+        // show a toast
+        const toast = toastCtrl.create({
+          message: msg.body,
+          duration: 8000,
+          position: 'top',
+          cssClass: 'nombreRaro'
+
+        });
+        this.nativeAudio.play('a').catch(() => { });
+        toast.present();
+      })
+    )
+      .subscribe()
+
 
     this.acciones = this.verificarTipo.RetornarAcciones();
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -203,11 +239,11 @@ export class PrincipalPage {
               || this.usuario.tipo == "repartidor") {
 
               // Para redireccionar a la encuesta de axel.
-              // localStorage.setItem("desloguear", "true");
-              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+              localStorage.setItem("desloguear", "true");
+              this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
 
-              localStorage.clear();
-              this.navCtrl.setRoot(LoginPage);
+              // localStorage.clear();
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
             } else {
 
               localStorage.clear();
