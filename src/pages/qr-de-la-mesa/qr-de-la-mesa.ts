@@ -112,9 +112,9 @@ public moment = moment;
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
     //this.vistaCliente=true;
-    this.vistaMozo=true;
+    //this.vistaMozo=true;
 
-   /* this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
     if(this.usuario.tipo=="mozo")
     {
@@ -124,7 +124,7 @@ public moment = moment;
     if(this.usuario.tipo=="cliente" || this.usuario.tipo=="anonimo")
     {
       this.vistaCliente=true;
-    }*/
+    }
 
     
     setInterval(() => {
