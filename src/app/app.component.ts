@@ -25,7 +25,7 @@ import { JuegoQuinterosPageModule } from '../pages/juego-quinteros/juego-quinter
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = MapaDeRutaPage;
+  rootPage:any = QrDeLaMesaPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,modalCtrl: ModalController, fcm: FcmProvider, toastCtrl: ToastController,private nativeAudio: NativeAudio) {
     platform.ready().then(() => {

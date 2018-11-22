@@ -1147,6 +1147,36 @@ public moment = moment;
                                     refDos.child(key).update(data[key]);
                                     //alert("bienvenido,se relaciono la mesa tres")
 
+                                    if(text==mesa)
+                                    {
+
+
+                                      let reservasRef = firebase.database().ref("reservas");
+
+                                      reservasRef.once("value", (snap) => {
+
+                                        let data = snap.val();
+                                    
+                                          for (let item in data) 
+                                          {
+                                    
+                                            if (data[item].correo == correo) 
+                                            {
+                                              reservasRef.child(item).remove();
+                                              break;
+
+                                            }
+
+                                          }
+                              
+
+
+                                      });
+
+
+
+                                    }
+
 
 
                                     //var ref = this.firebase.database().ref("usuarios/clientes");
@@ -1162,7 +1192,9 @@ public moment = moment;
                                                 ref.child(key).update(data[key]);
                                                 //alert("Listo,se relaciono al cliente con la mesa " + text);
                                                 this.MostrarAlert("Exito!", "Listo,se relaciono al cliente con la mesa " + text, "Aceptar", this.limpiar);
-                                                this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                                                //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                                                //COMENTE ESTO
+                                                return;
                                                 
                                                 
                                                 
