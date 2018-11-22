@@ -19,6 +19,19 @@
 
 </div>
 
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+  <div class="alert-message animation-target">
+    <h1>{{alertTitulo}}</h1>
+    <p>{{alertMensaje}}</p>
+    <div class="botones">
+      <button ion-button outline (click)="OcultarAlert()">No</button>
+      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+    </div>
+  </div>
+
+</div>
+
 <ion-content>
 
   <div class="sin-elementos" *ngIf="ocultarSpinner  && reservasPendientes.length == 0 && reservasConfirmadas.length == 0">
@@ -41,9 +54,19 @@
       <p>Horario • {{item.horario}} Hs.</p>
       <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
 
-      <button ion-button clear item-end (click)="DesplegarMesas(item)">
-        <ion-icon style="color: #CAFF4F;" name="checkmark-circle-outline"></ion-icon>
-      </button>
+      <div item-end style="display: flex; align-items: center;align-content: center;flex-direction: column;">
+
+        <button ion-button clear (click)="DesplegarMesas(item)" style="margin-bottom: 20px;">
+          <ion-icon style="color: #CAFF4F;" name="checkmark-circle-outline"></ion-icon>
+        </button>
+
+        <button ion-button clear (click)="ConfirmarCancelarReserva(item)">
+          <ion-icon style="color: #FF0000;" name="close"></ion-icon>
+        </button>
+
+      </div>
+
+
     </ion-item>
 
   </ion-list>
@@ -65,6 +88,10 @@
       <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
       <p>Mesa • {{item.mesa}}</p>
 
+      <button item-end ion-button clear (click)="ConfirmarCancelarReserva(item)">
+        <ion-icon style="color: #FF0000;" name="close"></ion-icon>
+      </button>
+
     </ion-item>
 
   </ion-list>
@@ -76,7 +103,7 @@
       <button ion-button color="red" class="mesa {{item.seleccionado}}" (click)="Seleccionar(item.numero)" *ngFor="let item of mesas">{{item.numero}}</button>
     </div>
 
-    <div class="botones">
+    <div class="botones-interfaz-mesa">
       <button ion-button color="red" (click)="OcultarInterfaz()">Cancelar</button>
       <button ion-button color="red" (click)="Confirmar()">Confirmar</button>
     </div>

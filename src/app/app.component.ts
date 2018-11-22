@@ -16,6 +16,7 @@ import { CuentaPage } from "../pages/cuenta/cuenta";
 import { ReservaPage } from "../pages/reserva/reserva";
 import { ListadoReservasPage } from "../pages/listado-reservas/listado-reservas";
 import { JuegoFerPage } from "../pages/juego-fer/juego-fer";
+import { SalaDeJuegosPage } from "../pages/sala-de-juegos/sala-de-juegos";
 
 @Component({
   templateUrl: 'app.html'

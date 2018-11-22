@@ -144,7 +144,7 @@ page-listado-reservas {
         outline-offset: 5px;
     }
 
-    .botones {
+    .botones-interfaz-mesa {
         margin-top: 20px;
         margin-bottom: 20px;
         text-align: center;
@@ -152,6 +152,14 @@ page-listado-reservas {
         button {
             padding: 30px 20px 30px 20px;
         }
+    }
+
+    .animation-target {
+        animation-name: jelly;
+        animation-duration: 1000ms;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
     }
 
     .ocultar {

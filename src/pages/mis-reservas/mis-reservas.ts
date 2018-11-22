@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { LoginPage } from '../login/login';
 
 import firebase from "firebase";
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class MisReservasPage {
 
   public ocultarSpinner: boolean = false;
   public ocultarInterfazMesas: boolean;
+  public ejecutarSetInterval: boolean;
 
   public firebase = firebase;
   public usuario: any;
@@ -36,6 +38,7 @@ export class MisReservasPage {
     this.reservas = [];
     this.reservasPendientes = [];
     this.reservasConfirmadas = [];
+    this.ejecutarSetInterval = true;
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     setInterval(() => {
@@ -73,6 +76,18 @@ export class MisReservasPage {
         return item.estado == "confirmada";
       });
 
+
+      if (this.ejecutarSetInterval) {
+
+        this.VerificarReservasPasadasDeTiempo();
+        this.ejecutarSetInterval = false;
+
+        setInterval(() => {
+
+          this.VerificarReservasPasadasDeTiempo();
+        }, 1000 * 60);
+      }
+
       this.ocultarSpinner = true;
     })
   }
@@ -81,10 +96,25 @@ export class MisReservasPage {
     console.log('ionViewDidLoad MisReservasPage');
   }
 
+  VerificarReservasPasadasDeTiempo() {
+
+    let momentoActual = moment(new Date());
+
+    for (let item of this.reservas) {
+
+      if (momentoActual.diff(moment(item.horario, "DD/MM/YYYY HH:mm"), "m") > 20) {
+
+        firebase.database().ref("reservas").child(item.key).remove().catch(() => this.presentToast("Ups... Tenemos problemas técnicos"));
+      }
+
+    }
+
+  }
+
   ConfirmarCancelarReserva(reserva) {
 
     this.reservaSeleccionada = reserva;
-    this.MostrarAlert("", "¿Seguro que deseas cancelar la reserva?", "Sí", this.CancelarRerserva);
+    this.MostrarAlert("", `¿Seguro que deseas cancelar tu reserva para el ${this.reservaSeleccionada.horario} Hs.?`, "Sí", this.CancelarRerserva);
 
   }
 

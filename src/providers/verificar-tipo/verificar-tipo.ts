@@ -6,6 +6,7 @@ import { ListadoSupervisorPage } from "../../pages/listado-supervisor/listado-su
 import { ReservaPage } from "../../pages/reserva/reserva";
 import { CuentaPage } from "../../pages/cuenta/cuenta";
 import { ListadoReservasPage } from "../../pages/listado-reservas/listado-reservas";
+import { SalaDeJuegosPage } from "../../pages/sala-de-juegos/sala-de-juegos";
 
 @Injectable()
 export class VerificarTipoProvider {
@@ -84,7 +85,7 @@ export class VerificarTipoProvider {
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
           { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: "./" },
           { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage },
-          { accion: "Juegos", img: "juegos.jpg", ruta: "./" }
+          { accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage }
         ];
         break;
 
@@ -94,7 +95,7 @@ export class VerificarTipoProvider {
           { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: "./" },
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: "./" },
           { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: "./" },
-          { accion: "Juegos", img: "juegos.jpg", ruta: "./" }
+          { accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage }
         ];
         break;
     }

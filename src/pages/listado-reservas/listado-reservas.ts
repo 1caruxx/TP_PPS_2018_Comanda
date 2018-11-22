@@ -18,11 +18,20 @@ export class ListadoReservasPage {
   public reservasConfirmadas: Array<any>;
   public mesas: Array<any>;
   public reservaSeleccionada;
+  public reservaSeleccionadaParaCancelar;
 
   public image = "";
   public ocultarImagen = true;
   public ocultarSpinner: boolean = false;
   public ocultarInterfazMesas: boolean;
+  public ejecutarSetInterval: boolean;
+
+  public estadoBoton: boolean = false;
+  public ocultarAlert: boolean = true;
+  public alertTitulo;
+  public alertMensaje;
+  public alertMensajeBoton;
+  public alertHandler;
 
   public firebase = firebase;
   public usuario: any;
@@ -35,6 +44,7 @@ export class ListadoReservasPage {
     this.reservasConfirmadas = [];
     this.mesas = [];
     this.ocultarInterfazMesas = true;
+    this.ejecutarSetInterval = true;
 
     setInterval(() => {
       this.reservasPendientes = this.reservasPendientes;
@@ -48,6 +58,8 @@ export class ListadoReservasPage {
       let data = snap.val();
       this.reservas = [];
       let contador = 0;
+
+      console.clear();
 
       for (let item in data) {
 
@@ -66,6 +78,17 @@ export class ListadoReservasPage {
         return item.estado == "confirmada";
       });
 
+      if (this.ejecutarSetInterval) {
+
+        this.VerificarReservasPasadasDeTiempo();
+        this.ejecutarSetInterval = false;
+
+        setInterval(() => {
+
+          this.VerificarReservasPasadasDeTiempo();
+        }, 1000 * 60);
+      }
+
       this.ocultarSpinner = true;
     })
 
@@ -73,6 +96,21 @@ export class ListadoReservasPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListadoReservasPage');
+  }
+
+  VerificarReservasPasadasDeTiempo() {
+
+    let momentoActual = moment(new Date());
+
+    for (let item of this.reservas) {
+
+      if (momentoActual.diff(moment(item.horario, "DD/MM/YYYY HH:mm"), "m") > 20) {
+
+        firebase.database().ref("reservas").child(item.key).remove().catch(() => this.presentToast("Ups... Tenemos problemas técnicos"));
+      }
+
+    }
+
   }
 
   DesplegarMesas(reservaSeleccionada) {
@@ -167,6 +205,22 @@ export class ListadoReservasPage {
 
   }
 
+  ConfirmarCancelarReserva(reserva) {
+
+    this.reservaSeleccionadaParaCancelar = reserva;
+    this.MostrarAlert("", `¿Seguro que deseas cancelar la reserva de ${this.reservaSeleccionadaParaCancelar.apellido}, ${this.reservaSeleccionadaParaCancelar.nombre} para el ${this.reservaSeleccionadaParaCancelar.horario} Hs.?`, "Sí", this.CancelarRerserva);
+  }
+
+  CancelarRerserva() {
+
+    this.OcultarAlert();
+
+    firebase.database().ref("reservas").child(this.reservaSeleccionadaParaCancelar.key).remove().then(() => {
+      this.ocultarSpinner = true;
+      this.presentToast("Se ha cancelado la reserva.");
+    })
+  }
+
   OcultarInterfaz() {
     this.ocultarInterfazMesas = true;
   }
@@ -178,6 +232,18 @@ export class ListadoReservasPage {
 
   OcultarImagen() {
     this.ocultarImagen = true;
+  }
+
+  MostrarAlert(titulo: string, mensaje: string, mensajeBoton: string, handler) {
+    this.ocultarAlert = false;
+    this.alertTitulo = titulo;
+    this.alertMensaje = mensaje;
+    this.alertMensajeBoton = mensajeBoton;
+    this.alertHandler = handler;
+  }
+
+  OcultarAlert() {
+    this.ocultarAlert = true;
   }
 
   presentToast(mensaje: string) {

@@ -20,11 +20,13 @@ import { MisReservasPage } from "../pages/mis-reservas/mis-reservas";
 import { CuentaPage } from "../pages/cuenta/cuenta";
 import { ListadoReservasPage } from "../pages/listado-reservas/listado-reservas";
 import { JuegoFerPage } from "../pages/juego-fer/juego-fer";
+import { SalaDeJuegosPage } from "../pages/sala-de-juegos/sala-de-juegos";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Camera } from '@ionic-native/camera';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
 
@@ -54,7 +56,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     MisReservasPage,
     CuentaPage,
     ListadoReservasPage,
-    JuegoFerPage
+    JuegoFerPage,
+    SalaDeJuegosPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +85,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     MisReservasPage,
     CuentaPage,
     ListadoReservasPage,
-    JuegoFerPage
+    JuegoFerPage,
+    SalaDeJuegosPage
   ],
   providers: [
     StatusBar,
@@ -91,7 +95,8 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     VerificarTipoProvider,
     AngularFireAuth,
     Camera,
-    BarcodeScanner
+    BarcodeScanner,
+    NativeAudio
   ]
 })
 export class AppModule {}

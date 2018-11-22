@@ -28,22 +28,13 @@
 <ion-content>
 
   <div class="puntos">
-    <span>Aciertos: {{preguntasAcertadas}}/5</span><br>
-    <span>Tiempo restante: {{preguntasAcertadas}}/5</span>
-    <!-- <span>Tiempo restante: {{segundos}}.{{milisegundos}}</span> -->
+    <span>Aciertos: <span class="preguntas-acertadas">{{preguntasAcertadas}}</span>/5</span><br>
+    <span>Tiempo restante: {{segundos}} segundos</span>
   </div>
 
-  <div class="vertical-container">
+  <h1 class="pregunta">{{preguntaSeleccionada.pregunta}}</h1>
 
-    <h1>{{preguntaSeleccionada.pregunta}}</h1>
-
-    <!-- <div class="interfaz">
-
-      <input type="text" placeholder="Escribe tu respuesta" [(ngModel)]="respuestaUsuario" />
-      <button ion-button color="red" (click)="Validar()" #input>Responder</button>
-
-    </div> -->
-
+  <div class="interfaz">
     <ion-list radio-group [(ngModel)]="respuestaUsuario">
       <ion-item>
         <ion-label>{{preguntaSeleccionada.opcion1}}</ion-label>
@@ -59,13 +50,12 @@
       </ion-item>
 
       <ion-item>
-          <ion-label>{{preguntaSeleccionada.opcion4}}</ion-label>
-          <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion4}}"></ion-radio>
-        </ion-item>
+        <ion-label>{{preguntaSeleccionada.opcion4}}</ion-label>
+        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion4}}"></ion-radio>
+      </ion-item>
     </ion-list>
 
-    <button ion-button color="red" (click)="Validar()">Responder</button>
-
+    <button ion-button color="btn-verde" (click)="Validar()">Responder</button>
 
   </div>
 
