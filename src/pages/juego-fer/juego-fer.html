@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-title>{{usuario.tipo}}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+  <div class="alert-message animation-target">
+    <h1>{{alertTitulo}}</h1>
+    <p>{{alertMensaje}}</p>
+    <div class="botones">
+
+      <button ion-button outline [disabled]="estadoBoton" (click)="alertHandler()">{{alertMensajeBoton}}</button>
+    </div>
+  </div>
+
+</div>
+
+<ion-content>
+
+  <div class="puntos">
+    <span>Aciertos: <span class="preguntas-acertadas">{{preguntasAcertadas}}</span>/5</span><br>
+    <span>Tiempo restante: {{segundos}} segundos</span>
+  </div>
+
+  <h1 class="pregunta">{{preguntaSeleccionada.pregunta}}</h1>
+
+  <div class="interfaz">
+    <ion-list radio-group [(ngModel)]="respuestaUsuario">
+      <ion-item>
+        <ion-label>{{preguntaSeleccionada.opcion1}}</ion-label>
+        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion1}}"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{preguntaSeleccionada.opcion2}}</ion-label>
+        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion2}}"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{preguntaSeleccionada.opcion3}}</ion-label>
+        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion3}}"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>{{preguntaSeleccionada.opcion4}}</ion-label>
+        <ion-radio item-left color="red" value="{{preguntaSeleccionada.opcion4}}"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button color="btn-verde" (click)="Validar()">Responder</button>
+
+  </div>
+
+  <app-spinner [ngClass]="{'ocultar':ocultarSpinner}"></app-spinner>
+
+</ion-content>

@@ -6,6 +6,7 @@ import { ListadoSupervisorPage } from "../../pages/listado-supervisor/listado-su
 import { ReservaPage } from "../../pages/reserva/reserva";
 import { CuentaPage } from "../../pages/cuenta/cuenta";
 import { ListadoReservasPage } from "../../pages/listado-reservas/listado-reservas";
+import { SalaDeJuegosPage } from "../../pages/sala-de-juegos/sala-de-juegos";
 
 import { RegistroClientePage } from '../../pages/registro-cliente/registro-cliente';
 import { AltaPlatosPage } from '../../pages/alta-platos/alta-platos';
@@ -98,8 +99,7 @@ export class VerificarTipoProvider {
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
           { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: EncuestaClientePage },
           { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage },
-          { accion: "juego facu", img: "juegos.jpg", ruta: JuegoPage },
-          { accion: "juego axel", img: "juegos.jpg", ruta: JuegoQuinterosPage }
+          { accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage }
         ];
         break;
 
@@ -109,8 +109,7 @@ export class VerificarTipoProvider {
           { accion: "Ver estado del pedido", img: "estado-pedido.jpg", ruta: QrDeLaMesaPage },
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
           { accion: "Confeccionar encuesta.", img: "encuesta.jpg", ruta: EncuestaClientePage },
-          { accion: "juego facu", img: "juegos.jpg", ruta: JuegoPage },
-          { accion: "juego axel", img: "juegos.jpg", ruta: JuegoQuinterosPage }
+          { accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage }
         ];
         break;
     }

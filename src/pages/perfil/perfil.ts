@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
+import { LoginPage } from '../login/login';
+
 import firebase from "firebase";
 
 @IonicPage()
@@ -17,6 +19,8 @@ export class PerfilPage {
   public usuario;
   public tipo;
 
+
+  public ocultarSpinner: boolean = true;
   public firebase = firebase;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) {
@@ -38,10 +42,6 @@ export class PerfilPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PerfilPage');
-  }
-
-  ionViewWillLeave() {
-    localStorage.setItem("refrescarImagen", "true");
   }
 
   async SacarFoto() {
@@ -66,7 +66,7 @@ export class PerfilPage {
       let foto = `data:image/jpeg;base64,${result}`;
 
       let pictures = this.firebase.storage().ref(`usuarios/${nombreFoto}`);
-
+      this.ocultarSpinner = false;
       pictures.putString(foto, "data_url").then(() => {
 
         pictures.getDownloadURL().then((url) => {
@@ -78,15 +78,17 @@ export class PerfilPage {
             let data = snap.val();
 
             for (let item in data) {
-      
+
               if (data[item].correo == this.usuario.correo) {
-                
+
                 usuariosRef.child(item).update({
                   img: url
                 }).then(() => {
+
                   this.usuario.img = url;
                   localStorage.setItem("usuario", JSON.stringify(this.usuario));
-
+                  localStorage.setItem("refrescarImagen", "true");
+                  this.ocultarSpinner = true;
                 });
 
                 break;
@@ -122,4 +124,45 @@ export class PerfilPage {
 
   //   return retorno;
   // }
+
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
+          });
+
+          break;
+        }
+      }
+    });
+  }
+
 }

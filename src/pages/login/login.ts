@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { PrincipalPage } from "../principal/principal";
-import { RegistroClientePage } from "../registro-cliente/registro-cliente";
-import { EncuestaDeEmpleadoPage } from "../encuesta-de-empleado/encuesta-de-empleado";
-import { QrIngresoLocalPage } from "../qr-ingreso-local/qr-ingreso-local";
+import { AltaEmpleadoPage } from "../alta-empleado/alta-empleado";
+import { ListadoSupervisorPage } from "../listado-supervisor/listado-supervisor";
 
 import { AngularFireAuth } from "angularfire2/auth";
 import firebase from "firebase";
@@ -33,23 +32,10 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private authInstance: AngularFireAuth,
-    private toastCtrl: ToastController,
-    public plt: Platform) {
+    private toastCtrl: ToastController) {
 
-    // fcm.getToken()
+    localStorage.setItem("anonimo", "false");
 
-  //   // Listen to incoming messages
-  //   fcm.listenToNotifications().pipe(
-  //     tap(msg => {
-  //       // show a toast
-  //       const toast = toastCtrl.create({
-  //         message: msg.body,
-  //         duration: 3000
-  //       });
-  //       toast.present();
-  //     })
-  //   )
-  //     .subscribe()
   }
 
   ionViewDidLoad() {
@@ -69,7 +55,7 @@ export class LoginPage {
   }
 
   Redireccionar() {
-    this.navCtrl.push(RegistroClientePage);
+    this.navCtrl.push(AltaEmpleadoPage);
   }
 
   DesplegarUsuarios() {
@@ -150,12 +136,12 @@ export class LoginPage {
                     case "bartender":
                     case "metre":
                     case "repartidor":
-                      this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+                      this.navCtrl.setRoot(PrincipalPage);
                       break;
 
                     case "cliente":
                       if (estado == "espera")
-                        this.navCtrl.setRoot(QrIngresoLocalPage);
+                        this.navCtrl.setRoot(ListadoSupervisorPage);
                       else
                         this.navCtrl.setRoot(PrincipalPage);
                       break;
@@ -166,7 +152,7 @@ export class LoginPage {
                       if (estado == "atendido" || estado == "pidio" || estado == "comiendo")
                         this.navCtrl.setRoot(PrincipalPage);
                       else
-                        this.navCtrl.setRoot(QrIngresoLocalPage);
+                        this.navCtrl.setRoot(ListadoSupervisorPage);
                       break;
 
                     // siempre a principal (dueño, supervisor, cliente (registrado))
@@ -250,6 +236,32 @@ export class LoginPage {
             this.textoDelBoton = "Ingresar";
         }
       });
+  }
+
+  IngresarComoAnonimo() {
+
+    this.estadoBoton = true;
+    this.textoDelBoton = "Espera...";
+    this.animation = "ani";
+    this.NoDesplegarUsuarios();
+
+    this.authInstance.auth.signInWithEmailAndPassword("anonimo@gmail.com", "123456").then(() => {
+
+      localStorage.setItem("anonimo", "true");
+
+      this.estadoBoton = false;
+      this.textoDelBoton = "Ingresar";
+      this.animation = "";
+
+      this.navCtrl.setRoot(PrincipalPage);
+    }).catch(() => {
+
+      this.estadoBoton = false;
+      this.textoDelBoton = "Ingresar";
+      this.animation = "";
+      this.presentToast("Ups... Tenemos problemas tecnicos.");
+    });
+
   }
 
   SetearUsuario(email: string, password: string) {

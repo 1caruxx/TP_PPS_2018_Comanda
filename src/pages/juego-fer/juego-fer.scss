@@ -1,0 +1,113 @@
+page-juego-fer {
+
+    ion-navbar {
+        padding: 20px 10px !important;
+
+        ion-icon {
+            color: white;
+        }
+    }
+
+    ion-navbar ion-icon { font-size: 50px !important; }
+
+    ion-content {
+        background-image: url('../../assets/imgs/alfa/juego-bgn.jpg');
+        background-size: cover; 
+        background-position: center; 
+    }
+
+    .puntos {
+        position: relative;
+        width: 300px;
+        top: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        text-align: center;
+        background-color: color($colors, red);
+        font-size: 20px;
+        color: white;
+        padding: 15px;
+    }
+
+    .preguntas-acertadas {
+        color: #30B73E;
+    }
+
+    h1.pregunta {
+        text-align: center;
+        margin-bottom: 50px;
+        padding-left: 10px; 
+        padding-right: 10px;
+        line-height: 1.6;
+        background-color: color($colors, red);
+        color: white;
+        width: 100%;
+    }
+
+    .interfaz {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        button {
+            height: 100px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin: 0;
+            border-radius: 0 !important;
+            margin-left: 15px;
+        }
+    }
+
+    ion-list {
+        width: 85%;
+    }
+
+    .radio {
+        margin-right: 10px !important; 
+    }
+
+    ion-item {
+        background-color: #FCE5C6 !important;
+    }
+
+    .item-inner {
+        border-bottom: none !important;
+    }
+
+    .item:not(:last-child) {
+        border-bottom: solid 1px color($colors, red);
+    }
+
+    input, select {
+        width: 75%;
+        height: 100%;
+        border: gray solid 2px;
+        margin-right: 20px;
+        padding: 5px;
+        margin: 7vh 0 7vh 0;
+        font-size: 25px;
+        transition-duration: .3s;
+        caret-color: color($colors, red);
+    }
+
+    input:focus {
+        border-color: color($colors, red);
+    }
+
+    .ocultar {
+        display: none !important;
+    }
+
+    .animation-target {
+        animation-name: jelly;
+        animation-duration: 1000ms;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+    }
+
+}

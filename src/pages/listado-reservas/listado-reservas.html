@@ -1,6 +1,8 @@
 <ion-header>
   <ion-navbar color="red">
 
+    <ion-title>{{usuario.tipo}}</ion-title>
+
     <ion-buttons end>
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
@@ -17,9 +19,27 @@
 
 </div>
 
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+  <div class="alert-message animation-target">
+    <h1>{{alertTitulo}}</h1>
+    <p>{{alertMensaje}}</p>
+    <div class="botones">
+      <button ion-button outline (click)="OcultarAlert()">No</button>
+      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+    </div>
+  </div>
+
+</div>
+
 <ion-content>
 
-  <ng-container *ngIf="ocultarSpinner">
+  <div class="sin-elementos" *ngIf="ocultarSpinner  && reservasPendientes.length == 0 && reservasConfirmadas.length == 0">
+    <img src="../../assets/imgs/alfa/empty.png" />
+    <h1>No hay reservas disponibles.</h1>
+  </div>
+
+  <ng-container *ngIf="ocultarSpinner && reservasPendientes.length > 0">
     <h2 class="titulo">Reservas pendientes de confirmación</h2>
   </ng-container>
 
@@ -34,14 +54,24 @@
       <p>Horario • {{item.horario}} Hs.</p>
       <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
 
-      <button ion-button clear item-end (click)="DesplegarMesas(item)">
-        <ion-icon name="checkmark-circle-outline"></ion-icon>
-      </button>
+      <div item-end style="display: flex; align-items: center;align-content: center;flex-direction: column;">
+
+        <button ion-button clear (click)="DesplegarMesas(item)" style="margin-bottom: 20px;">
+          <ion-icon style="color: #CAFF4F;" name="checkmark-circle-outline"></ion-icon>
+        </button>
+
+        <button ion-button clear (click)="ConfirmarCancelarReserva(item)">
+          <ion-icon style="color: #FF0000;" name="close"></ion-icon>
+        </button>
+
+      </div>
+
+
     </ion-item>
 
   </ion-list>
 
-  <ng-container *ngIf="ocultarSpinner">
+  <ng-container *ngIf="ocultarSpinner && reservasConfirmadas.length > 0">
     <h2 class="titulo">Reservas confirmadas</h2>
   </ng-container>
 
@@ -58,6 +88,10 @@
       <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
       <p>Mesa • {{item.mesa}}</p>
 
+      <button item-end ion-button clear (click)="ConfirmarCancelarReserva(item)">
+        <ion-icon style="color: #FF0000;" name="close"></ion-icon>
+      </button>
+
     </ion-item>
 
   </ion-list>
@@ -69,7 +103,7 @@
       <button ion-button color="red" class="mesa {{item.seleccionado}}" (click)="Seleccionar(item.numero)" *ngFor="let item of mesas">{{item.numero}}</button>
     </div>
 
-    <div class="botones">
+    <div class="botones-interfaz-mesa">
       <button ion-button color="red" (click)="OcultarInterfaz()">Cancelar</button>
       <button ion-button color="red" (click)="Confirmar()">Confirmar</button>
     </div>

@@ -1,7 +1,12 @@
 <ion-header>
   <ion-navbar color="red">
 
+    <ion-title>{{usuario.tipo}}</ion-title>
+
     <ion-buttons end>
+      <button ion-button (click)="VerReservas()">
+        <ion-icon name="calendar"></ion-icon>
+      </button>
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
       </button>
@@ -9,6 +14,19 @@
 
   </ion-navbar>
 </ion-header>
+
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+  <div class="alert-message animation-target">
+    <h1>{{alertTitulo}}</h1>
+    <p>{{alertMensaje}}</p>
+    <div class="botones">
+
+      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+    </div>
+  </div>
+
+</div>
 
 <ion-content>
 
@@ -31,13 +49,12 @@
       </ion-item>
 
       <ion-item>
-      <ion-label>Personas</ion-label>
-      <ion-datetime displayFormat="YY" min="2001" max="2008"
-        cancelText="Cancelar" doneText="Aceptar" [(ngModel)]="cantidadPersonas">
-      </ion-datetime>
+        <ion-label>Personas</ion-label>
+        <ion-datetime displayFormat="YY" min="2001" max="2008" cancelText="Cancelar" doneText="Aceptar" [(ngModel)]="cantidadPersonas">
+        </ion-datetime>
       </ion-item>
 
-      <button ion-button outline color="light" class="alta" (click)="Reservar()">Reservar</button>
+      <button ion-button outline color="light" class="alta" [disabled]="estadoBoton" (click)="Reservar()">Reservar</button>
     </div>
 
   </div>

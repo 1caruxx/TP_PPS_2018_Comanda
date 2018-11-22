@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-title>{{usuario.tipo}}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+  <div class="alert-message animation-target">
+    <h1>{{alertTitulo}}</h1>
+    <p>{{alertMensaje}}</p>
+    <div class="botones">
+      <button ion-button outline (click)="OcultarAlert()">No</button>
+      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+    </div>
+  </div>
+
+</div>
+
+<ion-content>
+
+  <div class="sin-elementos" *ngIf="ocultarSpinner  && reservasPendientes.length == 0 && reservasConfirmadas.length == 0">
+    <img src="../../assets/imgs/alfa/empty.png" />
+    <h1>Todavía no has hecho reservas.</h1>
+  </div>
+
+  <ng-container *ngIf="ocultarSpinner && reservasPendientes.length > 0">
+    <h2 class="titulo">Reservas pendientes de confirmación</h2>
+  </ng-container>
+
+  <ion-list>
+
+    <ion-item *ngFor="let item of reservasPendientes">
+
+      <h1>{{item.horario}} Hs.</h1>
+      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
+
+      <button ion-button clear item-end (click)="ConfirmarCancelarReserva(item)">
+        <ion-icon style="color: #FF0000;" name="close"></ion-icon>
+      </button>
+
+    </ion-item>
+
+  </ion-list>
+
+  <ng-container *ngIf="ocultarSpinner && reservasConfirmadas.length > 0">
+    <h2 class="titulo">Reservas confirmadas</h2>
+  </ng-container>
+
+  <ion-list>
+
+    <ion-item *ngFor="let item of reservasConfirmadas">
+
+      <h1>{{item.horario}} Hs.</h1>
+      <p>Cantidad de personas • {{item.cantidadPersonas}}</p>
+      <p>Mesa • {{item.mesa}}</p>
+
+      <button ion-button clear item-end (click)="ConfirmarCancelarReserva(item)">
+        <ion-icon style="color: #FF0000;" name="close"></ion-icon>
+      </button>
+
+    </ion-item>
+
+  </ion-list>
+
+  <app-spinner [ngClass]="{'ocultar':ocultarSpinner}"></app-spinner>
+
+</ion-content>

@@ -1,6 +1,8 @@
 <ion-header>
   <ion-navbar color="red">
 
+    <ion-title>{{usuario.tipo}}</ion-title>
+
     <ion-buttons end>
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
@@ -40,7 +42,6 @@
         <ng-template #anonimo>
 
           <span><span>Nombre:</span> {{usuario.nombre}}</span>
-          <span><span>Correo:</span> {{usuario.correo}} </span>
 
         </ng-template>
       </ng-container>
@@ -75,5 +76,7 @@
     </div>
 
   </div>
+
+  <app-spinner [ngClass]="{'ocultar':ocultarSpinner}"></app-spinner>
 
 </ion-content>

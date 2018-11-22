@@ -5,7 +5,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { LoginPage } from "../login/login";
 import { PrincipalPage } from "../principal/principal";
-import { EncuestaClientePage } from "../encuesta-cliente/encuesta-cliente";
 
 import firebase from "firebase";
 
@@ -47,6 +46,8 @@ export class CuentaPage {
     private barcodeScanner: BarcodeScanner,
     private toastCtrl: ToastController) {
 
+    console.clear();
+
     this.rate = 1;
     this.textoDelBoton = "pagar";
     this.textoRate = "Malo";
@@ -80,6 +81,10 @@ export class CuentaPage {
       pedidoRef.once("value", (snap) => {
 
         let data = snap.val();
+
+        if(data.desc) {
+          console.log("El descuento esta seteado...");
+        }
 
         for (let item in data) {
 
@@ -183,45 +188,39 @@ export class CuentaPage {
 
         clienteRef.child("estado").remove().then(() => {
 
-          mesaRef.once("value", (snap) => {
+          clienteRef.child("comensales").remove().then(() => {
 
-            let data = snap.val();
+            clienteRef.child("mesa").remove().then(() => {
 
-            for (let item in data) {
+              mesaRef.once("value", (snap) => {
 
-              if (data[item].numeroMesa == this.mesa) {
+                let data = snap.val();
 
-                mesaRef.child(item).update({
-                  estado: "libre"
-                }).then(() => {
+                for (let item in data) {
 
-                  console.log(mesaRef.child(this.mesa).child("cliente"));
-console.log( clienteRef.child("mesa"));
-                  mesaRef.child(this.mesa).child("cliente").remove().then(() => {
-                    clienteRef.child("mesa").remove().then(() => {
-                      if (true) {
+                  if (data[item].numeroMesa == this.mesa) {
 
-                        this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
-                      } /*else {
-  
-                      this.alertMostrarBotonCancelar = false;
-                      this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante!", "Finalizar", this.Logout);
-                    }*/
+                    mesaRef.child(item).update({ estado: "libre" }).then(() => {
 
-                      this.ocultarSpinner = true;
+                      mesaRef.child(item).child("cliente").remove().then(() => {
+
+                        if (true) {
+
+                          this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
+                        }
+
+                        this.ocultarSpinner = true;
+                      })
                     });
-                  })
-                });
 
-                break;
-              }
-            }
+                    break;
+                  }
+                }
+              }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+            }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
           }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
-
         }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
-
       }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
-
     }
   }
 
@@ -246,7 +245,7 @@ console.log( clienteRef.child("mesa"));
   }
 
   Redireccionar() {
-    this.navCtrl.setRoot(EncuestaClientePage);
+    this.navCtrl.setRoot(PrincipalPage);
   }
 
   Logout() {
@@ -264,9 +263,23 @@ console.log( clienteRef.child("mesa"));
           usuariosRef.child(item).update({
             logueado: false
           }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
 
-            localStorage.clear();
-            this.navCtrl.setRoot(LoginPage);
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
           });
 
           break;

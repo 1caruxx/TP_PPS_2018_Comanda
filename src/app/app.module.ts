@@ -16,8 +16,11 @@ import { AltaEmpleadoPage } from "../pages/alta-empleado/alta-empleado";
 import { EncuestaSupervisorPage } from "../pages/encuesta-supervisor/encuesta-supervisor";
 import { ListadoSupervisorPage } from "../pages/listado-supervisor/listado-supervisor";
 import { ReservaPage } from "../pages/reserva/reserva";
+import { MisReservasPage } from "../pages/mis-reservas/mis-reservas";
 import { CuentaPage } from "../pages/cuenta/cuenta";
 import { ListadoReservasPage } from "../pages/listado-reservas/listado-reservas";
+import { JuegoFerPage } from "../pages/juego-fer/juego-fer";
+import { SalaDeJuegosPage } from "../pages/sala-de-juegos/sala-de-juegos";
 
 import { RegistroClientePage } from '../pages/registro-cliente/registro-cliente';
 import { AltaPlatosPage } from '../pages/alta-platos/alta-platos';
@@ -39,6 +42,7 @@ import { MapaDeRutaPage } from '../pages/mapa-de-ruta/mapa-de-ruta';
 
 import { Camera } from '@ionic-native/camera';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 import { VerificarTipoProvider } from '../providers/verificar-tipo/verificar-tipo';
 
@@ -80,7 +84,6 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
     ReservaPage,
-    RegistroClientePage,
     AltaPlatosPage,
     QrIngresoLocalPage,
     EncuestaClientePage,
@@ -89,7 +92,10 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     JuegoQuinterosPage,
     TiempoDesdeAhoraPipe,
     ListadoReservasPage,
-    JuegoPage
+    JuegoPage,
+    MisReservasPage,
+    JuegoFerPage,
+    SalaDeJuegosPage
   ],
   imports: [
     BrowserModule,
@@ -120,7 +126,6 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     EncuestaSupervisorPage,
     ListadoSupervisorPage,
     ReservaPage,
-    RegistroClientePage,
     AltaPlatosPage,
     QrIngresoLocalPage,
     EncuestaClientePage,
@@ -131,7 +136,10 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     CuentaPage,
     JuegoQuinterosPage,
     ListadoReservasPage,
-    JuegoPage
+    JuegoPage,
+    MisReservasPage,
+    JuegoFerPage,
+    SalaDeJuegosPage
   ],
   providers: [
     StatusBar,

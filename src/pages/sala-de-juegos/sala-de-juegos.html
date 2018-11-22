@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="red">
+
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>{{usuario.tipo}}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="Logout()">
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-nav #content swipeBackEnabled="false"></ion-nav>
+
+<ion-content class="card-background-page" padding>
+
+  <button ion-button *ngFor="let item of juegos" (click)="Redireccionar(item.ruta)">
+    <div class="sombreado"></div>
+    <img src="../../assets/imgs/alfa/{{item.img}}" />
+    <span>{{item.accion}}</span>
+  </button>
+
+</ion-content>

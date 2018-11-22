@@ -19,6 +19,7 @@ export class AltaDuenioSupervisorPage {
 
   public firebase = firebase;
   public db = firebase.firestore();
+  public usuario: any;
 
   public correo: string;
   public clave: string;
@@ -29,7 +30,6 @@ export class AltaDuenioSupervisorPage {
   public tipo: string = "dueño";
   public foto: string = "";
   public nombreFoto: string;
-  public usuario: any;
 
   public estadoBoton: boolean = false;
   public ocultarAlert: boolean = true;
@@ -46,8 +46,7 @@ export class AltaDuenioSupervisorPage {
     private camera: Camera,
     private barcodeScanner: BarcodeScanner) {
 
-    this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
-    this.usuario = localStorage.getItem("usuario");
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
   }
 
   ionViewDidLoad() {
@@ -189,7 +188,7 @@ export class AltaDuenioSupervisorPage {
 
   InicializarLectorQR() {
 
-    let options = { prompt : "Escaneá el DNI", formats: "PDF_417" };
+    let options = { prompt: "Escaneá el DNI", formats: "PDF_417" };
 
     this.barcodeScanner.scan(options).then(barcodeData => {
 
@@ -264,10 +263,23 @@ export class AltaDuenioSupervisorPage {
           usuariosRef.child(item).update({
             logueado: false
           }).then(() => {
-           
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              // Para redireccionar a la encuesta de axel.
+              // localStorage.setItem("desloguear", "true");
+              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
               localStorage.clear();
               this.navCtrl.setRoot(LoginPage);
-            
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
           });
 
           break;
