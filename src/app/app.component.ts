@@ -19,7 +19,7 @@ export class MyApp {
       
    
 
-rootPage:any = PedirPlatosPage;
+rootPage:any = JuegoPage;
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {

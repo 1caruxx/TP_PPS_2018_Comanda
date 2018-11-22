@@ -139,7 +139,7 @@ console.log("Dentro de observable ecnuesta");
             this.mostrarAlert3=false;
             
         
-          }, 3000);
+          }, 4500);
 
 
           //Aca cambio el estado del usuario y escucho al cambio d este estado

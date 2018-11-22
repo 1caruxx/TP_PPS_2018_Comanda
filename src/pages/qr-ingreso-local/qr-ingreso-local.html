@@ -71,6 +71,7 @@
           <div class="fotos" >
             <h1 *ngIf="encuesta.foto1 !=''||encuesta.foto2 !=''||encuesta.foto3 !=''">Fotos de  las encuesta:</h1>
             <div class="subFotos">
+              
               <img  *ngIf="encuesta.foto1 !=''" [src]="encuesta.foto1">
               <img *ngIf="encuesta.foto2 !=''" [src]="encuesta.foto2">
               <img *ngIf="encuesta.foto3 !=''" [src]="encuesta.foto3">

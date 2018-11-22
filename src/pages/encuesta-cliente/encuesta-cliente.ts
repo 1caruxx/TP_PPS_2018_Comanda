@@ -350,8 +350,75 @@ respPreg5:boolean=false;
   {
     this.ocultar6=false;
   }
-  Aceptar()
+  Aceptar(valor)
   {
+
+    switch(valor)
+    {
+      case "1":
+      if(!this.resp1)
+      {
+        
+        this.mensaje="No contestó la pregunta. Elija una opción para contestar";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+
+        this.mostrarAlert3=false;
+       
+      }, 2000);
+      return
+      }
+        break;
+
+      case "2":
+      if(!this.resp2)
+      {
+        
+        this.mensaje="No contestó la pregunta. Elija una  opción para contestar.";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+
+        this.mostrarAlert3=false;
+       
+      }, 2000);
+      return
+      }
+      break;
+
+      case "3":
+      if(this.resp3atencion==false && this.resp3comodidad==false && this.resp3platos==false && this.resp3precios==false )
+      {
+        this.mensaje="No contestó la pregunta. Elija una o más opciones para contestar.";
+        this.mostrarAlert3=true;
+        setTimeout(()=>{
+  
+          this.mostrarAlert3=false;
+      
+        }, 2000);
+        return
+        
+      }
+  
+      break;
+
+      case "4":
+      if(!this.movioElRange)
+      {
+        this.mensaje="No contestó la pregunta, mueva el rango para contestar";
+        this.mostrarAlert3=true;
+        setTimeout(()=>{
+  
+          this.mostrarAlert3=false;
+    
+        }, 2000);
+        return
+      }
+      break;
+
+    
+  
+  
+    }
     this.ocultar=true;
     this.ocultar2=true;
     this.ocultar3=true;
@@ -408,8 +475,30 @@ respPreg5:boolean=false;
    
  
   }
+  cerrarPregunta()
+  {
+    this.ocultar=true;
+    this.ocultar2=true;
+    this.ocultar3=true;
+    this.ocultar4=true;
+    this.ocultar5=true;
+    this.ocultar6=true;
+  }
   Aceptar5()
   {
+    if(!this.resp5)
+    {
+   
+      this.mensaje="No contesto la pregunta.";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+
+        this.mostrarAlert3=false;
+       
+      }, 2000);
+      return
+    }
+  
     if(!this.ValidarNumero(this.resp5))
     {
       this.mensaje="Debe ingresar un número en este campo.";

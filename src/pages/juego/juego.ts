@@ -28,7 +28,7 @@ export class JuegoPage {
   coincide:boolean=false;
   claveActual;
   imgMostrar:any[]=[];
-  mostrarAlert:boolean=false;
+  
   contadorJugadas:number=0;
   mesa;
   valorViejo;
@@ -36,10 +36,13 @@ export class JuegoPage {
   x:any;
   tiempo="";
   mensaje="";
+  mostrarAlert:boolean=false;
   correo:string;
   juegoIniciado:boolean=false;
   puntos:number;
   gano:boolean=false;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,   private authInstance: AngularFireAuth,private nativeAudio: NativeAudio) {
     this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
     this.correo=localStorage.getItem("usuario");
