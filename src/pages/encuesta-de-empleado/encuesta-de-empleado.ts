@@ -75,6 +75,19 @@ export class EncuestaDeEmpleadoPage {
 
   }
 
+  pruebita()
+  {
+    //alert("asd");
+    this.cinco.item2=false;
+    this.cinco.item1=true;
+  }
+
+  pruebitaDos()
+  {
+    this.cinco.item1=false;
+    this.cinco.item2=true;
+  }
+
   ionViewDidLoad() 
   {
     console.log('ionViewDidLoad EncuestaDeEmpleadoPage');

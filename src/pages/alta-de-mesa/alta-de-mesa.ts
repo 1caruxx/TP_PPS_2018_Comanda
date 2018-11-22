@@ -45,6 +45,9 @@ export class AltaDeMesaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController,private camera: Camera)
    {
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+    this.foto="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg";
+
+
     this.probandingg=true;
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -91,17 +94,30 @@ export class AltaDeMesaPage {
     }
 
     //if(this.numeroMesa < 1 || this.numeroMesa > 10)
-    if(this.numeroMesa!=1||this.numeroMesa!=2||this.numeroMesa!=3||this.numeroMesa!=4||this.numeroMesa!=5||this.numeroMesa!=6||this.numeroMesa!=7||this.numeroMesa!=8||this.numeroMesa!=9||this.numeroMesa!=10)
+    if(this.numeroMesa==1||this.numeroMesa==2||this.numeroMesa==3||this.numeroMesa==4||this.numeroMesa==5||this.numeroMesa==6||this.numeroMesa==7||this.numeroMesa==8||this.numeroMesa==9||this.numeroMesa==10)
     {
-      this.presentToast("Solo tenemos lugar para 10 mesas en el restaurante")
+      //this.presentToast("Solo tenemos lugar para 10 mesas en el restaurante")
+      //return;
+    }
+
+    else
+    {
+      this.presentToast("Solo tenemos lugar para mesas del 1 al 10 en el restaurante")
       return;
     }
 
     //if(this.cantidadComensales < 1 || this.cantidadComensales > 8)
-    if(this.cantidadComensales!=1 || this.cantidadComensales!=2 || this.cantidadComensales!=3 || this.cantidadComensales!=4 || this.cantidadComensales!=5 || this.cantidadComensales!=6 || this.cantidadComensales!=7 || this.cantidadComensales!=8)
+    if(this.cantidadComensales==1 || this.cantidadComensales==2 || this.cantidadComensales==3 || this.cantidadComensales==4 || this.cantidadComensales==5 || this.cantidadComensales==6 || this.cantidadComensales==7 || this.cantidadComensales==8)
+    {
+      //this.presentToast("Los comensales solo pueden ser de 1 a 8")
+     // return;
+    }
+
+    else
     {
       this.presentToast("Los comensales solo pueden ser de 1 a 8")
       return;
+
     }
 
     
@@ -134,15 +150,88 @@ export class AltaDeMesaPage {
         if (data[item].numeroMesa == parseInt(this.numeroMesa)) 
         {
 
-          this.presentToast("La mesa ingresada ya esta registrada");
+          this.presentToast("Esa mesa ya esta en registra,vea el listado");
           this.esValido = false;
           //break;
         }
       }
+
+
+      if(this.foto=="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg" && this.esValido)
+      {
+        let url="";
+
+        url="../../assets/imgs/gamma/llama.jpeg"
+
+        let mesasRef = this.firebase.database().ref("mesas");
+
+        mesasRef.push({
+          numeroMesa: this.numeroMesa,
+          cantidadComensales: this.cantidadComensales,
+          tipo: this.tipo,
+          estado: "libre",
+          img: url
+        }).then(() => 
+        {
+         
+          this.numeroMesa="";
+          this.cantidadComensales="";
+          this.foto="";
+          this.presentToast("La Mesa Fue Cargada Con Exito");
+
+        });;
+
+
+        
+      }
+
+
+      if (this.esValido && this.foto != "http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg") 
+      {
+        let mesasRef = this.firebase.database().ref("mesas");
+
+
+        let pictures = this.firebase.storage().ref(`mesas/${this.nombreFoto+"mesaNumero:"+this.numeroMesa}`);
+
+        pictures.putString(this.foto, "data_url").then(() => {
+
+          pictures.getDownloadURL().then((url) => {
+
+            mesasRef.push({
+              numeroMesa: this.numeroMesa,
+              cantidadComensales: this.cantidadComensales,
+              tipo: this.tipo,
+              estado: "libre",
+              img: url
+            }).then(() => 
+            {
+             
+              this.numeroMesa="";
+              this.cantidadComensales="";
+              this.foto="";
+            });;
+
+            
+          });
+
+
+
+
+        });
+
+
+        
+
+  
+      }
+
+
+
       
+
     });
 
-    if (this.esValido) {
+   /* if (this.esValido) {
           let mesasRef = this.firebase.database().ref("mesas");
 
 
@@ -160,7 +249,7 @@ export class AltaDeMesaPage {
                 img: url
               }).then(() => 
               {
-                //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+               
                 this.numeroMesa="";
                 this.cantidadComensales="";
                 this.foto="";
@@ -169,11 +258,6 @@ export class AltaDeMesaPage {
               
             });
 
-            /*this.presentToast("La mesa se pudo cargar con exito");
-            this.numeroMesa="";
-            this.cantidadComensales="";
-            this.foto="";*/
-         // this.navCtrl.setRoot(this.navCtrl.getActive().component);
 
 
 
@@ -183,7 +267,7 @@ export class AltaDeMesaPage {
           
 
     
-  }
+        }*/
   }
 
   presentToast(mensaje: string) {

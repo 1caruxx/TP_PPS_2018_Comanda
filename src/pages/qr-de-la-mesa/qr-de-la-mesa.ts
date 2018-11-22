@@ -1051,42 +1051,75 @@ public moment = moment;
   Modificar(correo,text,cantidad,mesa)
   {
     var ocup=true;
-    //let reservadita=false;
-    //let otro=1;
+    
 
     this.estaLibre=true;
-    //this.presentToast(text);
-    //if(this.prueba(text))
-    //{
-      //reservadita=true;
-   // }
+ 
     
 
     let momentoActual = moment(new Date());
-                                  let reservasRef = firebase.database().ref("reservas");
+    let reservasRef = firebase.database().ref("reservas");
 
-                                  reservasRef.once("value", (snap) => {
+    reservasRef.once("value", (snap) => {
 
-                                    let data = snap.val();
-                              
-                                    for (let item in data) {
-                              
-                                      if (data[item].mesa == text) {
-                              
-                                        let diferencia = Math.abs(momentoActual.diff(moment(data[item].horario, "DD/MM/YYYY HH:mm"), "m"));
-                              
-                                        if (diferencia < 40) {
-                              
-                                        
-                                          //this.presentToast("Esa mesa esta reservada.");
-                                          this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
-                                          //reservadita=true;
-                                          //otro=2;
-                                          return;
-                                          
-                                        }
-                                      }
-                                    }
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].mesa == text) {
+
+          let diferencia = Math.abs(momentoActual.diff(moment(data[item].horario, "DD/MM/YYYY HH:mm"), "m"));
+
+          if (diferencia < 40) {
+
+            if(data[item].correo == correo) {
+
+              firebase.database().ref("usuarios").once("value", (snapUsuario) => {
+
+                let dataUsuario = snapUsuario.val();
+
+                for (let itemUsuario in dataUsuario) {
+
+                  if (dataUsuario[itemUsuario].correo == correo) {
+
+                    firebase.database().ref("usuarios").child(itemUsuario).update({estado: "atendido"}).then(() => {
+
+                      firebase.database().ref("mesas").once("value", (snapMesa) => {
+
+                        let dataMesa = snapMesa.val();
+
+                        for (let itemMesa in dataMesa) {
+
+                          if(dataMesa[itemMesa].numeroMesa == mesa) {
+
+                            firebase.database().ref("mesas").child(itemMesa).update({estado: "ocupada"}).then(() => {
+
+                              firebase.database().ref("mesas").child(itemMesa).update({cliente: correo}).then(() => {
+
+                                this.MostrarAlert("bienn", "se setoe la mesa!!", "ok", this.ocultarAlert);
+                              })
+
+                            })
+
+                          }
+                        }
+                      })
+                    })
+                  }
+                }
+              })
+            } else {
+              //this.presentToast("Esa mesa esta reservada.");
+              this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
+              //reservadita=true;
+              //otro=2;
+              return;
+            }
+
+            
+          }
+        }
+      }
 
 
                                     var refDos = this.firebase.database().ref("mesas");

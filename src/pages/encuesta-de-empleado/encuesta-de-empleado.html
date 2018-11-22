@@ -164,7 +164,7 @@
 
           <ion-item>
               <ion-label >Si</ion-label>
-            <ion-checkbox [(ngModel)]="cinco.item1"  value="si" checked>Si</ion-checkbox>
+            <ion-checkbox [(ngModel)]="cinco.item1" (click)="pruebita()"  value="si" checked>Si</ion-checkbox>
             
           </ion-item>
 
@@ -174,7 +174,7 @@
 
           <ion-item>
               <ion-label >No</ion-label>
-            <ion-checkbox  [(ngModel)]="cinco.item2" value="no" >No</ion-checkbox>
+            <ion-checkbox  [(ngModel)]="cinco.item2" (click)="pruebitaDos()" value="no" >No</ion-checkbox>
 
             
           </ion-item>
