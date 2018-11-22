@@ -22,16 +22,21 @@ import  {SpinnerComponent } from '../../components/spinner/spinner';
 export class PedirPlatosPage {
   @ViewChild('cant') cant:any;
   contErrores:number=0;
+  animacionMonto:boolean=true;
   mensaje:string;
+  mostrarSpinnerMonto:boolean=true;
+  ocultarMontoPrincipal=true;
   mostrarAlert:boolean=false;
   ocultarPlatos:boolean;
   cantidad:number;
+  erroresPedidos:number=0;
   titulo:string;
   claveUsuarioActual;
   platos:any[]=[];
   bebidas:any[]=[];
   mostrarSpinner:boolean=false;
   mostrarAlert2:boolean=false;
+  ocultarMonto:boolean=true;
   mostrarAlert3:boolean=false;
   valor:number;
   miValor:number=undefined;
@@ -40,6 +45,7 @@ export class PedirPlatosPage {
   eligio:boolean=false;
   foto3;
   nombre;
+  valorPlatos:number;
   yaPidio:boolean=false;
   desc;
   cantidadNueva=undefined;
@@ -53,8 +59,12 @@ export class PedirPlatosPage {
   pedido:any[]=[];
   ocultarBebidas:boolean;
   for="let plato of platos";
+  monto:number=0;
   mostrarslide:boolean;
   ocultarTitulo:boolean;
+  montoPlatos=0;
+  montoBebidas=0;
+  ocultarElMonto:boolean=false;
   mostrarSpinnerPlatos:boolean=false;
 contador;
   constructor
@@ -85,7 +95,7 @@ this.foto="";
 if(this.tipo1=="mozo")
 {
   this.mostrarAlert2=true;
-  
+ 
   return
 }
     this.TraerTipoMesa();
@@ -166,6 +176,7 @@ mensaje.once("value",(snap)=>{
      {
        this.mostrarAlert2=false;
        this.TraerClaveMozo();
+       this.CalcularMonto();
 
      }
    
@@ -241,11 +252,12 @@ mensaje.once("value",(snap)=>{
   } 
   ElegirPlato(nombre, valor, es, tiempo, para, precio, id)
   {
-   this.miValor=undefined;
-     
-    console.log(id);
-    
-    if(valor<=0 )
+   //this.miValor=undefined;
+  
+  
+  
+  
+    if(parseInt(valor)<=0 ||valor==undefined ||valor=="")
     {
       if(this.contErrores==3)
       {
@@ -264,6 +276,20 @@ mensaje.once("value",(snap)=>{
       return;
     }
 
+  if(parseInt(valor)>20)
+  {   
+    this.mensaje="La cantidad del elemento del menú no puede ser mayor a 20.";
+  this.mostrarAlert3=true;
+  this.valorPlatos=0;
+  this.valor=null;
+  setTimeout(()=>{
+
+    this.mostrarAlert3=false;
+    this.mensaje="Su pedido ha sido enviado en bréve se lo llevaremos...";
+  }, 3000);
+  return;
+
+  }
 
     if(tiempo=="cero")
     {
@@ -275,10 +301,32 @@ mensaje.once("value",(snap)=>{
 
 
     this.pedido.push({cant:valor, nombre:nombre, es:es, tiempo:tiempo, para:para, precio:precio, id:id});
-    console.log(this.pedido);
+    console.log("Elegi" +this.pedido[this.pedido.length-1]);
     (window.document.querySelector('#'+id) as HTMLElement).classList.add("mostrarElegido");
     console.log(this.pedido);
-    valor=0;
+
+//Si es plato le sumo el monto a plato si es bebida a bebida:
+let total=0;
+if(es=="plato")
+{
+
+  let sumar= parseInt(valor) * parseInt(precio);
+  console.log(sumar);
+  this.montoPlatos=this.montoPlatos+sumar;
+  total=sumar;
+}
+else
+{
+  let sumar= parseInt(valor) * parseInt(precio);
+  console.log(sumar);
+
+  this.montoBebidas=this.montoBebidas+sumar;
+  total=sumar;
+}
+
+
+this.monto=this.monto +total; 
+
   }
   mostrarSlide(foto1,foto2,foto3,nombre,desc)
   {
@@ -325,23 +373,28 @@ mensaje.once("value",(snap)=>{
     });
     alert.present();
   }
+
+
   Platos()
   {
+    
+
     this.mostrarSpinnerPlatos=true;
   if((this.platos.length>0))
   {
     this.mostrarSpinnerPlatos=false;
   }
-      this.miValor=undefined;
      
    
 
   
-    console.log(this.valor);
+    
     this.ocultarPlatos =false;
+ 
+
     this.ocultarTitulo=true;
     this.titulo ="Nuestros platos";
-
+    this.ocultarMonto=false;
   }
   Bebidas()
   {
@@ -355,15 +408,31 @@ mensaje.once("value",(snap)=>{
     this.ocultarPlatos =true;
     this.valor=undefined;
     this.ocultarBebidas =false;
-    this.titulo ="Nuestras bebidas" ;
+    this.ocultarTitulo=true;
+        this.titulo ="Nuestras bebidas" ;
+    this.ocultarMonto=false;
 
   }
   Cerrar()
   {
+ 
     this.ocultarPlatos =true;
     this.ocultarTitulo=false;
     this.ocultarBebidas=true;
-   
+
+    this.ocultarMonto=true;
+    if(this.monto==0)
+    {
+      console.log("no se tendria  que ver el monto");
+      this.ocultarMontoPrincipal=true;
+
+    }
+    else
+    {
+      console.log("se tendria  que ver el monto");
+      this.ocultarMontoPrincipal=false;
+    }
+  // this.ocultarMontoPrincipal=false;
 
   }
   cerrarSlide()
@@ -446,30 +515,98 @@ var data =snap.val();
     this.Cerrar();
     
   }
-  CancelarPedido()
+  CancelarPedido(cual)
   {
-    this.eligio=false;
+    if(cual=="plato")
+    {
+      console.log("pongo undefined a platos");
+     console.log("Le resto: " +this.montoPlatos );
+     console.log("El monto es de :" + this.monto);
+      this.monto= this.monto-this.montoPlatos;
    
+    
+      this.montoPlatos=0;
+      this.valorPlatos=null;  
+
+    }
+    else
+    {
+      console.log("Le resto: " +this.montoBebidas );
+      this.monto =this.monto-this.montoBebidas;
+      this.montoBebidas=0;
+      this.valor=null;
+    }
+    this.eligio=false;
+  
+  console.log("elementos en array pedidios" +this.pedido.length);
+    let posicionBorrar:any[]=[];
     for(let i=0;i<this.pedido.length;i++)
     {
-      (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
-    
-    }
 
     
-    this.pedido.splice(0, this.pedido.length);
-    console.log(this.pedido);
-    this.valor=undefined;
-    this.Cerrar();
+      
+    
+console.log("Le saco la selecccion a ");    
+      if(this.pedido[i].es == cual)
+      {
+        
+        (window.document.querySelector('#'+this.pedido[i].id) as HTMLElement).classList.remove("mostrarElegido");
+     //  this.pedido.splice(i, 1);
+     //Guardo las posiciones del array que tengo que borrar
+     posicionBorrar.push(i);
+     this.pedido[i]=null;
+     //console.log("Deberia borrar este pedido:" + this.pedido[i]);
+     //console.log("Esta es la posicion : " + i);
+
+      }
+    
+    }
+//Aca cargo el array de pedidos con elementos del pedido que no hallan sido borrados
+  let pedidoSec:any[]=[];
+  
+    for(let i=0;i<this.pedido.length;i++ )
+    {
+      if(this.pedido[i]!=null)
+      {
+        pedidoSec.push(this.pedido[i]);
+      }
+        
+      //  this.pedido.splice(posicionBorrar[i], 1);
+    }
+    this.pedido=pedidoSec;
+    
+   // this.pedido.splice(0, this.pedido.length);
    
  
+    
+    this.Cerrar();
+
+  
+   
+ console.log(this.pedido);
+  }
+  Atras()
+  {
+    this.navCtrl.pop();
+
   }
   PedirFinal()
   {
-    
+    if(this.erroresPedidos==3)
+    {
+      this.erroresPedidos=0;
+      this.mensaje="Para agregar un plato o bebida a su orden, coloque una cantidad del plato que desea y presione sobre el botón elegir del plato.";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+        
+        this.mostrarAlert3=false;
+      }, 7000);
+      return;
+    }
     if(this.pedido.length<=0)
     {
-      this.mensaje="No agrego ningun pedido a la orden";
+      this.erroresPedidos++;
+      this.mensaje="No agrego ningun pedido a la orden.";
       this.mostrarAlert3=true;
       setTimeout(()=>{
         
@@ -588,12 +725,13 @@ var data =snap.val();
       
       
       this.mostrarSpinner=false;
+   
      
       this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
-    this.mostrarAlert=true;
+    this.mostrarAlert3=true;
     setTimeout(()=>{
 
-      this.mostrarAlert=false;
+      this.mostrarAlert3=false;
       this.navCtrl.pop();
     }, 4000);
     
@@ -631,6 +769,7 @@ TraerClaveMozo()
 }
   TraerTipoMesa()
   {
+    console.log("Estoy trayendo la mesa");
 /*   if(this.tipo1=="mozo")
     {
       return;
@@ -649,24 +788,122 @@ TraerClaveMozo()
       
           if(this.tipo!="mozo")
           {
-            this.mesa=data[key].mesa;
-            this.claveUsuarioActual=key;
+            //Si no tiene mesa la mesa va a ser su correo
+           if(!data[key].mesa)
+           {
+            this.mesa= this.correo;
+          
+            //Le saco el arroba y el punto al string
+            let patron ='@';
+            let nuevo= '';
+            let cadena=this.mesa.replace(patron, nuevo);
+            patron ='.';
+            nuevo= '';
+            cadena=cadena.replace(patron, nuevo);
+            this.mesa=cadena;
+            //Le pongo estado al cliente como delivery
+            let usuario= data[key];
+            usuario.estado="delivery";
+          
+            console.log(usuario);
+           
+         
+            let usuariosRef = firebase.database().ref("usuarios/"+key);
+         
+            usuariosRef.set(usuario);
+           
+            this.CalcularMonto();
             return;
+
+           }
+           else
+           {
+            this.mesa=data[key].mesa;
+            console.log(this.mesa);
+            this.claveUsuarioActual=key;
+            this.CalcularMonto();
+            return;
+           }
+       
           }
 
           if(this.tipo1=="mozo")
           {
+            console.log("Soy mozo");
+            this.CalcularMonto();
             if(data[key].mesa==this.mesa)
             {
               this.claveUsuarioActual=key;
+          
             }
 
           }
           break;
         }
       }
-      console.log(this.mesa + this.tipo);
+    
 
+     
   });
+}
+
+CalcularMonto()
+{
+  console.log("soy: "+this.correo);
+  console.log("Estoy en sunmar montos");
+  let montos:any[] = [];
+
+ let montoGuardado=0; //ACA ME FIJO EL MONTO DE LA MESA
+   let usuariosRef2= firebase.database().ref("pedidos").child(this.mesa);
+      
+
+    
+   usuariosRef2.once("value", (snap) => {
+
+     let data = snap.val();
+   
+     if(data ==null)
+     {
+      this.monto=0;
+     }
+     for (let item in data) 
+     {
+       
+        for(let subItem in data[item])
+        {
+          montos.push(data[item][subItem]);
+          console.log("esto estoy pusheando a montos" +data[item][subItem]);
+        }
+
+     }
+     console.log(montos);
+     //SUMO LOS VALORES:
+     for(let i=0;i<montos.length-1;i++)
+     {
+      console.log(montos[i]);
+      console.log("cantidad " +montos[i].cantidad);
+      console.log("precio " +montos[i].precio);
+
+       //Fijarme Si esto se soluciona.
+       if(montos[i]!="tomado" && montos[i]!="preparacion" && montos[i]!="terminado" && montos[i]!="1" && montos[i]!="0" && montos[i]!="%")
+       {
+         console.log("cantidad " +montos[i].cantidad);
+         console.log("precio " +montos[i].precio);
+
+        let suma= parseInt(montos[i].cantidad) *  montos[i].precio;
+        console.log(suma);
+        console.log(montos[i]);
+        console.log("cantidad " +montos[i].cantidad);
+         console.log("precio " +montos[i].precio);
+
+        montoGuardado = montoGuardado + suma;
+       }
+   
+     }
+     this.monto=montoGuardado;
+     this.mostrarSpinnerMonto=false;
+     this.animacionMonto=false;
+     this.ocultarElMonto=true;
+   });
 }
 }

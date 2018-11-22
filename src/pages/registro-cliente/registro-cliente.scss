@@ -89,7 +89,18 @@ page-registro-cliente {
                 color: white;
             }
         }
-    
+
+        .elTituloForm
+        {
+            position: relative;
+        }
+        
+        .foto
+        {
+            width:50%;
+            height: 20%;
+            margin-left:25%;
+        }
         ion-navbar ion-icon { font-size: 50px !important; }
         .alert
         {
@@ -100,13 +111,15 @@ page-registro-cliente {
             border-radius:5%;
             background: red;
        text-align: center;
+       align-items: center;
+       height: 200px;
        top:50%;
        display:none;
       // animation:fadeInRight 2s 1 ease-in-out;  
         }
         .mostrarAlert
         {
-            display:block;
+            display:flex!important;
         }
         .alert h1
         {
@@ -451,6 +464,7 @@ page-registro-cliente {
             font-size: 1.7em;
             color:black;
             border:2px solid black;
+            background: rgba(255, 255, 255, 0.5);
         }
         .tituloPagina
         {

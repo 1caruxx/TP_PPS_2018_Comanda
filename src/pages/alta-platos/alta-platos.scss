@@ -37,6 +37,35 @@ page-alta-platos {
         margin-bottom: 10%;
         text-align: center;
     }
+    .miSpinner
+    {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 5000;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.349);
+    }
+    .miSpinner img
+    {
+        width: 80%
+    }
+    .spinnerPropio
+    {
+        position: absolute;
+        z-index: 1000;
+        bottom: 16%;
+        right: 5px;
+        width: 20%;
+    }
+   
+    .altura
+    {
+        bottom:22%;
+    }
     .alert3
     {
        position: absolute;
@@ -253,24 +282,29 @@ page-alta-platos {
     }
     .laFoto1
     {
-        position:absolute;
-        z-index:1000;
-        width: 50%;
-        height: 20%;
-        left: 25%;
-        top:15%;
+     
         display:none;
+
+        position: absolute;
+        z-index: 1000;
+        width: 40%;
+        height: 18%;
+        left: 30%;
+        top: 15%;
     }
 
     .laFoto2
     {
         position:absolute;
         z-index:1000;
-        width: 50%;
-        height: 20%;
-        left: 25%;
+        width: 40%;
+        height: 18%;
+        left: 30%;
         top:37%;
         display:none;
+
+            
+      
     }
     .radio-icon
     {
@@ -285,9 +319,9 @@ page-alta-platos {
         position: absolute;
         z-index: 1000;
         top: 58%;
-        width: 50%;
-        height: 21%;
-        left: 25%;
+        width: 40%;
+        height: 18%;
+        left: 30%;
         display:none;
 
     }

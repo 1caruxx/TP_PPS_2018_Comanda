@@ -27,13 +27,13 @@ export class EncuestaClientePage {
   public pregunta1Data: number[] = [0, 0];
   public pregunta2Labels: string[] = ['Muy mala', 'Mala', 'Regular', 'Buena', 'Muy buena'];
   public pregunta2Data: number[] = [0, 0 ,0 ,0, 0];
-  public pregunta3Labels: string[] = ['Comodidad', 'Platos', 'Precios', 'Atención'];
+  public pregunta3Labels: string[] = ['Comodidad', 'Platos', 'Precios', 'No tienen'];
   public pregunta3Data: number[] = [0, 0, 0, 0];
   public pregunta5Labels: string[] = ['Puntuaron 1', ' Puntuaron 2', ' Puntuaron 3', 'Puntuaron 4', 'Puntuaron 5', 'Puntuaron 6', 'Puntuaron 7', 'Puntuaron 8','Puntuaron 9','Puntuaron 10'];
   public pregunta5Data: number[] = [0, 0, 0, 0, 0,0,0,0 , 0,0];
   public doughnutChartType: string = 'doughnut';
   //Para los votos de la preg 
-
+movioElRange:boolean=false;
   votosPreg1Si=0;
   votosPreg1No=0;
   votosHorribles=0;
@@ -92,7 +92,12 @@ mostrarfoto3:boolean;
 textoRange;
 
 mostrarChart:boolean=false;
-
+//Para mostrar los tildes
+respPreg1:boolean=false;
+respPreg2:boolean=false;
+respPreg3:boolean=false;
+respPreg4:boolean=false;
+respPreg5:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,  private aut:AngularFireAuth) {
     this.ocultar=true;
     this.ocultar2=true;
@@ -364,6 +369,44 @@ mostrarChart:boolean=false;
    console.log(this.resp4);
    console.log(this.resp5);
 
+   //Me fijo si debo poner tilde o no
+   if(this.resp1)
+   {
+     this.respPreg1 =false;
+
+   }
+   if(this.resp2)
+   {
+     this.respPreg2 =false;
+
+   }
+   if(this.resp3atencion)
+   {
+     console.log("Se tendria que dejar de mostrar la cruz");
+     this.respPreg3=false;
+   }
+   if( this.resp3comodidad )
+   {
+     console.log("Se tendria que dejar de mostrar la cruz");
+     this.respPreg3=false;
+   }
+
+   if(this.resp3platos )
+   {
+     console.log("Se tendria que dejar de mostrar la cruz");
+     this.respPreg3=false;
+   }
+   if( this.resp3precios )
+   {
+     console.log("Se tendria que dejar de mostrar la cruz");
+     this.respPreg3=false;
+   }
+   if(this.movioElRange)
+   {
+     this.respPreg4=false;
+   }
+   
+ 
   }
   Aceptar5()
   {
@@ -393,6 +436,17 @@ mostrarChart:boolean=false;
     
     }
     this.ocultar5=true;
+    if(this.resp5)
+    {
+      this.respPreg5 =false;
+ 
+    }
+    console.log(this.resp3atencion);
+    console.log(this.resp3platos);
+
+    console.log(this.resp3precios);
+
+    console.log(this.resp3comodidad);
 
   }
 
@@ -511,14 +565,43 @@ mostrarChart:boolean=false;
   }
   SubirEncuesta()
   {
-    if(!this.resp1||!this.resp2||!this.resp4||!this.resp5)
+    let preg3ok:boolean=true;
+    let preg4ok:boolean=true;
+
+    if(!this.resp1)
+   {
+     this.respPreg1 =true;
+
+   }
+   if(!this.resp2)
+   {
+     this.respPreg2 =true;
+
+   }
+   if(!this.movioElRange)
+   {
+     this.respPreg4=true;
+    preg4ok=false;
+   }
+   if(!this.resp5)
+   {
+     this.respPreg5 =true;
+
+   }
+   if(this.resp3atencion==false && this.resp3comodidad==false && this.resp3platos==false && this.resp3precios==false )
+   {
+     this.respPreg3=true;
+      preg3ok=false;
+     
+   }
+    if(!this.resp1||!this.resp2||!preg3ok|| !preg4ok||!this.resp5)
     {
       this.mensaje="Debe contestar todas las preguntas para poder enviar la encuesta.";
       this.mostrarAlert3=true;
       setTimeout(()=>{
 
         this.mostrarAlert3=false;
-      }, 3500);
+      }, 3000);
       return
 
     }
@@ -552,6 +635,7 @@ mostrarChart:boolean=false;
 
   ModificarTextoRange()
   {
+    this.movioElRange=true;
     switch (this.resp4) {
       case 1:
         this.textoRange = "Horribles";

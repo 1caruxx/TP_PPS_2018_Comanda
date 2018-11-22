@@ -2,9 +2,13 @@
 <div class="alert" [ngClass]="{'mostrarAlert':mostrarAlert}">
     <h1>{{mensaje}}</h1>
   </div>
-  <div class="alert3" [ngClass]="{'mostrarAlert2':mostrarAlert3}">
+  <div class="soyAlert3" [ngClass]="{'mostrarAlert2':mostrarAlert3}">
+  <div class="alert3" >
+    
+  
     <h1>{{mensaje}}</h1>
   </div>
+</div>
   <div class="elAlert2" [ngClass]="{'mostrarAlert2':mostrarAlert2}">
   <div class="alert2" >
     <h1>Ingrese por favor el n&uacute;mero de mesa</h1>
@@ -14,7 +18,9 @@
   </div>
   </div>
 <div class="platos" [ngClass]="{'ocultar':ocultarPlatos}">
-  <app-spinner *ngIf="mostrarSpinnerPlatos"></app-spinner>
+
+
+  <spinner *ngIf="mostrarSpinnerPlatos"></spinner>
     <h1 class="tituloPlatos"  >{{titulo}}:</h1>
 
     <div class="elPlato">
@@ -30,7 +36,8 @@
            
         <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value,plato.carga.es, plato.carga.tiempo,  plato.carga.para,plato.carga.precio, plato.carga.id)">Elegir</button> <label class="platoCant">Cantidad</label>
      
-        <input class="inpCantidad" [value]="plato.carga.MiCantidad" [id]="plato.carga.id +'1'" #cant  placeholder="0" ion-input type="number">
+        <!--input class="inpCantidad" [value]="valorPlatos"  #cant  placeholder="0" ion-input  type="number"-->
+        <input class="inpCantidad"  #cant  [value]="valorPlatos"   placeholder="0" ion-input type="number">
       </div>
         <div class="slide" [ngClass]="{'mostrarSlide':mostrarslide}">
   
@@ -46,10 +53,10 @@
          </div>
     </div>
        <button ion-button class="aceptarBtn" color="red" color="celeste" (click)="AceptarPedido()">Aceptar</button>
-       <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido()">Cancelar</button>
+       <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido('plato')">Cancelar</button>
 </div>
 <div class="platos" [ngClass]="{'ocultar':ocultarBebidas}">
-  <app-spinner *ngIf="mostrarSpinnerPlatos"></app-spinner>
+  <spinner *ngIf="mostrarSpinnerPlatos"></spinner>
   <h1 class="tituloPlatos"  >{{titulo}}:</h1>
 
   <div class="elPlato">
@@ -61,7 +68,7 @@
       </div>
       <img [src]="plato.carga.foto1" class="platoImagen" (click)="mostrarSlide(plato.carga.foto1,plato.carga.foto2,plato.carga.foto3,plato.carga.nombre,plato.carga.desc)" ><h2>{{plato.carga.nombre}}</h2> 
       <span class="precio">${{plato.carga.precio}}</span><button ion-button (click)="ElegirPlato(plato.carga.nombre, cant.value,plato.carga.es, 'cero',plato.carga.para, plato.carga.precio, plato.carga.id)">Elegir</button> <label class="platoCant">Cantidad</label>
-      <input class="inpCantidad"  #cant  [value]="plato.carga.MiCantidad" placeholder="0" ion-input type="number">
+      <input class="inpCantidad"  #cant  [value]="valor" placeholder="0" ion-input type="number">
  
     </div>
     <div class="slide" [ngClass]="{'mostrarSlide':mostrarslide}">
@@ -77,22 +84,31 @@
   </div>
   </div>
      <button ion-button class="aceptarBtn" color="red" color="celeste" (click)="AceptarPedido()">Aceptar</button>
-     <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido()">Cancelar</button>
+     <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido('bebida')">Cancelar</button>
 </div>
 
  <ion-header>
-  <ion-navbar color="red">
+  <ion-navbar color="red" hideBackButton="true">
 
     
  
 
-    
+    <ion-buttons start style="left: 3px;
+    position: absolute;">
+      <button ion-button (click)="Atras()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
 
     <!-- <ion-title>{{sala}}</ion-title> -->
-    <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
+    <!-- <p class="su    <ion-buttons end>
+      <button ion-button>
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>btitle" style="color: white;">{{usuario.mail}}</p> -->
 
     <ion-buttons end>
-      <button ion-button>
+      <button ion-button >
         <ion-icon name="power"></ion-icon>
       </button>
     </ion-buttons>
@@ -103,8 +119,18 @@
 
 
 <ion-content>
+  <div class="monto" *ngIf="!ocultarMonto" [ngClass]="{'animacion':animacionMonto}">
+    <span class="elMonto" *ngIf="ocultarElMonto">MONTO: ${{monto}}</span>
+    <span class="elMontoEspera" *ngIf="mostrarSpinnerMonto">Cargando monto...  </span>
+ 
+    </div>
+    <div class="montoPrincipal" [ngClass]="{'ocultarMontoPrincipal':ocultarMontoPrincipal}">
+        <span class="elMonto">MONTO: ${{monto}}</span>
+       
+        </div>
   <div class="contenido">
       <h1 class="tituloPag" [ngClass]="{'ocultarTit':ocultarTitulo}">¡Haga su pedido!</h1>
+     
       <div class="botonespp">
             <button class="btnPlatos" (click)="Platos()" ion-button color="danger"  ><img src="assets/imgs/beta/comida.png"> Platos</button>
             <button class="btnBebidas"  (click)="Bebidas()" ion-button color="danger" ><img src="assets/imgs/beta/bebidas.png">Bebidas</button>
@@ -112,5 +138,5 @@
       <!--input class="inpDireccion" type="text" placeholder="Su direcci&oacute;n"-->
       <button class="btnPedir" (click)="PedirFinal()" ion-button color="danger" >¡Pedir!</button>
     </div>
-    <app-spinner *ngIf="mostrarSpinner"></app-spinner>
+    <spinner *ngIf="mostrarSpinner"></spinner>
 </ion-content>

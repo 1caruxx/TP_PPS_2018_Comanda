@@ -1,53 +1,133 @@
+<!--
+  Generated template for the QrIngresoLocalPage page.
 
-<div class="alert3" [ngClass]="{'mostrarAlert3':mostrarAlert3}">
-  <h1>{{mensaje}}</h1>
-</div>
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 
+<div class="miSpinner" *ngIf="mostrarMiSpinner">
+  <img src="assets/imgs/beta/elLogo.png" class="pulse">
+  </div>
+<div class="anonimo" [ngClass]="{'mostrarAnonimo':mostrarAnonimo}">
+  <div class="regAnonimo">
+    <img class="imgAnonimo" [src]="imgAnonimo">
 
-<ion-content>
-  <div class="vacio" [ngClass]="{'sinEncuestas':noHayEncuestas}">
-    <img src="assets/imgs/beta/Reloj.png">
-    <h1 class="tituloSinEncuestas">En breve lo atenderá un mozo, y le dara una mesa.</h1>
+    <input type="text" [(ngModel)]="nombreAnonimo" placeholder="Ingrese su nombre">
+    <button ion-button class="fotoAnonimo" (click)="tomarFoto()" color="red">
+       
+        <ion-icon name="camera" style="font-size:2em"></ion-icon>
+  </button>
+  <button ion-button  style="width:50%; margin-left:25%;" (click)="aceptarAnonimo()" color="red">Aceptar</button>
 
   </div>
-
-
-  <div class="encuestas" [ngClass]="{'desplegar':desplegarEncuesta}">
-    <h1 class="tituloEncuestas">Opiniones de nuestros clientes</h1>
-
-    <img *ngIf="desplegarEncuesta" src="assets/imgs/beta/Reloj.png">
-    <div class="encuesta1" *ngFor="let encuesta of encuestas">
-      <h2 class="tituloEncuesta1">{{encuesta.cliente}}</h2>
-
-      <div class="pregResp">
-        <h3 class="PreguntaEncuesta1">¿Se sintió cómodo en el restaurante?</h3>
-        <p class="respEncuesta1">{{encuesta.preg1}}</p>
-      </div>
-      <div class="pregResp">
-        <h3 class="PreguntaEncuesta1"> ¿Como calificar&iacute;a la atenci&oacute;n?</h3>
-        <p class="respEncuesta1">{{encuesta.preg2}}</p>
-      </div>
-      <div class="pregResp">
-        <h3 class="PreguntaEncuesta1"> ¿Que tan buenos son nuestros platos?</h3>
-        <p class="respEncuesta1">{{encuesta.preg4}}</p>
-      </div>
-      <div class="pregResp">
-        <h3 class="PreguntaEncuesta1"> ¿Del 1 al 10, qué puntaje le pondrias al restaurante?</h3>
-        <p class="respEncuesta1"> {{encuesta.preg5}}</p>
-      </div>
-      <div class="fotos">
-        <img *ngIf="encuesta.foto1 !=''" [src]="encuesta.foto1">
-        <img *ngIf="encuesta.foto2 !=''" [src]="encuesta.foto2">
-        <img *ngIf="encuesta.foto3 !=''" [src]="encuesta.foto3">
-      </div>
-    </div>
-
 </div>
-
-    <div class="contenido" *ngIf="mostrar">
-      <h1 class="tituloPag">¡Bienvenido!</h1>
-      <p class="info">Lea el c&oacute;digo QR de la puerta para anunciarse en lista de espera.</p>
-      <button class="btnQr1" (click)="leerQr()" ion-button color="red">Leer QR</button>
+<div class="elAlert2" [ngClass]="{'mostrarAlert2':mostrarAlert2}">
+    <div class="alert2" >
+      <h1>Ingrese por favor la cantidad de comensales</h1>
+      <input type="number"[(ngModel)]="comensales">
+      <button ion-button color="red" (click)="AceptarAlert2()">Aceptar</button>
+     
     </div>
+    </div>
+<div class="alert3" [ngClass]="{'mostrarAlert3':mostrarAlert3}">
+    <h1>{{mensaje}}</h1>
+  </div>
+  
+
+
+
+  
+
+<ion-content >
+
+  <div class="vacio"  [ngClass]="{'sinEncuestas':noHayEncuestas}">
+    <img src="assets/imgs/beta/Reloj.png">
+      <h1 class="tituloSinEncuestas">En breve lo atenderá un mozo, y le dara una mesa.</h1>
+
+  </div>
+    <div class="encuestas"  [ngClass]="{'desplegar':desplegarEncuesta}" >
+      <h1 class="tituloEncuestas">Opiniones de nuestros clientes</h1>
+  
+      <img *ngIf="desplegarEncuesta" class="encuestaImg" src="assets/imgs/beta/Reloj.png">
+          <div class="encuesta1" *ngFor="let encuesta of encuestas">
+          <h2 class="tituloEncuesta1">{{encuesta.cliente}}</h2>
+
+          <div class="pregResp">
+          <h3 class="PreguntaEncuesta1">¿Se sintió cómodo en el restaurante?</h3>
+          <p class="respEncuesta1">{{encuesta.preg1}}</p>
+          </div>
+          <div class="pregResp">
+          <h3 class="PreguntaEncuesta1"> ¿Cómo calificar&iacute;a la atenci&oacute;n?</h3>
+          <p class="respEncuesta1 preg4">{{encuesta.preg2}}</p>
+          </div>
+          <div class="pregResp">
+          <h3 class="PreguntaEncuesta1"> ¿Qué tan buenos son nuestros platos?</h3>
+          <p class="respEncuesta1 preg4" >{{encuesta.preg4|elPipe}}</p>
+          </div>
+          <div class="pregResp">
+          <h3 class="PreguntaEncuesta1"> ¿Del 1 al 10, qué puntaje le pondría al restaurante?</h3>
+          <p class="respEncuesta1"> {{encuesta.preg5}}</p>
+          </div>
+          <div class="fotos" >
+            <h1 *ngIf="encuesta.foto1 !=''||encuesta.foto2 !=''||encuesta.foto3 !=''">Fotos de  las encuesta:</h1>
+            <div class="subFotos">
+              <img  *ngIf="encuesta.foto1 !=''" [src]="encuesta.foto1">
+              <img *ngIf="encuesta.foto2 !=''" [src]="encuesta.foto2">
+              <img *ngIf="encuesta.foto3 !=''" [src]="encuesta.foto3">
+              </div>
+              </div>
+          </div>
+    
+        <!--div class="encuesta1">
+          <h2 class="tituloEncuesta1">Cliente:Cliente nombre</h2>
+          <h3 class="PreguntaEncuesta1">¿Qu&eacute;  piensa qu&eacute; es lo mejor del restaurante?</h3>
+          <p class="respEncuesta1">TOOODO</p>
+          <h3 class="PreguntaEncuesta1"> ¿Como calificar&iacute;a la atenci&oacute;n?</h3>
+          <p class="respEncuesta1">bUENA</p>
+          <h3 class="PreguntaEncuesta1"> ¿Del 1 al 10 que tan buenos son nuestros platos?</h3>
+          <p class="respEncuesta1">10</p>
+          <h3 class="PreguntaEncuesta1"> ¿Se sintio c&oacute;modo en nuestro restaurante?</h3>
+          <p class="respEncuesta1"> SI</p>
+          <!div class="fotos">
+              <img  *ngIf="encuesta.foto1 !=''" [src]="encuesta.foto1">
+              <img *ngIf="encuesta.foto2 !=''" [src]="encuesta.foto2">
+              <img *ngIf="encuesta.foto3 !=''" [src]="encuesta.foto3">
+              </div>
+          </div>
+        </div-->
+        
+   
+
+      
+
+     
+  
+        
+        <!--div class="encuesta1" *ngFor="let encuesta of encuestas">
+          <h2 class="tituloEncuesta1">Cliente:{{encuesta.cliente}}</h2>
+          <h3 class="PreguntaEncuesta1">¿Qu&eacute;  piensa qu&eacute; es lo mejor del restaurante?</h3>
+          <p class="respEncuesta1">{{encuesta.preg5}}</p>
+          <h3 class="PreguntaEncuesta1"> ¿Como calificar&iacute;a la atenci&oacute;n?</h3>
+          <p class="respEncuesta1">{{encuesta.preg2}}</p>
+          <h3 class="PreguntaEncuesta1"> ¿Del 1 al 10 que tan buenos son nuestros platos?</h3>
+          <p class="respEncuesta1">{{encuesta.preg4}}</p>
+          <h3 class="PreguntaEncuesta1"> ¿Se sintio c&oacute;modo en nuestro restaurante?</h3>
+          <p class="respEncuesta1"> {{encuesta.preg1}}</p>
+    <  
+          <div class="fotos">
+            <img  *ngIf="encuesta.foto1 !=''" [src]="encuesta.foto1">
+            <img *ngIf="encuesta.foto2 !=''" [src]="encuesta.foto2">
+            <img *ngIf="encuesta.foto3 !=''" [src]="encuesta.foto3">
+            </div>
+        </div>
+
+      </div-->
+    
+      </div>
+  <div class="contenido">
+    <h1 class="tituloPag">¡Bienvenido!</h1>
+    <p class="info">Lea el c&oacute;digo QR de la puerta para anunciarse en lista de espera.</p>
+    <button class="btnQr1" (click)="leerQr()" ion-button color="red">Leer QR</button>
+  </div>
 
 </ion-content>

@@ -13,7 +13,7 @@ import { AlertController } from 'ionic-angular';
  * import { BarcodeScanner } from '@ionic-native/barcode-scanner';ore info on
  * Ionic pages and navigation.
  */
-
+//Descomentar linea 189 y 118 antes de hacer el push.
 
 @Component({
   selector: 'page-registro-cliente',
@@ -22,14 +22,18 @@ import { AlertController } from 'ionic-angular';
 export class RegistroClientePage {
   nombre:string;
   apellido:string;
+  prueba:string="";
   dni:number;
+  mostrarSpinner:boolean=false;
   correo:string;
   clase:string;
+
   pass:string;
   formReg:boolean;
   formInicial:boolean;
   formAnon:boolean;
-  foto:string="";
+  public foto:string="";
+
   scanedCode;
   miScan = {};
   options : any;
@@ -49,13 +53,23 @@ export class RegistroClientePage {
       private alertCtrl: AlertController
   ) 
   {
-  //  this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
-      this.formReg =false;
-      this.formInicial=true;
+    this.prueba="";
+   // this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+      this.formReg =true;
+      this.ocultarCabecera=false;
+      this.formInicial=false;
       this.formAnon=false;
       this.ocultarContenido=false;
       this.ocultarCabecera=false;
+      this.foto="assets/imgs/beta/hamburguesa.jpg";
+      console.log(this.foto);
   }
+  ionViewDidEnter(){
+    this.foto="";
+    // fires on navCtrl.push(DBLocomotive)
+    }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegistroClientePage');
@@ -68,6 +82,7 @@ export class RegistroClientePage {
       this.presentToast("Todos los campos deben ser completados.");
       return;
     }
+    this.mostrarSpinner=true;
     let usuariosRef = firebase.database().ref("usuarios");
 
     usuariosRef.once("value", (snap) => {
@@ -78,7 +93,7 @@ export class RegistroClientePage {
       for (let item in data) {
 
         if (data[item].dni == this.dni) {
-
+          this.mostrarSpinner=false;
           this.presentToast("El DNI ingresado es de  otro usuario registrado.");
           esValido = false;
        
@@ -107,21 +122,56 @@ export class RegistroClientePage {
                 img: this.foto
               }).then(() => {
 
+                this.mostrarSpinner = false;
                 this.mostrarAlert=true;
                 setTimeout(()=>{
             
                   this.mostrarAlert=false;
-                  this.LimpiarCampos();
                   this.navCtrl.pop();
+                  this.LimpiarCampos();
+               //   this.navCtrl.pop();
                 }, 4000);
        
          
               });
            
-                  });
+                  //});
+            })  .catch(error => {
+
+              let mensaje: string;
+  
+              console.log(error.code);
+  
+              switch (error.code) {
+                case "auth/invalid-email":
+                  mensaje = "El correo ingresado no es válido.";
+                  this.correo="";
+
+                  break;
+  
+                case "auth/email-already-in-use":
+                  mensaje = "Este usuario ya fue registrado previamente.";
+                  this.correo="";
+                  break;
+  
+                case "auth/weak-password":
+                  mensaje = "La contraseña debe tener 6 o más caracteres.";
+                  this.pass="";
+                  
+                  break;
+  
+                default:
+                  mensaje = "Ups... Tenemos problemas técnicos.";
+                
+                  break;
+              }
+              this.mostrarSpinner=false;
+              this.presentToast(mensaje);
+            });
+                  
                 }
                 })
-              .catch(error => {
+             .catch(error => {
 
             let mensaje: string;
 
@@ -148,7 +198,7 @@ export class RegistroClientePage {
               
                 break;
             }
-
+            this.mostrarSpinner=false;
             this.presentToast(mensaje);
           });
       }
@@ -159,6 +209,7 @@ export class RegistroClientePage {
           this.presentToast("Todos los campos deben ser completados.");
           return;
         }
+        this.mostrarSpinner=true;
         let usuariosRef = firebase.database().ref("usuarios");
     
         let correo = this.correo.toLowerCase();
@@ -176,12 +227,13 @@ export class RegistroClientePage {
                     clave: this.pass,
                     img: this.foto
                   }).then(() => {
-    
+                    this.mostrarSpinner=false;
                     this.mostrarAlert=true;
                     setTimeout(()=>{
                       this.mostrarAlert=false;
                       this.LimpiarCampos();
-                      this.navCtrl.pop();
+                      
+                     // this.navCtrl.pop();
                     
                     }, 3000);
             
@@ -216,7 +268,7 @@ export class RegistroClientePage {
                   
                     break;
                 }
-    
+                this.mostrarSpinner=false;
                 this.presentToast(mensaje);
               });
 
@@ -295,6 +347,8 @@ export class RegistroClientePage {
       
         ElegirUsuario(tipo)
         {
+          this.LimpiarCampos();
+          this.prueba="";
           this.formInicial=false;
           if(tipo=="anonimo")
           {
@@ -302,6 +356,7 @@ export class RegistroClientePage {
             this.formAnon=true;
             this.formReg=false; 
             this.ocultarCabecera=true;
+            
           }
           if(tipo=="registrado")
           {
@@ -337,7 +392,8 @@ export class RegistroClientePage {
             
             
             this.foto= "data:image/jpeg;base64," + imageData;
-         
+            this.prueba= this.foto;
+
       
          
             
@@ -355,19 +411,27 @@ export class RegistroClientePage {
         
       
          
-      
+    
 
-      
         
         }
         scanear()
       {
+    
+       
+       
+        
+       
+ 
           this.options = { prompt : "Escaneá tu DNI", formats: "PDF_417" }
 
           this.barcodeScanner.scan(this.options).then((barcodeData) => {
               this.miScan = (barcodeData.text).split('@');
               this.apellido = this.miScan[1];
-              this.nombre = this.miScan[2];
+              let unNombre =  this.miScan[2];
+              //this.nombre = this.miScan[2];
+              let nombres = unNombre.split(' ');
+              this.nombre= nombres[0];
               this.dni = this.miScan[4];
               alert(this.miScan);
           }, (error) => {

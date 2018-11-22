@@ -2,6 +2,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { NativeAudio } from '@ionic-native/native-audio';
+
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -56,6 +58,8 @@ import { JuegoPage } from '../pages/juego/juego';
 
 import { FcmProvider } from '../providers/fcm/fcm';
 
+import { ElPipe } from '../pipes/el/el';
+
 import { ComponentsModule } from "../components/components.module";
 import { Ionic2RatingModule } from 'ionic2-rating';
 
@@ -95,7 +99,8 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     JuegoPage,
     MisReservasPage,
     JuegoFerPage,
-    SalaDeJuegosPage
+    SalaDeJuegosPage,
+    ElPipe
   ],
   imports: [
     BrowserModule,
@@ -145,11 +150,11 @@ import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-a
     StatusBar,
     SplashScreen,
     NativeAudio,
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VerificarTipoProvider,
     AngularFireAuth,
     Camera,
-    BarcodeScanner,
     Firebase,
     FcmProvider
   ]

@@ -8,25 +8,7 @@
     <h1>{{mensaje}}</h1>
   </div>
 
-<ion-header>
-    <ion-navbar color="red">
-  
-      
-      
-  
-      
-  
-      <!-- <ion-title>{{sala}}</ion-title> -->
-      <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
-  
-      <ion-buttons end>
-        <button ion-button (click)="irA()">
-          <ion-icon name="power"></ion-icon>
-        </button>
-      </ion-buttons>
-  
-    </ion-navbar>
-  </ion-header>
+
 
 
 <ion-content >
@@ -55,8 +37,11 @@
                                   <button ion-button class="cerrarChart" (click)="cerrarChart()" color="light">
                                           <ion-icon name="close"></ion-icon>
                                       </button>
-                                  <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
-                                  <canvas baseChart
+                                  <h2 >¿Se siente c&oacute;modo en el restaurant?</h2><br>
+                                 
+                                
+
+                                  <canvas class="altoCanvas" baseChart
                                           [data]="pregunta1Data"
                                           [labels]="pregunta1Labels"
                                           [chartType]="doughnutChartType"
@@ -90,7 +75,7 @@
                                   <ion-icon name="close"></ion-icon>
                               </button>
                                   <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
-                                  <canvas baseChart
+                                  <canvas class="altoCanvas" baseChart
                                           [data]="pregunta2Data"
                                           [labels]="pregunta2Labels"
                                           [chartType]="doughnutChartType"
@@ -121,7 +106,7 @@
                                 
                               </ion-item>
                               <ion-item>
-                                      <ion-label >Nuestra atenci&oacute;n</ion-label>
+                                      <ion-label >No tienen</ion-label>
                                     <ion-checkbox  [(ngModel)]="resp3atencion" >No</ion-checkbox>
                                     
                                   </ion-item>
@@ -134,7 +119,7 @@
                                               <ion-icon name="close"></ion-icon>
                                           </button>
                                           <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
-                                      <canvas baseChart
+                                      <canvas baseChart class="altoCanvas"
                                               [data]="pregunta3Data"
                                               [labels]="pregunta3Labels"
                                               [chartType]="doughnutChartType"
@@ -169,7 +154,7 @@
                                               <ion-icon name="close"></ion-icon>
                                           </button>
                                           <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
-                                      <canvas baseChart
+                                      <canvas baseChart class="altoCanvas"
                                               [data]="pregunta4Data"
                                               [labels]="pregunta4Labels"
                                               [chartType]="doughnutChartType"
@@ -197,7 +182,7 @@
                                                   <ion-icon name="close"></ion-icon>
                                               </button>
                                               <h2 >Gráfico de todas las respuestas a esta pregunta:</h2>
-                                          <canvas baseChart
+                                          <canvas baseChart class="altoCanvas"
                                                   [data]="pregunta5Data"
                                                   [labels]="pregunta5Labels"
                                                   [chartType]="doughnutChartType"
@@ -223,13 +208,27 @@
                             </div>
         <h1 class="tituloPag">¿Qu&eacute; piensa de nosotros?</h1>
         <p class="info">Ayudenos a brindarle una mejor atenci&oacute;n cada vez, con la siguiente encuesta:</p>
+        <div class="esUnaPregunta">
+            <img  *ngIf="respPreg1" src="assets/imgs/beta/not.png" class="errorImg">
         <button ion-button color="light" class="btnContenido" (click)="pregunta1()" outline>Pregunta I</button>
+        </div>
+        <div class="esUnaPregunta">
+                <img *ngIf="respPreg2" src="assets/imgs/beta/not.png" class="errorImg">
          <button ion-button color="light" class="btnContenido" (click)="pregunta2()"  outline>Pregunta II</button>
+         </div>
+         <div class="esUnaPregunta">
+                <img *ngIf="respPreg3"  src="assets/imgs/beta/not.png" class="errorImg">
          <button ion-button color="light"class="btnContenido"  (click)="pregunta3()" outline>Pregunta III</button>
+         </div>
+         <div class="esUnaPregunta">
+                <img  *ngIf="respPreg4"  src="assets/imgs/beta/not.png" class="errorImg">
          <button ion-button color="light"   class="btnContenido" (click)="pregunta4()" outline>Pregunta IV</button>
+         </div>
+         <div class="esUnaPregunta">
+                <img *ngIf="respPreg5" src="assets/imgs/beta/not.png" class="errorImg">
          <button ion-button color="light" class="btnContenido" (click)="pregunta5()" outline>Pregunta V</button>
 
-      
+        </div>
          <button ion-button color="light"class="btnContenido" (click)="pregunta6()" outline>Fotos(Opcional)</button>
          <button class="enviar" (click)= "SubirEncuesta()" ion-button color="red">Enviar encuesta</button>
       </div>
