@@ -13,14 +13,21 @@ ion-navbar ion-icon { font-size: 50px !important; }
 
   .ion-md-chatboxes:before {
     content: "\f2b6";
-    font-size: 35px;
-    padding-right: 40px;
+    font-size: 30px;
+    padding-right: 10px;
+    
 }
 
   .ion-md-contact:before {
     content: "\f2d6";
     font-size: 70px;
 }
+
+.ion-md-checkmark-circle:before {
+  content: "\f2bb";
+  font-size: 30px;
+}
+
 
   .scroll-content {
 
@@ -220,7 +227,7 @@ ion-content {
   .que{
 
     color: black!important;
-        font-size: 200%;
+        font-size: 150%;
         margin-bottom: 0px !important;
         margin-top: 2px !important;
         padding-top: 5px !important;
@@ -233,7 +240,7 @@ ion-content {
   .queDos{
 
     color: red!important;
-        font-size: 100%;
+        font-size: 80%;
         margin-bottom: 0px !important;
         margin-top: 2px !important;
         padding-top: 5px !important;

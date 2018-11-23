@@ -267,7 +267,7 @@ exports.aceptarReserva = functions.database
         const before = change.before.val()
         const after = change.after.val()
 
-        if (after.estado == "pendiente") 
+        if (after.estado == "pendiente" || after.terminada=="si") 
         {
             console.log("error");
             return null
@@ -367,6 +367,64 @@ export const cancelarReserva = functions.database
 
   
 
+
+});
+
+
+
+exports.hacerPedidoDos = functions.database
+    .ref('pedidos/{mesa}/{tipo}')
+    .onUpdate(async (change, context) => {
+
+        const before = change.before.val()
+        const after = change.after.val()
+
+        if (after.estado != "tomado") 
+        {
+            console.log("error");
+            return null
+        }
+        
+    // Notification content
+    const payload = {
+      notification: {
+          title: 'Pedido Nuevo',
+          body: `Hicieron un nuevo pedido!!!`,
+          icon: 'https://goo.gl/Fz9nrQ',
+          sound:'default',
+          //body:"Asdasd",
+          vibrate: "true",
+      }
+    }
+
+ 
+    const db = admin.firestore()
+  
+    const devicesRef = db.collection('devices')
+
+
+   
+    const devices = await devicesRef.get();
+   
+
+    const tokens = [];
+
+    
+    devices.forEach(result => {
+      const token = result.data().token;
+
+      if(result.data().tipo=="cocinero" || result.data().tipo=="bartender")
+      {
+        tokens.push( token )
+      }
+
+   
+    })
+
+    //const tokens = [];
+   // tokens.push("eiEhMAhigdY:APA91bH4oVLkLh8fzOsjm1bVhlyTsh4v8tb3WZ7zNmiUQXkEMmPW6aHJ_Rv_Ylx5ZuaChX2zIHMPIjp7mACe6_fP6t-i8r4KhP4B97GxLQlxWB8LYGFRHOJYy4-l5u3Bi-7uy_jTe_zk");
+
+    return admin.messaging().sendToDevice(tokens, payload)
 
 });
 

@@ -148,6 +148,10 @@
         <button ion-button clear item-end (click)="chatear(item)">
             <ion-icon name="chatboxes"></ion-icon>
           </button>
+
+          <button ion-button clear item-end (click)="entregar(item)">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </button>
     
     
     
@@ -183,7 +187,7 @@
 
       <div class="chat-message" text-right *ngIf="message.name === probanding">
           <div class="right-bubble">
-            <span class="msg-name">Yo</span>
+            <span class="msg-name"></span>
             <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>
             <p text-wrap>{{message.message}}</p>
           </div>
