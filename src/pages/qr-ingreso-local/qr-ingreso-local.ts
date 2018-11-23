@@ -77,7 +77,8 @@ this.ObtenerMesaMaxima();
     else
     {
       //Aca hago lo otro si no es anonimo
-      this.VerificarReserva();
+     // this.VerificarReserva();
+     this.VerificarEstado();
     }
   }
   TraerEncuestas()
@@ -495,12 +496,14 @@ console.log("Dentro de observable ecnuesta");
 
     let usuariosRef = firebase.database().ref("reservas");
     usuariosRef.once("value", (snap) => {
-      
+      console.log("En verificar Reserva");
+
       let data = snap.val();
       let esValido = true;
     let hayReserva:boolean=false;
       for (var key in data) {
 
+        console.log("reservas:" +data[key]);
         //Verifico si hay una reserva confirmada
         if(data[key].estado=="confirmada" && data[key].correo==this.correo)
         {
@@ -511,8 +514,9 @@ console.log("Dentro de observable ecnuesta");
           let momentoActual:any = moment(new Date(), "DD/MM/YYYY HH:mm");
           console.log(momentoActual);
          console.log( Math.abs(momentoActual.diff(momentoReserva, "m")));
-         if(Math.abs(momentoReserva.diff(momentoActual, "m")) <= 40)
-         {
+        // if(Math.abs(momentoReserva.diff(momentoActual, "m")) <= 40)
+        if(momentoReserva.diff(momentoActual, "m")>-40 && momentoReserva.diff(momentoActual, "m")<20) 
+        {
           hayReserva=true;
            this.tieneReserva=true;
            this.mesa = data[key].mesa;
@@ -579,6 +583,56 @@ console.log("Dentro de observable ecnuesta");
 
       
     });
+
+  }
+  VerificarEstado()
+  {
+
+    this.correo=localStorage.getItem("usuario");
+  
+ 
+     this.correo =(JSON.parse(this.correo)).correo;
+    let usuariosRef = firebase.database().ref("usuarios");
+    usuariosRef.once("value", (snap) => {
+      console.log("En verificar estado");
+
+     let data = snap.val();
+     let esValido = true;
+
+     for (var key in data) {
+
+       if (data[key].correo == this.correo) {
+      
+
+        //Pregunto si esta seteado el estado para que no pinche la app
+        if(data[key].estado)
+        {
+
+          //Si ese estado que ahora se que esta seteado por que estoy dentro del if 
+          //es en espera directamente le muestro las encuestas de usuarios
+          if(data[key].estado=="espera")
+          { 
+            this.mostrarMiSpinner=false;
+            this.desplegarEncuesta=true;
+
+          }
+          else
+          {
+            this.VerificarReserva();
+          }
+
+        }
+        else
+        {
+          this.VerificarReserva();
+        }
+       
+
+
+
+       }
+      }
+    }).catch(()=>console.log("por las dudas"));
 
   }
 }

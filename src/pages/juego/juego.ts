@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Alert } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Alert, GESTURE_GO_BACK_SWIPE } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { NativeAudio } from '@ionic-native/native-audio';
 
@@ -21,6 +21,8 @@ import firebase from "firebase";
 })
 export class JuegoPage {
 
+  jugadorActual;
+  claveJugador;
   yaJugo:boolean;
   taparJuego:boolean=false;
   animacion:any[]=[];
@@ -36,15 +38,16 @@ export class JuegoPage {
   x:any;
   tiempo="";
   mensaje="";
-  mostrarAlert:boolean=false;
+ 
   correo:string;
   juegoIniciado:boolean=false;
   puntos:number;
   gano:boolean=false;
+  mostrarAlert:boolean=false;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,   private authInstance: AngularFireAuth,private nativeAudio: NativeAudio) {
-    this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
+    //this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
     this.correo=localStorage.getItem("usuario");
     this.correo =(JSON.parse(this.correo)).correo;
  
@@ -105,7 +108,30 @@ export class JuegoPage {
   
   if (distance < 0) {
     clearInterval(this.x);
+this.gano=false;
 
+    //Me fijo si jugo o si no para subirle el estado
+    if(!this.yaJugo)
+    {
+      console.log(this.jugadorActual);
+      console.log(this.claveJugador);
+
+      let usuariosRef = firebase.database().ref("usuarios/"+this.claveJugador);
+      //this.claveActual=key;
+      usuariosRef.set(this.jugadorActual).then(()=>{
+
+        this.mensaje="El tiempo se acabó, juego terminado, ustéd pierde";
+        this.mostrarAlert=true;
+        setTimeout(()=>{
+    
+          this.mostrarAlert=false;
+        
+          this.navCtrl.pop();
+        }, 4000);
+
+      });
+
+    }
    this.tiempo ="Juego finalizado";
 
    this.taparJuego=true;
@@ -131,6 +157,10 @@ export class JuegoPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad JuegoPage');
+  }
+  Salir()
+  {
+    this.navCtrl.pop();
   }
 
   cambiarImagen(valor)
@@ -238,16 +268,25 @@ export class JuegoPage {
           {
             this.SubirDescuento();
             this.mensaje="!!Felicitaciones usted ganó un 10% de descuento!!";
-            this.mostrarAlert=true;
-            setTimeout(()=>{
-        
-              this.mostrarAlert=false;
+            let usuariosRef = firebase.database().ref("usuarios/"+this.claveJugador);
+         
+            usuariosRef.set(this.jugadorActual).then(()=>{
+
+
+              this.mostrarAlert=true;
+              setTimeout(()=>{
+          
+                this.mostrarAlert=false;
+              
+                this.navCtrl.pop();
+              }, 4000);
+              clearInterval(this.x);
+              
+              this.tiempo="juego finalizado";
+
+              
+            });
             
-              this.navCtrl.pop();
-            }, 4000);
-            clearInterval(this.x);
-            
-            this.tiempo="juego finalizado";
 
           }
           else
@@ -292,17 +331,18 @@ export class JuegoPage {
           {
             this.yaJugo=false;
 
-            let usuario= data[key];
-            usuario.juegoFacu="si";
-         
+            this.jugadorActual= data[key];
+            this.jugadorActual.juegoFacu="si";
+            this.claveJugador=   key;
            
          
-            let usuariosRef = firebase.database().ref("usuarios/"+key);
-            this.claveActual=key;
-            usuariosRef.set(usuario)
+ 
           }//Si jugo simplemente le aviso a mi variable local.
           else
           {
+            this.jugadorActual= data[key];
+            this.jugadorActual.juegoFacu="si";
+            this.claveJugador=   key;
             this.yaJugo=true;
           }
          
@@ -314,7 +354,7 @@ export class JuegoPage {
         
       }
 
-  });
+  }).catch(()=>{ console.log("Por las dudas");});
 
   }
   SubirDescuento()

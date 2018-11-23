@@ -26,6 +26,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ChartsModule } from 'ng2-charts';
 import { ComponentsModule } from "../components/components.module";
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -39,6 +40,7 @@ import { ComponentsModule } from "../components/components.module";
     EncuestaClientePage,
     PedirPlatosPage,
     JuegoPage,
+ 
     ElPipe
   ],
   imports: [

@@ -6,7 +6,7 @@
 -->
 <div class="superAlert"  [ngClass]="{'mostrarAlert':mostrarAlert}">
 <div class="alert">
-  <img src="assets/imgs/beta/ganador.jpg">
+  <img  src="assets/imgs/beta/ganador.jpg"  [ngClass]="{'quitarFoto':!gano}">
   <h1>{{mensaje}}</h1>
 </div>
 </div>
@@ -67,6 +67,7 @@
         <p>¡¡¡Inténtelo!!!</p>
     
     <button ion-button  (click)="Jugar()">Jugar</button>
+
 </div>
 </div>
 
