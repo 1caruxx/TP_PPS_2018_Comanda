@@ -72,6 +72,11 @@ public pedidosPruebaDiez : Array<any>;
 
 public moment = moment;
 
+public sinPersonasEnEspera;
+public sinPersonasAtendidas;
+
+public sinPedidosParaEntregar;
+
 
 
 
@@ -112,7 +117,13 @@ public moment = moment;
     //this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
     //this.vistaCliente=true;
+    //this.usuario.tipo="cliente";
     //this.vistaMozo=true;
+   // this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
+   this.sinPersonasEnEspera=false;
+   this.sinPersonasAtendidas=false;
+   this.sinPedidosParaEntregar=false;
 
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
@@ -212,6 +223,9 @@ public moment = moment;
     genteRef.on("value", (snap) => {
 
       this.usuarios=[];
+      this.sinPersonasEnEspera=false;
+      this.sinPersonasAtendidas=false;
+      console.log("asd");
 
       let data = snap.val();
 
@@ -222,11 +236,21 @@ public moment = moment;
 
       this.espera = this.usuarios.filter(item => {
 
+        if(item.estado=="espera")
+        {
+          this.sinPersonasEnEspera=true;
+        }
         
+        //console.log("aca estoy");
         return item.estado=="espera";
       });
 
       this.atendidos = this.usuarios.filter(item => {
+
+        if(item.estado=="atendido")
+        {
+          this.sinPersonasAtendidas=true;
+        }
 
        
        return item.estado=="atendido";
@@ -245,6 +269,8 @@ public moment = moment;
 
               this.pedidosPruebaUno=[];
               let vale=0;
+              this.sinPedidosParaEntregar=false;
+              let terminadisimo=false;
 
               let cocinero=false;
               let bartender=false;
@@ -263,21 +289,42 @@ public moment = moment;
                   bartender=true;
                 }
 
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
+                }
+
               }
 
               for(let k in result)
               { 
+
+              
                 if (result[k].estado=="preparacion")
                 {
                   vale++;
+
+                        if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaUno.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
 
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
+                        
                         this.pedidosPruebaUno.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
+
+
+
                       }
 
                   }
@@ -288,6 +335,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaUno.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -298,6 +346,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaUno.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -317,6 +366,8 @@ public moment = moment;
 
               this.pedidosPruebaDos=[];
               let vale=0;
+              this.sinPedidosParaEntregar=false;
+              let terminadisimo=false;
 
               let cocinero=false;
               let bartender=false;
@@ -334,6 +385,10 @@ public moment = moment;
                 {
                   bartender=true;
                 }
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
+                }
 
               }
 
@@ -344,12 +399,22 @@ public moment = moment;
 
                   vale++;
 
+                  if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaDos.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
+
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
                         this.pedidosPruebaDos.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
                       }
 
@@ -361,6 +426,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaDos.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -371,6 +437,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaDos.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -388,11 +455,12 @@ public moment = moment;
 
               this.pedidosPruebaTres=[];
               //this.pedidosPruebaTres=new Array(0);
-
+              this.sinPedidosParaEntregar=false;
               let vale=0;
               let terminado=true;
               let cocinero=false;
               let bartender=false;
+              let terminadisimo=false;
 
 
               let result = snap.val();
@@ -406,6 +474,10 @@ public moment = moment;
                 if(k=="bartender")
                 {
                   bartender=true;
+                }
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
                 }
 
               }
@@ -421,12 +493,22 @@ public moment = moment;
                   }*/
                   vale++;
 
+                  if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaTres.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
+
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
                         this.pedidosPruebaTres.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
                       }
 
@@ -438,6 +520,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaTres.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -448,6 +531,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaTres.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -468,9 +552,11 @@ public moment = moment;
 
               this.pedidosPruebaCuatro=[];
               let vale=0;
+              this.sinPedidosParaEntregar=false;
 
               let cocinero=false;
               let bartender=false;
+              let terminadisimo=false;
 
 
               let result = snap.val();
@@ -485,6 +571,10 @@ public moment = moment;
                 {
                   bartender=true;
                 }
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
+                }
 
               }
 
@@ -495,12 +585,22 @@ public moment = moment;
 
                   vale++;
 
+                  if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaCuatro.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
+
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
                         this.pedidosPruebaCuatro.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
                       }
 
@@ -512,6 +612,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaCuatro.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -522,6 +623,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaCuatro.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -540,6 +642,8 @@ public moment = moment;
 
               this.pedidosPruebaCinco=[];
               let vale=0;
+              this.sinPedidosParaEntregar=false;
+              let terminadisimo=false;
 
               let cocinero=false;
               let bartender=false;
@@ -557,6 +661,11 @@ public moment = moment;
                 {
                   bartender=true;
                 }
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
+                }
+
 
               }
 
@@ -567,12 +676,22 @@ public moment = moment;
 
                   vale++;
 
+                  if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaCinco.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
+
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
                         this.pedidosPruebaCinco.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
                       }
 
@@ -584,6 +703,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaCinco.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -594,6 +714,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaCinco.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -612,6 +733,8 @@ public moment = moment;
 
               this.pedidosPruebaSeis=[];
               let vale=0;
+              this.sinPedidosParaEntregar=false;
+              let terminadisimo=false;
 
               let cocinero=false;
               let bartender=false;
@@ -629,6 +752,10 @@ public moment = moment;
                 {
                   bartender=true;
                 }
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
+                }
 
               }
 
@@ -639,12 +766,22 @@ public moment = moment;
 
                   vale++;
 
+                  if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaSeis.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
+
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
                         this.pedidosPruebaSeis.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
                       }
 
@@ -656,6 +793,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaSeis.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -666,6 +804,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaSeis.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -684,6 +823,8 @@ public moment = moment;
 
               this.pedidosPruebaSiete=[];
               let vale=0;
+              this.sinPedidosParaEntregar=false;
+              let terminadisimo=false;
 
               let cocinero=false;
               let bartender=false;
@@ -701,6 +842,10 @@ public moment = moment;
                 {
                   bartender=true;
                 }
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
+                }
 
               }
 
@@ -711,12 +856,22 @@ public moment = moment;
 
                   vale++;
 
+                  if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaSiete.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
+
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
                         this.pedidosPruebaSiete.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
                       }
 
@@ -728,6 +883,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaSiete.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -738,6 +894,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaSiete.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -756,6 +913,8 @@ public moment = moment;
 
               this.pedidosPruebaOcho=[];
               let vale=0;
+              this.sinPedidosParaEntregar=false;
+              let terminadisimo=false;
 
               let cocinero=false;
               let bartender=false;
@@ -773,6 +932,10 @@ public moment = moment;
                 {
                   bartender=true;
                 }
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
+                }
 
               }
 
@@ -783,12 +946,22 @@ public moment = moment;
 
                   vale++;
 
+                  if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaOcho.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
+
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
                         this.pedidosPruebaOcho.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
                       }
 
@@ -800,6 +973,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaOcho.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -810,6 +984,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaOcho.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -827,6 +1002,8 @@ public moment = moment;
 
               this.pedidosPruebaNueve=[];
               let vale=0;
+              this.sinPedidosParaEntregar=false;
+              let terminadisimo=false;
 
               let cocinero=false;
               let bartender=false;
@@ -844,6 +1021,10 @@ public moment = moment;
                 {
                   bartender=true;
                 }
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
+                }
 
               }
 
@@ -854,12 +1035,22 @@ public moment = moment;
 
                   vale++;
 
+                  if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaNueve.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
+
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
                         this.pedidosPruebaNueve.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
                       }
 
@@ -871,6 +1062,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaNueve.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -881,6 +1073,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaNueve.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -900,6 +1093,8 @@ public moment = moment;
 
               this.pedidosPruebaDiez=[];
               let vale=0;
+              this.sinPedidosParaEntregar=false;
+              let terminadisimo=false;
 
               let cocinero=false;
               let bartender=false;
@@ -917,6 +1112,10 @@ public moment = moment;
                 {
                   bartender=true;
                 }
+                if(result[k].estado=="terminado")
+                {
+                  terminadisimo=true;
+                }
 
               }
 
@@ -927,12 +1126,22 @@ public moment = moment;
 
                   vale++;
 
+                  if(terminadisimo==true)
+                        {
+                          this.pedidosPruebaDiez.push(result[k]);
+                          console.log("los 2,uno terminado y el otro añadido")
+                          this.sinPedidosParaEntregar=true;
+                          break;
+
+                        }
+
                   if(bartender==true && cocinero==true)
                   {
                     if(vale==2)
                       {
                         this.pedidosPruebaDiez.push(result[k]);
                         console.log("los 2")
+                        this.sinPedidosParaEntregar=true;
                         break;
                       }
 
@@ -944,6 +1153,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaDiez.push(result[k]);
                       console.log("barteneder")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -954,6 +1164,7 @@ public moment = moment;
                     {
                       this.pedidosPruebaDiez.push(result[k]);
                       console.log("cocinero")
+                      this.sinPedidosParaEntregar=true;
                       break;
                     }
 
@@ -1096,7 +1307,7 @@ public moment = moment;
 
                               firebase.database().ref("mesas").child(itemMesa).update({cliente: correo}).then(() => {
 
-                                this.MostrarAlert("bienn", "se setoe la mesa!!", "ok", this.ocultarAlert);
+                                this.MostrarAlert("", "Se ha asignado la mesa.", "Aceptar", this.limpiar);
                               })
 
                             })
@@ -1110,7 +1321,7 @@ public moment = moment;
               })
             } else {
               //this.presentToast("Esa mesa esta reservada.");
-              this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
+              this.MostrarAlert("Error","Esta mesa está reservada.","Aceptar",this.limpiar);
               //reservadita=true;
               //otro=2;
               return;
@@ -1137,7 +1348,7 @@ public moment = moment;
                                     
                                       if(text!=mesa)
                                       {
-                                        this.MostrarAlert("Error!!","Este cliente tiene una reserva para otra mesa","aceptar",this.limpiar);
+                                        this.MostrarAlert("¡Error!","Este cliente tiene otra mesa reservada.","Aceptar",this.limpiar);
                                         break;
                                       }
 
@@ -1158,7 +1369,7 @@ public moment = moment;
                                     this.estaLibre=false;
                                     //ocup=false;
                                    // alert("La mesa ya esta ocupada");
-                                   this.MostrarAlert("Error!", "La mesa ya esta ocupada", "Aceptar", this.limpiar);
+                                   this.MostrarAlert("Error!", "La mesa ya está ocupada.", "Aceptar", this.limpiar);
                                     break;
                                     //return;
                                     
@@ -1166,7 +1377,7 @@ public moment = moment;
 
                                   if(data[key].cantidadComensales<cantidad)
                                   {
-                                    this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales", "Aceptar", this.limpiar);
+                                    this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales.", "Aceptar", this.limpiar);
                                     break;
 
                                   }
@@ -1195,6 +1406,12 @@ public moment = moment;
                                     
                                             if (data[item].correo == correo) 
                                             {
+
+                                              //AGREGANDO LOGIC APRA LA FUNCION
+                                              data[item].terminada="si";
+                                              reservasRef.child(item).update(data[item]);
+
+
                                               reservasRef.child(item).remove();
                                               break;
 
@@ -1224,7 +1441,7 @@ public moment = moment;
                                                
                                                 ref.child(key).update(data[key]);
                                                 //alert("Listo,se relaciono al cliente con la mesa " + text);
-                                                this.MostrarAlert("Exito!", "Listo,se relaciono al cliente con la mesa " + text, "Aceptar", this.limpiar);
+                                                this.MostrarAlert("Éxito!", "Se relacionó al cliente con la mesa." + text, "Aceptar", this.limpiar);
                                                 //this.navCtrl.setRoot(this.navCtrl.getActive().component);
                                                 //COMENTE ESTO
                                                 return;
@@ -1413,7 +1630,7 @@ public moment = moment;
                                   }
                                   else
                                   {
-                                    alert("No hicieron ningun pedido todavia");
+                                    alert("No hicieron ningún pedido todavía.");
                                     break;
 
                                   }
@@ -1586,9 +1803,19 @@ public moment = moment;
           var dataDos = snap.val();
         for (var keyDos in dataDos)
         {
-          if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo==usuario.correo)
+          if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo==usuario.correo && dataDos[keyDos].mesa==barcodeData.text)
+          //if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo=="cliente@gmail.com" && dataDos[keyDos].mesa==barcodeData.text)
           {
-            this.MostrarAlert("Terminado y Entregado", "Su pedido ya deberia estar en la mesa,si no es asi comuniquese con su mozo", "Aceptar", this.limpiar);
+            this.MostrarAlert("Terminado y entregado", "Su pedido ya debería estar en la mesa. Si no es así, comuniquese con su mozo.", "Aceptar", this.limpiar);
+            banderita=1;
+            comiendo=true;
+            break;
+          }
+
+          if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo==usuario.correo && dataDos[keyDos].mesa!=barcodeData.text)
+         //if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo=="cliente@gmail.com" && dataDos[keyDos].mesa!=barcodeData.text)
+          {
+            this.MostrarAlert("Error!!","Por favor escanee su mesa","Aceptar",this.limpiar);
             banderita=1;
             comiendo=true;
             break;
@@ -1623,7 +1850,7 @@ public moment = moment;
                     //alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
                     if(comiendo==false)
                     {
-                      this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
+                      this.MostrarAlert("¡Cocinándose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
                       banderita=1;
 
                     }
@@ -1635,7 +1862,7 @@ public moment = moment;
                     else
                     {
                       //alert("Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo");
-                      this.MostrarAlert("A esperar!", "Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo", "Aceptar", this.limpiar);
+                      this.MostrarAlert("¡A esperar!", "Su pedido fue tomado, falta que el cocinero ponga un tiempo mínimo.", "Aceptar", this.limpiar);
                       banderita=1;
                       break;
                     }
@@ -1644,7 +1871,7 @@ public moment = moment;
                   else
                   {
                     //alert("Esa no es su mesa");
-                    this.MostrarAlert("Error!", "Esta no es su mesa", "Aceptar", this.limpiar);
+                    this.MostrarAlert("¡Error!", "Esta no es su mesa.", "Aceptar", this.limpiar);
                     banderita=1;
                     break;
                   }
@@ -1658,7 +1885,7 @@ public moment = moment;
               if(banderita==0)
               {
                 //alert("Por favor escanee una mesa valida");
-                this.MostrarAlert("NOOOOOOOOOOOOOOO!", "por favor escanee una mesa valida", "Aceptar", this.limpiar);
+                this.MostrarAlert("¡Error!", "Por favor escanee una mesa válida.", "Aceptar", this.limpiar);
               }
             });
 
@@ -2060,7 +2287,7 @@ public moment = moment;
                               
                                         
                                           //this.presentToast("Esa mesa esta reservada.");
-                                          this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
+                                          this.MostrarAlert("¡Error!","Esta mesa está reservada.","Aceptar",this.limpiar);
                               
                                           return true;
                                           

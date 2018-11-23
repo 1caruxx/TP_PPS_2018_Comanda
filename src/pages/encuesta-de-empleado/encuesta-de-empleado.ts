@@ -4,6 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
+import * as Chart from 'chart.js';
 
 
 //LINEA 336    361 Y 364 LAJSDKLASDLKASJDLKAJDKLJDLK
@@ -61,7 +62,7 @@ export class EncuestaDeEmpleadoPage {
      this.desloguaer = JSON.parse(localStorage.getItem("desloguear"));
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
     // this.encuesta();
-
+    Chart.defaults.global.legend.display = false;
     this.uno=3;
     this.dos="Me Encanta";
     this.tres="si";
@@ -160,7 +161,7 @@ export class EncuestaDeEmpleadoPage {
       img: url
       }).then(() => {
 
-        this.presentToast("la encuesta fue cargada con exito");
+        this.presentToast("La encuesta fue cargada con éxito.");
         this.encuesta();
 
 
@@ -195,7 +196,7 @@ export class EncuestaDeEmpleadoPage {
               });
             }).then(() => {
 
-              this.presentToast("la encuesta fue cargada con exito");
+              this.presentToast("La encuesta fue cargada con éxito.");
               this.encuesta();
 
 
@@ -380,17 +381,17 @@ export class EncuestaDeEmpleadoPage {
       
     }).then(() => 
     {
-      this.pieChartLabels = ['si', 'no'];
+      this.pieChartLabels = ['Sí', 'No'];
     //this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
     this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
 
-    this.pieChartLabelsDos = ['si', 'no'];
+    this.pieChartLabelsDos = ['Sí', 'No'];
     this.pieChartDataDos = [this.pregCuatroPrimeraRespuesta, this.pregCuatroPrimeraRespuesta];
 
-    this.pieChartLabelsCinco = ['si', 'no'];
+    this.pieChartLabelsCinco = ['Sí', 'No'];
     this.pieChartDataCinco = [this.pregCincoPrimeraRespuesta, this.pregCincoSegundaRespuesta];
 
-    this.pieChartLabelsUno = ["bien","masomenos","mal"];
+    this.pieChartLabelsUno = ["Bien","Más o menos","Mal"];
     this.pieChartDataUno = [this.pregUnoPrimeraRespuesta,this.pregUnoSegundaRespuesta,this.pregUnoTerceraRespuesta];
 
 

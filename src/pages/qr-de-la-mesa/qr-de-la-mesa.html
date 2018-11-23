@@ -66,14 +66,29 @@
 
       <ion-content  *ngIf="probandingg">
 
+          <div class="asdasd" *ngIf="!sinPersonasEnEspera">
+              SIN PERSONAS EN ESPERA
+            </div>
+
+            <div class="asdasd2" *ngIf="!sinPersonasAtendidas">
+                SIN PERSONAS ATENDIDAS
+              </div>
+
+             <!-- <div class="asdasd3" *ngIf="!sinPedidosParaEntregar">
+                  SIN PEDIDOS TERMINADOS
+                </div>-->
+
          <div *ngIf="vistaMozo">
 
          
 
 
-
+        <div *ngIf="sinPersonasEnEspera">
 
       <h2 class="titulo">Lista de personas en espera</h2>
+
+    </div>
+
 
       <ion-list>
 
@@ -88,9 +103,9 @@
           <p>CUIL • {{item.cuil}}</p>-->
 
           <h1 style="color:black;">{{item.nombre}}</h1>
-          <p style="color:black;">Tipo : • {{item.tipo}}</p>
-          <p style="color:black;">Cantidad De Personas : • {{item.comensales}} </p>
-          <p style="color:black;">Mesa : • {{item.mesa}} </p>
+          <p style="color:black;">Tipo: • {{item.tipo}}</p>
+          <p style="color:black;">Cantidad de personas: • {{item.comensales}} </p>
+          <p style="color:black;">Mesa: • {{item.mesa}} </p>
          
     
           <!--<button ion-button clear item-end (click)="MostrarQr(item.correo)">-->
@@ -101,7 +116,11 @@
     
       </ion-list>
 
-      <h2 class="titulo">Lista de personas Atendidas</h2>
+      <div *ngIf="sinPersonasAtendidas">
+
+      <h2 class="titulo">Lista de personas atendidas</h2>
+
+      </div>
 
       <ion-list>
 
@@ -116,7 +135,7 @@
           <p>CUIL • {{item.cuil}}</p>-->
 
           <h1 style="color:black;"> {{item.nombre}}</h1>
-          <p  style="color:black;">Tipo : • {{item.tipo}}</p>
+          <p  style="color:black;">Tipo: • {{item.tipo}}</p>
     
          <!-- <button ion-button clear item-end (click)="MostrarPedidos(item.mesa)">-->
             <!--<button ion-button clear item-end (click)="probandoBarcode()">
@@ -126,7 +145,11 @@
     
       </ion-list>
 
+   <!--   <div *ngIf="sinPedidosParaEntregar">-->
+
       <h2 class="titulo">Lista de pedidos para entregar</h2>
+
+    <!--</div>-->
 
       <ion-list>
 
@@ -142,7 +165,7 @@
             </button>
     
 
-          <h1 style="color:black;">Mesa Uno </h1>
+          <h1 style="color:black;">Mesa uno</h1>
    
         </ion-item>
 
@@ -162,7 +185,7 @@
                 <ion-icon name="checkmark-circle"></ion-icon>
               </button>
   
-            <h1 style="color:black;">Mesa Dos </h1>
+            <h1 style="color:black;">Mesa dos</h1>
      
           </ion-item>
 
@@ -183,7 +206,7 @@
                   <ion-icon name="checkmark-circle"></ion-icon>
                 </button>
     
-              <h1 style="color:black;">Mesa Tres </h1>
+              <h1 style="color:black;">Mesa tres</h1>
        
             </ion-item>
 
@@ -202,7 +225,7 @@
                     <ion-icon name="checkmark-circle"></ion-icon>
                   </button>
       
-                <h1 style="color:black;">Mesa Cuatro </h1>
+                <h1 style="color:black;">Mesa cuatro</h1>
          
               </ion-item>
 
@@ -221,7 +244,7 @@
                       <ion-icon name="checkmark-circle"></ion-icon>
                     </button>
         
-                  <h1 style="color:black;">Mesa Cinco </h1>
+                  <h1 style="color:black;">Mesa cinco</h1>
            
                 </ion-item>
 
@@ -240,7 +263,7 @@
                         <ion-icon name="checkmark-circle"></ion-icon>
                       </button>
           
-                    <h1 style="color:black;">Mesa Seis </h1>
+                    <h1 style="color:black;">Mesa seis</h1>
              
                   </ion-item>
 
@@ -259,7 +282,7 @@
                           <ion-icon name="checkmark-circle"></ion-icon>
                         </button>
             
-                      <h1 style="color:black;">Mesa Siete </h1>
+                      <h1 style="color:black;">Mesa siete</h1>
                
                     </ion-item>
 
@@ -278,7 +301,7 @@
                           <ion-icon name="checkmark-circle"></ion-icon>
                         </button>
             
-                      <h1 style="color:black;">Mesa Ocho </h1>
+                      <h1 style="color:black;">Mesa ocho</h1>
                
                     </ion-item>
 
@@ -298,7 +321,7 @@
                           </button>
                   
               
-                        <h1 style="color:black;">Mesa Nueve </h1>
+                        <h1 style="color:black;">Mesa nueve</h1>
                  
                       </ion-item>
 
@@ -318,7 +341,7 @@
                             </button>
                     
                 
-                          <h1 style="color:black;">Mesa Diez </h1>
+                          <h1 style="color:black;">Mesa diez</h1>
                    
                         </ion-item>
     
@@ -345,7 +368,7 @@
           </ion-list>-->
 
       
-     
+        
 
     </div>
 
@@ -355,7 +378,7 @@
             <ion-icon name="expand"></ion-icon>
           </button>-->
 
-          <button ion-button class="submit-btn" color="red" class="botonAlta" (click)="mostrarTiempoBarcode()" >Escanear Mesa</button>
+          <button ion-button class="submit-btn" color="red" class="botonAlta" (click)="mostrarTiempoBarcode()" >Escanear mesa</button>
 
 
     </div>

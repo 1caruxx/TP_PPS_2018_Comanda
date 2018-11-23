@@ -267,7 +267,7 @@ exports.aceptarReserva = functions.database
         const before = change.before.val()
         const after = change.after.val()
 
-        if (after.estado != "pendiente") 
+        if (after.estado == "pendiente") 
         {
             console.log("error");
             return null
@@ -277,7 +277,7 @@ exports.aceptarReserva = functions.database
     const payload = {
       notification: {
           title: 'Reserva Aceptada',
-          body: `Ya aceptaron su reserva!!!`,
+          body: `Ya aceptaron una de tus reserva!!!`,
           icon: 'https://goo.gl/Fz9nrQ',
           sound:'default',
           //body:"Asdasd",
@@ -313,6 +313,60 @@ exports.aceptarReserva = functions.database
    // tokens.push("eiEhMAhigdY:APA91bH4oVLkLh8fzOsjm1bVhlyTsh4v8tb3WZ7zNmiUQXkEMmPW6aHJ_Rv_Ylx5ZuaChX2zIHMPIjp7mACe6_fP6t-i8r4KhP4B97GxLQlxWB8LYGFRHOJYy4-l5u3Bi-7uy_jTe_zk");
 
     return admin.messaging().sendToDevice(tokens, payload)
+
+});
+
+
+export const cancelarReserva = functions.database
+.ref('reservas/{reservasId}')
+.onDelete(async (snapshot, context) => {
+
+  const data = snapshot.val();
+
+  const payload = {
+    notification: {
+        title: 'Reserva Cancelada',
+        body: `Se cancelo una de tus reservas!!!`,
+        icon: 'https://goo.gl/Fz9nrQ',
+        sound:'default',
+        //body:"Asdasd",
+        vibrate: "true",
+    }
+  }
+
+
+  const db = admin.firestore()
+
+  const devicesRef = db.collection('devices')
+
+
+ 
+  const devices = await devicesRef.get();
+ 
+
+  const tokens = [];
+
+  
+  devices.forEach(result => {
+    const token = result.data().token;
+
+    if(result.data().tipo=="cliente" && data.correo==result.data().correo && data.terminada!="si")
+    {
+      tokens.push( token )
+    }
+
+ 
+  })
+
+ 
+  return admin.messaging().sendToDevice(tokens, payload)
+
+  
+
+
+
+  
+
 
 });
 

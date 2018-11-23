@@ -1564,7 +1564,7 @@ export class TomarPedidoPage {
     if(this.tiempoMesaUno<this.tiempoMinimoUno)
     {
      this.ocultarUno=true;
-     alert("Ponga un tiempo mayor o igual del indicado")
+     alert("Ponga un tiempo mayor o igual al indicado.")
       return;
     }
 
@@ -1637,7 +1637,7 @@ export class TomarPedidoPage {
    if(this.tiempoMesaDos<this.tiempoMinimoDos)
    {
     this.ocultarDos=true;
-    alert("Ponga un tiempo mayor o igual del indicado")
+    alert("Ponga un tiempo mayor o igual al indicado.")
      return;
    }
 
@@ -1679,7 +1679,7 @@ export class TomarPedidoPage {
     if(this.tiempoMesaTres<this.tiempoMinimoTres)
     {
      this.ocultarTres=true;
-     alert("Ponga un tiempo mayor o igual del indicado")
+     alert("Ponga un tiempo mayor o igual al indicado.")
       return;
     }
 
@@ -1722,7 +1722,7 @@ export class TomarPedidoPage {
     if(this.tiempoMesaCuatro<this.tiempoMinimoCuatro)
     {
      this.ocultarCuatro=true;
-     alert("Ponga un tiempo mayor o igual del indicado")
+     alert("Ponga un tiempo mayor o igual al indicado.")
       return;
     }
 
@@ -1766,7 +1766,7 @@ export class TomarPedidoPage {
     if(this.tiempoMesaCinco<this.tiempoMinimoCinco)
     {
      this.ocultarCinco=true;
-     alert("Ponga un tiempo mayor o igual del indicado")
+     alert("Ponga un tiempo mayor o igual al indicado.")
       return;
     }
     //this.ocultar=true;
@@ -1808,7 +1808,7 @@ export class TomarPedidoPage {
     if(this.tiempoMesaSeis<this.tiempoMinimoSeis)
     {
      this.ocultarSeis=true;
-     alert("Ponga un tiempo mayor o igual del indicado")
+     alert("Ponga un tiempo mayor o igual al indicado.")
       return;
     }
 
@@ -1853,7 +1853,7 @@ export class TomarPedidoPage {
     if(this.tiempoMesaSiete<this.tiempoMinimoSiete)
     {
      this.ocultarSiete=true;
-     alert("Ponga un tiempo mayor o igual del indicado")
+     alert("Ponga un tiempo mayor o igual al indicado.")
       return;
     }
 
@@ -1895,7 +1895,7 @@ export class TomarPedidoPage {
     if(this.tiempoMesaOcho<this.tiempoMinimoOcho)
     {
      this.ocultarOcho=true;
-     alert("Ponga un tiempo mayor o igual del indicado")
+     alert("Ponga un tiempo mayor o igual al indicado.")
       return;
     }
 
@@ -1937,7 +1937,7 @@ export class TomarPedidoPage {
     if(this.tiempoMesaNueve<this.tiempoMinimoNueve)
     {
      this.ocultarNueve=true;
-     alert("Ponga un tiempo mayor o igual del indicado")
+     alert("Ponga un tiempo mayor o igual al indicado.")
       return;
     }
 
@@ -1979,7 +1979,7 @@ export class TomarPedidoPage {
     if(this.tiempoMesaDiez<this.tiempoMinimoDiez)
     {
      this.ocultarDiez=true;
-     alert("Ponga un tiempo mayor o igual del indicado")
+     alert("Ponga un tiempo mayor o igual al indicado.")
       return;
     }
 

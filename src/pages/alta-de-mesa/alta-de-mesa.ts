@@ -102,7 +102,7 @@ export class AltaDeMesaPage {
 
     else
     {
-      this.presentToast("Solo tenemos lugar para mesas del 1 al 10 en el restaurante")
+      this.presentToast("Solo tenemos lugar para mesas del 1 al 10 en el restaurante.")
       return;
     }
 
@@ -115,7 +115,7 @@ export class AltaDeMesaPage {
 
     else
     {
-      this.presentToast("Los comensales solo pueden ser de 1 a 8")
+      this.presentToast("Los comensales solo pueden ser de 1 a 8.")
       return;
 
     }
@@ -150,7 +150,7 @@ export class AltaDeMesaPage {
         if (data[item].numeroMesa == parseInt(this.numeroMesa)) 
         {
 
-          this.presentToast("Esa mesa ya esta en registra,vea el listado");
+          this.presentToast("Esa mesa ya ha sido registrada.");
           this.esValido = false;
           //break;
         }
@@ -177,7 +177,7 @@ export class AltaDeMesaPage {
           this.numeroMesa="";
           this.cantidadComensales="";
           this.foto="";
-          this.presentToast("La Mesa Fue Cargada Con Exito");
+          this.presentToast("La mesa fue cargada con éxito.");
 
         });;
 
