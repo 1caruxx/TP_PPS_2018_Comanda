@@ -67,8 +67,13 @@ export class ReservaPage {
     let momentoReserva = moment(new Date(fechaAux[0], fechaAux[1] - 1, fechaAux[2], horaAux[0], horaAux[1]));
     let momentoActual = moment(new Date());
 
-    if (Math.abs(momentoReserva.diff(momentoActual, "m")) < 60) {
-      this.presentToast("No se puede realizar una reserva con menos de una hora de adelanto.");
+    // if (Math.abs(momentoReserva.diff(momentoActual, "m")) < 60) {
+    //   this.presentToast("No se puede realizar una reserva con menos de una hora de adelanto.");
+    //   return;
+    // }
+
+    if (momentoReserva.diff(momentoActual, "m") < 5) {
+      this.presentToast("No se puede realizar una reserva con menos de 5 minutos de adelanto.");
       return;
     }
 

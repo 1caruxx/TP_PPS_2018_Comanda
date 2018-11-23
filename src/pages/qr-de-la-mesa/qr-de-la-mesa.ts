@@ -1051,80 +1051,75 @@ public moment = moment;
   Modificar(correo,text,cantidad,mesa)
   {
     var ocup=true;
-    //let reservadita=false;
-    //let otro=1;
+    
 
     this.estaLibre=true;
-    //this.presentToast(text);
-    //if(this.prueba(text))
-    //{
-      //reservadita=true;
-   // }
+ 
     
 
     let momentoActual = moment(new Date());
-                                  let reservasRef = firebase.database().ref("reservas");
+    let reservasRef = firebase.database().ref("reservas");
 
-                                  reservasRef.once("value", (snap) => {
+    reservasRef.once("value", (snap) => {
 
-                                    let data = snap.val();
-                              
-                                    for (let item in data) {
-                              
-                                      if (data[item].mesa == text) {
-                              
-                                        let diferencia = Math.abs(momentoActual.diff(moment(data[item].horario, "DD/MM/YYYY HH:mm"), "m"));
-                              
-                                        if (diferencia < 40) {
-                              
-                                          if(data[item].correo == correo) {
+      let data = snap.val();
 
-                                            firebase.database().ref("usuarios").once("value", (snapUsuario) => {
+      for (let item in data) {
 
-                                              let dataUsuario = snapUsuario.val();
+        if (data[item].mesa == text) {
 
-                                              for (let itemUsuario in dataUsuario) {
+          let diferencia = Math.abs(momentoActual.diff(moment(data[item].horario, "DD/MM/YYYY HH:mm"), "m"));
 
-                                                if (dataUsuario[itemUsuario].correo == correo) {
+          if (diferencia < 40) {
 
-                                                  firebase.database().ref("usuarios").child(itemUsuario).update({estado: "atendido"}).then(() => {
+            if(data[item].correo == correo) {
 
-                                                    firebase.database().ref("mesas").once("value", (snapMesa) => {
+              firebase.database().ref("usuarios").once("value", (snapUsuario) => {
 
-                                                      let dataMesa = snapMesa.val();
+                let dataUsuario = snapUsuario.val();
 
-                                                      for (let itemMesa in dataMesa) {
+                for (let itemUsuario in dataUsuario) {
 
-                                                        if(dataMesa[itemMesa].numeroMesa == mesa) {
+                  if (dataUsuario[itemUsuario].correo == correo) {
 
-                                                          firebase.database().ref("mesas").child(itemMesa).update({estado: "ocupada"}).then(() => {
+                    firebase.database().ref("usuarios").child(itemUsuario).update({estado: "atendido"}).then(() => {
 
-                                                            firebase.database().ref("mesas").child(itemMesa).update({cliente: correo}).then(() => {
+                      firebase.database().ref("mesas").once("value", (snapMesa) => {
 
-                                                              this.MostrarAlert("bienn", "se setoe la mesa!!", "ok", this.ocultarAlert);
-                                                            })
+                        let dataMesa = snapMesa.val();
 
-                                                          })
+                        for (let itemMesa in dataMesa) {
 
-                                                        }
-                                                      }
-                                                    })
-                                                  })
-                                                }
-                                              }
-                                            })
-                                          } else {
-                                            //this.presentToast("Esa mesa esta reservada.");
-                                            this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
-                                            //reservadita=true;
-                                            //otro=2;
-                                            return;
-                                          }
+                          if(dataMesa[itemMesa].numeroMesa == mesa) {
 
-                                          
-                                        }
-                                      }
-                                    }
+                            firebase.database().ref("mesas").child(itemMesa).update({estado: "ocupada"}).then(() => {
+
+                              firebase.database().ref("mesas").child(itemMesa).update({cliente: correo}).then(() => {
+
+                                this.MostrarAlert("", "Se ha asignado la mesa.", "Aceptar", this.ocultarAlert);
+                              })
+
+                            })
+
+                          }
+                        }
+                      })
+                    })
+                  }
+                }
+              })
+            } else {
+              //this.presentToast("Esa mesa esta reservada.");
+              this.MostrarAlert("Error","Esta mesa está reservada.","Aceptar",this.limpiar);
+              //reservadita=true;
+              //otro=2;
+              return;
+            }
+
+            
+          }
+        }
+      }
 
 
                                     var refDos = this.firebase.database().ref("mesas");
@@ -1142,7 +1137,7 @@ public moment = moment;
                                     
                                       if(text!=mesa)
                                       {
-                                        this.MostrarAlert("Error!!","Este cliente tiene una reserva para otra mesa","aceptar",this.limpiar);
+                                        this.MostrarAlert("¡Error!","Este cliente tiene otra mesa reservada.","Aceptar",this.limpiar);
                                         break;
                                       }
 
@@ -1163,7 +1158,7 @@ public moment = moment;
                                     this.estaLibre=false;
                                     //ocup=false;
                                    // alert("La mesa ya esta ocupada");
-                                   this.MostrarAlert("Error!", "La mesa ya esta ocupada", "Aceptar", this.limpiar);
+                                   this.MostrarAlert("Error!", "La mesa ya está ocupada.", "Aceptar", this.limpiar);
                                     break;
                                     //return;
                                     
@@ -1171,7 +1166,7 @@ public moment = moment;
 
                                   if(data[key].cantidadComensales<cantidad)
                                   {
-                                    this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales", "Aceptar", this.limpiar);
+                                    this.MostrarAlert("Error!", "Esta mesa no soporta esa cantidad de comensales.", "Aceptar", this.limpiar);
                                     break;
 
                                   }
@@ -1198,8 +1193,10 @@ public moment = moment;
                                           for (let item in data) 
                                           {
                                     
-                                            if (data[item].correo == correo) 
+                                            if (data[item].correo == correo ) 
                                             {
+                                              data[item].terminada="si";
+                                              reservasRef.child(item).update(data[item]);
                                               reservasRef.child(item).remove();
                                               break;
 
@@ -1229,7 +1226,7 @@ public moment = moment;
                                                
                                                 ref.child(key).update(data[key]);
                                                 //alert("Listo,se relaciono al cliente con la mesa " + text);
-                                                this.MostrarAlert("Exito!", "Listo,se relaciono al cliente con la mesa " + text, "Aceptar", this.limpiar);
+                                                this.MostrarAlert("Éxito!", "Se relacionó al cliente con la mesa." + text, "Aceptar", this.limpiar);
                                                 //this.navCtrl.setRoot(this.navCtrl.getActive().component);
                                                 //COMENTE ESTO
                                                 return;
@@ -1418,7 +1415,7 @@ public moment = moment;
                                   }
                                   else
                                   {
-                                    alert("No hicieron ningun pedido todavia");
+                                    alert("No hicieron ningún pedido todavía.");
                                     break;
 
                                   }
@@ -1593,7 +1590,7 @@ public moment = moment;
         {
           if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo==usuario.correo)
           {
-            this.MostrarAlert("Terminado y Entregado", "Su pedido ya deberia estar en la mesa,si no es asi comuniquese con su mozo", "Aceptar", this.limpiar);
+            this.MostrarAlert("Terminado y entregado", "Su pedido ya debería estar en la mesa. Si no es así, comuniquese con su mozo.", "Aceptar", this.limpiar);
             banderita=1;
             comiendo=true;
             break;
@@ -1628,7 +1625,7 @@ public moment = moment;
                     //alert("El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos");
                     if(comiendo==false)
                     {
-                      this.MostrarAlert("¡Cocinandose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
+                      this.MostrarAlert("¡Cocinándose!", "El tiempo de su pedido es de " + data[key].tiempoMinimo + " minutos", "Aceptar", this.limpiar);
                       banderita=1;
 
                     }
@@ -1640,7 +1637,7 @@ public moment = moment;
                     else
                     {
                       //alert("Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo");
-                      this.MostrarAlert("A esperar!", "Su pedido fue tomado,falta que el cocinero ponga un tiempo minimo", "Aceptar", this.limpiar);
+                      this.MostrarAlert("¡A esperar!", "Su pedido fue tomado, falta que el cocinero ponga un tiempo mínimo.", "Aceptar", this.limpiar);
                       banderita=1;
                       break;
                     }
@@ -1649,7 +1646,7 @@ public moment = moment;
                   else
                   {
                     //alert("Esa no es su mesa");
-                    this.MostrarAlert("Error!", "Esta no es su mesa", "Aceptar", this.limpiar);
+                    this.MostrarAlert("¡Error!", "Esta no es su mesa.", "Aceptar", this.limpiar);
                     banderita=1;
                     break;
                   }
@@ -1663,7 +1660,7 @@ public moment = moment;
               if(banderita==0)
               {
                 //alert("Por favor escanee una mesa valida");
-                this.MostrarAlert("NOOOOOOOOOOOOOOO!", "por favor escanee una mesa valida", "Aceptar", this.limpiar);
+                this.MostrarAlert("¡Error!", "Por favor escanee una mesa válida.", "Aceptar", this.limpiar);
               }
             });
 
@@ -2065,7 +2062,7 @@ public moment = moment;
                               
                                         
                                           //this.presentToast("Esa mesa esta reservada.");
-                                          this.MostrarAlert("Error!!","Esta mesa esta reservada","Aceptar",this.limpiar);
+                                          this.MostrarAlert("¡Error!","Esta mesa está reservada.","Aceptar",this.limpiar);
                               
                                           return true;
                                           

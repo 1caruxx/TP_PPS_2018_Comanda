@@ -717,24 +717,21 @@ console.log("Le saco la selecccion a ");
  //Guardo el estado pidio  al cliente
 
       let usuariosRef = firebase.database().ref().child("usuarios/"+this.claveUsuarioActual);
-      usuariosRef.update({estado:"pidio"});
-      
-  console.log(this.claveUsuarioActual);
-  
-    
-      
-      
-      this.mostrarSpinner=false;
-   
-     
-      this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
-    this.mostrarAlert3=true;
-    setTimeout(()=>{
+      usuariosRef.update({estado:"pidio"}).then(() => {
 
-      this.mostrarAlert3=false;
-      this.navCtrl.pop();
-    }, 4000);
-    
+        this.mostrarSpinner=false;
+   
+        this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
+        this.mostrarAlert3=true;
+        setTimeout(()=>{
+  
+          this.mostrarAlert3=false;
+          this.navCtrl.pop();
+        }, 4000);
+      });
+      
+      console.log(this.claveUsuarioActual);
+  
   }
 TraerClaveMozo()
 {

@@ -45,6 +45,13 @@
       
     </ng-container>
 
+    <ng-container *ngIf="descuento">
+      <div>
+        <span>Descuento del 10% por jugar</span><span style="float: right;">(${{descuento}})</span>
+      </div>
+      <div class="puntos"></div>
+    </ng-container>
+
     <div>
         <span>Propina</span><span style="float: right;">${{propinaTotal}}</span>
     </div>

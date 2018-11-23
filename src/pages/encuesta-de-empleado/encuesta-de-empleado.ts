@@ -4,8 +4,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
-import { LoginPage } from '../login/login';
 import { PrincipalPage } from '../principal/principal';
+import { LoginPage } from '../login/login';
 
 
 //LINEA 336    361 Y 364 LAJSDKLASDLKASJDLKAJDKLJDLK
@@ -75,6 +75,19 @@ export class EncuestaDeEmpleadoPage {
     //this.nombreFoto=`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}-${date.getMilliseconds()}`;
     this.foto="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg";
 
+  }
+
+  pruebita()
+  {
+    //alert("asd");
+    this.cinco.item2=false;
+    this.cinco.item1=true;
+  }
+
+  pruebitaDos()
+  {
+    this.cinco.item1=false;
+    this.cinco.item2=true;
   }
 
   ionViewDidLoad() 
@@ -149,7 +162,7 @@ export class EncuestaDeEmpleadoPage {
       img: url
       }).then(() => {
 
-        this.presentToast("la encuesta fue cargada con exito");
+        this.presentToast("La encuesta fue cargada con éxito.");
         this.encuesta();
 
 
@@ -184,7 +197,7 @@ export class EncuestaDeEmpleadoPage {
               });
             }).then(() => {
 
-              this.presentToast("la encuesta fue cargada con exito");
+              this.presentToast("La encuesta fue cargada con éxito.");
               this.encuesta();
 
 
@@ -369,17 +382,17 @@ export class EncuestaDeEmpleadoPage {
       
     }).then(() => 
     {
-      this.pieChartLabels = ['si', 'no'];
+      this.pieChartLabels = ['Sí', 'No'];
     //this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
     this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
 
-    this.pieChartLabelsDos = ['si', 'no'];
+    this.pieChartLabelsDos = ['Sí', 'No'];
     this.pieChartDataDos = [this.pregCuatroPrimeraRespuesta, this.pregCuatroPrimeraRespuesta];
 
-    this.pieChartLabelsCinco = ['si', 'no'];
+    this.pieChartLabelsCinco = ['Sí', 'No'];
     this.pieChartDataCinco = [this.pregCincoPrimeraRespuesta, this.pregCincoSegundaRespuesta];
 
-    this.pieChartLabelsUno = ["bien","masomenos","mal"];
+    this.pieChartLabelsUno = ["Bien","Más o menos","Mal"];
     this.pieChartDataUno = [this.pregUnoPrimeraRespuesta,this.pregUnoSegundaRespuesta,this.pregUnoTerceraRespuesta];
 
 

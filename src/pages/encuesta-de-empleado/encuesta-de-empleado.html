@@ -43,14 +43,14 @@
     
 <!-- style="font-size: 150%;"-->
     <ion-list-header style="background-color:#CF4946">
-        <div class="realizarEncuesta">Realize la encuesta</div>
+        <div class="realizarEncuesta">Realice la encuesta</div>
       </ion-list-header>
 
       <ion-grid>
 
           <ion-row>
               <ion-col col-12>
-                  <ion-label class="lb" >¿Cuan limpio es el lugar?</ion-label>
+                  <ion-label class="lb" >¿Cuán limpio es el lugar?</ion-label>
                 </ion-col>
               </ion-row>
 
@@ -71,7 +71,7 @@
 
       <ion-row>
           <ion-col col-12>
-              <ion-label class="lb" >¿Que cambiaria del lugar</ion-label>
+              <ion-label class="lb" >¿Qué cambiaría del lugar?</ion-label>
             </ion-col>
           </ion-row>
 
@@ -82,7 +82,7 @@
       
       <ion-item >
          
-          <ion-input placeholder="Escriba su opinion" [(ngModel)]="dos"> </ion-input>
+          <ion-input placeholder="Escriba su opinión" [(ngModel)]="dos"> </ion-input>
         </ion-item>
 
       </ion-col>
@@ -92,7 +92,7 @@
 
       <ion-row>
           <ion-col col-12>
-              <ion-label class="lb" >¿lo tratan bien sus jefes?</ion-label>
+              <ion-label class="lb" >¿Lo tratan bien sus jefes?</ion-label>
             </ion-col>
           </ion-row>
 
@@ -105,7 +105,7 @@
       
      
       <ion-item>
-          <ion-label>Si</ion-label>
+          <ion-label>Sí</ion-label>
           <ion-radio value="si" checked ></ion-radio>
         </ion-item>
 
@@ -128,7 +128,7 @@
 
     <ion-row>
         <ion-col col-12>
-            <ion-label class="lb">¿le pagan bien?</ion-label>
+            <ion-label class="lb">¿Le pagan bien?</ion-label>
           </ion-col>
         </ion-row>
           
@@ -137,9 +137,9 @@
 
          
           <ion-item>
-              <ion-label>Elija su opcion</ion-label>
+              <ion-label>Elija una opción</ion-label>
               <ion-select [(ngModel)]="cuatro">
-                <ion-option value="si">Si</ion-option>
+                <ion-option value="si">Sí</ion-option>
                 <ion-option value="no">No</ion-option>
                 
               </ion-select>
@@ -151,7 +151,7 @@
         <ion-row>
             <ion-col col-12>
                
-          <ion-label class="lb">¿Dejaria de trabajar aca?</ion-label>
+          <ion-label class="lb">¿Dejaría de trabajar acá?</ion-label>
               </ion-col>
             </ion-row>
 
@@ -163,8 +163,8 @@
 
 
           <ion-item>
-              <ion-label >Si</ion-label>
-            <ion-checkbox [(ngModel)]="cinco.item1"  value="si" checked>Si</ion-checkbox>
+              <ion-label >Sí</ion-label>
+            <ion-checkbox [(ngModel)]="cinco.item1" (click)="pruebita()"  value="si" checked>Si</ion-checkbox>
             
           </ion-item>
 
@@ -174,7 +174,7 @@
 
           <ion-item>
               <ion-label >No</ion-label>
-            <ion-checkbox  [(ngModel)]="cinco.item2" value="no" >No</ion-checkbox>
+            <ion-checkbox  [(ngModel)]="cinco.item2" (click)="pruebitaDos()" value="no" >No</ion-checkbox>
 
             
           </ion-item>
@@ -245,11 +245,11 @@
             <!--<h2 class="resultadoEncuesta">Resultado de encuestas</h2>-->
 
             <ion-list-header style="background-color:#CF4946">
-                <div class="realizarEncuesta">Resultado de encuestas</div>
+                <div class="realizarEncuesta">Resultados de las encuestas</div>
               </ion-list-header>
 
   
-            <h2 class="asd">Pregunta 1,Cuan limpio es el lugar?</h2>
+            <h2 class="asd">Pregunta 1, ¿Cuán limpio es el lugar?</h2>
           
             <!--<div class="col-xs-2 col-sm-2 col-md-2">-->
               <div class="canvas">
@@ -261,7 +261,7 @@
                             (chartClick)="chartClicked($event)"></canvas>
               </div>
           
-            <h2 class="asd">Pregunta 3,le tratan bien sus jefes?</h2>
+            <h2 class="asd">Pregunta 3, ¿Le tratan bien sus jefes?</h2>
             
             <div class="canvas">
               <canvas baseChart
@@ -272,7 +272,7 @@
                           (chartClick)="chartClicked($event)"></canvas>
             </div>
           
-            <h2 class="asd">Pregunta 4,le pagan bien?</h2>
+            <h2 class="asd">Pregunta 4, ¿Le pagan bien?</h2>
           
             <div class="canvas">
                 <canvas baseChart
@@ -283,7 +283,7 @@
                             (chartClick)="chartClicked($event)"></canvas>
               </div>
           
-              <h2 class="asd">Pregunta 5,Dejaria de trabajar aca?</h2>
+              <h2 class="asd">Pregunta 5, ¿Dejaría de trabajar acá?</h2>
           
               <div class="canvas">
                   <canvas baseChart
