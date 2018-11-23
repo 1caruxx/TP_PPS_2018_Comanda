@@ -124,6 +124,12 @@
 
   <div *ngIf="clientes">
 
+      <div class="asdasd" *ngIf="!sinPedidos">
+          SIN PEDIDOS
+        </div>
+
+    <div *ngIf="sinPedidos">
+
     <ion-list>
 
         <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->
@@ -160,6 +166,8 @@
     
     
     </ion-list>
+
+    </div>
 
     </div>
 

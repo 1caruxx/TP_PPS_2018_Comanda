@@ -44,9 +44,12 @@ export class MapaDeRutaPage {
 
   ListadoDeChats=["asd","probando","gg"];
 
+  public sinPedidos;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public alert: AlertController,private authInstance: AngularFireAuth) 
   {
 	//this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+	this.sinPedidos=false;
 
 	this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
@@ -126,6 +129,7 @@ export class MapaDeRutaPage {
 	genteRef.on("value", (snap) => {
 
 		this.clientesConPedidos=[];
+		this.sinPedidos=true;
 
 		let data = snap.val();
 
@@ -217,6 +221,7 @@ export class MapaDeRutaPage {
 												{
 													this.clientesConPedidos.push(data[item]);
 													console.log("los 2")
+													//this.sinPedidos=true;
 													break;
 												}
 
@@ -228,6 +233,7 @@ export class MapaDeRutaPage {
 												{
 													this.clientesConPedidos.push(data[item]);
 													console.log("barteneder")
+													//this.sinPedidos=true;
 													break;
 												}
 
@@ -238,6 +244,7 @@ export class MapaDeRutaPage {
 												{
 													this.clientesConPedidos.push(data[item]);
 													console.log("cocinero")
+													//this.sinPedidos=true;
 													break;
 												}
 
