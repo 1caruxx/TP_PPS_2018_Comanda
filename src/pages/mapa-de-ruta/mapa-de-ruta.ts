@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,Content  } from 'ionic-angular';
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -17,6 +17,7 @@ import { AngularFireAuth } from "angularfire2/auth";
   selector: 'page-mapa-de-ruta',
   templateUrl: 'mapa-de-ruta.html',
 })
+
 export class MapaDeRutaPage {
 	//@ViewChild('content') content:any
 	//@ViewChild(Content) content: Content;
@@ -25,6 +26,8 @@ export class MapaDeRutaPage {
 	newmessage;
   messagesList;
   nombre="lucas";
+
+  @ViewChild(Content) content: Content;
   
   public clientes:boolean;
   public chat:boolean;
@@ -44,16 +47,13 @@ export class MapaDeRutaPage {
 
   ListadoDeChats=["asd","probando","gg"];
 
-  public sinPedidos;
-
   constructor(public navCtrl: NavController, public navParams: NavParams,public alert: AlertController,private authInstance: AngularFireAuth) 
   {
 	//this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
-	this.sinPedidos=false;
 
 	this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
-    if(this.usuario.tipo=="delivery")
+    if(this.usuario.tipo=="repartidor")
     {
       this.clientes=true;
     }
@@ -72,6 +72,7 @@ export class MapaDeRutaPage {
 				tmp.push({
 					key: data.key,
 					name: data.val().name,
+					tiempo:data.val().tiempo,
 					//ame: ,
 					message: data.val().message
 				})
@@ -129,7 +130,6 @@ export class MapaDeRutaPage {
 	genteRef.on("value", (snap) => {
 
 		this.clientesConPedidos=[];
-		this.sinPedidos=true;
 
 		let data = snap.val();
 
@@ -221,7 +221,6 @@ export class MapaDeRutaPage {
 												{
 													this.clientesConPedidos.push(data[item]);
 													console.log("los 2")
-													//this.sinPedidos=true;
 													break;
 												}
 
@@ -233,7 +232,6 @@ export class MapaDeRutaPage {
 												{
 													this.clientesConPedidos.push(data[item]);
 													console.log("barteneder")
-													//this.sinPedidos=true;
 													break;
 												}
 
@@ -244,7 +242,6 @@ export class MapaDeRutaPage {
 												{
 													this.clientesConPedidos.push(data[item]);
 													console.log("cocinero")
-													//this.sinPedidos=true;
 													break;
 												}
 
@@ -480,11 +477,23 @@ export class MapaDeRutaPage {
 			tmp.push({
 				key: data.key,
 				name: data.val().name,
+				tiempo:data.val().tiempo,
 				//ame: ,
 				message: data.val().message
 			})
 		});
 		this.messagesList = tmp;
+
+		setTimeout(() => {
+
+			try {
+  
+			  this.content.scrollToBottom(0);
+			} catch (error) {
+  
+				console.log("Entre al catch del scrollbottom()");
+			}
+		}, 100);
 
 		
 	});

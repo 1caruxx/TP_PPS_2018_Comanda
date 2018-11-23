@@ -120,15 +120,9 @@
 
 
 
-<ion-content>
+<ion-content #content>
 
   <div *ngIf="clientes">
-
-      <div class="asdasd" *ngIf="!sinPedidos">
-          SIN PEDIDOS
-        </div>
-
-    <div *ngIf="sinPedidos">
 
     <ion-list>
 
@@ -169,14 +163,12 @@
 
     </div>
 
-    </div>
-
     <div *ngIf="chat">
 
 
 
 
-        <img src={{probando}} style="width: 150px;">
+        <img src={{probando}} style="width: 100px;">
     
 
           <ion-label class="lb" >{{nombreCliente}}</ion-label>
@@ -197,6 +189,7 @@
           <div class="right-bubble">
             <span class="msg-name"></span>
             <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>
+           <!-- <span class="msg-date">{{message.tiempo}}</span>-->
             <p text-wrap>{{message.message}}</p>
           </div>
         </div>

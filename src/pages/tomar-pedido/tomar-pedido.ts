@@ -3048,7 +3048,7 @@ export class TomarPedidoPage {
 
   }
 
-  terminarPedidoBartender(probando)
+  terminarDeliveryBartender(probando)
   {
 
     let deliveryBartender = this.firebase.database().ref("pedidos/");
