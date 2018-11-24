@@ -22,6 +22,7 @@ export class SplashPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController, public splashScreen: SplashScreen,private nativeAudio: NativeAudio) 
   {
+    
     this.nativeAudio.preloadSimple('z', 'assets/imgs/gamma/aud.mp3').catch(() => { }); 
 
   }
@@ -31,7 +32,11 @@ export class SplashPage {
     this.splashScreen.hide();
  
     setTimeout(() => {
+
+      if(localStorage.getItem("sonidos") != "false") {
       this.nativeAudio.play('z').catch(() => { });
+    }
+    
       this.viewCtrl.dismiss();
     }, 4000);
  
