@@ -114,6 +114,10 @@ export class JuegoFerPage {
     console.log('ionViewDidLoad JuegoFerPage');
   }
 
+  ionViewDidLeave() {
+    clearInterval(this.intervalID);
+  }
+
   Validar() {
 
     console.log(this.respuestaUsuario);
@@ -130,7 +134,10 @@ export class JuegoFerPage {
   NuevaPregunta() {
 
     this.preguntasAcertadas++;
-    this.nativeAudio.play('acierto').catch(error => { });
+
+    if(localStorage.getItem("sonidos") != "false") {
+      this.nativeAudio.play('acierto').catch(error => { });
+    }
 
     if (this.preguntasAcertadas == 5) {
 
@@ -179,7 +186,9 @@ export class JuegoFerPage {
 
   Perder(titulo: string) {
 
-    this.nativeAudio.play('fallo').catch(error => { });
+    if(localStorage.getItem("sonidos") != "false") {
+      this.nativeAudio.play('fallo').catch(error => { });
+    }
 
     this.MostrarAlert(titulo, `Más suerte la próxima.`, "Volver", this.Volver);
 

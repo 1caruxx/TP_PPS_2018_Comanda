@@ -34,7 +34,7 @@ export class MyApp {
       //splashScreen.hide();
 
       if(localStorage.getItem("usuario")) {
-        this.rootPage = PrincipalPage;
+        this.rootPage = ListadoSupervisorPage;
       }
       let splash = modalCtrl.create(SplashPage);
             splash.present();

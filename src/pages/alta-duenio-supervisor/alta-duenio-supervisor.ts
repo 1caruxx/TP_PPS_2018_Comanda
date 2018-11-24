@@ -9,7 +9,6 @@ import "firebase/firestore";
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 
 @IonicPage()
 @Component({

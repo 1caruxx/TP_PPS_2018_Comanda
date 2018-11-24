@@ -8,9 +8,6 @@ import { ListadoSupervisorPage } from "../listado-supervisor/listado-supervisor"
 import { AngularFireAuth } from "angularfire2/auth";
 import firebase from "firebase";
 import "firebase/firestore";
-import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
-import { QrIngresoLocalPage } from '../qr-ingreso-local/qr-ingreso-local';
-import { RegistroClientePage } from '../registro-cliente/registro-cliente';
 
 @IonicPage()
 @Component({
@@ -58,7 +55,7 @@ export class LoginPage {
   }
 
   Redireccionar() {
-    this.navCtrl.push(RegistroClientePage);
+    this.navCtrl.push(AltaEmpleadoPage);
   }
 
   DesplegarUsuarios() {
@@ -139,12 +136,12 @@ export class LoginPage {
                     case "bartender":
                     case "metre":
                     case "repartidor":
-                      this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+                      this.navCtrl.setRoot(PrincipalPage);
                       break;
 
                     case "cliente":
                       if (estado == "espera")
-                        this.navCtrl.setRoot(QrIngresoLocalPage);
+                        this.navCtrl.setRoot(ListadoSupervisorPage);
                       else
                         this.navCtrl.setRoot(PrincipalPage);
                       break;
@@ -155,7 +152,7 @@ export class LoginPage {
                       if (estado == "atendido" || estado == "pidio" || estado == "comiendo")
                         this.navCtrl.setRoot(PrincipalPage);
                       else
-                        this.navCtrl.setRoot(QrIngresoLocalPage);
+                        this.navCtrl.setRoot(ListadoSupervisorPage);
                       break;
 
                     // siempre a principal (dueño, supervisor, cliente (registrado))
@@ -256,7 +253,7 @@ export class LoginPage {
       this.textoDelBoton = "Ingresar";
       this.animation = "";
 
-      this.navCtrl.setRoot(QrIngresoLocalPage);
+      this.navCtrl.setRoot(PrincipalPage);
     }).catch(() => {
 
       this.estadoBoton = false;

@@ -6,17 +6,8 @@ import { VerificarTipoProvider } from "../../providers/verificar-tipo/verificar-
 import { LoginPage } from "../login/login";
 import { PerfilPage } from "../perfil/perfil";
 
-import { FcmProvider } from '../../providers/fcm/fcm';
-
-import { ToastController } from 'ionic-angular';
-import { Subject } from 'rxjs/Subject';
-import { tap } from 'rxjs/operators';
-
-import { NativeAudio } from '@ionic-native/native-audio';
-
 import firebase from "firebase";
 import "firebase/firestore";
-import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 
 @IonicPage()
 @Component({
@@ -31,37 +22,20 @@ export class PrincipalPage {
   public usuarioKey: any;
   public firebase = firebase;
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private verificarTipo: VerificarTipoProvider,
-    private fcm: FcmProvider,
-    private nativeAudio: NativeAudio,
-    private toastCtrl: ToastController) {
+  public estadoBoton: boolean = false;
+  public ocultarAlert: boolean = true;
+  public alertTitulo;
+  public alertMensaje;
+  public alertMensajeBoton;
+  public alertHandler;
 
-    this.nativeAudio.preloadSimple('a', 'assets/imgs/gamma/fortnite.mp3').catch(() => { });
+  public sonidos;
 
-    fcm.getToken()
-
-    // Listen to incoming messages
-    fcm.listenToNotifications().pipe(
-      tap(msg => {
-        // show a toast
-        const toast = toastCtrl.create({
-          message: msg.body,
-          duration: 8000,
-          position: 'top',
-          cssClass: 'nombreRaro'
-
-        });
-        this.nativeAudio.play('a').catch(() => { });
-        toast.present();
-      })
-    )
-      .subscribe()
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private verificarTipo: VerificarTipoProvider) {
 
     this.acciones = this.verificarTipo.RetornarAcciones();
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    this.sonidos = localStorage.getItem("sonidos");
 
     if (this.usuario.tipo == "cliente" || this.usuario.tipo == "anonimo") {
 
@@ -97,13 +71,6 @@ export class PrincipalPage {
           this.acciones = [];
 
           switch (estadoCliente) {
-
-
-            case 'delivery':
-              this.acciones[0] = this.accionesRespaldoCliente[7];
-              break;
-
-
             /*
              * 
              * Puede hacer un pedido
@@ -224,6 +191,32 @@ export class PrincipalPage {
     this.navCtrl.push(PerfilPage);
   }
 
+  AlternarSonidos() {
+
+    if (localStorage.getItem("sonidos") == "false") {
+
+      localStorage.setItem("sonidos", "true");
+      this.sonidos = "true";
+    } else {
+
+      localStorage.setItem("sonidos", "false");
+      this.sonidos = "false";
+    }
+
+  }
+
+  MostrarAlert(titulo: string, mensaje: string, mensajeBoton: string, handler) {
+    this.ocultarAlert = false;
+    this.alertTitulo = titulo;
+    this.alertMensaje = mensaje;
+    this.alertMensajeBoton = mensajeBoton;
+    this.alertHandler = handler;
+  }
+
+  OcultarAlert() {
+    this.ocultarAlert = true;
+  }
+
   Logout() {
 
     let usuariosRef = this.firebase.database().ref("usuarios");
@@ -239,23 +232,49 @@ export class PrincipalPage {
           usuariosRef.child(item).update({
             logueado: false
           }).then(() => {
-            if (this.usuario.tipo == "mozo"
-              || this.usuario.tipo == "cocinero"
-              || this.usuario.tipo == "bartender"
-              || this.usuario.tipo == "metre"
-              || this.usuario.tipo == "repartidor") {
 
-              // Para redireccionar a la encuesta de axel.
-              localStorage.setItem("desloguear", "true");
-              this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+            switch (this.usuario.tipo) {
 
-              // localStorage.clear();
-              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
-            } else {
+              case 'mozo':
+              case 'cocinero':
+              case 'bartender':
+              case 'metre':
+              case 'repartidor':
+                // Para redireccionar a la encuesta de axel.
+                // localStorage.setItem("desloguear", "true");
+                // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
 
-              localStorage.clear();
-              this.navCtrl.setRoot(LoginPage);
+                localStorage.clear();
+                this.navCtrl.setRoot(LoginPage);
+                break;
+
+              case 'anonimo':
+                //this.MostrarAlert("fds", "fds", "fds", this.LimpiarAnonimo);
+                break;
+
+              default:
+                localStorage.clear();
+                this.navCtrl.setRoot(LoginPage);
+                break;
             }
+
+            // if (this.usuario.tipo == "mozo"
+            //   || this.usuario.tipo == "cocinero"
+            //   || this.usuario.tipo == "bartender"
+            //   || this.usuario.tipo == "metre"
+            //   || this.usuario.tipo == "repartidor") {
+
+            //   // Para redireccionar a la encuesta de axel.
+            //   // localStorage.setItem("desloguear", "true");
+            //   // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+            //   localStorage.clear();
+            //   this.navCtrl.setRoot(LoginPage);
+            // } else {
+
+            //   localStorage.clear();
+            //   this.navCtrl.setRoot(LoginPage);
+            // }
           });
 
           break;

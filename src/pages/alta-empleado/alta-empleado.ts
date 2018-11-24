@@ -9,7 +9,6 @@ import "firebase/firestore";
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 
 @IonicPage()
 @Component({
@@ -113,7 +112,30 @@ export class AltaEmpleadoPage {
                 cuil: parseInt(this.cuil),
                 tipo: this.tipo,
                 clave: this.clave,
-                img: url
+                img: url,
+                "encuesta": {
+                  "pregunta1": {
+                    "pesimo": 0,
+                    "malo": 0,
+                    "mediocre": 0,
+                    "bueno": 0,
+                    "excelente": 0
+                  },
+                  "pregunta2": {
+                    "si": 0,
+                    "no": 0
+                  },
+                  "pregunta3": {
+                    "item1": 0,
+                    "item2": 0,
+                    "item3": 0
+                  },
+                  "pregunta4": {
+                    "si": 0,
+                    "no": 0
+                  },
+                  "pregunta5": [0]
+                }
               }).then(() => {
 
                 this.MostrarAlert("¡Éxito!", "Se registró correctamente el empleado.", "Aceptar", this.LimpiarCampos);
@@ -135,7 +157,30 @@ export class AltaEmpleadoPage {
                     cuil: parseInt(this.cuil),
                     tipo: this.tipo,
                     clave: this.clave,
-                    img: url
+                    img: url,
+                    "encuesta": {
+                      "pregunta1": {
+                        "pesimo": 0,
+                        "malo": 0,
+                        "mediocre": 0,
+                        "bueno": 0,
+                        "excelente": 0
+                      },
+                      "pregunta2": {
+                        "si": 0,
+                        "no": 0
+                      },
+                      "pregunta3": {
+                        "item1": 0,
+                        "item2": 0,
+                        "item3": 0
+                      },
+                      "pregunta4": {
+                        "si": 0,
+                        "no": 0
+                      },
+                      "pregunta5": [0]
+                    }
                   }).then(() => {
 
                     this.MostrarAlert("¡Éxito!", "Se registró correctamente el empleado.", "Aceptar", this.LimpiarCampos);

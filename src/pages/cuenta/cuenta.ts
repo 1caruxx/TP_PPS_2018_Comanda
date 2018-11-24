@@ -7,7 +7,6 @@ import { LoginPage } from "../login/login";
 import { PrincipalPage } from "../principal/principal";
 
 import firebase from "firebase";
-import { EncuestaClientePage } from '../encuesta-cliente/encuesta-cliente';
 
 @IonicPage()
 @Component({
@@ -203,29 +202,25 @@ export class CuentaPage {
                   clienteRef.child("mesa").remove().then(() => {
 
                     mesaRef.once("value", (snap) => {
-      
+
                       let data = snap.val();
-      
+
                       for (let item in data) {
-      
+
                         if (data[item].numeroMesa == this.mesa) {
-      
+
                           mesaRef.child(item).update({ estado: "libre" }).then(() => {
-      
+
                             mesaRef.child(item).child("cliente").remove().then(() => {
-      
+
                               mesaRef.child(item).child("tiempoMinimo").remove().then(() => {
-      
-                                if (true) {
-      
-                                  this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
-                                }
-      
+
+                                this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
                                 this.ocultarSpinner = true;
                               }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
                             }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
                           }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));;
-      
+
                           break;
                         }
                       }
@@ -261,7 +256,7 @@ export class CuentaPage {
   }
 
   Redireccionar() {
-    this.navCtrl.setRoot(EncuestaClientePage);
+    this.navCtrl.setRoot(PrincipalPage);
   }
 
   Logout() {
