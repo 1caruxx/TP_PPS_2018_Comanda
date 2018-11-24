@@ -20,15 +20,18 @@ Branch del proyecto: [lareu_alfa](https://github.com/1caruxx/TP_PPS_2018_Comanda
 * [x] B- Alta de empleados.
 * [x] H- QR de propina.
 * [x] K- Encuesta de supervisor.
-* [ ] N- Hacer reservas agendadas.
-* [ ] Q- Hacer reservas agendadas.
+* [x] N- Hacer reservas agendadas.
+* [x] Q- Hacer reservas agendadas.
+* [x] V- Juego para un postre gratis.
 
 ---
 
-* [x] Vista y funcionalidad de la pagina de inicio de sesion.
-* [x] Vista y funcionalidad de la pagina principal.
-* [x] Vista de la pagina del perfil del usuario.
-* [x] Vista de la pagina para realizar reservas.
+* [x] Vista y funcionalidad de la página de inicio de sesión.
+* [x] Vista y funcionalidad de la página principal.
+* [x] Vista y funcionalidad de la página de la cuenta.
+* [x] Vista y funcionalidad de la página del perfil del usuario.
+* [x] Vista y funcionalidad de la página de sala de juegos.
+* [x] Responsable de la fusión de las ramas de codigo de los integrantes del grupo.
 
 **Fecha de inicio:** 03/11/2018<br />
 **Fecha de fin:** 10/11/2018

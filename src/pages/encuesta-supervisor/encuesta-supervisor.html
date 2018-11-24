@@ -16,26 +16,30 @@
   </ion-navbar>
 </ion-header>
 
+<div class="imagen" [ngClass]="{'ocultar':ocultarImagen,'opacidad':true}">
+
+  <ion-icon name="close" (click)="OcultarImagen()"></ion-icon>
+  <img [src]="image" alt="">
+
+</div>
+
 <ion-content>
 
   <h1>Califique la conducta de {{usuario.apellido}}, {{usuario.nombre}}.</h1>
 
   <div class="encuesta">
     <div id="divCanvas" class="canvas">
-        <canvas baseChart
-                [data]="pregunta1Data"
-                [labels]="pregunta1Labels"
-                [chartType]="doughnutChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
+      <canvas baseChart [data]="pregunta1Data" [labels]="pregunta1Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
     </div>
-    
+
     <div class="mi-range">
-    
-      <ion-range [(ngModel)]="conducta" color="red" pin="true" min="1" max="5" snaps="true" style="width: 100%;position: relative;" (ngModelChange)="ModificarTextoRange()"></ion-range>
+
+      <ion-range [(ngModel)]="conducta" color="red" pin="true" min="1" max="5" snaps="true" style="width: 100%;position: relative;"
+        (ngModelChange)="ModificarTextoRange()"></ion-range>
       <span>{{textoRange}}</span>
 
-    </div> 
+    </div>
   </div>
 
   <h1>¿Tuvo algún inconveniente con {{usuario.apellido}}, {{usuario.nombre}} en horas de servicio?</h1>
@@ -44,12 +48,8 @@
 
     <div id="divCanvas" class="canvas">
 
-      <canvas baseChart
-              [data]="pregunta2Data"
-              [labels]="pregunta2Labels"
-              [chartType]="doughnutChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
+      <canvas baseChart [data]="pregunta2Data" [labels]="pregunta2Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
     </div>
 
     <ion-list radio-group [(ngModel)]="inconveniente">
@@ -70,76 +70,68 @@
   <div class="encuesta">
 
     <div id="divCanvas" class="canvas">
-      <canvas baseChart
-              [data]="pregunta3Data"
-              [labels]="pregunta3Labels"
-              [chartType]="doughnutChartType"
-              (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
-      </div>
+      <canvas baseChart [data]="pregunta3Data" [labels]="pregunta3Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
+    </div>
 
-      <ion-list style="left: -75px;">
+    <ion-list style="left: -75px;">
 
-        <ion-item>
-          <ion-label>Mala conducta</ion-label>
-          <ion-checkbox color="red" [(ngModel)]="aspectos.item1"></ion-checkbox>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label>Mala presentacíon</ion-label>
-          <ion-checkbox color="red" [(ngModel)]="aspectos.item2"></ion-checkbox>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label>Poca formalidad</ion-label>
-          <ion-checkbox color="red" [(ngModel)]="aspectos.item3"></ion-checkbox>
-        </ion-item>
-        
-      </ion-list>
+      <ion-item>
+        <ion-label>Mala conducta</ion-label>
+        <ion-checkbox color="red" [(ngModel)]="aspectos.item1"></ion-checkbox>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Mala presentación</ion-label>
+        <ion-checkbox color="red" [(ngModel)]="aspectos.item2"></ion-checkbox>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Poca formalidad</ion-label>
+        <ion-checkbox color="red" [(ngModel)]="aspectos.item3"></ion-checkbox>
+      </ion-item>
+
+    </ion-list>
 
   </div>
 
-  <h1>Aca va otra pregunta.</h1>
+  <h1>¿Le gustaría que {{usuario.apellido}}, {{usuario.nombre}} siguiese presentandose en el restaurante?</h1>
 
   <div class="encuesta">
 
     <div id="divCanvas" class="canvas">
-        <canvas baseChart
-                [data]="doughnutChartData"
-                [labels]="doughnutChartLabels"
-                [chartType]="doughnutChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-      </div>
+      <canvas baseChart [data]="pregunta4Data" [labels]="pregunta4Labels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
+    </div>
 
-      <ion-range [(ngModel)]="singleValue" color="danger" pin="true" style="width: 50%;position: relative;left: -50px;"></ion-range>
+    <select [(ngModel)]="prescencia">
+      <option value="1">Sí, definitivamente.</option>
+      <option value="0">No, en absoluto.</option>
+    </select>
 
   </div>
 
-  <h1>Aca va otra pregunta.</h1>  
+  <h1>Escriba su comentario.</h1>
 
   <div class="encuesta">
 
-    <div id="divCanvas" class="canvas">
-        <canvas baseChart
-                [data]="doughnutChartData"
-                [labels]="doughnutChartLabels"
-                [chartType]="doughnutChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-      </div>
-
-      <select [(ngModel)]="tipo"> 
-        <option value="dueño">dueño</option>
-        <option value="supervisor">supervisor</option>
-        <option value="mozo">Mozo</option>
-        <option value="cocinero">Cocinero</option>
-        <option value="bartender">Bartender</option>
-        <option value="metre">Metre</option>
-      </select>
+    <textarea rows="4" cols="50" placeholder="Escribe tu comentario aquí..." [(ngModel)]="opinion"></textarea>
 
   </div>
 
-  <button ion-button color="red" class="enviar" (click)="HacerEncuesta()">Enviar encuesta</button>
+  <button ion-button color="red" class="enviar" [disabled]="estadoBoton" (click)="HacerEncuesta()">Enviar encuesta</button>
+
+  <h1 style="margin-bottom: 30px;" *ngIf="!ocultarSpinner && pregunta5.length > 1">Comentarios</h1>
+
+    <div class="comentarios" *ngFor="let item of pregunta5">
+
+      <img src="{{item.img}}" (click)="MostrarImagen(item.img)" />
+      <h2>{{item.nombre}}</h2>
+      <h5>({{item.fecha}} Hs.)</h5>
+      <p>{{item.comentario}}</p>
+
+    </div>
+
+  <app-spinner [ngClass]="{'ocultar':!estadoBoton}"></app-spinner>
 
 </ion-content>

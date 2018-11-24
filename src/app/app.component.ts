@@ -32,7 +32,7 @@ export class MyApp {
       splashScreen.hide();
 
       if(localStorage.getItem("usuario")) {
-        this.rootPage = PrincipalPage;
+        this.rootPage = ListadoSupervisorPage;
       }
     });
   }

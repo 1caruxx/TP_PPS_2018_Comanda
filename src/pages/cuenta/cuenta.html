@@ -3,7 +3,7 @@
 
     <ion-title>{{usuario.tipo}}</ion-title>
 
-    <ion-buttons end>
+    <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
       </button>
@@ -27,9 +27,6 @@
 
 <ion-content padding>
 
-    <!-- lucas@soylucas.com
-    Wwwwwwe -->
-
   <div [class]="estado">
 
     <div style="width: 100%;text-align: center;margin: 0;position: relative;">
@@ -43,6 +40,13 @@
       </div>
       <div class="puntos"></div>
       
+    </ng-container>
+
+    <ng-container *ngIf="descuento">
+      <div>
+        <span>Descuento del 10% por jugar</span><span style="float: right;">(${{descuento}})</span>
+      </div>
+      <div class="puntos"></div>
     </ng-container>
 
     <div>

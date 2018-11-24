@@ -90,7 +90,19 @@ page-principal {
           position: absolute;
           z-index: -1;
           background-color: black;
-          opacity: .6; 
+          opacity: .6;
+      }
+
+      .animation-target {
+        animation-name: jelly;
+        animation-duration: 1000ms;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+    }
+
+      .ocultar {
+          display: none !important;
       }
 
 }

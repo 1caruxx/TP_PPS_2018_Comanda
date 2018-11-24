@@ -40,6 +40,8 @@ export class CuentaPage {
   public alertHandler;
   public alertMostrarBotonCancelar = true;
 
+  public descuento;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -82,10 +84,6 @@ export class CuentaPage {
 
         let data = snap.val();
 
-        if(data.desc) {
-          console.log("El descuento esta seteado...");
-        }
-
         for (let item in data) {
 
           for (let subItem in data[item]) {
@@ -104,6 +102,11 @@ export class CuentaPage {
           else
             return valorAnterior.cantidad * valorAnterior.precio + valorActual.cantidad * valorActual.precio;
         });
+
+        if (data.desc) {
+          this.descuento = this.total * 0.1;
+          this.total -= this.descuento;
+        }
 
         this.estado = "cuenta";
         this.ocultarSpinner = true;
@@ -190,32 +193,40 @@ export class CuentaPage {
 
           clienteRef.child("comensales").remove().then(() => {
 
-            clienteRef.child("mesa").remove().then(() => {
+            clienteRef.child("juegoFer").remove().then(() => {
 
-              mesaRef.once("value", (snap) => {
+              clienteRef.child("juegoFacu").remove().then(() => {
 
-                let data = snap.val();
+                clienteRef.child("juegoAxel").remove().then(() => {
 
-                for (let item in data) {
+                  clienteRef.child("mesa").remove().then(() => {
 
-                  if (data[item].numeroMesa == this.mesa) {
+                    mesaRef.once("value", (snap) => {
 
-                    mesaRef.child(item).update({ estado: "libre" }).then(() => {
+                      let data = snap.val();
 
-                      mesaRef.child(item).child("cliente").remove().then(() => {
+                      for (let item in data) {
 
-                        if (true) {
+                        if (data[item].numeroMesa == this.mesa) {
 
-                          this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
+                          mesaRef.child(item).update({ estado: "libre" }).then(() => {
+
+                            mesaRef.child(item).child("cliente").remove().then(() => {
+
+                              mesaRef.child(item).child("tiempoMinimo").remove().then(() => {
+
+                                this.MostrarAlert("Éxito!", "Gracias por comer en nuestro restaurante, nos ayudaría mucho que completases una encuesta sobre tu experiencia en el lugar.", "Ok", this.Redireccionar);
+                                this.ocultarSpinner = true;
+                              }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                            }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                          }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));;
+
+                          break;
                         }
-
-                        this.ocultarSpinner = true;
-                      })
-                    });
-
-                    break;
-                  }
-                }
+                      }
+                    }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                  }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
+                }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
               }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
             }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));
           }).catch(() => this.presentToast("Ups... Tenemos problemas técnicos."));

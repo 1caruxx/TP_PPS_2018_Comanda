@@ -21,50 +21,115 @@
 
 <ion-content>
 
-  <ng-container *ngIf="ocultarSpinner">
-    <h2 class="titulo">Empleados</h2>
+  <div class="seleccion" *ngIf="ocultarSpinner">
+
+    <button ion-button color="red" (click)="AlternarVista(0)">Supervisor</button>
+    <button ion-button color="red" (click)="AlternarVista(1)">Clientes</button>
+    <button ion-button color="red" (click)="AlternarVista(2)">Empleados</button>
+
+  </div>
+
+  <ng-container *ngIf="vistas[0]">
+
+    <ng-container *ngIf="ocultarSpinner">
+      <h2 class="titulo">Empleados</h2>
+    </ng-container>
+
+    <ion-list>
+
+      <ion-item *ngFor="let item of empleados">
+        <ion-thumbnail item-start (click)="MostrarImagen(item.img)">
+          <img src={{item.img}}>
+        </ion-thumbnail>
+
+        <h1>{{item.apellido}}, {{item.nombre}}</h1>
+        <p>Empleado • {{item.tipo}}</p>
+        <p>CUIL • {{item.cuil}}</p>
+
+        <button ion-button clear item-end (click)="MostrarEncuesta(item)">
+          <ion-icon name="clipboard"></ion-icon>
+        </button>
+      </ion-item>
+
+    </ion-list>
+
+    <ng-container *ngIf="ocultarSpinner">
+      <h2 class="titulo">Clientes</h2>
+    </ng-container>
+
+    <ion-list>
+
+      <ion-item *ngFor="let item of clientes">
+
+        <ion-thumbnail item-start (click)="MostrarImagen(item.img)">
+          <img src={{item.img}} />
+        </ion-thumbnail>
+
+        <h1>{{item.apellido}}, {{item.nombre}}</h1>
+        <p>{{item.tipo}}</p>
+        <p>DNI • {{item.dni}}</p>
+
+        <button ion-button clear item-end (click)="MostrarEncuesta(item)">
+          <ion-icon name="clipboard"></ion-icon>
+        </button>
+      </ion-item>
+
+    </ion-list>
+
   </ng-container>
 
-  <ion-list>
+  <ng-container *ngIf="vistas[1]">
 
-    <ion-item *ngFor="let item of empleados">
-      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">
-        <img src={{item.img}}>
-      </ion-thumbnail>
+    <h2 class="titulo">Pregunta 1, ¿Se siente cómodo en el restaurante?</h2>
 
-      <h1>{{item.apellido}}, {{item.nombre}}</h1>
-      <p>Empleado • {{item.tipo}}</p>
-      <p>CUIL • {{item.cuil}}</p>
+    <canvas class="altoCanvas" baseChart [data]="pregunta1Data" [labels]="pregunta1Labels" [chartType]="doughnutChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
 
-      <button ion-button clear item-end (click)="MostrarEncuesta(item)">
-        <ion-icon name="clipboard"></ion-icon>
-      </button>
-    </ion-item>
+    <h2 class="titulo">Pregunta 2, ¿Cómo calificaría la atención?</h2>
 
-  </ion-list>
+    <canvas class="altoCanvas" baseChart [data]="pregunta2Data" [labels]="pregunta2Labels" [chartType]="doughnutChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
 
-  <ng-container *ngIf="ocultarSpinner">
-    <h2 class="titulo">Clientes</h2>
+    <h2 class="titulo">Pregunta 3, ¿Cuáles considera nuestros puntos fuertes?</h2>
+
+    <canvas baseChart class="altoCanvas" [data]="pregunta3Data" [labels]="pregunta3Labels" [chartType]="doughnutChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+
+    <h2 class="titulo">Pregunta 4, ¿Qué tan buenos son nuestros platos?</h2>
+
+    <canvas baseChart class="altoCanvas" [data]="pregunta4Data" [labels]="pregunta4Labels" [chartType]="doughnutChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+
+    <h2 class="titulo">Pregunta 5, Del 1 al 10 ¿Qué puntaje le pondrías a nuestro restaurante?</h2>
+
+    <canvas baseChart class="altoCanvas" [data]="pregunta5Data" [labels]="pregunta5Labels" [chartType]="doughnutChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+
   </ng-container>
 
-  <ion-list>
+  <ng-container *ngIf="vistas[2]">
 
-    <ion-item *ngFor="let item of clientes">
+    <h2 class="titulo">Pregunta 1, ¿Cuán limpio es el lugar?</h2>
 
-      <ion-thumbnail item-start (click)="MostrarImagen(item.img)">
-        <img src={{item.img}} />
-      </ion-thumbnail>
+    <canvas baseChart class="altoCanvas" [data]="pieChartDataUno" [labels]="pieChartLabelsUno" [chartType]="pieChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
 
-      <h1>{{item.apellido}}, {{item.nombre}}</h1>
-      <p>{{item.tipo}}</p>
-      <p>DNI • {{item.dni}}</p>
+    <h2 class="titulo">Pregunta 3, ¿Le tratan bien sus jefes?</h2>
 
-      <button ion-button clear item-end (click)="MostrarEncuesta(item)">
-        <ion-icon name="clipboard"></ion-icon>
-      </button>
-    </ion-item>
+    <canvas baseChart class="altoCanvas" [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
 
-  </ion-list>
+    <h2 class="titulo">Pregunta 4, ¿Le pagan bien?</h2>
+
+    <canvas baseChart class="altoCanvas" [data]="pieChartDataDos" [labels]="pieChartLabelsDos" [chartType]="pieChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+
+    <h2 class="titulo">Pregunta 5, ¿Dejaría de trabajar acá?</h2>
+
+    <canvas baseChart class="altoCanvas" [data]="pieChartDataCinco" [labels]="pieChartLabelsCinco" [chartType]="pieChartType"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+
+  </ng-container>
 
   <app-spinner [ngClass]="{'ocultar':ocultarSpinner}"></app-spinner>
 

@@ -9,7 +9,7 @@
 
     <ion-title>{{usuario.tipo}}</ion-title>
 
-    <ion-buttons end>
+    <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
       </button>
@@ -17,6 +17,19 @@
 
   </ion-navbar>
 </ion-header>
+
+<div [ngClass]="{'alert':true,'ocultar':ocultarAlert}">
+
+  <div class="alert-message animation-target">
+    <h1>{{alertTitulo}}</h1>
+    <p>{{alertMensaje}}</p>
+    <div class="botones">
+
+      <button ion-button outline (click)="alertHandler()">{{alertMensajeBoton}}</button>
+    </div>
+  </div>
+
+</div>
 
 <ion-menu [content]="content">
   <ion-header>
@@ -36,8 +49,11 @@
 
       <button ion-item *ngFor="let item of acciones" (click)="Redireccionar(item.ruta)">{{item.accion}}</button>
       <button ion-item (click)="IrAPerfil()">Ver mi perfil</button>
-      <button ion-item>Desactivar sonidos</button>
-      <button ion-item (click)="Logout()">Cerrar sesión</button>
+      <button ion-item (click)="AlternarSonidos()">
+        <ng-container *ngIf="sonidos != 'false'; else activar">Desactivar sonidos</ng-container>
+        <ng-template #activar>Activar sonidos</ng-template>
+      </button>
+      <button ion-item (click)="Logout()" *ngIf="usuario.tipo != 'anonimo'">Cerrar sesión</button>
 
     </ion-list>
   </ion-content>

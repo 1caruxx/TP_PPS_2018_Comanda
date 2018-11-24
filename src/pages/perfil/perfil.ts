@@ -19,24 +19,14 @@ export class PerfilPage {
   public usuario;
   public tipo;
 
-
   public ocultarSpinner: boolean = true;
   public firebase = firebase;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera) {
 
-    // this.claveOculta = this.OcultarClave("12345");
-
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
     this.tipo = this.usuario.tipo;
-    // this.datos = [];
 
-    // for (let item in this.usuario) {
-
-    //   this.datos.push({ clave: item, valor: this.usuario[item] })
-    // }
-
-    // console.log(this.datos);
 
   }
 
@@ -104,27 +94,6 @@ export class PerfilPage {
     }
   }
 
-  // MostrarClave() {
-
-  //   this.claveOculta = "12345";
-  // }
-
-  // VolverAOcultar() {
-  //   this.claveOculta = this.OcultarClave("12345");
-  // }
-
-  // OcultarClave(clave: string) {
-
-  //   let retorno: string = "";
-
-  //   for (let i = 0; i < clave.length; i++) {
-
-  //     retorno += "*";
-  //   }
-
-  //   return retorno;
-  // }
-
   Logout() {
 
     let usuariosRef = this.firebase.database().ref("usuarios");
@@ -145,10 +114,6 @@ export class PerfilPage {
               || this.usuario.tipo == "bartender"
               || this.usuario.tipo == "metre"
               || this.usuario.tipo == "repartidor") {
-
-              // Para redireccionar a la encuesta de axel.
-              // localStorage.setItem("desloguear", "true");
-              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
 
               localStorage.clear();
               this.navCtrl.setRoot(LoginPage);

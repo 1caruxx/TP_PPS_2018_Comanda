@@ -3,7 +3,7 @@
 
     <ion-title>{{usuario.tipo}}</ion-title>
 
-    <ion-buttons end>
+    <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
       <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
       </button>
