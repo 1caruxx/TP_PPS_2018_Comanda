@@ -448,6 +448,7 @@ export class TomarPedidoPage {
       this.vistaBartenderMesaUno=false;
       this.pedidosCocinaUno=[];
       this.pedidosBartenderUno=[];
+      //this.sinPedidos=false;
 
       let result = snap.val();
 
@@ -461,12 +462,14 @@ export class TomarPedidoPage {
           {
 
             if(result[k].estado != "tomado")
+            //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
               break;
             }
 
               this.sinPedidos=false;
+              console.log("aca estoy");
               this.vistaCocinaMesaUno=true;
 
 
@@ -544,6 +547,7 @@ export class TomarPedidoPage {
       this.vistaCocinaMesaDos=false;
       this.pedidosCocinaDos=[];
       this.pedidosBartenderDos=[];
+     // this.sinPedidos=false;
 
       let result = snap.val();
 
@@ -556,7 +560,8 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado != "tomado")
+           if(result[k].estado != "tomado")
+           //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
               break;
@@ -638,6 +643,7 @@ export class TomarPedidoPage {
       this.vistaBartenderMesaTres=false;
       this.pedidosCocinaTres=[];
       this.pedidosBartenderTres=[];
+     // this.sinPedidos=false;
  
        let result = snap.val();
  
@@ -655,6 +661,7 @@ export class TomarPedidoPage {
            {
 
             if(result[k].estado != "tomado")
+            //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
               break;

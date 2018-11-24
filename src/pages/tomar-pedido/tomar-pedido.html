@@ -168,12 +168,32 @@
     -->
 
     
-
     <ion-content>
 
-      <div class="asdasd" *ngIf="sinPedidos">
-        NO HAY PEDIDOS
+      <div *ngIf="vistaCocinero"> 
+
+          <div class="asdasd" *ngIf="sinPedidos">
+              NO HAY PEDIDOS
+            </div>
+
+
       </div>
+
+      <div *ngIf="vistaBartender">
+
+          <div class="asdasd" *ngIf="sinPedidos">
+              NO HAY PEDIDOS
+            </div>
+
+       </div>
+
+
+     <!-- <div class="asdasd" *ngIf="sinPedidos">
+        NO HAY PEDIDOS
+      </div>-->
+
+
+
 
         <ion-list *ngIf="vistaCocinero">
 
@@ -1039,14 +1059,14 @@
   
               
   
-              <ion-thumbnail item-start>
-                  <!--<img src={{item.img}}>-->
+             <!-- <ion-thumbnail item-start>
+                  <img src={{item.img}}>
                   <ion-icon name="restaurant"></ion-icon>
-                </ion-thumbnail>
+                </ion-thumbnail>-->
             
               <!--  <h1>{{item.correo}}, {{item.nombre}}</h1>
                 <p>Cliente • {{item.tipo}}</p>-->
-                <h1>{{item}}</h1>
+                <h3>{{item}}</h3>
   
                 <button ion-button clear item-end (click)="terminarDeliveryBartender(item)">
           

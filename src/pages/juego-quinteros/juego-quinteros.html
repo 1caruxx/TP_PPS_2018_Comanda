@@ -20,7 +20,7 @@
 
 
   
-      <ion-buttons end>
+      <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
 
        
         <button ion-button (click)="Logout()">

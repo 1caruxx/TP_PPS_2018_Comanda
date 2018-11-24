@@ -1354,6 +1354,19 @@ public sinPedidosParaEntregar;
 
                                   }
 
+                                  //agregue esto para ver si valida el que escanea un qr de mesa
+                                  if(text=="1"||text=="2"||text=="3"||text=="4"||text=="5"||text=="6"||text=="7"||text=="8"||text=="9"||text=="10")
+                                  {
+
+                                  }
+
+                                  else
+                                  {
+                                    this.MostrarAlert("¡Error!","Por favor escanee una mesa valida.","Aceptar",this.limpiar);
+                                    break;
+
+                                  }
+
 
 
                                 if (text == data[key].numeroMesa) 
@@ -1803,6 +1816,20 @@ public sinPedidosParaEntregar;
           var dataDos = snap.val();
         for (var keyDos in dataDos)
         {
+          //agregue esto para ver si funciona tambien
+          if(barcodeData.text=="1"||barcodeData.text=="2"||barcodeData.text=="3"||barcodeData.text=="4"||barcodeData.text=="5"||barcodeData.text=="6"||barcodeData.text=="7"||barcodeData.text=="8"||barcodeData.text=="9"||barcodeData.text=="10")
+          {
+
+          }
+
+          else
+          {
+            this.MostrarAlert("¡Error!","Por favor escanee una mesa valida.","Aceptar",this.limpiar);
+            break;
+
+          }
+
+
           if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo==usuario.correo && dataDos[keyDos].mesa==barcodeData.text)
           //if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo=="cliente@gmail.com" && dataDos[keyDos].mesa==barcodeData.text)
           {

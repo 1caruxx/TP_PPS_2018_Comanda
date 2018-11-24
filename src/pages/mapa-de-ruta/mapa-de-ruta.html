@@ -38,7 +38,7 @@
 
     
 
-    <ion-buttons end>
+    <ion-buttons end >
 
        
 
@@ -124,11 +124,15 @@
 
   <div *ngIf="clientes">
 
+      <div class="asdasd" *ngIf="sinPedidos">
+          SIN PEDIDOS
+        </div>
+
     <ion-list>
 
         <!--<h2 class="titulo">Lista de empleados con pedidos realizados</h2>-->
 
-        <ion-list-header style="background-color:#99bbff">
+        <ion-list-header style="background-color:#99bbff" *ngIf="!sinPedidos">
           <div class="realizarEncuesta">Pedidos a entregar</div>
         </ion-list-header>
     

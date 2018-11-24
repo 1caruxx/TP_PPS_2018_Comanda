@@ -30,7 +30,7 @@
          </button>
         </ion-buttons>
 
-    <ion-buttons end>
+    <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
 
 
       <button ion-button (click)="Logout()">
@@ -66,19 +66,21 @@
 
       <ion-content  *ngIf="probandingg">
 
-          <div class="asdasd" *ngIf="!sinPersonasEnEspera">
-              SIN PERSONAS EN ESPERA
-            </div>
-
-            <div class="asdasd2" *ngIf="!sinPersonasAtendidas">
-                SIN PERSONAS ATENDIDAS
-              </div>
+         
 
              <!-- <div class="asdasd3" *ngIf="!sinPedidosParaEntregar">
                   SIN PEDIDOS TERMINADOS
                 </div>-->
 
          <div *ngIf="vistaMozo">
+
+            <div class="asdasd" *ngIf="!sinPersonasEnEspera">
+                SIN PERSONAS EN ESPERA
+              </div>
+  
+              <div class="asdasd2" *ngIf="!sinPersonasAtendidas">
+                  SIN PERSONAS ATENDIDAS
+                </div>
 
          
 

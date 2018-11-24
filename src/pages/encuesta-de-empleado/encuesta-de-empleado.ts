@@ -72,7 +72,8 @@ export class EncuestaDeEmpleadoPage {
     //this.foto="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg"
     //let date = new Date();
     //this.nombreFoto=`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}-${date.getMilliseconds()}`;
-    this.foto="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg";
+    //this.foto="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg";
+    this.foto="https://upload.wikimedia.org/wikipedia/commons/5/50/Italian_dishes_on_a_table%2C_served_at_a_restaurant_in_Dhaka%2C_Bangladesh._2.JPG";
 
   }
 
@@ -142,7 +143,8 @@ export class EncuestaDeEmpleadoPage {
       return;
     }
 
-    if(this.foto=="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg")
+    //if(this.foto=="http://estaticos.expansion.com/assets/multimedia/imagenes/2017/09/08/15048915173238.jpg")
+    if(this.foto=="https://upload.wikimedia.org/wikipedia/commons/5/50/Italian_dishes_on_a_table%2C_served_at_a_restaurant_in_Dhaka%2C_Bangladesh._2.JPG")
     {
      // this.presentToast("Tiene que cargar una foto");
      // return;
