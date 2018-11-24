@@ -61,7 +61,7 @@ export class RegistroClientePage {
       this.formAnon=false;
       this.ocultarContenido=false;
       this.ocultarCabecera=false;
-      this.foto="assets/imgs/beta/hamburguesa.jpg";
+      this.foto="../../assets/imgs/alfa/perfil.jpg";
       console.log(this.foto);
   }
   ionViewDidEnter(){
@@ -108,8 +108,7 @@ export class RegistroClientePage {
         this.authInstance.auth.createUserWithEmailAndPassword(correo, this.pass)
           .then(() => {
 
-        
-          
+            this.authInstance.auth.currentUser.sendEmailVerification();
 
               usuariosRef.push({
                 nombre: this.nombre,
@@ -147,6 +146,7 @@ export class RegistroClientePage {
 
                 this.mostrarSpinner = false;
                 this.mostrarAlert=true;
+
                 setTimeout(()=>{
             
                   this.mostrarAlert=false;

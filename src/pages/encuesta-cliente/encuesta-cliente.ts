@@ -6,6 +6,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { PedirPlatosPage } from '../pedir-platos/pedir-platos';
 import { QrIngresoLocalPage } from '../qr-ingreso-local/qr-ingreso-local';
 import { Chart } from 'chart.js';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the EncuestaClientePage page.
@@ -20,6 +21,10 @@ import { Chart } from 'chart.js';
   templateUrl: 'encuesta-cliente.html',
 })
 export class EncuestaClientePage {
+
+  firebase = firebase;
+  public usuario: any;
+
   correo:string;
   public pregunta4Labels: string[] = ['Horribles', 'Feos', 'Pasable', 'Aceptable', 'Buenos', 'Ricos', 'Muy ricos'];
   public pregunta4Data: number[] = [0, 0, 0, 0, 0,0,0];
@@ -99,6 +104,8 @@ respPreg3:boolean=false;
 respPreg4:boolean=false;
 respPreg5:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,  private aut:AngularFireAuth) {
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
     this.ocultar=true;
     this.ocultar2=true;
     this.ocultar3=true;
@@ -715,7 +722,7 @@ respPreg5:boolean=false;
       setTimeout(()=>{
 
         this.mostrarAlert3=false;
-        this.navCtrl.pop();
+        this.Logout();
       }, 2000);
 
     });
@@ -756,4 +763,33 @@ respPreg5:boolean=false;
         break;
     }
   }
+
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            
+          });
+
+          break;
+        }
+      }
+    });
+  }
+
+
 }

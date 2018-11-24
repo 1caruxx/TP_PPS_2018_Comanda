@@ -49,7 +49,7 @@ export class VerificarTipoProvider {
           { accion: "Confirmar reservas", img: "reserva.jpg", ruta: ListadoReservasPage },
           { accion: "Agregar un dueño o supervisor", img: "nuevo-duenio-supervisor.jpg", ruta: AltaDuenioSupervisorPage },
           { accion: "Agregar un empleado", img: "nuevo-empleado.jpg", ruta: AltaEmpleadoPage },
-          { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: ListadoSupervisorPage }
+          { accion: "Confeccionar y ver encuestas", img: "encuesta.jpg", ruta: ListadoSupervisorPage }
         ];
         break;
 

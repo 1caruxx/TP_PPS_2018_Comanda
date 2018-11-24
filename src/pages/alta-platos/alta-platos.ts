@@ -8,6 +8,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import "firebase/firestore";
 import { PedirPlatosPage } from '../pedir-platos/pedir-platos';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { LoginPage } from '../login/login';
+import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 /**
  * Generated class for the AltaPlatosPage page.
  *
@@ -21,6 +23,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
   templateUrl: 'alta-platos.html',
 })
 export class AltaPlatosPage {
+
+  public usuario: any;
+
   ocultar:boolean;
   mostrar:boolean;
   foto1:any="";
@@ -79,6 +84,8 @@ mostrarSpinner:boolean=false;
     this.mostrarfoto3=false;
     this.ocultarTiempo=false;
     this.carga="platos";
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
     //Descomentar esta linea antes de hacer el push
    this.tipo = localStorage.getItem("usuario");
@@ -972,10 +979,46 @@ mostrarSpinner:boolean=false;
 
     return true;
   }
+
+
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              // Para redireccionar a la encuesta de axel.
+              localStorage.setItem("desloguear", "true");
+              this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
+          });
+
+          break;
+        }
+      }
+    });
+  }
+
+
 }
-
-        
-
-       
- 
-

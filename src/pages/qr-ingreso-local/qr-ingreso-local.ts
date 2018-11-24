@@ -6,6 +6,7 @@ import { RegistroClientePage } from '../registro-cliente/registro-cliente';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import * as moment from 'moment';
+import { PrincipalPage } from '../principal/principal';
 
 
 /**
@@ -34,6 +35,7 @@ export class QrIngresoLocalPage {
   correo:string;
   mostrarAlert2:boolean=false;
   encuestas:any[]=[];
+  mostrarEncuestasVacias:boolean=false;
   maximaMesa:number=0;
 
   noHayEncuestas:boolean=false;
@@ -71,7 +73,7 @@ this.ObtenerMesaMaxima();
     
       this.mostrarAnonimo=true;
       this.mostrarMiSpinner=false;
-     
+     this.desplegarHeader = false;
 
     }
     else
@@ -105,8 +107,10 @@ console.log("Dentro de observable ecnuesta");
         console.log(this.encuestas);
         if(this.encuestas.length < 1)
         {
-          this.noHayEncuestas=true;
-          this.desplegarEncuesta=false;
+
+          this.mostrarEncuestasVacias=true;
+        //  this.noHayEncuestas=true;
+          //this.desplegarEncuesta=false;
           console.log(this.noHayEncuestas);
         }
     });
@@ -139,7 +143,23 @@ console.log("Dentro de observable ecnuesta");
         {
           this.mensaje="Bienvenido!! Se ha anunciado con éxito, en breve vendra el mozo a atenderlo";
           this.mostrarAlert3=true;
-          this.desplegarEncuesta=true;
+          
+            //Si es bienvenido y adémas no hay encuestas muestro la pagina negra y el relog de arena 
+          
+            if(this.mostrarEncuestasVacias)
+            {
+              this.noHayEncuestas=true;
+              this.desplegarEncuesta=false;
+
+            }
+            else
+            {
+              this.desplegarEncuesta=true;
+              this.noHayEncuestas=false;
+            }
+
+
+
           this.desplegarHeader=false;
           setTimeout(()=>{
         
@@ -179,7 +199,7 @@ console.log("Dentro de observable ecnuesta");
             if(data.estado!="espera")
             {
               //FER EN ESTA LINEA TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL
-              this.navCtrl.setRoot(RegistroClientePage);
+              this.navCtrl.setRoot(PrincipalPage);
             }
          
           });
@@ -270,7 +290,7 @@ console.log("Dentro de observable ecnuesta");
             if(data.estado!="espera")
             {
               //FER EN ESTA LINEA TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL
-              this.navCtrl.setRoot(RegistroClientePage);
+              this.navCtrl.setRoot(PrincipalPage);
             }
          
           });
@@ -618,9 +638,23 @@ console.log("Dentro de observable ecnuesta");
           //es en espera directamente le muestro las encuestas de usuarios
           if(data[key].estado=="espera")
           { 
-            this.mostrarMiSpinner=false;
-            this.desplegarEncuesta=true;
-            this.desplegarHeader=false;
+
+            if(this.mostrarEncuestasVacias)
+            {
+
+              this.noHayEncuestas=true;
+              this.desplegarEncuesta=false;
+              this.desplegarHeader=false;
+              this.mostrarMiSpinner=false;
+
+            }
+            else
+            {
+              this.mostrarMiSpinner=false;
+              this.desplegarEncuesta=true;
+              this.desplegarHeader=false;
+            }
+           
 
           }
           else

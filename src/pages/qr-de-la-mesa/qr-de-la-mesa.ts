@@ -6,6 +6,8 @@ import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import * as moment from 'moment';
+import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
+import { LoginPage } from '../login/login';
 
 //LINEA 698 Y 701
 /**
@@ -1354,6 +1356,19 @@ public sinPedidosParaEntregar;
 
                                   }
 
+                                  //agregue esto para ver si valida el que escanea un qr de mesa
+                                  if(text=="1"||text=="2"||text=="3"||text=="4"||text=="5"||text=="6"||text=="7"||text=="8"||text=="9"||text=="10")
+                                  {
+
+                                  }
+
+                                  else
+                                  {
+                                    this.MostrarAlert("¡Error!","Por favor escanee una mesa valida.","Aceptar",this.limpiar);
+                                    break;
+
+                                  }
+
 
 
                                 if (text == data[key].numeroMesa) 
@@ -1393,8 +1408,9 @@ public sinPedidosParaEntregar;
 
                                     if(text==mesa)
                                     {
-                                      let reservasRef = firebase.database().ref("reservas");
 
+
+                                      let reservasRef = firebase.database().ref("reservas");
                                       let djActual = moment(new Date());
 
                                       reservasRef.once("value", (snap) => {
@@ -1403,9 +1419,11 @@ public sinPedidosParaEntregar;
                                     
                                           for (let item in data) 
                                           {
-                                            
+                                    
                                             if (data[item].correo == correo) 
                                             {
+
+                                              //AGREGANDO LOGIC APRA LA FUNCION
                                               let djReserva = moment(data[item].horario, "DD/MM/YYYY HH:mm");
 
                                               if(djReserva.diff(djActual, "m") > -40  && djReserva.diff(djActual, "m") < 20) {
@@ -1417,11 +1435,18 @@ public sinPedidosParaEntregar;
 
                                                 reservasRef.child(item).remove();
                                                 break;
-                                              }
+
                                             }
+
                                           }
+                                        }
+                              
+
 
                                       });
+
+
+
                                     }
 
 
@@ -1800,6 +1825,20 @@ public sinPedidosParaEntregar;
           var dataDos = snap.val();
         for (var keyDos in dataDos)
         {
+          //agregue esto para ver si funciona tambien
+          if(barcodeData.text=="1"||barcodeData.text=="2"||barcodeData.text=="3"||barcodeData.text=="4"||barcodeData.text=="5"||barcodeData.text=="6"||barcodeData.text=="7"||barcodeData.text=="8"||barcodeData.text=="9"||barcodeData.text=="10")
+          {
+
+          }
+
+          else
+          {
+            this.MostrarAlert("¡Error!","Por favor escanee una mesa valida.","Aceptar",this.limpiar);
+            break;
+
+          }
+
+
           if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo==usuario.correo && dataDos[keyDos].mesa==barcodeData.text)
           //if(dataDos[keyDos].estado=="comiendo" && dataDos[keyDos].correo=="cliente@gmail.com" && dataDos[keyDos].mesa==barcodeData.text)
           {
@@ -1938,10 +1977,11 @@ public sinPedidosParaEntregar;
               || this.usuario.tipo == "metre"
               || this.usuario.tipo == "repartidor") {
 
-              this.navCtrl.setRoot("");
+              localStorage.setItem("desloguear", "true");
+              this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
             } else {
               localStorage.clear();
-              this.navCtrl.setRoot("");
+              this.navCtrl.setRoot(LoginPage);
             }
           });
 

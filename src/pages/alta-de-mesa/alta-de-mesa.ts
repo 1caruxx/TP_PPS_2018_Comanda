@@ -4,6 +4,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { LoginPage } from '../login/login';
 //import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 //NANANANAN MUY CLAVE ESTE COMENTARIOOOOOOOOOOOOOO
@@ -389,17 +390,10 @@ this.qrScanner.prepare()
           usuariosRef.child(item).update({
             logueado: false
           }).then(() => {
-            if (this.usuario.tipo == "mozo"
-              || this.usuario.tipo == "cocinero"
-              || this.usuario.tipo == "bartender"
-              || this.usuario.tipo == "metre"
-              || this.usuario.tipo == "repartidor") {
 
-              this.navCtrl.setRoot("");
-            } else {
               localStorage.clear();
-              this.navCtrl.setRoot("");
-            }
+              this.navCtrl.setRoot(LoginPage);
+            
           });
 
           break;

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams,AlertController,Content  } from 'io
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
+import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
+import { LoginPage } from '../login/login';
 //import { Content } from 'ionic-angular';
 
 /**
@@ -29,6 +31,8 @@ export class MapaDeRutaPage {
 
   @ViewChild(Content) content: Content;
   
+  firebase = firebase;
+
   public clientes:boolean;
   public chat:boolean;
   public mandar:boolean;
@@ -47,9 +51,13 @@ export class MapaDeRutaPage {
 
   ListadoDeChats=["asd","probando","gg"];
 
+  public sinPedidos;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public alert: AlertController,private authInstance: AngularFireAuth) 
   {
 	//this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
+
+	this.sinPedidos=true;
 
 	this.usuario = JSON.parse(localStorage.getItem("usuario"));
     
@@ -130,6 +138,7 @@ export class MapaDeRutaPage {
 	genteRef.on("value", (snap) => {
 
 		this.clientesConPedidos=[];
+		//this.sinPedidos=true;
 
 		let data = snap.val();
 
@@ -145,6 +154,7 @@ export class MapaDeRutaPage {
 				let probandoRef=firebase.database().ref("pedidos");
 				probandoRef.once("value", (snap)=>{
 
+					this.sinPedidos=true;
 					//this.clientesConPedidos=[];
 					
 					let dataDos = snap.val();
@@ -221,6 +231,7 @@ export class MapaDeRutaPage {
 												{
 													this.clientesConPedidos.push(data[item]);
 													console.log("los 2")
+													this.sinPedidos=false;
 													break;
 												}
 
@@ -232,6 +243,7 @@ export class MapaDeRutaPage {
 												{
 													this.clientesConPedidos.push(data[item]);
 													console.log("barteneder")
+													this.sinPedidos=false;
 													break;
 												}
 
@@ -242,6 +254,7 @@ export class MapaDeRutaPage {
 												{
 													this.clientesConPedidos.push(data[item]);
 													console.log("cocinero")
+													this.sinPedidos=false;
 													break;
 												}
 
@@ -556,6 +569,46 @@ export class MapaDeRutaPage {
 
 
 
+  }
+
+
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+            if (this.usuario.tipo == "mozo"
+              || this.usuario.tipo == "cocinero"
+              || this.usuario.tipo == "bartender"
+              || this.usuario.tipo == "metre"
+              || this.usuario.tipo == "repartidor") {
+
+              // Para redireccionar a la encuesta de axel.
+              localStorage.setItem("desloguear", "true");
+              this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+
+            } else {
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            }
+          });
+
+          break;
+        }
+      }
+    });
   }
 
 

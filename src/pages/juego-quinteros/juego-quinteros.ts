@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import firebase from "firebase";
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the JuegoQuinterosPage page.
  *
@@ -259,7 +260,33 @@ export class JuegoQuinterosPage {
   }
 
 
+  Logout() {
 
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            
+          });
+
+          break;
+        }
+      }
+    });
+  }
 
 
 

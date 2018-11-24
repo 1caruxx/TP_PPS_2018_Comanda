@@ -6,8 +6,17 @@ import { VerificarTipoProvider } from "../../providers/verificar-tipo/verificar-
 import { LoginPage } from "../login/login";
 import { PerfilPage } from "../perfil/perfil";
 
+import { NativeAudio } from '@ionic-native/native-audio';
+
 import firebase from "firebase";
 import "firebase/firestore";
+
+import { FcmProvider } from '../../providers/fcm/fcm';
+
+import { ToastController } from 'ionic-angular';
+import { Subject } from 'rxjs/Subject';
+import { tap } from 'rxjs/operators';
+import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
 
 @IonicPage()
 @Component({
@@ -31,7 +40,33 @@ export class PrincipalPage {
 
   public sonidos;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private verificarTipo: VerificarTipoProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private verificarTipo: VerificarTipoProvider, fcm: FcmProvider, private toastCtrl: ToastController, private nativeAudio: NativeAudio) {
+
+    this.nativeAudio.preloadSimple('a', 'assets/imgs/gamma/fortnite.mp3').catch(() => { });
+
+    fcm.getToken()
+
+    // Listen to incoming messages
+    fcm.listenToNotifications().pipe(
+      tap(msg => {
+        // show a toast
+        const toast = toastCtrl.create({
+          message: msg.body,
+          duration: 8000,
+          position: 'top',
+          cssClass: 'nombreRaro'
+
+        });
+
+        if (localStorage.getItem("sonidos") != "false") {
+          this.nativeAudio.play('a').catch(() => { });
+        }
+
+        toast.present();
+      })
+    )
+      .subscribe()
+
 
     this.acciones = this.verificarTipo.RetornarAcciones();
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -71,6 +106,10 @@ export class PrincipalPage {
           this.acciones = [];
 
           switch (estadoCliente) {
+
+            case 'delivery':
+              this.acciones[0] = this.accionesRespaldoCliente[7];
+              break;
             /*
              * 
              * Puede hacer un pedido
@@ -241,11 +280,11 @@ export class PrincipalPage {
               case 'metre':
               case 'repartidor':
                 // Para redireccionar a la encuesta de axel.
-                // localStorage.setItem("desloguear", "true");
-                // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+                localStorage.setItem("desloguear", "true");
+                this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
 
-                localStorage.clear();
-                this.navCtrl.setRoot(LoginPage);
+                // localStorage.clear();
+                // this.navCtrl.setRoot(LoginPage);
                 break;
 
               case 'anonimo':

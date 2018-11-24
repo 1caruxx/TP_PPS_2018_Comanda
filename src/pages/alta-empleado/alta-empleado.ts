@@ -253,7 +253,7 @@ export class AltaEmpleadoPage {
 
   InicializarLectorQR() {
 
-    let options = { prompt : "Escaneá el DNI", formats: "PDF_417" };
+    let options = { prompt: "Escaneá el DNI", formats: "PDF_417" };
 
     this.barcodeScanner.scan(options).then(barcodeData => {
 
@@ -328,23 +328,9 @@ export class AltaEmpleadoPage {
           usuariosRef.child(item).update({
             logueado: false
           }).then(() => {
-            if (this.usuario.tipo == "mozo"
-              || this.usuario.tipo == "cocinero"
-              || this.usuario.tipo == "bartender"
-              || this.usuario.tipo == "metre"
-              || this.usuario.tipo == "repartidor") {
 
-              // Para redireccionar a la encuesta de axel.
-              // localStorage.setItem("desloguear", "true");
-              // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
-
-              localStorage.clear();
-              this.navCtrl.setRoot(LoginPage);
-            } else {
-
-              localStorage.clear();
-              this.navCtrl.setRoot(LoginPage);
-            }
+            localStorage.clear();
+            this.navCtrl.setRoot(LoginPage);
           });
 
           break;

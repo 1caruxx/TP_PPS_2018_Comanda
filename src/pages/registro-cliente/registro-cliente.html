@@ -30,7 +30,7 @@
   
 <ion-content [ngClass]="{'ocultar-fondo':ocultarContenido}">
 <div class="vertical" [ngClass]="{'ocultar2':ocultarContenido}">
-  <spinner *ngIf="mostrarSpinner"></spinner>
+  <app-spinner *ngIf="mostrarSpinner"></app-spinner>
   <div class="form" *ngIf="formReg">
     <img class="foto" [src]="prueba" *ngIf="prueba!=''">
   

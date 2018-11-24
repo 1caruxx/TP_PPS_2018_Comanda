@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 //import { Http } from '@angular/http';
 import 'rxjs/add/operator/map'
 import firebase from "firebase";
@@ -161,7 +161,7 @@ export class TomarPedidoPage {
   public vistaDeliveryBartender:boolean;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth) 
+  constructor(public navCtrl: NavController, public navParams: NavParams,private authInstance: AngularFireAuth,private toastCtrl: ToastController) 
   {
 
    /* let localData = http.get('assets/imgs/gamma/information.json').map(res => res.json().items);
@@ -448,6 +448,7 @@ export class TomarPedidoPage {
       this.vistaBartenderMesaUno=false;
       this.pedidosCocinaUno=[];
       this.pedidosBartenderUno=[];
+      //this.sinPedidos=false;
 
       let result = snap.val();
 
@@ -461,12 +462,14 @@ export class TomarPedidoPage {
           {
 
             if(result[k].estado != "tomado")
+            //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
               break;
             }
 
               this.sinPedidos=false;
+              console.log("aca estoy");
               this.vistaCocinaMesaUno=true;
 
 
@@ -544,6 +547,7 @@ export class TomarPedidoPage {
       this.vistaCocinaMesaDos=false;
       this.pedidosCocinaDos=[];
       this.pedidosBartenderDos=[];
+     // this.sinPedidos=false;
 
       let result = snap.val();
 
@@ -556,7 +560,8 @@ export class TomarPedidoPage {
         if(k=="cocinero")
           {
 
-            if(result[k].estado != "tomado")
+           if(result[k].estado != "tomado")
+           //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
               break;
@@ -638,6 +643,7 @@ export class TomarPedidoPage {
       this.vistaBartenderMesaTres=false;
       this.pedidosCocinaTres=[];
       this.pedidosBartenderTres=[];
+     // this.sinPedidos=false;
  
        let result = snap.val();
  
@@ -655,6 +661,7 @@ export class TomarPedidoPage {
            {
 
             if(result[k].estado != "tomado")
+            //if(result[k].estado == "terminado" || result[k].estado == "preparacion")
             {
               this.sinPedidos=true;
               break;
@@ -1556,6 +1563,18 @@ export class TomarPedidoPage {
     this.ocultarDiez=false;
   }
 
+  presentToast(mensaje: string) {
+
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: 3000,
+      position: 'top',
+      cssClass: "infoToast"
+    });
+
+    toast.present();
+  }
+
 
 
   Aceptar1()
@@ -1564,7 +1583,9 @@ export class TomarPedidoPage {
     if(this.tiempoMesaUno<this.tiempoMinimoUno)
     {
      this.ocultarUno=true;
-     alert("Ponga un tiempo mayor o igual al indicado.")
+     //alert("Ponga un tiempo mayor o igual al indicado.")
+     this.presentToast("Ponga un tiempo mayor o igual al indicado.");
+     
       return;
     }
 
@@ -1637,7 +1658,8 @@ export class TomarPedidoPage {
    if(this.tiempoMesaDos<this.tiempoMinimoDos)
    {
     this.ocultarDos=true;
-    alert("Ponga un tiempo mayor o igual al indicado.")
+    //alert("Ponga un tiempo mayor o igual al indicado.")
+    this.presentToast("Ponga un tiempo mayor o igual al indicado.");
      return;
    }
 
@@ -1679,7 +1701,8 @@ export class TomarPedidoPage {
     if(this.tiempoMesaTres<this.tiempoMinimoTres)
     {
      this.ocultarTres=true;
-     alert("Ponga un tiempo mayor o igual al indicado.")
+    // alert("Ponga un tiempo mayor o igual al indicado.")
+    this.presentToast("Ponga un tiempo mayor o igual al indicado.");
       return;
     }
 
@@ -1722,7 +1745,8 @@ export class TomarPedidoPage {
     if(this.tiempoMesaCuatro<this.tiempoMinimoCuatro)
     {
      this.ocultarCuatro=true;
-     alert("Ponga un tiempo mayor o igual al indicado.")
+     //alert("Ponga un tiempo mayor o igual al indicado.")
+     this.presentToast("Ponga un tiempo mayor o igual al indicado.");
       return;
     }
 
@@ -1766,7 +1790,8 @@ export class TomarPedidoPage {
     if(this.tiempoMesaCinco<this.tiempoMinimoCinco)
     {
      this.ocultarCinco=true;
-     alert("Ponga un tiempo mayor o igual al indicado.")
+     //alert("Ponga un tiempo mayor o igual al indicado.")
+     this.presentToast("Ponga un tiempo mayor o igual al indicado.");
       return;
     }
     //this.ocultar=true;
@@ -1808,7 +1833,8 @@ export class TomarPedidoPage {
     if(this.tiempoMesaSeis<this.tiempoMinimoSeis)
     {
      this.ocultarSeis=true;
-     alert("Ponga un tiempo mayor o igual al indicado.")
+     //alert("Ponga un tiempo mayor o igual al indicado.")
+     this.presentToast("Ponga un tiempo mayor o igual al indicado.");
       return;
     }
 
@@ -1853,7 +1879,8 @@ export class TomarPedidoPage {
     if(this.tiempoMesaSiete<this.tiempoMinimoSiete)
     {
      this.ocultarSiete=true;
-     alert("Ponga un tiempo mayor o igual al indicado.")
+     //alert("Ponga un tiempo mayor o igual al indicado.")
+     this.presentToast("Ponga un tiempo mayor o igual al indicado.");
       return;
     }
 
@@ -1895,7 +1922,8 @@ export class TomarPedidoPage {
     if(this.tiempoMesaOcho<this.tiempoMinimoOcho)
     {
      this.ocultarOcho=true;
-     alert("Ponga un tiempo mayor o igual al indicado.")
+     //alert("Ponga un tiempo mayor o igual al indicado.")
+     this.presentToast("Ponga un tiempo mayor o igual al indicado.");
       return;
     }
 
@@ -1937,7 +1965,8 @@ export class TomarPedidoPage {
     if(this.tiempoMesaNueve<this.tiempoMinimoNueve)
     {
      this.ocultarNueve=true;
-     alert("Ponga un tiempo mayor o igual al indicado.")
+    // alert("Ponga un tiempo mayor o igual al indicado.")
+    this.presentToast("Ponga un tiempo mayor o igual al indicado.");
       return;
     }
 
@@ -1979,7 +2008,8 @@ export class TomarPedidoPage {
     if(this.tiempoMesaDiez<this.tiempoMinimoDiez)
     {
      this.ocultarDiez=true;
-     alert("Ponga un tiempo mayor o igual al indicado.")
+    // alert("Ponga un tiempo mayor o igual al indicado.")
+    this.presentToast("Ponga un tiempo mayor o igual al indicado.");
       return;
     }
 

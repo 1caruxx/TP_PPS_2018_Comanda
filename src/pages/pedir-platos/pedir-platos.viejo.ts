@@ -5,6 +5,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
 import  {SpinnerComponent } from '../../components/spinner/spinner';
 import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
+import { EncuestaDeEmpleadoPage } from '../encuesta-de-empleado/encuesta-de-empleado';
+import { LoginPage } from '../login/login';
 
 
 
@@ -21,11 +23,13 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
   templateUrl: 'pedir-platos.html',
 })
 export class PedirPlatosPage {
+
+  public usuario: any;
+
+  firebase = firebase;
+
   @ViewChild('cant') cant:any;
-  @ViewChild('cant2') cant2:any;
   contErrores:number=0;
-  usuarioDelivery;
-  estadoActualCliente;
   animacionMonto:boolean=true;
   mensaje:string;
   mostrarSpinnerMonto:boolean=true;
@@ -45,7 +49,6 @@ export class PedirPlatosPage {
   valor:number;
   miValor:number=undefined;
   altoValor:number;
-  esDelivery:boolean=false;
   foto1;
   foto2;
   eligio:boolean=false;
@@ -68,15 +71,11 @@ export class PedirPlatosPage {
   monto:number=0;
   mostrarslide:boolean;
   ocultarTitulo:boolean;
-  claveUsuarioDelivery;
   montoPlatos=0;
   montoBebidas=0;
   ocultarElMonto:boolean=false;
   mostrarSpinnerPlatos:boolean=false;
 contador;
-
-  public usuario: any;
-
   constructor
   (
     public navCtrl: NavController,
@@ -87,7 +86,8 @@ contador;
       )
        {
 
-        this.usuario= JSON.parse(localStorage.getItem("usuario"));
+        this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
     this.ocultarPlatos = true;
     this.ocultarBebidas=true;
     this.mostrarslide=false;
@@ -532,23 +532,24 @@ var data =snap.val();
   }
   CancelarPedido(cual)
   {
-    this.valorPlatos=null;
     if(cual=="plato")
     {
-      
+      console.log("pongo undefined a platos");
+     console.log("Le resto: " +this.montoPlatos );
+     console.log("El monto es de :" + this.monto);
       this.monto= this.monto-this.montoPlatos;
-      this.montoPlatos=0;
-      this.valorPlatos=null;
-      //Solo estoy probando la variable si funca aca tambien  
+   
     
+      this.montoPlatos=0;
+      this.valorPlatos=null;  
+
     }
     else
     {
-    
+      console.log("Le resto: " +this.montoBebidas );
       this.monto =this.monto-this.montoBebidas;
       this.montoBebidas=0;
       this.valor=null;
-      console.log("valor "+ this.valor);
     }
     this.eligio=false;
   
@@ -730,11 +731,6 @@ console.log("Le saco la selecccion a ");
     });
  //Guardo el estado pidio  al cliente
 
-
- if(!this.esDelivery)
- {
-
- 
       let usuariosRef = firebase.database().ref().child("usuarios/"+this.claveUsuarioActual);
       usuariosRef.update({estado:"pidio"}).then(()=>{
 
@@ -743,33 +739,6 @@ console.log("Le saco la selecccion a ");
   
     
       
-      console.log("No delivery");
-        this.mostrarSpinner=false;
-     
-       
-        this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
-      this.mostrarAlert3=true;
-      setTimeout(()=>{
-  
-        this.mostrarAlert3=false;
-        this.navCtrl.pop();
-      }, 4000);
-
-
-      });
-    }
-    else
-    {
-
-      let usuariosRef = firebase.database().ref().child("usuarios/"+this.claveUsuarioActual);
-      usuariosRef.update({estado:"delivery"}).then(()=>{
-
-        console.log(" delivery");
-
-        console.log(this.claveUsuarioActual);
-  
-    
-      
       
         this.mostrarSpinner=false;
      
@@ -784,7 +753,6 @@ console.log("Le saco la selecccion a ");
 
 
       });
-    }
       
 
     
@@ -854,19 +822,16 @@ TraerClaveMozo()
             nuevo= '';
             cadena=cadena.replace(patron, nuevo);
             this.mesa=cadena;
-            this.esDelivery=true;
-            this.claveUsuarioActual = key;
             //Le pongo estado al cliente como delivery
-         //   let usuario= data[key];
-           // usuario.estado="delivery";
+            let usuario= data[key];
+            usuario.estado="delivery";
           
-         /*   this.usuarioDelivery=data[key];
-            this.usuarioDelivery.estado="delivery";
+            console.log(usuario);
            
          
-            //let usuariosRef = firebase.database().ref("usuarios/"+key);
+            let usuariosRef = firebase.database().ref("usuarios/"+key);
          
-            //usuariosRef.set(usuario);*/
+            usuariosRef.set(usuario);
            
             this.CalcularMonto();
             return;
@@ -962,4 +927,45 @@ CalcularMonto()
      this.ocultarElMonto=true;
    });
 }
+
+
+Logout() {
+
+  let usuariosRef = this.firebase.database().ref("usuarios");
+
+  usuariosRef.once("value", (snap) => {
+
+    let data = snap.val();
+
+    for (let item in data) {
+
+      if (data[item].correo == this.usuario.correo) {
+
+        usuariosRef.child(item).update({
+          logueado: false
+        }).then(() => {
+          if (this.usuario.tipo == "mozo"
+            || this.usuario.tipo == "cocinero"
+            || this.usuario.tipo == "bartender"
+            || this.usuario.tipo == "metre"
+            || this.usuario.tipo == "repartidor") {
+
+            // Para redireccionar a la encuesta de axel.
+            localStorage.setItem("desloguear", "true");
+            this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
+
+
+          } else {
+
+            localStorage.clear();
+            this.navCtrl.setRoot(LoginPage);
+          }
+        });
+
+        break;
+      }
+    }
+  });
+}
+
 }

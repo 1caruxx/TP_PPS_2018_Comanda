@@ -210,33 +210,3 @@ export class EncuestaSupervisorPage {
   }
 
 }
-
-
-
-
-/*
-
-            "encuesta": {
-              "pregunta1": {
-                "pesimo": 0,
-                "malo": 0,
-                "mediocre": 0,
-                "bueno": 0,
-                "excelente": 0
-              },
-              "pregunta2": {
-                "si": 0,
-                "no": 0
-              },
-              "pregunta3": {
-                "item1": 0,
-                "item2": 0,
-                "item3": 0
-              },
-              "pregunta4": {
-                "si": 0,
-                "no": 0
-              },
-              "pregunta5": [0]
-            }
-*/

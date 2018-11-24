@@ -5,6 +5,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 
 
 import firebase from "firebase";
+import { LoginPage } from '../login/login';
 
 
 /**
@@ -20,6 +21,8 @@ import firebase from "firebase";
   templateUrl: 'juego.html',
 })
 export class JuegoPage {
+
+  firebase = firebase;
 
   jugadorActual;
   claveJugador;
@@ -45,8 +48,12 @@ export class JuegoPage {
   gano:boolean=false;
   mostrarAlert:boolean=false;
 
+  public usuario: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,   private authInstance: AngularFireAuth,private nativeAudio: NativeAudio) {
+
+    this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
     //this.authInstance.auth.signInWithEmailAndPassword("lucas@soylucas.com", "Wwwwwwe");
     this.correo=localStorage.getItem("usuario");
     this.correo =(JSON.parse(this.correo)).correo;
@@ -381,6 +388,34 @@ this.gano=false;
       let desc = firebase.database().ref().child("pedidos/"+this.mesa);
       desc.update({desc:"10%"});
 
+  }
+
+  Logout() {
+
+    let usuariosRef = this.firebase.database().ref("usuarios");
+
+    usuariosRef.once("value", (snap) => {
+
+      let data = snap.val();
+
+      for (let item in data) {
+
+        if (data[item].correo == this.usuario.correo) {
+
+          usuariosRef.child(item).update({
+            logueado: false
+          }).then(() => {
+
+
+              localStorage.clear();
+              this.navCtrl.setRoot(LoginPage);
+            
+          });
+
+          break;
+        }
+      }
+    });
   }
  
 }

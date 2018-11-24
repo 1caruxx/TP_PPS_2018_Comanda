@@ -4,7 +4,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { NativeAudio } from '@ionic-native/native-audio';
 
-
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -64,7 +63,6 @@ import { Ionic2RatingModule } from 'ionic2-rating';
 import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
 import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-ahora';
 import { RuteoProvider } from '../providers/ruteo/ruteo';
-
 
 @NgModule({
   declarations: [

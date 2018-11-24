@@ -33,8 +33,8 @@ Branch del proyecto: [lareu_alfa](https://github.com/1caruxx/TP_PPS_2018_Comanda
 * [x] Vista y funcionalidad de la página de sala de juegos.
 * [x] Responsable de la fusión de las ramas de codigo de los integrantes del grupo.
 
-**Fecha de inicio:** 10/11/2018<br />
-**Fecha de fin:** 17/11/2018
+**Fecha de inicio:** 17/11/2018<br />
+**Fecha de fin:** 24/11/2018
 
 ---
 
@@ -47,12 +47,12 @@ Branch del proyecto: [vega_beta](https://github.com/1caruxx/TP_PPS_2018_Comanda/
 * [x] D- Alta de cliente.
 * [x] F- QR de ingreso al local.
 * [x] I- Encuesta de cliente.
-* [ ] L- Pedir platos y bebidas.
-* [ ] P- Pedido de platos y bebidas.
+* [x] L- Pedir platos y bebidas.
+* [x] P- Pedido de platos y bebidas.
 * [x] T- Juego 10% de descuento.
 
-**Fecha de inicio:** 10/11/18<br />
-**Fecha de fin:** 17/11/18
+**Fecha de inicio:** 17/11/18<br />
+**Fecha de fin:** 24/11/18
 
 ---
 
@@ -65,22 +65,18 @@ Branch del proyecto: [quinteros_gamma](https://github.com/1caruxx/TP_PPS_2018_Co
 * [x] G- QR de la mesa.
 * [x] J- Encuesta de empleado.
 * [x] M- Tomar pedido.
-* [ ] O- Pedir mesa.
-* [ ] S- Mapa de ruta hasta el domiciolio de entrega.
+* [x] O- Pedir mesa.
+* [x] S- Mapa de ruta hasta el domicilio de entrega.
 * [x] V- Juego para un postre gratis.
 
 ---
 
-* [x] Icono y Splash de la aplicacion
-* [x] Sonido de inicio de la aplicacion
-* [x] vista y logica de alta de mesa
-* [x] vista y logica de encuesta de empleado listo
-* [x] vista y logica de qrdelamesa listo
-* [x] vista de mapa de ruta hasta el domicilio de la entrega listo
+* [x] Ícono y Splash de la aplicación.
+* [x] Sonido de la aplicación.
+* [x] Vista de mapa de ruta hasta el domicilio de la entrega.
 
-
-**Fecha de inicio:** 10/11/2018<br />
-**Fecha de fin:** 17/11/2018
+**Fecha de inicio:** 17/11/2018<br />
+**Fecha de fin:** 24/11/2018
 
 ## Profesores
 

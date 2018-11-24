@@ -19,21 +19,14 @@
 
   </div>
 </div>
-<div class="elAlert2" [ngClass]="{'mostrarAlert2':mostrarAlert2}">
-    <div class="alert2" >
-      <h1>Ingrese por favor la cantidad de comensales</h1>
-      <input type="number"[(ngModel)]="comensales">
-      <button ion-button color="red" (click)="AceptarAlert2()">Aceptar</button>
-     
-    </div>
-    </div>
+
 <div class="alert3" [ngClass]="{'mostrarAlert3':mostrarAlert3}">
     <h1>{{mensaje}}</h1>
   </div>
   
 
 
-  <ion-header *ngIf="desplegarHeader">
+  <!-- <ion-header *ngIf="desplegarHeader">
     <ion-navbar color="red" hideBackButton="true">
   
       
@@ -44,7 +37,7 @@
         <button ion-button (click)="Atras()">
           <ion-icon name="arrow-back"></ion-icon>
         </button>
-      </ion-buttons>
+      </ion-buttons> -->
   
       <!-- <ion-title>{{sala}}</ion-title> -->
       <!-- <p class="su    <ion-buttons end>
@@ -53,17 +46,27 @@
         </button>
       </ion-buttons>btitle" style="color: white;">{{usuario.mail}}</p> -->
   
-      <ion-buttons end>
+      <!-- <ion-buttons end>
         <button ion-button >
           <ion-icon name="power"></ion-icon>
         </button>
       </ion-buttons>
   
     </ion-navbar>
-  </ion-header>
+  </ion-header> -->
   
 
 <ion-content >
+
+    <div class="elAlert2" [ngClass]="{'mostrarAlert2':mostrarAlert2}">
+        <div class="alert2" >
+          <h1>Ingrese por favor la cantidad de comensales</h1>
+          <input type="number"[(ngModel)]="comensales">
+          <button ion-button color="red" (click)="AceptarAlert2()">Aceptar</button>
+         
+        </div>
+        </div>
+
   <div class="miSpinner" *ngIf="mostrarMiSpinner">
     <img src="assets/imgs/beta/elLogo.png" class="pulse">
     </div>

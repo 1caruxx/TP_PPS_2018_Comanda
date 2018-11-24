@@ -10,16 +10,14 @@
   <h1>{{mensaje}}</h1>
 </div>
 </div>
+
 <ion-header>
   <ion-navbar color="red">
 
-  
+    <!-- <ion-title>{{usuario.tipo}}</ion-title> -->
 
-    <!-- <ion-title>{{sala}}</ion-title> -->
-    <!-- <p class="subtitle" style="color: white;">{{usuario.mail}}</p> -->
-
-    <ion-buttons end>
-      <button ion-button>
+    <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
+      <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
       </button>
     </ion-buttons>

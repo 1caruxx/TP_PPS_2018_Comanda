@@ -20,7 +20,7 @@
 <div class="platos" [ngClass]="{'ocultar':ocultarPlatos}">
 
 
-  <spinner *ngIf="mostrarSpinnerPlatos"></spinner>
+  <app-spinner *ngIf="mostrarSpinnerPlatos"></app-spinner>
     <h1 class="tituloPlatos"  >{{titulo}}:</h1>
 
     <div class="elPlato">
@@ -56,7 +56,7 @@
        <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido('plato')">Cancelar</button>
 </div>
 <div class="platos" [ngClass]="{'ocultar':ocultarBebidas}">
-  <spinner *ngIf="mostrarSpinnerPlatos"></spinner>
+  <app-spinner *ngIf="mostrarSpinnerPlatos"></app-spinner>
   <h1 class="tituloPlatos"  >{{titulo}}:</h1>
 
   <div class="elPlato">
@@ -87,36 +87,26 @@
      <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido('bebida')">Cancelar</button>
 </div>
 
- <ion-header>
+<ion-header>
   <ion-navbar color="red" hideBackButton="true">
 
-    
- 
+      <ion-buttons start style="left: 3px;
+      position: absolute;">
+        <button ion-button (click)="Atras()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
 
-    <ion-buttons start style="left: 3px;
-    position: absolute;">
-      <button ion-button (click)="Atras()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
+    <!-- <ion-title>{{usuario.tipo}}</ion-title> -->
 
-    <!-- <ion-title>{{sala}}</ion-title> -->
-    <!-- <p class="su    <ion-buttons end>
-      <button ion-button>
-        <ion-icon name="power"></ion-icon>
-      </button>
-    </ion-buttons>btitle" style="color: white;">{{usuario.mail}}</p> -->
-
-    <ion-buttons end>
-      <button ion-button >
+    <ion-buttons end *ngIf="usuario.tipo != 'anonimo'">
+      <button ion-button (click)="Logout()">
         <ion-icon name="power"></ion-icon>
       </button>
     </ion-buttons>
 
   </ion-navbar>
 </ion-header>
-
-
 
 <ion-content>
   <div class="monto" *ngIf="!ocultarMonto" [ngClass]="{'animacion':animacionMonto}">
@@ -138,5 +128,5 @@
       <!--input class="inpDireccion" type="text" placeholder="Su direcci&oacute;n"-->
       <button class="btnPedir" (click)="PedirFinal()" ion-button color="danger" >¡Pedir!</button>
     </div>
-    <spinner *ngIf="mostrarSpinner"></spinner>
+    <app-spinner *ngIf="mostrarSpinner"></app-spinner>
 </ion-content>
