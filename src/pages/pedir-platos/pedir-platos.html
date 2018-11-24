@@ -20,7 +20,7 @@
 <div class="platos" [ngClass]="{'ocultar':ocultarPlatos}">
 
 
-  <app-spinner *ngIf="mostrarSpinnerPlatos"></app-spinner>
+  <spinner *ngIf="mostrarSpinnerPlatos"></spinner>
     <h1 class="tituloPlatos"  >{{titulo}}:</h1>
 
     <div class="elPlato">
@@ -56,7 +56,7 @@
        <button ion-button class="cancelarBtn" color="red" color="celeste" (click)="CancelarPedido('plato')">Cancelar</button>
 </div>
 <div class="platos" [ngClass]="{'ocultar':ocultarBebidas}">
-  <app-spinner *ngIf="mostrarSpinnerPlatos"></app-spinner>
+  <spinner *ngIf="mostrarSpinnerPlatos"></spinner>
   <h1 class="tituloPlatos"  >{{titulo}}:</h1>
 
   <div class="elPlato">
@@ -138,5 +138,5 @@
       <!--input class="inpDireccion" type="text" placeholder="Su direcci&oacute;n"-->
       <button class="btnPedir" (click)="PedirFinal()" ion-button color="danger" >¡Pedir!</button>
     </div>
-    <app-spinner *ngIf="mostrarSpinner"></app-spinner>
+    <spinner *ngIf="mostrarSpinner"></spinner>
 </ion-content>

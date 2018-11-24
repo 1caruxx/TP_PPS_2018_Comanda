@@ -119,7 +119,30 @@ export class RegistroClientePage {
             
                 tipo: "cliente",
                 clave: this.pass,
-                img: this.foto
+                img: this.foto,
+                "encuesta": {
+                  "pregunta1": {
+                    "pesimo": 0,
+                    "malo": 0,
+                    "mediocre": 0,
+                    "bueno": 0,
+                    "excelente": 0
+                  },
+                  "pregunta2": {
+                    "si": 0,
+                    "no": 0
+                  },
+                  "pregunta3": {
+                    "item1": 0,
+                    "item2": 0,
+                    "item3": 0
+                  },
+                  "pregunta4": {
+                    "si": 0,
+                    "no": 0
+                  },
+                  "pregunta5": [0]
+                }    
               }).then(() => {
 
                 this.mostrarSpinner = false;
@@ -202,6 +225,10 @@ export class RegistroClientePage {
             this.presentToast(mensaje);
           });
       }
+      Atras()
+      {
+        this.navCtrl.pop();
+      }
 
       RegistrarAnonimo()
       {
@@ -225,7 +252,30 @@ export class RegistroClientePage {
                     tipo: "anonimo",
                     correo:correo,
                     clave: this.pass,
-                    img: this.foto
+                    img: this.foto,
+                    "encuesta": {
+                      "pregunta1": {
+                        "pesimo": 0,
+                        "malo": 0,
+                        "mediocre": 0,
+                        "bueno": 0,
+                        "excelente": 0
+                      },
+                      "pregunta2": {
+                        "si": 0,
+                        "no": 0
+                      },
+                      "pregunta3": {
+                        "item1": 0,
+                        "item2": 0,
+                        "item3": 0
+                      },
+                      "pregunta4": {
+                        "si": 0,
+                        "no": 0
+                      },
+                      "pregunta5": [0]
+                    }
                   }).then(() => {
                     this.mostrarSpinner=false;
                     this.mostrarAlert=true;

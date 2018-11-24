@@ -7,7 +7,7 @@
     <h1>El usuario se registr&oacute; exit&oacute;samente!!</h1>
   </div>
   <ion-header>
-  <ion-navbar color="red">
+  <ion-navbar color="red" hideBackButton="true">
 
     
  
@@ -16,19 +16,21 @@
 
 
 
-    <ion-buttons end>
-        <button ion-button>
-          <ion-icon name="power"></ion-icon>
-        </button>
-      </ion-buttons>
   
+    <ion-buttons start style="left: 3px;
+    position: absolute;">
+      <button ion-button (click)="Atras()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
     </ion-navbar>
   </ion-header>
   
   
 <ion-content [ngClass]="{'ocultar-fondo':ocultarContenido}">
 <div class="vertical" [ngClass]="{'ocultar2':ocultarContenido}">
-  <app-spinner *ngIf="mostrarSpinner"></app-spinner>
+  <spinner *ngIf="mostrarSpinner"></spinner>
   <div class="form" *ngIf="formReg">
     <img class="foto" [src]="prueba" *ngIf="prueba!=''">
   

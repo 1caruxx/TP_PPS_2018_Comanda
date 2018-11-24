@@ -95,6 +95,7 @@ page-encuesta-cliente {
         color:black;
         font-size: 3em;
     }
+   
     
     .mostrarChart
     {
@@ -186,6 +187,15 @@ margin-top:0;
         right: 5%;
         top: 0;
     }
+
+  .cerrarChartFotos
+  {
+  
+    position: absolute;
+    right: 5px;
+    top: 0;
+    background:  #e13838;
+  }
     .yaRespondido
     {
         background: white;
@@ -238,6 +248,30 @@ margin-top:0;
     .item-inner
     {
         border-bottom:1px solid black!important;
+    }
+    .select-md .select-icon .select-icon-inner
+    {
+        color:black!important;
+    } 
+    .radio-md .radio-checked {
+        border-color: black;
+    }
+    .radio-md .radio-inner
+    {
+        background-color:white!important;
+    }
+    .radio-md .radio-icon {
+    
+        border-color: black;
+    }
+    .range-md .range-knob {
+        background: black;
+    }
+    .range-md .range-bar-active 
+    {
+        bottom: 0;
+        width: auto;
+        background: black;
     }
     .Foto
     {

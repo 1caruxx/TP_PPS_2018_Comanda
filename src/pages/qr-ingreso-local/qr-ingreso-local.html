@@ -5,9 +5,7 @@
   Ionic pages and navigation.
 -->
 
-<div class="miSpinner" *ngIf="mostrarMiSpinner">
-  <img src="assets/imgs/beta/elLogo.png" class="pulse">
-  </div>
+
 <div class="anonimo" [ngClass]="{'mostrarAnonimo':mostrarAnonimo}">
   <div class="regAnonimo">
     <img class="imgAnonimo" [src]="imgAnonimo">
@@ -35,11 +33,40 @@
   
 
 
-
+  <ion-header *ngIf="desplegarHeader">
+    <ion-navbar color="red" hideBackButton="true">
+  
+      
+   
+  
+      <ion-buttons start style="left: 3px;
+      position: absolute;">
+        <button ion-button (click)="Atras()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+      <!-- <ion-title>{{sala}}</ion-title> -->
+      <!-- <p class="su    <ion-buttons end>
+        <button ion-button>
+          <ion-icon name="power"></ion-icon>
+        </button>
+      </ion-buttons>btitle" style="color: white;">{{usuario.mail}}</p> -->
+  
+      <ion-buttons end>
+        <button ion-button >
+          <ion-icon name="power"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+    </ion-navbar>
+  </ion-header>
   
 
 <ion-content >
-
+  <div class="miSpinner" *ngIf="mostrarMiSpinner">
+    <img src="assets/imgs/beta/elLogo.png" class="pulse">
+    </div>
   <div class="vacio"  [ngClass]="{'sinEncuestas':noHayEncuestas}">
     <img src="assets/imgs/beta/Reloj.png">
       <h1 class="tituloSinEncuestas">En breve lo atenderá un mozo, y le dara una mesa.</h1>
@@ -71,6 +98,7 @@
           <div class="fotos" >
             <h1 *ngIf="encuesta.foto1 !=''||encuesta.foto2 !=''||encuesta.foto3 !=''">Fotos de  las encuesta:</h1>
             <div class="subFotos">
+              
               <img  *ngIf="encuesta.foto1 !=''" [src]="encuesta.foto1">
               <img *ngIf="encuesta.foto2 !=''" [src]="encuesta.foto2">
               <img *ngIf="encuesta.foto3 !=''" [src]="encuesta.foto3">

@@ -6,7 +6,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { PedirPlatosPage } from '../pedir-platos/pedir-platos';
 import { QrIngresoLocalPage } from '../qr-ingreso-local/qr-ingreso-local';
 import { Chart } from 'chart.js';
-import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the EncuestaClientePage page.
@@ -22,10 +21,6 @@ import { LoginPage } from '../login/login';
 })
 export class EncuestaClientePage {
   correo:string;
-
-  firebase = firebase;
-
-  public usuario: any;
   public pregunta4Labels: string[] = ['Horribles', 'Feos', 'Pasable', 'Aceptable', 'Buenos', 'Ricos', 'Muy ricos'];
   public pregunta4Data: number[] = [0, 0, 0, 0, 0,0,0];
   public pregunta1Labels: string[] = ['Sí', 'No'];
@@ -104,10 +99,6 @@ respPreg3:boolean=false;
 respPreg4:boolean=false;
 respPreg5:boolean=false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,  private aut:AngularFireAuth) {
-
-
-    this.usuario = JSON.parse(localStorage.getItem("usuario"));
-
     this.ocultar=true;
     this.ocultar2=true;
     this.ocultar3=true;
@@ -125,7 +116,7 @@ respPreg5:boolean=false;
     this.mostrarfoto3=false;
 
     //setear esta variable con el cliente sacado del local storage
-    this.cliente ="yoCliente";
+  //  this.cliente ="yoCliente";
     //DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!
   //  this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
     Chart.defaults.global.legend.display = false;
@@ -359,8 +350,75 @@ respPreg5:boolean=false;
   {
     this.ocultar6=false;
   }
-  Aceptar()
+  Aceptar(valor)
   {
+
+    switch(valor)
+    {
+      case "1":
+      if(!this.resp1)
+      {
+        
+        this.mensaje="No contestó la pregunta. Elija una opción para contestar";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+
+        this.mostrarAlert3=false;
+       
+      }, 2000);
+      return
+      }
+        break;
+
+      case "2":
+      if(!this.resp2)
+      {
+        
+        this.mensaje="No contestó la pregunta. Elija una  opción para contestar.";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+
+        this.mostrarAlert3=false;
+       
+      }, 2000);
+      return
+      }
+      break;
+
+      case "3":
+      if(this.resp3atencion==false && this.resp3comodidad==false && this.resp3platos==false && this.resp3precios==false )
+      {
+        this.mensaje="No contestó la pregunta. Elija una o más opciones para contestar.";
+        this.mostrarAlert3=true;
+        setTimeout(()=>{
+  
+          this.mostrarAlert3=false;
+      
+        }, 2000);
+        return
+        
+      }
+  
+      break;
+
+      case "4":
+      if(!this.movioElRange)
+      {
+        this.mensaje="No contestó la pregunta, mueva el rango para contestar";
+        this.mostrarAlert3=true;
+        setTimeout(()=>{
+  
+          this.mostrarAlert3=false;
+    
+        }, 2000);
+        return
+      }
+      break;
+
+    
+  
+  
+    }
     this.ocultar=true;
     this.ocultar2=true;
     this.ocultar3=true;
@@ -417,8 +475,30 @@ respPreg5:boolean=false;
    
  
   }
+  cerrarPregunta()
+  {
+    this.ocultar=true;
+    this.ocultar2=true;
+    this.ocultar3=true;
+    this.ocultar4=true;
+    this.ocultar5=true;
+    this.ocultar6=true;
+  }
   Aceptar5()
   {
+    if(!this.resp5)
+    {
+   
+      this.mensaje="No contesto la pregunta.";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+
+        this.mostrarAlert3=false;
+       
+      }, 2000);
+      return
+    }
+  
     if(!this.ValidarNumero(this.resp5))
     {
       this.mensaje="Debe ingresar un número en este campo.";
@@ -635,7 +715,7 @@ respPreg5:boolean=false;
       setTimeout(()=>{
 
         this.mostrarAlert3=false;
-        this.Logout();
+        this.navCtrl.pop();
       }, 2000);
 
     });
@@ -676,34 +756,4 @@ respPreg5:boolean=false;
         break;
     }
   }
-
-
-  Logout() {
-
-    let usuariosRef = this.firebase.database().ref("usuarios");
-
-    usuariosRef.once("value", (snap) => {
-
-      let data = snap.val();
-
-      for (let item in data) {
-
-        if (data[item].correo == this.usuario.correo) {
-
-          usuariosRef.child(item).update({
-            logueado: false
-          }).then(() => {
-
-              localStorage.clear();
-              this.navCtrl.setRoot(LoginPage);
-            
-          });
-
-          break;
-        }
-      }
-    });
-  }
-
-
 }

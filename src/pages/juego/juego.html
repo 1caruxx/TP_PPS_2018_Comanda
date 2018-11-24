@@ -4,8 +4,11 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<div class="alert" [ngClass]="{'mostrarAlert':mostrarAlert}">
+<div class="superAlert"  [ngClass]="{'mostrarAlert':mostrarAlert}">
+<div class="alert">
+  <img  src="assets/imgs/beta/ganador.jpg"  [ngClass]="{'quitarFoto':!gano}">
   <h1>{{mensaje}}</h1>
+</div>
 </div>
 <ion-header>
   <ion-navbar color="red">
@@ -64,6 +67,7 @@
         <p>¡¡¡Inténtelo!!!</p>
     
     <button ion-button  (click)="Jugar()">Jugar</button>
+
 </div>
 </div>
 

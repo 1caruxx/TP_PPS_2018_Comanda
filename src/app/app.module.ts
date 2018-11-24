@@ -65,6 +65,7 @@ import { JuegoQuinterosPage } from '../pages/juego-quinteros/juego-quinteros';
 import { TiempoDesdeAhoraPipe } from '../pipes/tiempo-desde-ahora/tiempo-desde-ahora';
 import { RuteoProvider } from '../providers/ruteo/ruteo';
 
+
 @NgModule({
   declarations: [
     MyApp,

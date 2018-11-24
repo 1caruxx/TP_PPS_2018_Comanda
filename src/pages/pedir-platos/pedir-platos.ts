@@ -4,6 +4,7 @@ import firebase from "firebase";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
 import  {SpinnerComponent } from '../../components/spinner/spinner';
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -40,6 +41,7 @@ export class PedirPlatosPage {
   mostrarAlert3:boolean=false;
   valor:number;
   miValor:number=undefined;
+  altoValor:number;
   foto1;
   foto2;
   eligio:boolean=false;
@@ -416,6 +418,9 @@ this.monto=this.monto +total;
   Cerrar()
   {
  
+    //Esta la pongo de prueba
+
+
     this.ocultarPlatos =true;
     this.ocultarTitulo=false;
     this.ocultarBebidas=true;
@@ -717,21 +722,30 @@ console.log("Le saco la selecccion a ");
  //Guardo el estado pidio  al cliente
 
       let usuariosRef = firebase.database().ref().child("usuarios/"+this.claveUsuarioActual);
-      usuariosRef.update({estado:"pidio"}).then(() => {
+      usuariosRef.update({estado:"pidio"}).then(()=>{
 
-        this.mostrarSpinner=false;
-   
-        this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
-        this.mostrarAlert3=true;
-        setTimeout(()=>{
+
+        console.log(this.claveUsuarioActual);
   
-          this.mostrarAlert3=false;
-          this.navCtrl.pop();
-        }, 4000);
+    
+      
+      
+        this.mostrarSpinner=false;
+     
+       
+        this.mensaje="El pedido ha sido enviado en breve se lo llevaremos";
+      this.mostrarAlert3=true;
+      setTimeout(()=>{
+  
+        this.mostrarAlert3=false;
+        this.navCtrl.pop();
+      }, 4000);
+
+
       });
       
-      console.log(this.claveUsuarioActual);
-  
+
+    
   }
 TraerClaveMozo()
 {

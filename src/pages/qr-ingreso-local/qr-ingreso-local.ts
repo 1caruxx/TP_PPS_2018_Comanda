@@ -6,7 +6,6 @@ import { RegistroClientePage } from '../registro-cliente/registro-cliente';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import * as moment from 'moment';
-import { PrincipalPage } from '../principal/principal';
 
 
 /**
@@ -28,7 +27,7 @@ export class QrIngresoLocalPage {
   public moment = moment;
   mostrarAnonimo:boolean=false;
   comensales:number;
-  
+  desplegarHeader:boolean=false;
   //EL VALOR DE ESTE STRING FOTO DEBE SER VACIO
   foto:string="";
   imgAnonimo:string;
@@ -78,8 +77,14 @@ this.ObtenerMesaMaxima();
     else
     {
       //Aca hago lo otro si no es anonimo
-      this.VerificarReserva();
+     // this.VerificarReserva();
+     this.desplegarHeader=true;
+     this.VerificarEstado();
     }
+  }
+  Atras()
+  {
+    this.navCtrl.pop();
   }
   TraerEncuestas()
   {
@@ -135,12 +140,13 @@ console.log("Dentro de observable ecnuesta");
           this.mensaje="Bienvenido!! Se ha anunciado con éxito, en breve vendra el mozo a atenderlo";
           this.mostrarAlert3=true;
           this.desplegarEncuesta=true;
+          this.desplegarHeader=false;
           setTimeout(()=>{
         
             this.mostrarAlert3=false;
             
         
-          }, 3000);
+          }, 4500);
 
 
           //Aca cambio el estado del usuario y escucho al cambio d este estado
@@ -173,7 +179,7 @@ console.log("Dentro de observable ecnuesta");
             if(data.estado!="espera")
             {
               //FER EN ESTA LINEA TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL
-              this.navCtrl.setRoot(PrincipalPage);
+              this.navCtrl.setRoot(RegistroClientePage);
             }
          
           });
@@ -264,7 +270,7 @@ console.log("Dentro de observable ecnuesta");
             if(data.estado!="espera")
             {
               //FER EN ESTA LINEA TENES QUE CAMBIAR EL ROOT PAGE A PRINCIPAL
-              this.navCtrl.setRoot(PrincipalPage);
+              this.navCtrl.setRoot(RegistroClientePage);
             }
          
           });
@@ -496,12 +502,14 @@ console.log("Dentro de observable ecnuesta");
 
     let usuariosRef = firebase.database().ref("reservas");
     usuariosRef.once("value", (snap) => {
-      
+      console.log("En verificar Reserva");
+
       let data = snap.val();
       let esValido = true;
     let hayReserva:boolean=false;
       for (var key in data) {
 
+        console.log("reservas:" +data[key]);
         //Verifico si hay una reserva confirmada
         if(data[key].estado=="confirmada" && data[key].correo==this.correo)
         {
@@ -512,8 +520,9 @@ console.log("Dentro de observable ecnuesta");
           let momentoActual:any = moment(new Date(), "DD/MM/YYYY HH:mm");
           console.log(momentoActual);
          console.log( Math.abs(momentoActual.diff(momentoReserva, "m")));
-         if(Math.abs(momentoReserva.diff(momentoActual, "m")) <= 40)
-         {
+        // if(Math.abs(momentoReserva.diff(momentoActual, "m")) <= 40)
+        if(momentoReserva.diff(momentoActual, "m")>-40 && momentoReserva.diff(momentoActual, "m")<20) 
+        {
           hayReserva=true;
            this.tieneReserva=true;
            this.mesa = data[key].mesa;
@@ -580,6 +589,57 @@ console.log("Dentro de observable ecnuesta");
 
       
     });
+
+  }
+  VerificarEstado()
+  {
+
+    this.correo=localStorage.getItem("usuario");
+  
+ 
+     this.correo =(JSON.parse(this.correo)).correo;
+    let usuariosRef = firebase.database().ref("usuarios");
+    usuariosRef.once("value", (snap) => {
+      console.log("En verificar estado");
+
+     let data = snap.val();
+     let esValido = true;
+
+     for (var key in data) {
+
+       if (data[key].correo == this.correo) {
+      
+
+        //Pregunto si esta seteado el estado para que no pinche la app
+        if(data[key].estado)
+        {
+
+          //Si ese estado que ahora se que esta seteado por que estoy dentro del if 
+          //es en espera directamente le muestro las encuestas de usuarios
+          if(data[key].estado=="espera")
+          { 
+            this.mostrarMiSpinner=false;
+            this.desplegarEncuesta=true;
+            this.desplegarHeader=false;
+
+          }
+          else
+          {
+            this.VerificarReserva();
+          }
+
+        }
+        else
+        {
+          this.VerificarReserva();
+        }
+       
+
+
+
+       }
+      }
+    }).catch(()=>console.log("por las dudas"));
 
   }
 }

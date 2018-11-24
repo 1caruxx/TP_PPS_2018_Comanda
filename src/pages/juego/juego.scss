@@ -167,27 +167,55 @@ page-juego {
     font-family: 'Spicy Rice', cursive;
     font-size:2em;
 }
+.quitarFoto
+{
+    display:none;
+}
 .alert
 {
-    position:absolute;
-    z-index:1000;
+    position: absolute;
+    z-index: 1000;
     width: 80%;
-    left:10%;
-    border-radius:5%;
-    background: red;
-text-align: center;
-top:50%;
-display:none;
+    left: 10%;
+    border-radius: 5%;
+    background: #53adb8;
+    text-align: center;
+ 
+    display: flex;
+  
+    justify-content: center;
+    /* height: 250px; */
+  
+    align-items: center;
+    flex-direction: column;
+    padding: 5%;
+    border: 5px solid #e13838;
 // animation:fadeInRight 2s 1 ease-in-out;  
+}
+.superAlert
+{
+    position: absolute;
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    display: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.alert img
+{
+    width:60%;
 }
 .mostrarAlert
 {
-    display:block;
+    display:flex;
 }
 .alert h1
 {
    font-family: 'Lobster', cursive;
    color:white;
+   width:80%;
 }
 .p1
 {
