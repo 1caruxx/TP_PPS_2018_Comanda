@@ -71,6 +71,10 @@ export class PrincipalPage {
           this.acciones = [];
 
           switch (estadoCliente) {
+
+            case 'delivery':
+              this.acciones[0] =  this.accionesRespaldoCliente[7];
+              break;
             /*
              * 
              * Puede hacer un pedido
@@ -240,16 +244,8 @@ export class PrincipalPage {
               case 'bartender':
               case 'metre':
               case 'repartidor':
-                // Para redireccionar a la encuesta de axel.
-                // localStorage.setItem("desloguear", "true");
-                // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
-
                 localStorage.clear();
                 this.navCtrl.setRoot(LoginPage);
-                break;
-
-              case 'anonimo':
-                //this.MostrarAlert("fds", "fds", "fds", this.LimpiarAnonimo);
                 break;
 
               default:
@@ -257,24 +253,6 @@ export class PrincipalPage {
                 this.navCtrl.setRoot(LoginPage);
                 break;
             }
-
-            // if (this.usuario.tipo == "mozo"
-            //   || this.usuario.tipo == "cocinero"
-            //   || this.usuario.tipo == "bartender"
-            //   || this.usuario.tipo == "metre"
-            //   || this.usuario.tipo == "repartidor") {
-
-            //   // Para redireccionar a la encuesta de axel.
-            //   // localStorage.setItem("desloguear", "true");
-            //   // this.navCtrl.setRoot(EncuestaDeEmpleadoPage);
-
-            //   localStorage.clear();
-            //   this.navCtrl.setRoot(LoginPage);
-            // } else {
-
-            //   localStorage.clear();
-            //   this.navCtrl.setRoot(LoginPage);
-            // }
           });
 
           break;
