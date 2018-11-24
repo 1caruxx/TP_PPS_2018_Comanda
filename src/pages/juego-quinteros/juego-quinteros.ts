@@ -45,8 +45,7 @@ export class JuegoQuinterosPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) 
   {
-
-    this.puedeGanarBebida = true;
+    this.puedeGanarBebida=true;
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
 
@@ -92,8 +91,10 @@ export class JuegoQuinterosPage {
       if (this.segundos == 0) {
       
         this.MostrarAlert("¡Perdió!", "Se le acabó el tiempo para responder.", "Aceptar", this.limpiar);
+        firebase.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true });
         //alert("Se acabo el tiempo");
         clearInterval(this.asd);
+        this.navCtrl.pop();
         
         
         
@@ -205,6 +206,7 @@ export class JuegoQuinterosPage {
                   firebase.database().ref("pedidos").child(this.usuarioMesa).child("cocinero").update({ estado: "tomado" }).then(() => {
                     this.estadoBoton = false;
                    // this.ocultarSpinner = true;
+                   //this.navCtrl.pop();
                   })
                 })
               });
@@ -213,6 +215,7 @@ export class JuegoQuinterosPage {
             else {
 
               this.MostrarAlert("¡Ganaste!", "", "Volver", this.limpiar);
+              this.navCtrl.pop();
             }
           }
 
@@ -224,7 +227,9 @@ export class JuegoQuinterosPage {
       {
         //alert("respuesta incorrecta");
         this.MostrarAlert("¡Perdió!", "¡Escribió un número incorrecto.", "Aceptar", this.limpiar);
+        firebase.database().ref("usuarios").child(this.usuarioKey).update({ juegoAxel: true })
         clearInterval(this.asd);
+        this.navCtrl.pop();
 
       
       }
@@ -249,6 +254,7 @@ export class JuegoQuinterosPage {
 
   volver()
   {
+    clearInterval(this.asd);
     this.navCtrl.pop();
   }
 

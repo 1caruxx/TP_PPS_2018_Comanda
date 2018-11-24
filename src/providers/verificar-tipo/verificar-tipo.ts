@@ -99,7 +99,9 @@ export class VerificarTipoProvider {
           { accion: "Hacer un pedido", img: "pedido.jpg", ruta: PedirPlatosPage },
           { accion: "Confeccionar encuesta", img: "encuesta.jpg", ruta: EncuestaClientePage },
           { accion: "Reservar", img: "reserva.jpg", ruta: ReservaPage },
-          { accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage }
+          { accion: "Juegos", img: "juegos.jpg", ruta: SalaDeJuegosPage },
+          { accion: "Hablar con el repartidor", img: "chat.jpg", ruta: MapaDeRutaPage }
+
         ];
         break;
 

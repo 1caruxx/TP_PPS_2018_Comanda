@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController,Content  } from 'ionic-angular';
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -17,6 +17,7 @@ import { AngularFireAuth } from "angularfire2/auth";
   selector: 'page-mapa-de-ruta',
   templateUrl: 'mapa-de-ruta.html',
 })
+
 export class MapaDeRutaPage {
 	//@ViewChild('content') content:any
 	//@ViewChild(Content) content: Content;
@@ -25,6 +26,8 @@ export class MapaDeRutaPage {
 	newmessage;
   messagesList;
   nombre="lucas";
+
+  @ViewChild(Content) content: Content;
   
   public clientes:boolean;
   public chat:boolean;
@@ -48,12 +51,52 @@ export class MapaDeRutaPage {
   {
 	//this.authInstance.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
 
-	this.clientes=true;
-	this.chat=false;
+	this.usuario = JSON.parse(localStorage.getItem("usuario"));
+    
+    if(this.usuario.tipo=="repartidor")
+    {
+      this.clientes=true;
+    }
 
-	this.probanding="yo";
+    if(this.usuario.tipo=="cliente")
+    {
+	  this.chat=true;
+	  this.mandar=true;
+
+
+	  this.ref=firebase.database().ref('mensajes/' + this.usuario.apellido);
+	
+		this.ref.on('value',data => {
+			let tmp = [];
+			data.forEach( data => {
+				tmp.push({
+					key: data.key,
+					name: data.val().name,
+					tiempo:data.val().tiempo,
+					//ame: ,
+					message: data.val().message
+				})
+			});
+			this.messagesList = tmp;
+
+			
+		});
+
+
+
+
+
+	}
+	
+
+	//this.clientes=true;
+	//this.chat=false;
+
+	//this.probanding="yo";
 
 	this.usuario = JSON.parse(localStorage.getItem("usuario"));
+
+	this.probanding=this.usuario.apellido;
 
 
  /*	let genteRef = firebase.database().ref("usuarios");
@@ -95,6 +138,7 @@ export class MapaDeRutaPage {
 			 //console.log(item);
 			if(data[item].estado=="delivery")
 			{
+				console.log("aca toy");
 				//console.log(data[item]);
 				//this.clientesConPedidos.push(data[item]);
 
@@ -385,13 +429,22 @@ export class MapaDeRutaPage {
   			})
   		});
   		this.messagesList = tmp;
-  	});*/
+	  });*/
 
+	  if(this.usuario.tipo=="cliente")
+    	{	
+		this.ref=firebase.database().ref('mensajes/' + this.usuario.apellido);
+		
+		}
+
+
+	  //this.ref=firebase.database().ref('mensajes/' + this.usuario.apellido);
 
   	// add new data to firebase
   	this.ref.push({
 		  //name: this.name.username,
-		    name: "yo",
+			//name: "yo",
+			name:this.usuario.apellido,
 			message: this.newmessage,
 			tiempo: Date(),
 			//tipo:"delivery"
@@ -403,14 +456,20 @@ export class MapaDeRutaPage {
 
   chatear(item)
   {
+
+	
 	this.clientes=false;
 	this.chat=true;
 	this.mandar=true;
 	this.probando=item.img;
 	this.nombreCliente=item.nombre;
 	this.direccionCliente=item.correo;
+	
+	let apellido=item.apellido;
 
-	this.ref=firebase.database().ref('mensajes/' + this.nombreCliente);
+	//this.ref=firebase.database().ref('mensajes/' + this.nombreCliente);
+	this.ref=firebase.database().ref('mensajes/' + apellido);
+	console.log(apellido);
 	
 	this.ref.on('value',data => {
 		let tmp = [];
@@ -418,19 +477,85 @@ export class MapaDeRutaPage {
 			tmp.push({
 				key: data.key,
 				name: data.val().name,
+				tiempo:data.val().tiempo,
 				//ame: ,
 				message: data.val().message
 			})
 		});
 		this.messagesList = tmp;
 
+		setTimeout(() => {
+
+			try {
+  
+			  this.content.scrollToBottom(0);
+			} catch (error) {
+  
+				console.log("Entre al catch del scrollbottom()");
+			}
+		}, 100);
+
 		
 	});
+
+
+
   }
 
   volver()
   {
 	this.navCtrl.pop();
+  }
+
+
+  entregar(item)
+  {
+
+						let pruebita=item.correo;
+
+						let patron ='@';
+						let nuevo= '';
+						let cadena=pruebita.replace(patron, nuevo);
+						patron ='.';
+						nuevo= '';
+						cadena=cadena.replace(patron, nuevo);
+						pruebita=cadena;
+
+						console.log(item);
+
+						let probandoRef=firebase.database().ref("usuarios");
+						
+						probandoRef.once("value", (snap)=>{
+
+							let data = snap.val();
+
+							for (let a in data)
+							{
+								if(data[a].correo==item.correo)
+								{
+									//console.log("llegb ro");
+									data[a].estado="deliveryTerminado";
+									probandoRef.child(a).update(data[a]);
+									let pedidoRef = firebase.database().ref("pedidos").child(pruebita);
+									pedidoRef.remove();
+									let mensajesRef=firebase.database().ref("mensajes").child(item.apellido);
+									mensajesRef.remove();
+								}
+								
+							} 
+
+
+
+						});
+
+						//let clienteRef = firebase.database().ref("usuarios").child(item.key);
+						//clienteRef.child(item).update({ pago: "si" });
+					//let pedidoRef = firebase.database().ref("pedidos").child(pruebita);
+					//pedidoRef.remove();
+
+
+
+
   }
 
 

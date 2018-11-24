@@ -120,7 +120,7 @@
 
 
 
-<ion-content>
+<ion-content #content>
 
   <div *ngIf="clientes">
 
@@ -148,6 +148,10 @@
         <button ion-button clear item-end (click)="chatear(item)">
             <ion-icon name="chatboxes"></ion-icon>
           </button>
+
+          <button ion-button clear item-end (click)="entregar(item)">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </button>
     
     
     
@@ -164,7 +168,7 @@
 
 
 
-        <img src={{probando}} style="width: 150px;">
+        <img src={{probando}} style="width: 100px;">
     
 
           <ion-label class="lb" >{{nombreCliente}}</ion-label>
@@ -183,8 +187,9 @@
 
       <div class="chat-message" text-right *ngIf="message.name === probanding">
           <div class="right-bubble">
-            <span class="msg-name">Yo</span>
+            <span class="msg-name"></span>
             <span class="msg-date">{{message.tiempo | tiempoDesdeAhora}}</span>
+           <!-- <span class="msg-date">{{message.tiempo}}</span>-->
             <p text-wrap>{{message.message}}</p>
           </div>
         </div>

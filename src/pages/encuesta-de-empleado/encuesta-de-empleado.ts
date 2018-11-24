@@ -4,8 +4,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import firebase from "firebase";
 import "firebase/firestore";
 import { AngularFireAuth } from "angularfire2/auth";
-import { PrincipalPage } from '../principal/principal';
+import * as Chart from 'chart.js';
 import { LoginPage } from '../login/login';
+import { PrincipalPage } from '../principal/principal';
 
 
 //LINEA 336    361 Y 364 LAJSDKLASDLKASJDLKAJDKLJDLK
@@ -63,7 +64,7 @@ export class EncuestaDeEmpleadoPage {
      this.desloguaer = JSON.parse(localStorage.getItem("desloguear"));
     this.usuario = JSON.parse(localStorage.getItem("usuario"));
     // this.encuesta();
-
+    Chart.defaults.global.legend.display = false;
     this.uno=3;
     this.dos="Me Encanta";
     this.tres="si";

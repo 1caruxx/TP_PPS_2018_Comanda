@@ -97,6 +97,13 @@ export class PrincipalPage {
           this.acciones = [];
 
           switch (estadoCliente) {
+
+
+            case 'delivery':
+              this.acciones[0] = this.accionesRespaldoCliente[7];
+              break;
+
+
             /*
              * 
              * Puede hacer un pedido

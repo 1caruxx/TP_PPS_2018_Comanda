@@ -66,14 +66,29 @@
 
       <ion-content  *ngIf="probandingg">
 
+          <div class="asdasd" *ngIf="!sinPersonasEnEspera">
+              SIN PERSONAS EN ESPERA
+            </div>
+
+            <div class="asdasd2" *ngIf="!sinPersonasAtendidas">
+                SIN PERSONAS ATENDIDAS
+              </div>
+
+             <!-- <div class="asdasd3" *ngIf="!sinPedidosParaEntregar">
+                  SIN PEDIDOS TERMINADOS
+                </div>-->
+
          <div *ngIf="vistaMozo">
 
          
 
 
-
+        <div *ngIf="sinPersonasEnEspera">
 
       <h2 class="titulo">Lista de personas en espera</h2>
+
+    </div>
+
 
       <ion-list>
 
@@ -101,7 +116,11 @@
     
       </ion-list>
 
+      <div *ngIf="sinPersonasAtendidas">
+
       <h2 class="titulo">Lista de personas atendidas</h2>
+
+      </div>
 
       <ion-list>
 
@@ -126,7 +145,11 @@
     
       </ion-list>
 
+   <!--   <div *ngIf="sinPedidosParaEntregar">-->
+
       <h2 class="titulo">Lista de pedidos para entregar</h2>
+
+    <!--</div>-->
 
       <ion-list>
 
@@ -345,7 +368,7 @@
           </ion-list>-->
 
       
-     
+        
 
     </div>
 
