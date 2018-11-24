@@ -388,13 +388,14 @@ export class EncuestaDeEmpleadoPage {
     this.pieChartData = [this.pregTresPrimeraRespuesta, this.pregTresSegundaRespuesta];
 
     this.pieChartLabelsDos = ['Sí', 'No'];
-    this.pieChartDataDos = [this.pregCuatroPrimeraRespuesta, this.pregCuatroPrimeraRespuesta];
+    this.pieChartDataDos = [this.pregCuatroPrimeraRespuesta, this.pregCuatroSegundaRespuesta];
 
     this.pieChartLabelsCinco = ['Sí', 'No'];
     this.pieChartDataCinco = [this.pregCincoPrimeraRespuesta, this.pregCincoSegundaRespuesta];
 
     this.pieChartLabelsUno = ["Bien","Más o menos","Mal"];
-    this.pieChartDataUno = [this.pregUnoPrimeraRespuesta,this.pregUnoSegundaRespuesta,this.pregUnoTerceraRespuesta];
+    //CAMBIE ESTO AL REVES
+    this.pieChartDataUno = [this.pregUnoTerceraRespuesta,this.pregUnoSegundaRespuesta,this.pregUnoPrimeraRespuesta];
 
 
     

@@ -114,7 +114,12 @@ exports.pedirMesa = functions.database
         const before = change.before.val()
         const after = change.after.val()
 
-        if (after.estado != "espera") 
+        if(after.estado != "espera")
+        {
+          return null;
+        }
+
+        if (before.estado == "espera" && after.estado == "espera") 
         {
             console.log("error");
             return null
