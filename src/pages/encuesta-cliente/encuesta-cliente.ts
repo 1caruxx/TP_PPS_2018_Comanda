@@ -116,7 +116,7 @@ respPreg5:boolean=false;
     this.mostrarfoto3=false;
 
     //setear esta variable con el cliente sacado del local storage
-    this.cliente ="yoCliente";
+  //  this.cliente ="yoCliente";
     //DESCOMENTAR ESTA LINEA PARA TRABAJAR A NIVEL LOCAL!!!
   //  this.aut.auth.signInWithEmailAndPassword("example@gmail.com", "123456");
     Chart.defaults.global.legend.display = false;

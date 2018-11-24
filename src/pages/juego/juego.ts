@@ -190,7 +190,12 @@ this.gano=false;
    //this.contadorJugadas = this.contadorJugadas +1;
     if(this.contadorJugadas==1)
     {
-      this.nativeAudio.play('simple').catch(()=>{});
+      //Pregunto si esta desactivado el sonido.
+      if(localStorage.getItem("sonidos")!="false")
+      {
+        this.nativeAudio.play('simple').catch(()=>{});
+
+      }
 
       //Aca permito que se de vuelta la imagen
       this.valorViejo=valor;
@@ -221,7 +226,14 @@ this.gano=false;
           this.imgMostrar[valor].ok=false;
           this.animacion[valor]=true;
           this.animacion[this.valorViejo]=true;
-          this.nativeAudio.play('coincide').catch(()=>{});
+
+        
+          if(localStorage.getItem("sonidos")!="false")
+          {
+            this.nativeAudio.play('coincide').catch(()=>{});
+
+          }
+
 
           this.puntos = this.puntos+10;
           if(this.puntos==80)
@@ -237,7 +249,12 @@ this.gano=false;
         }
         else
         {
-          this.nativeAudio.play('simple').catch(()=>{});
+          if(localStorage.getItem("sonidos")!="false")
+          {
+            this.nativeAudio.play('simple').catch(()=>{});
+
+          }
+
 
           this.claveActual="";
         }

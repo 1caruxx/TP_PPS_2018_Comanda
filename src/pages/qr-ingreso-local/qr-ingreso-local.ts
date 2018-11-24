@@ -27,7 +27,7 @@ export class QrIngresoLocalPage {
   public moment = moment;
   mostrarAnonimo:boolean=false;
   comensales:number;
-  
+  desplegarHeader:boolean=false;
   //EL VALOR DE ESTE STRING FOTO DEBE SER VACIO
   foto:string="";
   imgAnonimo:string;
@@ -78,8 +78,13 @@ this.ObtenerMesaMaxima();
     {
       //Aca hago lo otro si no es anonimo
      // this.VerificarReserva();
+     this.desplegarHeader=true;
      this.VerificarEstado();
     }
+  }
+  Atras()
+  {
+    this.navCtrl.pop();
   }
   TraerEncuestas()
   {
@@ -135,6 +140,7 @@ console.log("Dentro de observable ecnuesta");
           this.mensaje="Bienvenido!! Se ha anunciado con éxito, en breve vendra el mozo a atenderlo";
           this.mostrarAlert3=true;
           this.desplegarEncuesta=true;
+          this.desplegarHeader=false;
           setTimeout(()=>{
         
             this.mostrarAlert3=false;
@@ -614,6 +620,7 @@ console.log("Dentro de observable ecnuesta");
           { 
             this.mostrarMiSpinner=false;
             this.desplegarEncuesta=true;
+            this.desplegarHeader=false;
 
           }
           else
